@@ -29,3 +29,8 @@
 
 # 画面遷移図
 - https://drive.google.com/file/d/1DwlET5WXNm_4-lJP7deHsU-t7ncoiQg6/view?usp=sharing
+
+# データ取得
+- ゲーム情報　https://api-docs.igdb.com/#about or https://english.api.rakuten.net/accujazz/api/rawg-video-games-database/details
+- 動画自動検索　　
+- amazon商品自動検索　
