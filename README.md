@@ -32,5 +32,5 @@
 
 # データ取得
 - ゲーム情報　https://api-docs.igdb.com/#about or https://english.api.rakuten.net/accujazz/api/rawg-video-games-database/details
-- 動画自動検索　　
-- amazon商品自動検索　
+- Youtube動画自動検索　https://api.rakuten.net/aidangig/api/youtube-to-mp4　
+- amazon商品自動検索　https://api.rakuten.net/ebappa1971/api/amazon-price
