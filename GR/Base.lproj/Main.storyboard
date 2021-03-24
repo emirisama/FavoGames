@@ -193,7 +193,7 @@
                                 </constraints>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PuP-G1-iag">
-                                <rect key="frame" x="57" y="568" width="300" height="50"/>
+                                <rect key="frame" x="57" y="548" width="300" height="50"/>
                                 <color key="backgroundColor" red="0.99651342629999995" green="0.59027928110000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="4mf-cc-A32"/>
@@ -205,7 +205,7 @@
                                 </state>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9nR-IB-qCg">
-                                <rect key="frame" x="57" y="658" width="300" height="50"/>
+                                <rect key="frame" x="57" y="638" width="300" height="50"/>
                                 <color key="backgroundColor" red="0.29847586275351168" green="0.29847586275351168" blue="0.29847586275351168" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="300" id="Z0k-IQ-CpR"/>
@@ -220,7 +220,7 @@
                         <viewLayoutGuide key="safeArea" id="MJd-cP-yzd"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="PuP-G1-iag" firstAttribute="top" secondItem="UQR-VH-Ro0" secondAttribute="bottom" constant="40" id="1Sa-c2-yK8"/>
+                            <constraint firstItem="PuP-G1-iag" firstAttribute="top" secondItem="UQR-VH-Ro0" secondAttribute="bottom" constant="20" id="1Sa-c2-yK8"/>
                             <constraint firstItem="9nR-IB-qCg" firstAttribute="top" secondItem="PuP-G1-iag" secondAttribute="bottom" constant="40" id="90b-3h-IVS"/>
                             <constraint firstItem="MJd-cP-yzd" firstAttribute="trailing" secondItem="UQR-VH-Ro0" secondAttribute="trailing" constant="50" id="Mkx-2l-puR"/>
                             <constraint firstItem="PuP-G1-iag" firstAttribute="centerX" secondItem="Thf-Ug-84H" secondAttribute="centerX" id="bRn-Rt-Uzy"/>
