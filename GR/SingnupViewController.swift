@@ -30,28 +30,9 @@ class SingnupViewController: UIViewController,UITextFieldDelegate{
         passwordTextField.delegate = self
         passwordconfirmTextField.delegate = self
         
-        NotificationCenter.default.addObserver(self, selector: #selector(showkeyboard), name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(hidekeyboard), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
-    @objc func showkeyboard(notification: Notification){
-        let keyboardFrame = (notification.userInfo![UIResponder.keyboardFrameEndUserInfoKey] as AnyObject).cgRectValue
-        
-        //guard let else{return}は、nilだったらこの処理を終わりにしてくださいという意味
-        guard let keyboardMinY = keyboardFrame?.minY else { return }
-        let signupButtonMaxY = signupButton.frame.maxY
-        let distance = signupButtonMaxY - keyboardMinY + 20
-        
-        let transform = CGAffineTransform(translationX: 0, y: distance)
-        
-        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: [], animations: {self.view.transform = transform
-        })
-    }
-    
-        @objc func hidekeyboard(){
-            UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: [], animations: {self.view.transform = .identity
-            })
-        }
+
     
     
     //他のところをタップするとキーボードが下がる
