@@ -9,17 +9,7 @@ import UIKit
 import Firebase
 import FirebaseFirestore
 
-struct User{
-    let name: String
-    let createdAt: Timestamp
-    let email: String
-    
-    init(dic: [String: Any]){
-        self.name = dic["name"] as! String
-        self.createdAt = dic["createdAt"] as! Timestamp
-        self.email = dic["email"] as! String
-        
-    }
+
     
     class SingnupViewController: UIViewController,UITextFieldDelegate{
         
@@ -28,9 +18,24 @@ struct User{
         @IBOutlet weak var nameTextField: UITextField!
         @IBOutlet weak var idTextField: UITextField!
         
-        @IBOutlet weak var emailTextField: UITextField!
         @IBOutlet weak var passwordTextField: UITextField!
         
+        @IBOutlet weak var emailTextField: UITextField!
+        
+        
+        struct User{
+            let name: String
+            let createdAt: Timestamp
+            let email: String
+            
+            init(dic: [String: Any]){
+                self.name = dic["name"] as! String
+                self.createdAt = dic["createdAt"] as! Timestamp
+                self.email = dic["email"] as! String
+                
+            }
+            
+        }
         
         override func viewDidLoad() {
             super.viewDidLoad()
@@ -130,4 +135,4 @@ struct User{
         }
         
     }
-}
+

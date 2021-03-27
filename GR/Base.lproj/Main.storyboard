@@ -218,7 +218,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="新規会員登録・ログイン" id="SLc-LE-QHV"/>
                     <connections>
-                        <outlet property="emailTextField" destination="zL2-mN-90G" id="kUs-xS-RwZ"/>
+                        <outlet property="emailTextField" destination="zL2-mN-90G" id="Gb1-Ra-kmO"/>
                         <outlet property="idTextField" destination="8Xc-C8-1oT" id="brR-xi-kmM"/>
                         <outlet property="nameTextField" destination="jNz-IU-W2R" id="Eny-Vn-yBE"/>
                         <outlet property="passwordTextField" destination="h1C-Zq-Dj4" id="YLk-9r-ciN"/>
