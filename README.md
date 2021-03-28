@@ -21,6 +21,7 @@
 - 検索機能（直接入力、デバイスごと、ジャンルごと、発売日ごと）
 - マイページ・ユーザー編集
 - お問い合わせ
+- フォローフォロワー機能 ＊次回リリース予定
 
 # データベース設計
 - https://docs.google.com/spreadsheets/d/1-QSy2dTsDfnsHjoCUZ8zUWizoJe7kQBLLIRLKB-XXYs/edit?usp=sharing
