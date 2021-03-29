@@ -32,7 +32,10 @@
 # 画面遷移図
 - https://drive.google.com/file/d/1DwlET5WXNm_4-lJP7deHsU-t7ncoiQg6/view?usp=sharing
 
+# 画面遷移図（機能説明付き）
+- https://drive.google.com/file/d/1MA5HK_GdIDi4G-ddUxA3Ka4wd7ENd-vv/view?usp=sharing
+
 # データ取得
 - ゲーム情報　https://api-docs.igdb.com/#about or https://english.api.rakuten.net/accujazz/api/rawg-video-games-database/details
-- Youtube動画自動検索　https://api.rakuten.net/aidangig/api/youtube-to-mp4　
+- Youtube動画自動検索　https://api.rakuten.net/aidangig/api/youtube-to-mp4
 - amazon商品自動検索　https://api.rakuten.net/ebappa1971/api/amazon-price
