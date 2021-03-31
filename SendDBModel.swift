@@ -24,36 +24,36 @@ class SendDBModel {
     var sendProfileDone:SendProfileDone?
     var userDefaultsEX = UserDefaultsEX()
     //プロフィールをDBへ送信する
-    func sendProfileDB(name:String, email: String, id: String){
+    func sendProfileDB(name:String, email:String, id:String,profileText:String, imageData: Data){
         
         //処理
         HUD.show(.progress)
         HUD.dimsBackground = true
         
 //        //プロフィール画像
-//        let imageRef = Storage.storage().reference().child("ProfielImage").child("\(UUID().uuidString + String(Date().timeIntervalSince1970)).jpg")
-//        
-//        imageRef.putData(imageData, metadata: nil) { (metaData, error ) in
-//            
-//            if error != nil{
-//                return
-//            }
-//            imageRef.downloadURL { (url, error) in
-//                
-//                if url != nil{
+        var imageRef = Storage.storage().reference().child("ProfielImage").child("\(UUID().uuidString + String(Date().timeIntervalSince1970)).jpg")
+        let usernoimage = UIImage(named: "userimage")
+        imageRef.putData(imageData, metadata: nil) { (metaData, error ) in
+
+            if error != nil{
+                return
+            }
+            imageRef.downloadURL { (url, error) in
+
+                if url != nil{
                     
-        let profileModel = ProfileModel(name: name, id: Auth.auth().currentUser!.uid, email: email)
+        let profileModel = ProfileModel(name: name, id: id, email: email, profileText: profileText, imageURLString: url?.absoluteString, userID: Auth.auth().currentUser!.uid)
                     //アプリ内に自分のProfilseを保存しておく
         self.userDefaultsEX.set(value: profileModel, forKey: "profile")
         
                     //送信
-        self.db.collection("Users").document(Auth.auth().currentUser!.uid).setData(["name": name, "email": email, "id": id, "userID":Auth.auth().currentUser!.uid,"Date": Date().timeIntervalSince1970])
+                    self.db.collection("Users").document(Auth.auth().currentUser!.uid).setData(["name":name,"email": email,"id":id,"userID":Auth.auth().currentUser!.uid,"Date":Date().timeIntervalSince1970],"image":url?.absoluteString,"profileText":profileText)
         
         //画面遷移
         self.sendProfileDone?.checkOK()
-//                }
-//            }
-//        }
+                }
+            }
+        }
  
         
     }

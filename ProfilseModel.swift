@@ -13,7 +13,9 @@ struct ProfileModel:Codable {
     var name:String?
     var id:String?
     var email:String?
-    
+    var profileText:String?
+    var imageURLString:String?
+    var userID:String?
     
 
 }

@@ -25,7 +25,7 @@ class CreateUserViewController: UIViewController,UITextFieldDelegate,SendProfile
         @IBOutlet weak var emailTextField: UITextField!
         
         var sendDBModel = SendDBModel()
-
+        var profileImage = UIImage()
             
         
         
@@ -61,12 +61,12 @@ class CreateUserViewController: UIViewController,UITextFieldDelegate,SendProfile
                 
                 Auth.auth().signInAnonymously { [self] (result, error) in
                     
-//                    let data = imageView.image?.jpegData(compressionQuality:0.1)
+                    let data = profileImage.jpegData(compressionQuality:0.1)!
                     if error != nil{
                         print("エラーです")
                     }else{
                         
-                        sendDBModel.sendProfileDB(name: nameTextField.text!, email: emailTextField.text!, id: idTextField.text!)
+                        sendDBModel.sendProfileDB(name: nameTextField.text!, email: emailTextField.text!, id: idTextField.text!, profileText: "", imageData: data)
                     }
                 }
                 
