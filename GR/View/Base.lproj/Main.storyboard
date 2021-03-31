@@ -291,19 +291,23 @@
         <scene sceneID="pWb-3K-Pgf">
             <objects>
                 <viewController storyboardIdentifier="Mypage" useStoryboardIdentifierAsRestorationIdentifier="YES" id="2D6-aZ-i7J" customClass="MypageViewController" customModule="GR" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="kFQ-ZA-FKd">
+                    <view key="view" contentMode="scaleToFill" ambiguous="YES" id="kFQ-ZA-FKd">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xwB-V5-Vxc">
+                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xwB-V5-Vxc">
                                 <rect key="frame" x="3" y="88" width="411" height="220"/>
                                 <subviews>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="DIo-xL-KFV">
+                                    <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="DIo-xL-KFV">
                                         <rect key="frame" x="17" y="18" width="110" height="110"/>
+                                        <gestureRecognizers/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="110" id="8VG-kb-RjQ"/>
                                             <constraint firstAttribute="width" constant="110" id="dBX-GD-rtJ"/>
                                         </constraints>
+                                        <connections>
+                                            <outletCollection property="gestureRecognizers" destination="315-rO-8GH" appends="YES" id="wFy-T4-mbz"/>
+                                        </connections>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="名前" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SKF-E0-TRg">
                                         <rect key="frame" x="146" y="23" width="150" height="40"/>
@@ -377,12 +381,14 @@
                     <navigationItem key="navigationItem" id="Gmb-As-B4a"/>
                     <connections>
                         <outlet property="idLabel" destination="xbg-Va-S9r" id="HJL-75-s4y"/>
-                        <outlet property="introductionLabel" destination="TKJ-c2-4nF" id="lwU-CE-Wvq"/>
                         <outlet property="nameLabel" destination="SKF-E0-TRg" id="Gxc-OT-A7t"/>
                         <outlet property="profielImage" destination="DIo-xL-KFV" id="s4M-yx-NnL"/>
+                        <outlet property="profileTextField" destination="TKJ-c2-4nF" id="zMC-hk-ACf"/>
+                        <outlet property="tap" destination="DIo-xL-KFV" id="OfT-8O-R9d"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wug-Pb-h9C" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="315-rO-8GH"/>
             </objects>
             <point key="canvasLocation" x="4111.594202898551" y="1595.7589285714284"/>
         </scene>

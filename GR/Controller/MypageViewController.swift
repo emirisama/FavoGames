@@ -7,16 +7,17 @@
 
 import UIKit
 import Foundation
+import FirebaseAuth
 
 
-class MypageViewController: UIViewController {
+class MypageViewController: UIViewController,UIImagePickerControllerDelegate,UINavigationControllerDelegate {
 
 
 
     
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var idLabel: UILabel!
-    @IBOutlet weak var introductionLabel: UILabel!
+    @IBOutlet weak var profileTextField: UILabel!
     @IBOutlet weak var profielImage: UIImageView!
     
     
@@ -27,9 +28,51 @@ class MypageViewController: UIViewController {
         }
         
         
+    
+    @IBOutlet weak var tap: UIImageView!
+    
+    //カメラを立ち上げる
+    openCamera()
+    
+    }
+    
+
+func openCamera(){
+    let sourceType:UIImagePickerController.SourceType = UIImagePickerController.SourceType.photoLibrary
+    // カメラが利用可能かチェック
+    if UIImagePickerController.isSourceTypeAvailable(UIImagePickerController.SourceType.photoLibrary){
+        // インスタンスの作成
+        let cameraPicker = UIImagePickerController()
+        cameraPicker.sourceType = sourceType
+        cameraPicker.delegate = self
+        cameraPicker.allowsEditing = true
+//            cameraPicker.showsCameraControls = true
+        present(cameraPicker, animated: true, completion: nil)
+        
+    }else{
         
     }
     
+}
+
+func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+    
+    
+    if let pickedImage = info[.editedImage] as? UIImage
+    {
+        profielImage.image = pickedImage
+        //閉じる処理
+        picker.dismiss(animated: true, completion: nil)
+     }
+
+}
+
+// 撮影がキャンセルされた時に呼ばれる
+func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+    picker.dismiss(animated: true, completion: nil)
+}
+
+
 
     /*
     // MARK: - Navigation
