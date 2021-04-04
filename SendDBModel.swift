@@ -26,24 +26,31 @@ class SendDBModel {
     //プロフィールをDBへ送信する
     func sendProfileDB(name:String, email:String, id:String,profileText:String, imageData: Data){
         
+        //プロフィール画像
+        let usernoimage = UIImage(named: "userimage")
+        let usernoimagedata = usernoimage?.jpegData(compressionQuality: 1)
+        var imageRef = Storage.storage().reference().child("ProfielImage").child("\(UUID().uuidString + String(Date().timeIntervalSince1970)).jpg")
         //処理
         HUD.show(.progress)
         HUD.dimsBackground = true
         
-//        //プロフィール画像
-        var imageRef = Storage.storage().reference().child("ProfielImage").child("\(UUID().uuidString + String(Date().timeIntervalSince1970)).jpg")
-        let usernoimage = UIImage(named: "userimage")
+        //プロフィール画像が空の場合、デフォルト画像を入れる
         imageRef.putData(imageData, metadata: nil) { (metaData, error ) in
 
             if error != nil{
                 return
             }
+            if imageData.isEmpty{
+                    usernoimagedata.putData(imageData)
+                }
+            }
+            
             imageRef.downloadURL { (url, error) in
 
                 if url != nil{
                     
         let profileModel = ProfileModel(name: name, id: id, email: email, profileText: profileText, imageURLString: url?.absoluteString, userID: Auth.auth().currentUser!.uid)
-                    //アプリ内に自分のProfilseを保存しておく
+                    //アプリ内に自分のProfileを保存しておく
         self.userDefaultsEX.set(value: profileModel, forKey: "profile")
         
                     //送信
