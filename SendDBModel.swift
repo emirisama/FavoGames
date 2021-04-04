@@ -36,6 +36,7 @@ class SendDBModel {
         
         if imageData.isEmpty == true{
             imageRef.putData(usernoimagedata!)
+
         }
             
         imageRef.putData(imageData, metadata: nil) { (metaData, error ) in
