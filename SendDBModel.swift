@@ -34,17 +34,27 @@ class SendDBModel {
         HUD.show(.progress)
         HUD.dimsBackground = true
         
+
         //プロフィール画像が空の場合、デフォルト画像を入れる
+
+        if imageData.isEmpty == true{
+            imageRef.putData(usernoimagedata!)
+
+        }
+            
+
         imageRef.putData(imageData, metadata: nil) { (metaData, error ) in
 
             if error != nil{
                 return
             }
+
             if imageData.isEmpty{
                     usernoimagedata.putData(imageData)
                 }
             }
             
+
             imageRef.downloadURL { (url, error) in
 
                 if url != nil{
