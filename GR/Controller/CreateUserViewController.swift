@@ -34,8 +34,6 @@ class CreateUserViewController: UIViewController,UITextFieldDelegate,SendProfile
             
             sendDBModel.sendProfileDone = self
             
-            signupButton.isEnabled = false
-            
             nameTextField.delegate = self
             idTextField.delegate = self
             emailTextField.delegate = self
@@ -54,19 +52,23 @@ class CreateUserViewController: UIViewController,UITextFieldDelegate,SendProfile
         
     
         
-        @IBAction func registerButton(_ sender: Any) {
-            
+
+    @IBAction func registerButton(_ sender: Any) {
+    
+    
             //アカウントを作成する
             if nameTextField.text?.isEmpty != true || idTextField.text?.isEmpty != true || emailTextField.text?.isEmpty != true || passwordTextField.text?.isEmpty != true{
                 
                 Auth.auth().signInAnonymously { [self] (result, error) in
                     
-                    let data = profileImage.jpegData(compressionQuality:0.1)!
+                    let usernoimage = UIImage(named: "userimage")
+                    let usernoimagedata = usernoimage!.jpegData(compressionQuality: 1)
                     if error != nil{
                         print("エラーです")
                     }else{
                         
-                        sendDBModel.sendProfileDB(name: nameTextField.text!, email: emailTextField.text!, id: idTextField.text!, profileText: "", imageData: data)
+                        sendDBModel.sendProfileDB(name: nameTextField.text!, email: emailTextField.text!, id: idTextField.text!, profileText: "", imageData: usernoimagedata!)
+                        print("データをSendDBModelへ")
                     }
                 }
                 
@@ -88,7 +90,7 @@ class CreateUserViewController: UIViewController,UITextFieldDelegate,SendProfile
         //アプリ内に自分のProfileを保存しておく
         
         //Trendの画面に戻る
-        self.dismiss(animated: true, completion: nil)
+        performSegue(withIdentifier: "CreateVC", sender: nil)
         
     }
         

@@ -26,11 +26,11 @@ class TrendViewController: AMPagerTabsViewController {
         
         if Auth.auth().currentUser != nil{
             //サインイン
-            performSegue(withIdentifier: "", sender: nil)
+            performSegue(withIdentifier: "CreateVC", sender: nil)
             
         }else{
             //新規会員登録
-            performSegue(withIdentifier: "Trend", sender: nil)
+            performSegue(withIdentifier: "CreateVC", sender: nil)
         }
         
         
