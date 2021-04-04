@@ -50,7 +50,7 @@ class SendDBModel {
             }
 
             if imageData.isEmpty{
-                    usernoimagedata.putData(imageData)
+                    imageRef.putData(usernoimagedata!)
                 }
             }
             
@@ -75,4 +75,4 @@ class SendDBModel {
  
         
     }
-}
+
