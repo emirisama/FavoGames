@@ -90,8 +90,8 @@ class CreateUserViewController: UIViewController,UITextFieldDelegate,SendProfile
         //アプリ内に自分のProfileを保存しておく
         
         //Trendの画面に戻る
-        performSegue(withIdentifier: "CreateVC", sender: nil)
-        
+        let tabVC = self.storyboard?.instantiateViewController(identifier: "tab") as! TabBarController
+        self.navigationController?.pushViewController(tabVC, animated: true)
     }
         
 }

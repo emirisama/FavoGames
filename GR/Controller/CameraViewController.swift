@@ -9,6 +9,7 @@ import UIKit
 
 class CameraViewController: UIViewController {
 
+
     var index = Int()
     
     override func viewDidLoad() {

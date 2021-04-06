@@ -23,6 +23,7 @@ class SendDBModel {
     let db = Firestore.firestore()
     var sendProfileDone:SendProfileDone?
     var userDefaultsEX = UserDefaultsEX()
+    var imageDatauser = Data()
     //プロフィールをDBへ送信する
     func sendProfileDB(name:String, email:String, id:String,profileText:String, imageData: Data){
         
@@ -38,22 +39,19 @@ class SendDBModel {
         //プロフィール画像が空の場合、デフォルト画像を入れる
 
         if imageData.isEmpty == true{
-            imageRef.putData(usernoimagedata!)
+            imageDatauser = usernoimagedata!
 
+        }else{
+            imageDatauser = imageData
         }
             
 
-        imageRef.putData(imageData, metadata: nil) { (metaData, error ) in
+        imageRef.putData(imageDatauser, metadata: nil) { (metaData, error ) in
 
             if error != nil{
                 return
             }
 
-            if imageData.isEmpty{
-                    imageRef.putData(usernoimagedata!)
-                }
-            }
-            
 
             imageRef.downloadURL { (url, error) in
 
@@ -76,3 +74,4 @@ class SendDBModel {
         
     }
 
+} 
