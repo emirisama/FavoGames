@@ -42,7 +42,7 @@ class TabBarController: AMPagerTabsViewController {
         var vcArray = [UIViewController]()
         for i in 0..<5{
             
-            let tabbarController = self.storyboard?.instantiateViewController(withIdentifier: "view1") as! CameraViewController
+            let tabbarController = self.storyboard?.instantiateViewController(withIdentifier: "view1") as! ContentsViewController
             tabbarController.title = ""
             tabbarController.index = i
             vcArray.append(tabbarController)

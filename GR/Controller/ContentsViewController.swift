@@ -7,7 +7,7 @@
 
 import UIKit
 
-class CameraViewController: UIViewController {
+class ContentsViewController: UIViewController {
 
 
     var index = Int()

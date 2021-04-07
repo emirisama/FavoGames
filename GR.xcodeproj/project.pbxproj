@@ -8,14 +8,16 @@
 
 /* Begin PBXBuildFile section */
 		3579223637281EFA54B2D515 /* Pods_GR.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F90BE2B6597AA0DD3A514DC /* Pods_GR.framework */; };
+		5046C4D7261DD7B5006939C7 /* constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5046C4D6261DD7B5006939C7 /* constants.swift */; };
 		504C276C260CB0E600179AF9 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 504C276B260CB0E600179AF9 /* GoogleService-Info.plist */; };
 		50763BEB26104CA60071941E /* MypageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50763BEA26104CA60071941E /* MypageViewController.swift */; };
 		50763BEF261057210071941E /* TrendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50763BEE261057210071941E /* TrendViewController.swift */; };
 		50763BF5261068D00071941E /* SendDBModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50763BF4261068D00071941E /* SendDBModel.swift */; };
 		50777F9C261C8B77005314BF /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50777F9B261C8B77005314BF /* TabBarController.swift */; };
+		50777FA1261CAB58005314BF /* ReviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50777FA0261CAB58005314BF /* ReviewViewController.swift */; };
 		508B0B47260B615700FBA8C5 /* CreateUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 508B0B46260B615700FBA8C5 /* CreateUserViewController.swift */; };
 		508B0B4F260B762A00FBA8C5 /* UIColor-Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 508B0B4E260B762A00FBA8C5 /* UIColor-Extension.swift */; };
-		50BCC9D12614B77A0021D405 /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50BCC9D02614B77A0021D405 /* CameraViewController.swift */; };
+		50BCC9D12614B77A0021D405 /* ContentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50BCC9D02614B77A0021D405 /* ContentsViewController.swift */; };
 		50D9222B26078EB5009A7BB0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50D9222A26078EB5009A7BB0 /* AppDelegate.swift */; };
 		50D9222D26078EB5009A7BB0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50D9222C26078EB5009A7BB0 /* SceneDelegate.swift */; };
 		50D9222F26078EB5009A7BB0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50D9222E26078EB5009A7BB0 /* ViewController.swift */; };
@@ -29,14 +31,16 @@
 /* Begin PBXFileReference section */
 		1F90BE2B6597AA0DD3A514DC /* Pods_GR.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GR.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		238CD4109F23D90CA702E0C8 /* Pods-GR.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GR.debug.xcconfig"; path = "Target Support Files/Pods-GR/Pods-GR.debug.xcconfig"; sourceTree = "<group>"; };
+		5046C4D6261DD7B5006939C7 /* constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = constants.swift; sourceTree = "<group>"; };
 		504C276B260CB0E600179AF9 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		50763BEA26104CA60071941E /* MypageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MypageViewController.swift; sourceTree = "<group>"; };
 		50763BEE261057210071941E /* TrendViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendViewController.swift; sourceTree = "<group>"; };
 		50763BF4261068D00071941E /* SendDBModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendDBModel.swift; sourceTree = "<group>"; };
 		50777F9B261C8B77005314BF /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
+		50777FA0261CAB58005314BF /* ReviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewViewController.swift; sourceTree = "<group>"; };
 		508B0B46260B615700FBA8C5 /* CreateUserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateUserViewController.swift; sourceTree = "<group>"; };
 		508B0B4E260B762A00FBA8C5 /* UIColor-Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor-Extension.swift"; sourceTree = "<group>"; };
-		50BCC9D02614B77A0021D405 /* CameraViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
+		50BCC9D02614B77A0021D405 /* ContentsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentsViewController.swift; sourceTree = "<group>"; };
 		50D9222726078EB5009A7BB0 /* GR.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GR.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		50D9222A26078EB5009A7BB0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		50D9222C26078EB5009A7BB0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -70,6 +74,14 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		5046C4D5261DD784006939C7 /* Util */ = {
+			isa = PBXGroup;
+			children = (
+				5046C4D6261DD7B5006939C7 /* constants.swift */,
+			);
+			path = Util;
+			sourceTree = "<group>";
+		};
 		50763BE726102C970071941E /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -85,8 +97,9 @@
 				508B0B46260B615700FBA8C5 /* CreateUserViewController.swift */,
 				50763BEA26104CA60071941E /* MypageViewController.swift */,
 				50763BEE261057210071941E /* TrendViewController.swift */,
-				50BCC9D02614B77A0021D405 /* CameraViewController.swift */,
+				50BCC9D02614B77A0021D405 /* ContentsViewController.swift */,
 				50777F9B261C8B77005314BF /* TabBarController.swift */,
+				50777FA0261CAB58005314BF /* ReviewViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -125,6 +138,7 @@
 			children = (
 				50D9222A26078EB5009A7BB0 /* AppDelegate.swift */,
 				50D9222C26078EB5009A7BB0 /* SceneDelegate.swift */,
+				5046C4D5261DD784006939C7 /* Util */,
 				50763BF3261068B50071941E /* Model */,
 				50763BE826102CA50071941E /* Controller */,
 				50763BE726102C970071941E /* View */,
@@ -261,8 +275,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				50BCC9D12614B77A0021D405 /* CameraViewController.swift in Sources */,
+				50BCC9D12614B77A0021D405 /* ContentsViewController.swift in Sources */,
 				50D9222F26078EB5009A7BB0 /* ViewController.swift in Sources */,
+				50777FA1261CAB58005314BF /* ReviewViewController.swift in Sources */,
+				5046C4D7261DD7B5006939C7 /* constants.swift in Sources */,
 				508B0B4F260B762A00FBA8C5 /* UIColor-Extension.swift in Sources */,
 				508B0B47260B615700FBA8C5 /* CreateUserViewController.swift in Sources */,
 				50763BEB26104CA60071941E /* MypageViewController.swift in Sources */,
