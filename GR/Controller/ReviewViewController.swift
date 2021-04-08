@@ -9,7 +9,9 @@ import UIKit
 import PKHUD
 import Cosmos
 
-class ReviewViewController: UIViewController {
+class ReviewViewController: UIViewController,DoneSendContents2 {
+
+    
 
     @IBOutlet weak var reviewTextField: UITextView!
     
@@ -39,11 +41,19 @@ class ReviewViewController: UIViewController {
         let profile:ProfileModel? = userDefaultsEX.codable(forKey: "profile")
         //コンテンツとともに送信
         if reviewTextField.text?.isEmpty != true {
-//            self.sendDBModel.
             
+//            self.sendDBModel.sendDB(reView: <#T##String#>, name: <#T##String#>, id: <#T##String#>, imageData: <#T##Data#>, sender: <#T##ProfileModel#>, rate: <#T##Double#>)
+//
         }
     }
     
+    
+    func checkDone2() {
+        
+        HUD.hide()
+        self.tabBarController?.selectedIndex = 0
+        //受信
+    }
     
 
 }
