@@ -8,9 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		3579223637281EFA54B2D515 /* Pods_GR.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F90BE2B6597AA0DD3A514DC /* Pods_GR.framework */; };
-		5046C4D7261DD7B5006939C7 /* constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5046C4D6261DD7B5006939C7 /* constants.swift */; };
+		5046C4D7261DD7B5006939C7 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5046C4D6261DD7B5006939C7 /* Constants.swift */; };
 		504C276C260CB0E600179AF9 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 504C276B260CB0E600179AF9 /* GoogleService-Info.plist */; };
 		507375C3261F43A400D8E6D6 /* LoadModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 507375C2261F43A400D8E6D6 /* LoadModel.swift */; };
+		507375C626217F5200D8E6D6 /* ContentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 507375C526217F5200D8E6D6 /* ContentModel.swift */; };
 		50763BEB26104CA60071941E /* MypageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50763BEA26104CA60071941E /* MypageViewController.swift */; };
 		50763BEF261057210071941E /* TrendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50763BEE261057210071941E /* TrendViewController.swift */; };
 		50763BF5261068D00071941E /* SendDBModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50763BF4261068D00071941E /* SendDBModel.swift */; };
@@ -26,15 +27,16 @@
 		50D9223426078EB6009A7BB0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 50D9223326078EB6009A7BB0 /* Assets.xcassets */; };
 		50D9223726078EB6009A7BB0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 50D9223526078EB6009A7BB0 /* LaunchScreen.storyboard */; };
 		50F6F31E26121FC200B65E21 /* UserDefaultsEX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F6F31D26121FC200B65E21 /* UserDefaultsEX.swift */; };
-		50F6F3212612207400B65E21 /* ProfilseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F6F3202612207400B65E21 /* ProfilseModel.swift */; };
+		50F6F3212612207400B65E21 /* ProfileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F6F3202612207400B65E21 /* ProfileModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		1F90BE2B6597AA0DD3A514DC /* Pods_GR.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GR.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		238CD4109F23D90CA702E0C8 /* Pods-GR.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GR.debug.xcconfig"; path = "Target Support Files/Pods-GR/Pods-GR.debug.xcconfig"; sourceTree = "<group>"; };
-		5046C4D6261DD7B5006939C7 /* constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = constants.swift; sourceTree = "<group>"; };
+		5046C4D6261DD7B5006939C7 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		504C276B260CB0E600179AF9 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		507375C2261F43A400D8E6D6 /* LoadModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadModel.swift; sourceTree = "<group>"; };
+		507375C526217F5200D8E6D6 /* ContentModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentModel.swift; sourceTree = "<group>"; };
 		50763BEA26104CA60071941E /* MypageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MypageViewController.swift; sourceTree = "<group>"; };
 		50763BEE261057210071941E /* TrendViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendViewController.swift; sourceTree = "<group>"; };
 		50763BF4261068D00071941E /* SendDBModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendDBModel.swift; sourceTree = "<group>"; };
@@ -52,7 +54,7 @@
 		50D9223626078EB6009A7BB0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		50D9223826078EB6009A7BB0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		50F6F31D26121FC200B65E21 /* UserDefaultsEX.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsEX.swift; sourceTree = "<group>"; };
-		50F6F3202612207400B65E21 /* ProfilseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilseModel.swift; sourceTree = "<group>"; };
+		50F6F3202612207400B65E21 /* ProfileModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileModel.swift; sourceTree = "<group>"; };
 		53D6329EAE4CAFD347F2B99D /* Pods-GR.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GR.release.xcconfig"; path = "Target Support Files/Pods-GR/Pods-GR.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -79,7 +81,7 @@
 		5046C4D5261DD784006939C7 /* Util */ = {
 			isa = PBXGroup;
 			children = (
-				5046C4D6261DD7B5006939C7 /* constants.swift */,
+				5046C4D6261DD7B5006939C7 /* Constants.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -111,8 +113,9 @@
 			children = (
 				50763BF4261068D00071941E /* SendDBModel.swift */,
 				50F6F31D26121FC200B65E21 /* UserDefaultsEX.swift */,
-				50F6F3202612207400B65E21 /* ProfilseModel.swift */,
+				50F6F3202612207400B65E21 /* ProfileModel.swift */,
 				507375C2261F43A400D8E6D6 /* LoadModel.swift */,
+				507375C526217F5200D8E6D6 /* ContentModel.swift */,
 			);
 			name = Model;
 			path = ..;
@@ -281,12 +284,13 @@
 				50BCC9D12614B77A0021D405 /* ContentsViewController.swift in Sources */,
 				50D9222F26078EB5009A7BB0 /* ViewController.swift in Sources */,
 				50777FA1261CAB58005314BF /* ReviewViewController.swift in Sources */,
-				5046C4D7261DD7B5006939C7 /* constants.swift in Sources */,
+				5046C4D7261DD7B5006939C7 /* Constants.swift in Sources */,
 				508B0B4F260B762A00FBA8C5 /* UIColor-Extension.swift in Sources */,
 				508B0B47260B615700FBA8C5 /* CreateUserViewController.swift in Sources */,
 				50763BEB26104CA60071941E /* MypageViewController.swift in Sources */,
+				507375C626217F5200D8E6D6 /* ContentModel.swift in Sources */,
 				50763BEF261057210071941E /* TrendViewController.swift in Sources */,
-				50F6F3212612207400B65E21 /* ProfilseModel.swift in Sources */,
+				50F6F3212612207400B65E21 /* ProfileModel.swift in Sources */,
 				50F6F31E26121FC200B65E21 /* UserDefaultsEX.swift in Sources */,
 				50763BF5261068D00071941E /* SendDBModel.swift in Sources */,
 				50777F9C261C8B77005314BF /* TabBarController.swift in Sources */,

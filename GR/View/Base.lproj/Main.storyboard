@@ -290,7 +290,7 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="RoU-C9-0hp">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Cell" id="RoU-C9-0hp">
                                         <rect key="frame" x="0.0" y="0.0" width="191" height="305"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="rkh-lV-O5D">
@@ -356,6 +356,9 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="wfs-RE-h3a"/>
+                    <connections>
+                        <outlet property="collectionView" destination="j3d-XE-lNo" id="uoK-Jl-qUE"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="R9n-Ut-Ncd" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -690,14 +693,6 @@
             <point key="canvasLocation" x="5022" y="819"/>
         </scene>
     </scenes>
-    <designables>
-        <designable name="4Lh-wu-4vs">
-            <size key="intrinsicContentSize" width="150" height="26"/>
-        </designable>
-        <designable name="Wj9-BC-CyQ">
-            <size key="intrinsicContentSize" width="270" height="50"/>
-        </designable>
-    </designables>
     <resources>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

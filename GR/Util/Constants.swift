@@ -1,5 +1,5 @@
 //
-//  constants.swift
+//  Constants.swift
 //  GR
 //
 //  Created by 中森えみり on 2021/04/07.

@@ -81,7 +81,7 @@ class SendDBModel {
     }
     
     //カテゴリーとUsersのOwndContentsの中に入れるメソッド（関数）
-    func sendDB(reView:String,name:String,id:String,imageData:Data,sender:ProfileModel,rate:Double){
+    func sendDB(reView:String,userID:String,sender:ProfileModel,rate:Double){
         
         var imageRef = Storage.storage().reference().child("contentImage").child("\(UUID().uuidString + String(Date().timeIntervalSince1970)).jpg")
         
@@ -105,9 +105,9 @@ class SendDBModel {
                     self.myProfile.append(sender.name!)
                     
                     //送信（ownContentsの中に入れる）
-                    self.db.collection("Users").document(Auth.auth().currentUser!.uid).collection("ownContents").document().setData(["name":name,"userID":Auth.auth().currentUser!.uid,"review":reView,"image":url?.absoluteString,"sender":self.myProfile,"rate":rate,"date":Date().timeIntervalSince1970])
+                    self.db.collection("Users").document(Auth.auth().currentUser!.uid).collection("ownContents").document().setData(["userID":Auth.auth().currentUser!.uid,"review":reView,"sender":self.myProfile,"rate":rate,"date":Date().timeIntervalSince1970])
                     
-                    self.db.collection("Users").document().setData(["name":name,"userID":Auth.auth().currentUser!.uid,"review":reView,"image":url?.absoluteString,"sender":self.myProfile,"rate":rate,"date":Date().timeIntervalSince1970])
+                    self.db.collection("Users").document().setData(["userID":Auth.auth().currentUser!.uid,"review":reView,"sender":self.myProfile,"rate":rate,"date":Date().timeIntervalSince1970])
                     
                     self.doneSendContents2?.checkDone2()
                 }

@@ -19,11 +19,13 @@ class ReviewViewController: UIViewController,DoneSendContents2 {
     
     var userDefaultsEX = UserDefaultsEX()
     var sendDBModel = SendDBModel()
+    var loadModel = LoadModel()
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        sendDBModel.doneSendContents2 = self
         
         
         
@@ -42,8 +44,8 @@ class ReviewViewController: UIViewController,DoneSendContents2 {
         //コンテンツとともに送信
         if reviewTextField.text?.isEmpty != true {
             
-//            self.sendDBModel.sendDB(reView: <#T##String#>, name: <#T##String#>, id: <#T##String#>, imageData: <#T##Data#>, sender: <#T##ProfileModel#>, rate: <#T##Double#>)
-//
+            self.sendDBModel.sendDB(reView: reviewTextField.text!, userID: (profile?.userID)!, name: (profile?.name)!, sender: profile!, rate: self.reviewScore.rating)
+
         }
     }
     
@@ -53,6 +55,7 @@ class ReviewViewController: UIViewController,DoneSendContents2 {
         HUD.hide()
         self.tabBarController?.selectedIndex = 0
         //受信
+        loadModel.loadContents(category: "\(Constants.menuArray[0])")
     }
     
 
