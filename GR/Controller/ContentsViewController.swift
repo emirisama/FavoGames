@@ -8,7 +8,6 @@
 import UIKit
 import SDWebImage
 import Cosmos
-import FirebaseAuth
 
 class ContentsViewController: UIViewController,UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,GetDataProtocol {
 
@@ -69,7 +68,25 @@ class ContentsViewController: UIViewController,UICollectionViewDelegate,UICollec
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath)
         
+        //セルの影
+        cell.layer.cornerRadius = 15.0
+        cell.layer.borderWidth = 0.0
+        cell.layer.shadowColor = UIColor.black.cgColor
+        cell.layer.shadowOffset = CGSize(width: 0, height: 0)
+        cell.layer.shadowRadius = 5.0
+        cell.layer.shadowOpacity = 1
+        cell.layer.masksToBounds = false
         
+        let imageView = cell.contentView.viewWithTag(1) as! UIImageView
+        imageView.sd_setImage(with: URL(string: contentModelArray[indexPath.row].imageURLString!), completed: nil)
+        imageView.layer.cornerRadius = 20
+        
+        let label = cell.contentView.viewWithTag(2) as! UILabel
+        label.text = contentModelArray[indexPath.row].name
+        
+        let reviewView = cell.contentView.viewWithTag(3) as! CosmosView
+        reviewView.rating = contentModelArray[indexPath.row].rate!
+          
         return cell
         
     }
@@ -82,7 +99,19 @@ class ContentsViewController: UIViewController,UICollectionViewDelegate,UICollec
     }
     
     
-
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        performSegue(withIdentifier: "detailVC", sender: indexPath.row)
+    }
+    
+    //値を渡しながら画面遷移
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        let detailVC = segue.destination as? DetailViewController
+        detailVC?.contentModel = contentModelArray[sender as! Int]
+    }
+    
+    
     /*
     // MARK: - Navigation
 
