@@ -76,16 +76,26 @@ class DetailViewController: UIViewController,UITableViewDelegate,UITableViewData
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         let webVC = segue.destination as! WebViewController
+        //↓？ゲーム画像を押すと自動検索の画面遷移
+        webVC.imageView = UIImageView()
     }
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+   
+    @IBAction func toWebView(_ sender:Any){
+        
+        performSegue(withIdentifier: "webVC", sender: nil)
+        
     }
-    */
-
+    
+    
+    
+    @IBAction func toProfileVC(_ sender: Any) {
+        let profileVC = self.storyboard?.instantiateViewController(identifier: "profileVC") as! ProfileViewController
+        
+        profileVC.contentModel = contentModel
+        self.navigationController?.pushViewController(profileVC, animated: true)
+        
+    }
+    
+    
 }
