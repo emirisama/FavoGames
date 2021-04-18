@@ -8,11 +8,16 @@
 
 /* Begin PBXBuildFile section */
 		3579223637281EFA54B2D515 /* Pods_GR.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F90BE2B6597AA0DD3A514DC /* Pods_GR.framework */; };
+		50318454262B22E30005D9BF /* ContentDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50318453262B22E30005D9BF /* ContentDetailViewController.swift */; };
+		50318457262BC9880005D9BF /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50318456262BC9880005D9BF /* SignInViewController.swift */; };
 		5046C4D7261DD7B5006939C7 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5046C4D6261DD7B5006939C7 /* Constants.swift */; };
 		504C276C260CB0E600179AF9 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 504C276B260CB0E600179AF9 /* GoogleService-Info.plist */; };
 		504E35522625982D00A119D1 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 504E35512625982D00A119D1 /* ProfileViewController.swift */; };
 		504E35562625C68700A119D1 /* ContentsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 504E35542625C68700A119D1 /* ContentsCell.swift */; };
 		504E35572625C68700A119D1 /* ContentsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 504E35552625C68700A119D1 /* ContentsCell.xib */; };
+		5065E4682629C33500BE0316 /* FollowerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5065E4672629C33500BE0316 /* FollowerModel.swift */; };
+		5065E46F2629C3FD00BE0316 /* FollowModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5065E46E2629C3FD00BE0316 /* FollowModel.swift */; };
+		5065E472262AA2EE00BE0316 /* FollowAndFollowerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5065E471262AA2EE00BE0316 /* FollowAndFollowerViewController.swift */; };
 		507375C3261F43A400D8E6D6 /* LoadModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 507375C2261F43A400D8E6D6 /* LoadModel.swift */; };
 		507375C626217F5200D8E6D6 /* ContentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 507375C526217F5200D8E6D6 /* ContentModel.swift */; };
 		50763BEB26104CA60071941E /* MypageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50763BEA26104CA60071941E /* MypageViewController.swift */; };
@@ -38,11 +43,16 @@
 /* Begin PBXFileReference section */
 		1F90BE2B6597AA0DD3A514DC /* Pods_GR.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GR.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		238CD4109F23D90CA702E0C8 /* Pods-GR.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GR.debug.xcconfig"; path = "Target Support Files/Pods-GR/Pods-GR.debug.xcconfig"; sourceTree = "<group>"; };
+		50318453262B22E30005D9BF /* ContentDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentDetailViewController.swift; sourceTree = "<group>"; };
+		50318456262BC9880005D9BF /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		5046C4D6261DD7B5006939C7 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		504C276B260CB0E600179AF9 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		504E35512625982D00A119D1 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		504E35542625C68700A119D1 /* ContentsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentsCell.swift; sourceTree = "<group>"; };
 		504E35552625C68700A119D1 /* ContentsCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ContentsCell.xib; sourceTree = "<group>"; };
+		5065E4672629C33500BE0316 /* FollowerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowerModel.swift; sourceTree = "<group>"; };
+		5065E46E2629C3FD00BE0316 /* FollowModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowModel.swift; sourceTree = "<group>"; };
+		5065E471262AA2EE00BE0316 /* FollowAndFollowerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowAndFollowerViewController.swift; sourceTree = "<group>"; };
 		507375C2261F43A400D8E6D6 /* LoadModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadModel.swift; sourceTree = "<group>"; };
 		507375C526217F5200D8E6D6 /* ContentModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentModel.swift; sourceTree = "<group>"; };
 		50763BEA26104CA60071941E /* MypageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MypageViewController.swift; sourceTree = "<group>"; };
@@ -119,6 +129,9 @@
 				508C95DA2622D6FC0077F3A6 /* DetailViewController.swift */,
 				508C95DD2623356B0077F3A6 /* WebViewController.swift */,
 				504E35512625982D00A119D1 /* ProfileViewController.swift */,
+				5065E471262AA2EE00BE0316 /* FollowAndFollowerViewController.swift */,
+				50318453262B22E30005D9BF /* ContentDetailViewController.swift */,
+				50318456262BC9880005D9BF /* SignInViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -131,6 +144,8 @@
 				50F6F3202612207400B65E21 /* ProfileModel.swift */,
 				507375C2261F43A400D8E6D6 /* LoadModel.swift */,
 				507375C526217F5200D8E6D6 /* ContentModel.swift */,
+				5065E4672629C33500BE0316 /* FollowerModel.swift */,
+				5065E46E2629C3FD00BE0316 /* FollowModel.swift */,
 			);
 			name = Model;
 			path = ..;
@@ -299,8 +314,13 @@
 			files = (
 				50BCC9D12614B77A0021D405 /* ContentsViewController.swift in Sources */,
 				508C95DE2623356B0077F3A6 /* WebViewController.swift in Sources */,
+				5065E46F2629C3FD00BE0316 /* FollowModel.swift in Sources */,
+				50318454262B22E30005D9BF /* ContentDetailViewController.swift in Sources */,
+				5065E472262AA2EE00BE0316 /* FollowAndFollowerViewController.swift in Sources */,
+				5065E4682629C33500BE0316 /* FollowerModel.swift in Sources */,
 				508C95DB2622D6FC0077F3A6 /* DetailViewController.swift in Sources */,
 				50D9222F26078EB5009A7BB0 /* ViewController.swift in Sources */,
+				50318457262BC9880005D9BF /* SignInViewController.swift in Sources */,
 				50777FA1261CAB58005314BF /* ReviewViewController.swift in Sources */,
 				5046C4D7261DD7B5006939C7 /* Constants.swift in Sources */,
 				508B0B4F260B762A00FBA8C5 /* UIColor-Extension.swift in Sources */,

@@ -36,6 +36,8 @@ class DetailViewController: UIViewController,UITableViewDelegate,UITableViewData
     }
     
     
+    
+    
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }

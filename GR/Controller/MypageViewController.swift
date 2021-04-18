@@ -30,12 +30,18 @@ class MypageViewController: UIViewController,UIImagePickerControllerDelegate,UIN
             
         }else{
             //何も設定されていない場合
-            
+            showCamera()
             
         }
         
     }
     
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        self.navigationController?.isNavigationBarHidden = true
+    }
     
     
     @IBAction func tap(_ sender: Any){
@@ -82,6 +88,8 @@ class MypageViewController: UIViewController,UIImagePickerControllerDelegate,UIN
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         picker.dismiss(animated: true, completion: nil)
     }
+    
+    
     
     
     func showCamera(){

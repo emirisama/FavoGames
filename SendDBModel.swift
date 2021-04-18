@@ -23,6 +23,15 @@ protocol DoneSendContents2{
     func checkDone2()
 }
 
+
+protocol DoneSendContents{
+    
+    func checkDone(flag:Bool)
+    
+}
+
+
+
 class SendDBModel {
     
     let db = Firestore.firestore()
@@ -31,6 +40,7 @@ class SendDBModel {
     var imageDatauser = Data()
     var myProfile = [String]()
     var doneSendContents2:DoneSendContents2?
+    var doneSendContents:DoneSendContents?
     
     //プロフィールをDBへ送信する
     func sendProfileDB(name:String, email:String, id:String,profileText:String, imageData: Data){
@@ -115,5 +125,38 @@ class SendDBModel {
             
         }
     }
+    
+    
+    
+    //フォローに関するアクション
+    func followAction(id:String,followOrNot:Bool,contentModel:ContentModel){
+        
+        
+        let profile:ProfileModel? = userDefaultsEX.codable(forKey: "profile")
+        
+        //もしidが自分であれば
+        if id != Auth.auth().currentUser!.uid{
+            
+            //フォロワーの数(自分のデータを入れる）
+            self.db.collection("Users!").document(id).collection("follower").document(Auth.auth().currentUser!.uid).setData(
+                
+                ["follower":Auth.auth().currentUser!.uid,"followOrNot":followOrNot,"userID":profile?.userID,"name":profile?.name,"image":profile?.imageURLString,"profileText":profile?.profileText]
+            )
+            
+        }
+        
+        //
+        self.db.collection("Users").document(Auth.auth().currentUser!.uid).collection("follow").document(id).setData(
+        
+            ["follower":id,"followOrNot":followOrNot,"userID":contentModel.userID,"name":contentModel.sender![3],"image":contentModel.sender![0],"profileText":contentModel.sender![1]]
+        )
+        
+        self.doneSendContents?.checkDone(flag: followOrNot)
+        
+        
+        
+    }
+    
+    
 }
 
