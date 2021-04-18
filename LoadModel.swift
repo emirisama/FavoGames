@@ -69,9 +69,10 @@ class LoadModel{
                 for doc in snapShotDoc{
                     
                     let data = doc.data()
+                    //if letでもし空じゃなかったらの意味（!= nilと同じ)
                     if let userID = data["userID"] as? String,let name = data["name"] as? String,let image = data["image"] as? String,let review = data["review"] as? String,let sender = data["sender"] as? [String],let rate = data["rate"] as? Double, let date = data["date"] as? Double{
                         
-                        let contentModel = ContentModel(review: review, name: name, userID: userID, sender: sender, rate: rate)
+                        let contentModel = ContentModel(imageURLString: image, review: review, name: name, userID: userID, sender: sender, rate: rate)
                         self.contentModelArray.append(contentModel)
                         self.getDataProtocol?.getData(dataArray: self.contentModelArray)
                     }
@@ -94,7 +95,7 @@ class LoadModel{
                     if let userID = data["userID"] as? String,let name = data["name"] as? String,let image = data["image"] as? String,let review = data["review"] as? String,let sender = data["sender"] as? [String],let rate = data["rate"] as? Double,let date = data["date"] as? Double{
                         
                         
-                        let contentModel = ContentModel(review: review, name: name, userID: userID, sender: sender, rate: rate)
+                        let contentModel = ContentModel(imageURLString: image, review: review, name: name, userID: userID, sender: sender, rate: rate)
                         
                         self.contentModelArray.append(contentModel)
                         

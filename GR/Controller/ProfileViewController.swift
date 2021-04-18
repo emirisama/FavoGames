@@ -106,7 +106,8 @@ class ProfileViewController: UIViewController,UITableViewDelegate,UITableViewDat
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! ContentsCell
-        cell.contentImageView.sd_setImage(with: URL(string: contentModelArray[indexPath.row].imageURLSting!), completed: nil)
+        //自分が投稿したレビューのゲームソフトのタイトル画像(動画：コンテンツを受信しよう）
+//        cell.contentImageView.sd_setImage(with: URL(string: contentModelArray[indexPath.row].imageURLSting!), completed: nil)
         cell.reviewLabel.text = contentModelArray[indexPath.row].review
         cell.reviewView.rating = contentModelArray[indexPath.row].rate!
         

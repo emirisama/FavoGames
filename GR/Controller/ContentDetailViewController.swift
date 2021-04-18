@@ -15,6 +15,8 @@ class ContentDetailViewController: UIViewController,UITableViewDelegate,UITableV
     var loadModel = LoadModel()
     var contentModel:ContentModel?
     var contentModelArray = [ContentModel]()
+    //▲
+    var profileModelArray = [ProfileModel]()
     var userID = String()
     
     @IBOutlet weak var tableView: UITableView!
@@ -43,6 +45,7 @@ class ContentDetailViewController: UIViewController,UITableViewDelegate,UITableV
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! ContentsCell
         
+        //ContentsCell.xibのゲームソフトの画像をCellに表示
         cell.contentImageView.sd_setImage(with: URL(string: contentModelArray[indexPath.row].imageURLString!), completed: nil)
         
         cell.reviewLabel.text = contentModelArray[indexPath.row].review

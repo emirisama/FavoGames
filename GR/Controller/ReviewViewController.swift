@@ -41,10 +41,11 @@ class ReviewViewController: UIViewController,DoneSendContents2 {
         
         //自分のプロフィールをアプリ内からとってくる
         let profile:ProfileModel? = userDefaultsEX.codable(forKey: "profile")
-        //コンテンツとともに送信
+        //コンテンツとともに送信（動画：受信クラスを作成しよう）
         if reviewTextField.text?.isEmpty != true {
             
-            self.sendDBModel.sendDB(reView: reviewTextField.text!, userID: (profile?.userID)!, name: (profile?.name)!, sender: profile!, rate: self.reviewScore.rating)
+            self.sendDBModel.sendDB(category: "",name: (profile?.name)!, reView: reviewTextField.text!, userID: (profile?.userID)!, sender: profile!, rate: self.reviewScore.rating, imageData:  (profile?.jepegData(compressionQuality: 0.05))!)
+
 
         }
     }

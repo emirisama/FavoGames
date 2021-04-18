@@ -12,6 +12,7 @@ struct ContentModel{
     
 //    var profileModel:ProfileModel?
     
+    let imageURLString:String?
     let review:String?
     let name:String?
     let userID:String?

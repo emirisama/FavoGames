@@ -77,9 +77,9 @@ class ContentsViewController: UIViewController,UICollectionViewDelegate,UICollec
         cell.layer.shadowOpacity = 1
         cell.layer.masksToBounds = false
         
-        let imageView = cell.contentView.viewWithTag(1) as! UIImageView
-        imageView.sd_setImage(with: URL(string: contentModelArray[indexPath.row].imageURLString!), completed: nil)
-        imageView.layer.cornerRadius = 20
+//        let imageView = cell.contentView.viewWithTag(1) as! UIImageView
+//        imageView.sd_setImage(with: URL(string: contentModelArray[indexPath.row].imageURLString!), completed: nil)
+
         
         let label = cell.contentView.viewWithTag(2) as! UILabel
         label.text = contentModelArray[indexPath.row].name
