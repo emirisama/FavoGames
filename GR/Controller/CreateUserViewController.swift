@@ -90,7 +90,7 @@ class CreateUserViewController: UIViewController,UITextFieldDelegate,SendProfile
         //アプリ内に自分のProfileを保存しておく
         
         //Trendの画面遷移
-        let tabVC = self.storyboard?.instantiateViewController(identifier: "tab") as! TabBarController
+        let tabVC = self.storyboard?.instantiateViewController(identifier: "tab") as! UITabBarController
         self.navigationController?.pushViewController(tabVC, animated: true)
     }
     
