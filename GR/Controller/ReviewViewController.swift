@@ -44,7 +44,7 @@ class ReviewViewController: UIViewController,DoneSendContents2 {
         //コンテンツとともに送信（動画：受信クラスを作成しよう）
         if reviewTextField.text?.isEmpty != true {
             
-            self.sendDBModel.sendDB(category: "",name: (profile?.name)!, reView: reviewTextField.text!, userID: (profile?.userID)!, sender: profile!, rate: self.reviewScore.rating, imageData:  (profile?.jepegData(compressionQuality: 0.05))!)
+            self.sendDBModel.sendDB(category: "",name: (profile?.name)!, reView: reviewTextField.text!, userID: (profile?.userID)!, sender: profile!, rate: self.reviewScore.rating)
 
 
         }

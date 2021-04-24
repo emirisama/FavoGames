@@ -18,5 +18,6 @@ struct ContentModel{
     let userID:String?
     let sender:[String]?
     let rate:Double?
+    let gametitle:String?
     
 }

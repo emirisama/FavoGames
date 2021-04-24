@@ -91,42 +91,17 @@ class SendDBModel {
     }
     
     //カテゴリーとUsersのOwndContentsの中に入れるメソッド（関数）
-    func sendDB(category:String,name:String,reView:String,userID:String,sender:ProfileModel,rate:Double,imageData:Data){
-        
-        
-        
-        var imageRef = Storage.storage().reference().child("contentImage").child("\(UUID().uuidString + String(Date().timeIntervalSince1970)).jpg")
-        
-        
-        imageRef.putData(imageData, metadata: nil) { (metaData, error ) in
-            
-            if error != nil{
-                return
-            }
-            
-            
-            imageRef.downloadURL { (url, error) in
-                
-                if error != nil{
-                    return
-                }
-                if url != nil{
-                    self.myProfile.append(sender.imageURLString!)
-                    self.myProfile.append(sender.profileText!)
-                    self.myProfile.append(sender.userID!)
-                    self.myProfile.append(sender.name!)
-                    
+    func sendDB(category:String,name:String,reView:String,userID:String,sender:ProfileModel,rate:Double){
+       
                     //送信（ownContentsの中に入れる）
-                    self.db.collection("Users").document(Auth.auth().currentUser!.uid).collection("ownContents").document().setData(["name":name,"userID":Auth.auth().currentUser!.uid,"review":reView,"sender":self.myProfile,"rate":rate,"date":Date().timeIntervalSince1970,"image":url?.absoluteString])
+                    self.db.collection("Users").document(Auth.auth().currentUser!.uid).collection("ownContents").document().setData(["name":name,"userID":Auth.auth().currentUser!.uid,"review":reView,"sender":self.myProfile,"rate":rate,"date":Date().timeIntervalSince1970])
                     
-                    self.db.collection(category).document().setData(["name":name,"userID":Auth.auth().currentUser!.uid,"review":reView,"sender":self.myProfile,"rate":rate,"date":Date().timeIntervalSince1970,"image":url?.absoluteString])
+                    self.db.collection(category).document().setData(["name":name,"userID":Auth.auth().currentUser!.uid,"review":reView,"sender":self.myProfile,"rate":rate,"date":Date().timeIntervalSince1970])
                     
                     self.doneSendContents2?.checkDone2()
-                }
-            }
-            
-        }
     }
+
+
     
     
     
@@ -141,7 +116,6 @@ class SendDBModel {
             
             //フォロワーの数(自分のデータを入れる）
             self.db.collection("Users!").document(id).collection("follower").document(Auth.auth().currentUser!.uid).setData(
-                
                 ["follower":Auth.auth().currentUser!.uid,"followOrNot":followOrNot,"userID":profile?.userID,"name":profile?.name,"image":profile?.imageURLString,"profileText":profile?.profileText]
             )
             
@@ -149,16 +123,13 @@ class SendDBModel {
         
         //
         self.db.collection("Users").document(Auth.auth().currentUser!.uid).collection("follow").document(id).setData(
-        
             ["follower":id,"followOrNot":followOrNot,"userID":contentModel.userID,"name":contentModel.sender![3],"image":contentModel.sender![0],"profileText":contentModel.sender![1]]
         )
         
         self.doneSendContents?.checkDone(flag: followOrNot)
         
         
-        
     }
     
     
 }
-

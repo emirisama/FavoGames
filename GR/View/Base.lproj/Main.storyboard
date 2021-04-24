@@ -67,7 +67,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="新規会員登録・ログイン"/>
                                 <connections>
-                                    <segue destination="fBl-XV-G7T" kind="show" id="Kwh-oZ-UPJ"/>
+                                    <segue destination="fBl-XV-G7T" kind="show" identifier="" id="Kwh-oZ-UPJ"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -86,12 +86,11 @@
                     <connections>
                         <outlet property="pageControl" destination="ALa-Xe-Y5G" id="6nM-ah-04S"/>
                         <outlet property="scroll" destination="ODx-zz-juC" id="OEk-4C-7pC"/>
-                        <segue destination="hr9-Ui-kYQ" kind="presentation" identifier="signInVC" modalPresentationStyle="fullScreen" id="aKD-CC-GRb"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="928.98550724637687" y="79.6875"/>
+            <point key="canvasLocation" x="833" y="115"/>
         </scene>
         <!--新規会員登録・ログイン-->
         <scene sceneID="1dK-Us-ZvR">
@@ -204,6 +203,9 @@
                                 <state key="normal" title="メールアドレスでログイン">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <connections>
+                                    <action selector="signinButton:" destination="fBl-XV-G7T" eventType="touchUpInside" id="FDJ-48-lyq"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="MJd-cP-yzd"/>
@@ -225,12 +227,12 @@
                         <outlet property="nameTextField" destination="jNz-IU-W2R" id="Eny-Vn-yBE"/>
                         <outlet property="passwordTextField" destination="h1C-Zq-Dj4" id="YLk-9r-ciN"/>
                         <outlet property="signupButton" destination="PuP-G1-iag" id="byS-l5-EDZ"/>
-                        <segue destination="fVx-7x-oq4" kind="show" id="gY1-ep-t5o"/>
+                        <segue destination="fVx-7x-oq4" kind="show" identifier="CreateVC" id="aS2-GF-ehV"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ian-ta-8Av" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1664" y="80"/>
+            <point key="canvasLocation" x="1417" y="115"/>
         </scene>
         <!--Trend View Controller-->
         <scene sceneID="aA6-A7-uQ3">
@@ -404,6 +406,13 @@
                                                     <rect key="frame" x="20" y="73" width="156" height="165"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y4K-na-Grp">
+                                                    <rect key="frame" x="20" y="73" width="156" height="165"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <connections>
+                                                        <action selector="toWebView:" destination="HvS-Kq-qYm" eventType="touchUpInside" id="bWM-iA-rkT"/>
+                                                    </connections>
+                                                </button>
                                             </subviews>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </tableViewCellContentView>
@@ -476,9 +485,8 @@
                     <navigationItem key="navigationItem" id="PAt-pF-fxj"/>
                     <connections>
                         <outlet property="tableView" destination="NRb-P2-KD1" id="W2D-VU-7pS"/>
-                        <outlet property="toWebView" destination="OJW-Pz-PB1" id="eN3-0A-dMF"/>
-                        <segue destination="WcL-D3-6JI" kind="presentation" identifier="webVC" id="bZ1-ss-RrS"/>
                         <segue destination="DeC-ck-r7K" kind="show" id="glr-kS-HED"/>
+                        <segue destination="WcL-D3-6JI" kind="presentation" identifier="webVC" id="lYq-Fd-tCW"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="crE-yT-las" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -839,12 +847,12 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fko-T0-z6G" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="18.840579710144929" y="79.6875"/>
+            <point key="canvasLocation" x="19" y="115"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="Rb2-aV-eJj">
             <objects>
-                <tabBarController storyboardIdentifier="tab" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="fVx-7x-oq4" customClass="TabBarController" customModule="GR" customModuleProvider="target" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="tab" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="fVx-7x-oq4" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="DP4-mU-bsi"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="PCE-n9-ObH">
@@ -861,7 +869,7 @@
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GTT-7q-Q2d" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2369.5652173913045" y="79.6875"/>
+            <point key="canvasLocation" x="2588" y="96"/>
         </scene>
         <!--Trend-->
         <scene sceneID="qE9-zl-C6i">
@@ -1095,10 +1103,10 @@
             </objects>
             <point key="canvasLocation" x="4162" y="1596"/>
         </scene>
-        <!--新規会員登録・ログイン-->
+        <!--ログイン-->
         <scene sceneID="Uwh-xT-fYo">
             <objects>
-                <viewController id="hr9-Ui-kYQ" customClass="SignInViewController" customModule="GR" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SignInVC" modalPresentationStyle="fullScreen" useStoryboardIdentifierAsRestorationIdentifier="YES" id="hr9-Ui-kYQ" customClass="SignInViewController" customModule="GR" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="HmG-of-lcr">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1155,8 +1163,7 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
-                                    <action selector="registerButton:" destination="hr9-Ui-kYQ" eventType="touchUpInside" id="AoB-Wl-uG6"/>
-                                    <action selector="signIn:" destination="hr9-Ui-kYQ" eventType="touchUpInside" id="Nrm-Kb-hEb"/>
+                                    <action selector="signIn:" destination="hr9-Ui-kYQ" eventType="touchUpInside" id="U1J-tD-T8c"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -1170,12 +1177,11 @@
                             <constraint firstItem="Oee-H7-uJ4" firstAttribute="trailing" secondItem="QZu-MZ-Pkg" secondAttribute="trailing" constant="50" id="yr3-mO-ieH"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="新規会員登録・ログイン" id="2Mu-hU-lNv"/>
+                    <navigationItem key="navigationItem" title="ログイン" id="2Mu-hU-lNv"/>
                     <connections>
-                        <outlet property="emailTextField" destination="HqA-FH-dAu" id="fgF-xC-bBv"/>
-                        <outlet property="passwordTextField" destination="9ZS-Gy-xUz" id="tsg-dq-7wm"/>
-                        <outlet property="signupButton" destination="Qbi-fO-Nww" id="3am-RF-eeV"/>
-                        <outlet property="textField" destination="HqA-FH-dAu" id="L6Q-e0-Qax"/>
+                        <outlet property="emailTextField" destination="HqA-FH-dAu" id="fHh-o5-fWf"/>
+                        <outlet property="passwordTextField" destination="9ZS-Gy-xUz" id="2wp-Bb-mn3"/>
+                        <segue destination="fVx-7x-oq4" kind="show" identifier="" id="wvQ-Au-5Gd"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WMn-VU-l1J" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -1183,7 +1189,19 @@
             <point key="canvasLocation" x="1664" y="-607"/>
         </scene>
     </scenes>
+    <designables>
+        <designable name="4Lh-wu-4vs">
+            <size key="intrinsicContentSize" width="150" height="26"/>
+        </designable>
+        <designable name="4sz-sA-yhe">
+            <size key="intrinsicContentSize" width="120" height="20"/>
+        </designable>
+        <designable name="Wj9-BC-CyQ">
+            <size key="intrinsicContentSize" width="270" height="50"/>
+        </designable>
+    </designables>
     <inferredMetricsTieBreakers>
+        <segue reference="aS2-GF-ehV"/>
         <segue reference="3K0-bH-dte"/>
     </inferredMetricsTieBreakers>
     <resources>

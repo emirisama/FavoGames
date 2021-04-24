@@ -13,6 +13,9 @@ class DetailViewController: UIViewController,UITableViewDelegate,UITableViewData
 
  
     @IBOutlet weak var tableView: UITableView!
+    var imageView = UIImageView()
+    
+    
     var contentModel:ContentModel?
     var profileModel:ProfileModel?
     var loadModel = LoadModel()
@@ -23,7 +26,7 @@ class DetailViewController: UIViewController,UITableViewDelegate,UITableViewData
 
         tableView.delegate = self
         tableView.dataSource = self
-        
+        imageView.sd_setImage(with: URL(string: (contentModel?.imageURLString)!), completed: nil)
 //        loadModel.loadContents(category: <#T##String#>)
         
     }
@@ -79,16 +82,15 @@ class DetailViewController: UIViewController,UITableViewDelegate,UITableViewData
         
         let webVC = segue.destination as! WebViewController
         //↓？ゲーム画像を押すと自動検索の画面遷移
-        webVC.imageView = UIImageView()
+        webVC.gametitle = (contentModel?.gametitle)!
     }
 
-   
-    @IBAction func toWebView(_ sender:Any){
+    
+    @IBAction func toWebView(_ sender: Any) {
         
         performSegue(withIdentifier: "webVC", sender: nil)
-        
     }
-    
+
     
     
     @IBAction func toProfileVC(_ sender: Any) {

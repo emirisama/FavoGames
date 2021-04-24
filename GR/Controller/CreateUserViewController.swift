@@ -89,10 +89,18 @@ class CreateUserViewController: UIViewController,UITextFieldDelegate,SendProfile
         
         //アプリ内に自分のProfileを保存しておく
         
-        //Trendの画面に戻る
+        //Trendの画面遷移
         let tabVC = self.storyboard?.instantiateViewController(identifier: "tab") as! TabBarController
         self.navigationController?.pushViewController(tabVC, animated: true)
     }
+    
+    
+    @IBAction func signinButton(_ sender: Any) {
+        
+        self.performSegue(withIdentifier: "SignInVC", sender: nil)
+    }
+    
+    
         
 }
 

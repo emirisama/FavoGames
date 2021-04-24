@@ -15,7 +15,7 @@ class WebViewController: UIViewController,WKNavigationDelegate {
     
     @IBOutlet weak var webView: WKWebView!
     //ゲーム画像を押すとAmazonに遷移するための変数
-    var imageView = UIImageView()
+    var gametitle = String()
     
     
     override func viewDidLoad() {
@@ -23,7 +23,7 @@ class WebViewController: UIViewController,WKNavigationDelegate {
 
         webView.navigationDelegate = self
         
-        let myURL = URL(string: "https://www.google.com/search?q=\(imageView)".addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!)
+        let myURL = URL(string: "https://www.google.com/search?q=\(gametitle)".addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!)
         let myRequest = URLRequest(url: myURL!)
         webView.load(myRequest)
     }

@@ -23,15 +23,13 @@ class TabBarController: AMPagerTabsViewController {
         tabFont = UIFont.systemFont(ofSize: 17, weight: .bold)
         self.viewControllers = getTabs()
         
-        
         if Auth.auth().currentUser != nil{
-            //サインイン
-            performSegue(withIdentifier: "signInVC", sender: nil)
-            
-        }else{
+
             //新規会員登録
             performSegue(withIdentifier: "CreateVC", sender: nil)
         }
+   
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
