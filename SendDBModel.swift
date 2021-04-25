@@ -94,9 +94,9 @@ class SendDBModel {
     func sendDB(category:String,name:String,reView:String,userID:String,sender:ProfileModel,rate:Double){
        
                     //送信（ownContentsの中に入れる）
-                    self.db.collection("Users").document(Auth.auth().currentUser!.uid).collection("ownContents").document().setData(["name":name,"userID":Auth.auth().currentUser!.uid,"review":reView,"sender":self.myProfile,"rate":rate,"date":Date().timeIntervalSince1970])
+        self.db.collection("Users").document(Auth.auth().currentUser!.uid).collection("ownContents").document().setData(["name":name,"userID":Auth.auth().currentUser!.uid,"review":reView,"sender":self.myProfile,"rate":rate,"date":Date().timeIntervalSince1970])
                     
-                    self.db.collection(category).document().setData(["name":name,"userID":Auth.auth().currentUser!.uid,"review":reView,"sender":self.myProfile,"rate":rate,"date":Date().timeIntervalSince1970])
+        self.db.collection(category).document().setData(["name":name,"userID":Auth.auth().currentUser!.uid,"review":reView,"sender":self.myProfile,"rate":rate,"date":Date().timeIntervalSince1970])
                     
                     self.doneSendContents2?.checkDone2()
     }

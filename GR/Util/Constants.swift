@@ -9,7 +9,7 @@ import Foundation
 
 struct Constants{
     
-    static let titleArray = ["Trend","Nice","Search","New","Mypage"]
-    static let menuArray = ["category1","category2","category3","category","category5"]
+    static let titleArray = ["Trend","Search","Nice","Mypage"]
+    static let menuArray = ["category1","category2","category3","category4"]
     
 }

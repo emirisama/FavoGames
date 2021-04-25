@@ -67,7 +67,9 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="新規会員登録・ログイン"/>
                                 <connections>
-                                    <segue destination="fBl-XV-G7T" kind="show" identifier="" id="Kwh-oZ-UPJ"/>
+                                    <action selector="resisterButton:" destination="CS6-cF-acy" eventType="touchUpInside" id="GbA-rC-AtB"/>
+                                    <action selector="start:" destination="BYZ-38-t0r" eventType="touchUpInside" id="HOk-Ke-BXa"/>
+                                    <action selector="startButton:" destination="CS6-cF-acy" eventType="touchUpInside" id="RsA-Lk-0Lu"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -86,22 +88,24 @@
                     <connections>
                         <outlet property="pageControl" destination="ALa-Xe-Y5G" id="6nM-ah-04S"/>
                         <outlet property="scroll" destination="ODx-zz-juC" id="OEk-4C-7pC"/>
+                        <segue destination="fVx-7x-oq4" kind="show" identifier="next" id="bRS-dw-naU"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <exit id="CS6-cF-acy" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="833" y="115"/>
+            <point key="canvasLocation" x="974" y="96"/>
         </scene>
         <!--新規会員登録・ログイン-->
         <scene sceneID="1dK-Us-ZvR">
             <objects>
-                <viewController storyboardIdentifier="CreateVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="fBl-XV-G7T" customClass="CreateUserViewController" customModule="GR" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="createVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="fBl-XV-G7T" customClass="CreateUserViewController" customModule="GR" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Thf-Ug-84H">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="UQR-VH-Ro0">
-                                <rect key="frame" x="50" y="128" width="314" height="300"/>
+                                <rect key="frame" x="50" y="84" width="314" height="300"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="dcE-cK-JhK">
                                         <rect key="frame" x="0.0" y="0.0" width="314" height="60"/>
@@ -178,7 +182,7 @@
                                 </constraints>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PuP-G1-iag">
-                                <rect key="frame" x="57" y="448" width="300" height="50"/>
+                                <rect key="frame" x="57" y="404" width="300" height="50"/>
                                 <color key="backgroundColor" red="0.99651342629999995" green="0.59027928110000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="4mf-cc-A32"/>
@@ -193,7 +197,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9nR-IB-qCg">
-                                <rect key="frame" x="57" y="538" width="300" height="50"/>
+                                <rect key="frame" x="57" y="494" width="300" height="50"/>
                                 <color key="backgroundColor" red="0.29847586275351168" green="0.29847586275351168" blue="0.29847586275351168" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="300" id="Z0k-IQ-CpR"/>
@@ -227,17 +231,16 @@
                         <outlet property="nameTextField" destination="jNz-IU-W2R" id="Eny-Vn-yBE"/>
                         <outlet property="passwordTextField" destination="h1C-Zq-Dj4" id="YLk-9r-ciN"/>
                         <outlet property="signupButton" destination="PuP-G1-iag" id="byS-l5-EDZ"/>
-                        <segue destination="fVx-7x-oq4" kind="show" identifier="CreateVC" id="aS2-GF-ehV"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ian-ta-8Av" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1664" y="115"/>
+            <point key="canvasLocation" x="4112" y="-1359"/>
         </scene>
         <!--Trend View Controller-->
         <scene sceneID="aA6-A7-uQ3">
             <objects>
-                <viewController storyboardIdentifier="Trend" useStoryboardIdentifierAsRestorationIdentifier="YES" id="CAN-ha-GER" customClass="TrendViewController" customModule="GR" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="trend" useStoryboardIdentifierAsRestorationIdentifier="YES" id="CAN-ha-GER" customClass="TrendViewController" customModule="GR" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="0ky-Ok-8uj">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -254,15 +257,18 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                     <navigationItem key="navigationItem" id="TRW-i2-r7A"/>
+                    <connections>
+                        <segue destination="fBl-XV-G7T" kind="presentation" identifier="createVC" modalPresentationStyle="fullScreen" id="Wx1-Ax-AZe"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0IP-eD-zl5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="4113.04347826087" y="-617.41071428571422"/>
         </scene>
-        <!--View Controller-->
+        <!--Search View Controller-->
         <scene sceneID="CUk-jB-X2N">
             <objects>
-                <viewController id="ogn-S2-s4C" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="search" useStoryboardIdentifierAsRestorationIdentifier="YES" id="ogn-S2-s4C" customClass="SearchViewController" customModule="GR" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="X6u-ti-v9L">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -278,7 +284,7 @@
         <!--Contents View Controller-->
         <scene sceneID="FNp-Lr-Hni">
             <objects>
-                <viewController storyboardIdentifier="view1" useStoryboardIdentifierAsRestorationIdentifier="YES" id="ZIQ-nh-wUt" customClass="ContentsViewController" customModule="GR" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="ZIQ-nh-wUt" customClass="ContentsViewController" customModule="GR" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="AXT-f0-D8u">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -664,10 +670,10 @@
             </objects>
             <point key="canvasLocation" x="7429" y="556"/>
         </scene>
-        <!--View Controller-->
+        <!--Nice View Controller-->
         <scene sceneID="ljF-kD-kP1">
             <objects>
-                <viewController id="dSL-5K-Y8V" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="nice" useStoryboardIdentifierAsRestorationIdentifier="YES" id="dSL-5K-Y8V" customClass="NiceViewController" customModule="GR" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="9vb-qx-8OF">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -683,7 +689,7 @@
         <!--Review View Controller-->
         <scene sceneID="hJz-HN-pde">
             <objects>
-                <viewController id="5ac-yS-oMF" customClass="ReviewViewController" customModule="GR" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="review1" useStoryboardIdentifierAsRestorationIdentifier="YES" id="5ac-yS-oMF" customClass="ReviewViewController" customModule="GR" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="CdB-Gv-PAK">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -986,7 +992,7 @@
         <!--Profile View Controller-->
         <scene sceneID="DW6-9N-fFz">
             <objects>
-                <viewController id="juJ-Pj-drF" customClass="ProfileViewController" customModule="GR" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="mypage" useStoryboardIdentifierAsRestorationIdentifier="YES" id="juJ-Pj-drF" customClass="ProfileViewController" customModule="GR" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ITQ-PG-5Zp">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1106,7 +1112,7 @@
         <!--ログイン-->
         <scene sceneID="Uwh-xT-fYo">
             <objects>
-                <viewController storyboardIdentifier="SignInVC" modalPresentationStyle="fullScreen" useStoryboardIdentifierAsRestorationIdentifier="YES" id="hr9-Ui-kYQ" customClass="SignInViewController" customModule="GR" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="signInVC" modalPresentationStyle="fullScreen" useStoryboardIdentifierAsRestorationIdentifier="YES" id="hr9-Ui-kYQ" customClass="SignInViewController" customModule="GR" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="HmG-of-lcr">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1181,7 +1187,6 @@
                     <connections>
                         <outlet property="emailTextField" destination="HqA-FH-dAu" id="fHh-o5-fWf"/>
                         <outlet property="passwordTextField" destination="9ZS-Gy-xUz" id="2wp-Bb-mn3"/>
-                        <segue destination="fVx-7x-oq4" kind="show" identifier="" id="wvQ-Au-5Gd"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WMn-VU-l1J" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -1201,7 +1206,6 @@
         </designable>
     </designables>
     <inferredMetricsTieBreakers>
-        <segue reference="aS2-GF-ehV"/>
         <segue reference="3K0-bH-dte"/>
     </inferredMetricsTieBreakers>
     <resources>

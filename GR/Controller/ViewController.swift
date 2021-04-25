@@ -29,6 +29,13 @@ class ViewController: UIViewController {
         self.scroll.delegate = self
         
     }
+    
+    @IBAction func start(_ sender: Any) {
+        
+        performSegue(withIdentifier: "next",sender: nil)
+    }
+    
+    
 }
     
     
@@ -37,6 +44,7 @@ extension ViewController:UIScrollViewDelegate {
         let index = Int(round(scrollView.contentOffset.x / scrollView.frame.width))
         self.pageControl.currentPage = index
     }
+    
 }
 
 

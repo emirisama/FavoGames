@@ -15,6 +15,8 @@
 		504E35522625982D00A119D1 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 504E35512625982D00A119D1 /* ProfileViewController.swift */; };
 		504E35562625C68700A119D1 /* ContentsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 504E35542625C68700A119D1 /* ContentsCell.swift */; };
 		504E35572625C68700A119D1 /* ContentsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 504E35552625C68700A119D1 /* ContentsCell.xib */; };
+		505854552635081B00182CFD /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 505854542635081B00182CFD /* SearchViewController.swift */; };
+		505854582635084F00182CFD /* NiceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 505854572635084F00182CFD /* NiceViewController.swift */; };
 		5065E4682629C33500BE0316 /* FollowerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5065E4672629C33500BE0316 /* FollowerModel.swift */; };
 		5065E46F2629C3FD00BE0316 /* FollowModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5065E46E2629C3FD00BE0316 /* FollowModel.swift */; };
 		5065E472262AA2EE00BE0316 /* FollowAndFollowerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5065E471262AA2EE00BE0316 /* FollowAndFollowerViewController.swift */; };
@@ -50,6 +52,8 @@
 		504E35512625982D00A119D1 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		504E35542625C68700A119D1 /* ContentsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentsCell.swift; sourceTree = "<group>"; };
 		504E35552625C68700A119D1 /* ContentsCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ContentsCell.xib; sourceTree = "<group>"; };
+		505854542635081B00182CFD /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
+		505854572635084F00182CFD /* NiceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NiceViewController.swift; sourceTree = "<group>"; };
 		5065E4672629C33500BE0316 /* FollowerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowerModel.swift; sourceTree = "<group>"; };
 		5065E46E2629C3FD00BE0316 /* FollowModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowModel.swift; sourceTree = "<group>"; };
 		5065E471262AA2EE00BE0316 /* FollowAndFollowerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowAndFollowerViewController.swift; sourceTree = "<group>"; };
@@ -132,6 +136,8 @@
 				5065E471262AA2EE00BE0316 /* FollowAndFollowerViewController.swift */,
 				50318453262B22E30005D9BF /* ContentDetailViewController.swift */,
 				50318456262BC9880005D9BF /* SignInViewController.swift */,
+				505854542635081B00182CFD /* SearchViewController.swift */,
+				505854572635084F00182CFD /* NiceViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -320,6 +326,7 @@
 				5065E4682629C33500BE0316 /* FollowerModel.swift in Sources */,
 				508C95DB2622D6FC0077F3A6 /* DetailViewController.swift in Sources */,
 				50D9222F26078EB5009A7BB0 /* ViewController.swift in Sources */,
+				505854552635081B00182CFD /* SearchViewController.swift in Sources */,
 				50318457262BC9880005D9BF /* SignInViewController.swift in Sources */,
 				50777FA1261CAB58005314BF /* ReviewViewController.swift in Sources */,
 				5046C4D7261DD7B5006939C7 /* Constants.swift in Sources */,
@@ -331,6 +338,7 @@
 				504E35562625C68700A119D1 /* ContentsCell.swift in Sources */,
 				50763BEF261057210071941E /* TrendViewController.swift in Sources */,
 				50F6F3212612207400B65E21 /* ProfileModel.swift in Sources */,
+				505854582635084F00182CFD /* NiceViewController.swift in Sources */,
 				50F6F31E26121FC200B65E21 /* UserDefaultsEX.swift in Sources */,
 				50763BF5261068D00071941E /* SendDBModel.swift in Sources */,
 				50777F9C261C8B77005314BF /* TabBarController.swift in Sources */,
