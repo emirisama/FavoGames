@@ -99,7 +99,7 @@
         <!--新規会員登録・ログイン-->
         <scene sceneID="1dK-Us-ZvR">
             <objects>
-                <viewController storyboardIdentifier="createVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="fBl-XV-G7T" customClass="CreateUserViewController" customModule="GR" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="fBl-XV-G7T" customClass="CreateUserViewController" customModule="GR" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Thf-Ug-84H">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -258,12 +258,108 @@
                     </view>
                     <navigationItem key="navigationItem" id="TRW-i2-r7A"/>
                     <connections>
-                        <segue destination="fBl-XV-G7T" kind="presentation" identifier="createVC" modalPresentationStyle="fullScreen" id="Wx1-Ax-AZe"/>
+                        <segue destination="fBl-XV-G7T" kind="presentation" identifier="createVC" modalPresentationStyle="fullScreen" id="qA8-pV-QK7"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0IP-eD-zl5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="4113.04347826087" y="-617.41071428571422"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="Qo4-cw-ndP">
+            <objects>
+                <viewController storyboardIdentifier="ps5" useStoryboardIdentifierAsRestorationIdentifier="YES" id="oph-oI-j41" customClass="PS5ViewController" customModule="GR" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="e9A-4W-DHP">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="PS5" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PGQ-eN-mc4">
+                                <rect key="frame" x="68" y="189" width="115" height="58"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="aIy-XR-uEu"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="eGJ-fo-qms" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5086.9565217391309" y="-808.25892857142856"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="0Cs-FC-QHO">
+            <objects>
+                <viewController storyboardIdentifier="ps4" useStoryboardIdentifierAsRestorationIdentifier="YES" id="4tS-h1-81O" customClass="PS4ViewController" customModule="GR" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="JyG-Jp-qXx">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="PS4" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HDX-Hf-KLz">
+                                <rect key="frame" x="90" y="189" width="115" height="58"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="Bw6-8u-A3B"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="CD6-HN-rfA" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5797" y="-808"/>
+        </scene>
+        <!--Switch View Controller-->
+        <scene sceneID="H1M-mq-ETa">
+            <objects>
+                <viewController storyboardIdentifier="switch" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Hor-xP-ueq" customClass="SwitchViewController" customModule="GR" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="I8W-5i-Ewk">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Switch" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xsq-F8-tT2">
+                                <rect key="frame" x="91" y="202" width="115" height="58"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="HFU-13-UbJ"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="52c-eq-omw" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="6509" y="-808"/>
+        </scene>
+        <!--Steam View Controller-->
+        <scene sceneID="Hef-fS-Zu4">
+            <objects>
+                <viewController storyboardIdentifier="steam" useStoryboardIdentifierAsRestorationIdentifier="YES" id="6B0-oH-pH6" customClass="SteamViewController" customModule="GR" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="ixs-HQ-6Sd">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Steam" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jGn-DL-cJc">
+                                <rect key="frame" x="92" y="205" width="115" height="58"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="fhQ-Rl-soF"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="JLb-xx-bxi" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="7199" y="-808"/>
         </scene>
         <!--Search View Controller-->
         <scene sceneID="CUk-jB-X2N">
@@ -418,6 +514,11 @@
                                                     <connections>
                                                         <action selector="toWebView:" destination="HvS-Kq-qYm" eventType="touchUpInside" id="bWM-iA-rkT"/>
                                                     </connections>
+                                                </button>
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6YF-hM-kDy">
+                                                    <rect key="frame" x="208" y="254" width="138" height="49"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <state key="normal" title="レビューを投稿する"/>
                                                 </button>
                                             </subviews>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -875,7 +976,7 @@
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GTT-7q-Q2d" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2588" y="96"/>
+            <point key="canvasLocation" x="2141" y="96"/>
         </scene>
         <!--Trend-->
         <scene sceneID="qE9-zl-C6i">

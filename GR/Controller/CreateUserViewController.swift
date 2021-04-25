@@ -96,7 +96,7 @@ class CreateUserViewController: UIViewController,UITextFieldDelegate,SendProfile
     
     @IBAction func signinButton(_ sender: Any) {
         
-        self.performSegue(withIdentifier: "SignInVC", sender: nil)
+        self.performSegue(withIdentifier: "signInVC", sender: nil)
     }
     
     
