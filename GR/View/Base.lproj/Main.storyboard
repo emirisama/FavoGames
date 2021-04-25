@@ -99,7 +99,7 @@
         <!--新規会員登録・ログイン-->
         <scene sceneID="1dK-Us-ZvR">
             <objects>
-                <viewController id="fBl-XV-G7T" customClass="CreateUserViewController" customModule="GR" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="createVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="fBl-XV-G7T" customClass="CreateUserViewController" customModule="GR" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Thf-Ug-84H">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

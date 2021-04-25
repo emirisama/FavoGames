@@ -90,6 +90,7 @@ class CreateUserViewController: UIViewController,UITextFieldDelegate,SendProfile
         //アプリ内に自分のProfileを保存しておく
         
         //Trendの画面遷移
+ 
         self.dismiss(animated: true, completion: nil)
     }
     
