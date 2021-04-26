@@ -57,15 +57,10 @@
                                 <color key="pageIndicatorTintColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="currentPageIndicatorTintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </pageControl>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NmP-g7-3KM">
-                                <rect key="frame" x="139" y="804" width="138" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="ログインせずに利用"/>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dcf-T1-OSx">
-                                <rect key="frame" x="123" y="766" width="169" height="30"/>
+                                <rect key="frame" x="191" y="766" width="34" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="新規会員登録・ログイン"/>
+                                <state key="normal" title="Start"/>
                                 <connections>
                                     <action selector="resisterButton:" destination="CS6-cF-acy" eventType="touchUpInside" id="GbA-rC-AtB"/>
                                     <action selector="start:" destination="BYZ-38-t0r" eventType="touchUpInside" id="HOk-Ke-BXa"/>
@@ -235,7 +230,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ian-ta-8Av" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4112" y="-1359"/>
+            <point key="canvasLocation" x="3839" y="-1340"/>
         </scene>
         <!--Trend View Controller-->
         <scene sceneID="aA6-A7-uQ3">
@@ -258,7 +253,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="TRW-i2-r7A"/>
                     <connections>
-                        <segue destination="fBl-XV-G7T" kind="presentation" identifier="createVC" modalPresentationStyle="fullScreen" id="qA8-pV-QK7"/>
+                        <segue destination="fBl-XV-G7T" kind="presentation" identifier="createVC" modalPresentationStyle="fullScreen" id="C2n-WF-3P0"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0IP-eD-zl5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -287,7 +282,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eGJ-fo-qms" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5086.9565217391309" y="-808.25892857142856"/>
+            <point key="canvasLocation" x="5183" y="-766"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="0Cs-FC-QHO">
@@ -311,7 +306,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CD6-HN-rfA" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5797" y="-808"/>
+            <point key="canvasLocation" x="5846" y="-766"/>
         </scene>
         <!--Switch View Controller-->
         <scene sceneID="H1M-mq-ETa">
@@ -335,7 +330,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="52c-eq-omw" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6509" y="-808"/>
+            <point key="canvasLocation" x="6559" y="-766"/>
         </scene>
         <!--Steam View Controller-->
         <scene sceneID="Hef-fS-Zu4">
@@ -359,7 +354,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JLb-xx-bxi" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="7199" y="-808"/>
+            <point key="canvasLocation" x="7213" y="-800"/>
         </scene>
         <!--Search View Controller-->
         <scene sceneID="CUk-jB-X2N">
@@ -1292,7 +1287,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WMn-VU-l1J" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1664" y="-607"/>
+            <point key="canvasLocation" x="4555" y="-1341"/>
         </scene>
     </scenes>
     <designables>

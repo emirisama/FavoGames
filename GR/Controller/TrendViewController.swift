@@ -25,15 +25,15 @@ class TrendViewController: AMPagerTabsViewController {
         tabFont = UIFont.systemFont(ofSize: 17, weight: .bold)
         self.viewControllers = getTabs()
         
-        if Auth.auth().currentUser != nil{
-//            performSegue(withIdentifier: "signInVC", sender: nil)
-        }else{
+//        if Auth.auth().currentUser != nil{
+//            let signinVC = self.storyboard?.instantiateViewController(withIdentifier: "signInVC") as! SignInViewController
+//            self.navigationController?.pushViewController(signinVC, animated: true)
+//        }else{
             
             //新規会員登録
         let createVC = self.storyboard?.instantiateViewController(withIdentifier: "createVC") as! CreateUserViewController
         self.navigationController?.pushViewController(createVC, animated: true)
-//            performSegue(withIdentifier: "createVC", sender: nil)
-        }
+//        }
    
         
     }
