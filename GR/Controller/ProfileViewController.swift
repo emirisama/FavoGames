@@ -42,10 +42,11 @@ class ProfileViewController: UIViewController,UITableViewDelegate,UITableViewDat
         imageView.layer.cornerRadius = imageView.frame.width/2
         tableView.register(UINib(nibName: "ContentsCell", bundle: nil), forCellReuseIdentifier: "Cell")
         sendDBModel.doneSendContents = self
+
         
         //自分のプロフィールを表示する→タブが２の場合
         
-        if self.tabBarController!.selectedIndex == 2{
+        if self.tabBarController!.selectedIndex == 3{
             
             followButton.isHidden = true
             

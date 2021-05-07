@@ -9,8 +9,15 @@ import UIKit
 
 class PS5ViewController: UIViewController {
 
+    
+    @IBOutlet weak var rankingLabel: UILabel!
+    
+    @IBOutlet weak var timeLabel: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+
 
         // Do any additional setup after loading the view.
     }

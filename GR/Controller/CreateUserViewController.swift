@@ -97,7 +97,8 @@ class CreateUserViewController: UIViewController,UITextFieldDelegate,SendProfile
     
     @IBAction func signinButton(_ sender: Any) {
         
-        self.performSegue(withIdentifier: "signInVC", sender: nil)
+        let signinVC = self.storyboard?.instantiateViewController(withIdentifier: "signinVC") as! SignInViewController
+        self.navigationController?.pushViewController(signinVC, animated: true)
     }
     
     
