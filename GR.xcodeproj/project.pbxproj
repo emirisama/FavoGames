@@ -31,6 +31,9 @@
 		508B0B4F260B762A00FBA8C5 /* UIColor-Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 508B0B4E260B762A00FBA8C5 /* UIColor-Extension.swift */; };
 		508C95DB2622D6FC0077F3A6 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 508C95DA2622D6FC0077F3A6 /* DetailViewController.swift */; };
 		508C95DE2623356B0077F3A6 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 508C95DD2623356B0077F3A6 /* WebViewController.swift */; };
+		50A8D81C26452B1C008B5CEA /* SearchAndLoadModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50A8D81B26452B1C008B5CEA /* SearchAndLoadModel.swift */; };
+		50A8D81F2645310C008B5CEA /* SearchResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50A8D81E2645310C008B5CEA /* SearchResultsViewController.swift */; };
+		50A8D8222645336D008B5CEA /* DataSets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50A8D8212645336D008B5CEA /* DataSets.swift */; };
 		50BCC9D12614B77A0021D405 /* ContentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50BCC9D02614B77A0021D405 /* ContentsViewController.swift */; };
 		50CF1B9D263525DA00ECF7E4 /* PS5ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50CF1B9C263525DA00ECF7E4 /* PS5ViewController.swift */; };
 		50CF1BA0263525E700ECF7E4 /* PS4ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50CF1B9F263525E700ECF7E4 /* PS4ViewController.swift */; };
@@ -72,6 +75,9 @@
 		508B0B4E260B762A00FBA8C5 /* UIColor-Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor-Extension.swift"; sourceTree = "<group>"; };
 		508C95DA2622D6FC0077F3A6 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		508C95DD2623356B0077F3A6 /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
+		50A8D81B26452B1C008B5CEA /* SearchAndLoadModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchAndLoadModel.swift; sourceTree = "<group>"; };
+		50A8D81E2645310C008B5CEA /* SearchResultsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultsViewController.swift; sourceTree = "<group>"; };
+		50A8D8212645336D008B5CEA /* DataSets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataSets.swift; sourceTree = "<group>"; };
 		50BCC9D02614B77A0021D405 /* ContentsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentsViewController.swift; sourceTree = "<group>"; };
 		50CF1B9C263525DA00ECF7E4 /* PS5ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PS5ViewController.swift; sourceTree = "<group>"; };
 		50CF1B9F263525E700ECF7E4 /* PS4ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PS4ViewController.swift; sourceTree = "<group>"; };
@@ -150,6 +156,7 @@
 				50CF1B9F263525E700ECF7E4 /* PS4ViewController.swift */,
 				50CF1BA22635260E00ECF7E4 /* SwitchViewController.swift */,
 				50CF1BA52635261E00ECF7E4 /* SteamViewController.swift */,
+				50A8D81E2645310C008B5CEA /* SearchResultsViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -164,6 +171,8 @@
 				507375C526217F5200D8E6D6 /* ContentModel.swift */,
 				5065E4672629C33500BE0316 /* FollowerModel.swift */,
 				5065E46E2629C3FD00BE0316 /* FollowModel.swift */,
+				50A8D81B26452B1C008B5CEA /* SearchAndLoadModel.swift */,
+				50A8D8212645336D008B5CEA /* DataSets.swift */,
 			);
 			name = Model;
 			path = ..;
@@ -343,10 +352,12 @@
 				50318457262BC9880005D9BF /* SignInViewController.swift in Sources */,
 				50777FA1261CAB58005314BF /* ReviewViewController.swift in Sources */,
 				50CF1BA32635260E00ECF7E4 /* SwitchViewController.swift in Sources */,
+				50A8D81C26452B1C008B5CEA /* SearchAndLoadModel.swift in Sources */,
 				5046C4D7261DD7B5006939C7 /* Constants.swift in Sources */,
 				508B0B4F260B762A00FBA8C5 /* UIColor-Extension.swift in Sources */,
 				508B0B47260B615700FBA8C5 /* CreateUserViewController.swift in Sources */,
 				50763BEB26104CA60071941E /* MypageViewController.swift in Sources */,
+				50A8D8222645336D008B5CEA /* DataSets.swift in Sources */,
 				504E35522625982D00A119D1 /* ProfileViewController.swift in Sources */,
 				50CF1BA0263525E700ECF7E4 /* PS4ViewController.swift in Sources */,
 				507375C626217F5200D8E6D6 /* ContentModel.swift in Sources */,
@@ -354,6 +365,7 @@
 				50763BEF261057210071941E /* TrendViewController.swift in Sources */,
 				50F6F3212612207400B65E21 /* ProfileModel.swift in Sources */,
 				505854582635084F00182CFD /* NiceViewController.swift in Sources */,
+				50A8D81F2645310C008B5CEA /* SearchResultsViewController.swift in Sources */,
 				50CF1BA62635261E00ECF7E4 /* SteamViewController.swift in Sources */,
 				50F6F31E26121FC200B65E21 /* UserDefaultsEX.swift in Sources */,
 				50763BF5261068D00071941E /* SendDBModel.swift in Sources */,
