@@ -176,6 +176,7 @@ code_sign_if_enabled() {
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/AMPagerTabs/AMPagerTabs.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/BoringSSL-GRPC/openssl_grpc.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/Cosmos/Cosmos.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/EMAlertController/EMAlertController.framework"
@@ -195,15 +196,18 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/SSSpinnerButton/SSSpinnerButton.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/SteviaLayout/Stevia.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/YPImagePicker/YPImagePicker.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/abseil/absl.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/gRPC-C++/grpcpp.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/gRPC-Core/grpc.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/lottie-ios/Lottie.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/AMPagerTabs/AMPagerTabs.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/BoringSSL-GRPC/openssl_grpc.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/Cosmos/Cosmos.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/EMAlertController/EMAlertController.framework"
@@ -223,11 +227,13 @@ if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/SSSpinnerButton/SSSpinnerButton.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/SteviaLayout/Stevia.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/YPImagePicker/YPImagePicker.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/abseil/absl.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/gRPC-C++/grpcpp.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/gRPC-Core/grpc.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/lottie-ios/Lottie.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework"
 fi
 if [ "${COCOAPODS_PARALLEL_CODE_SIGN}" == "true" ]; then

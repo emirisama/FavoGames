@@ -15,6 +15,9 @@ pod 'Cosmos', '~> 23.0'
 pod 'IQKeyboardManagerSwift'
 pod 'PKHUD', '~> 5.0'
 pod 'SSSpinnerButton'
+pod 'SwiftyJSON'
+pod 'lottie-ios'
+pod 'Alamofire'
 
 
 target 'GR' do
