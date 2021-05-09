@@ -109,7 +109,6 @@ class ProfileViewController: UIViewController,UITableViewDelegate,UITableViewDat
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! ContentsCell
         //自分が投稿したレビューのゲームソフトのタイトル画像(動画：コンテンツを受信しよう）
 //        cell.contentImageView.sd_setImage(with: URL(string: contentModelArray[indexPath.row].imageURLSting!), completed: nil)
-        cell.reviewLabel.text = contentModelArray[indexPath.row].review
         cell.reviewView.rating = contentModelArray[indexPath.row].rate!
         
         return cell
@@ -206,12 +205,17 @@ class ProfileViewController: UIViewController,UITableViewDelegate,UITableViewDat
     func getProfileData(dataArray: [ProfileModel]) {
         
         imageView.sd_setImage(with: URL(string: dataArray[0].imageURLString!), completed: nil)
-        nameLabel.text = dataArray[0].name
+        nameLabel.text = dataArray[0].userName
         profileTextLabel.text = dataArray[0].profileText
         
         
     }
-   
+    
+    
+    @IBAction func niceList(_ sender: Any) {
+        
+    }
+    
     /*
      // MARK: - Navigation
      

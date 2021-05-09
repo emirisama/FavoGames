@@ -15,15 +15,14 @@ class ContentsCell: UITableViewCell {
     
     @IBOutlet weak var gameTitleLabel: UILabel!
     
-    
-    @IBOutlet weak var reviewLabel: UILabel!
-    
+
     @IBOutlet weak var reviewView: CosmosView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        contentImageView.layer.cornerRadius = 20
+        
+        self.selectionStyle = .none
         contentView.clipsToBounds = true
         
         

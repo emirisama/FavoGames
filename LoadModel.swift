@@ -70,9 +70,10 @@ class LoadModel{
                     
                     let data = doc.data()
                     //if letでもし空じゃなかったらの意味（!= nilと同じ)
-                    if let userID = data["userID"] as? String,let name = data["name"] as? String,let image = data["image"] as? String,let review = data["review"] as? String,let sender = data["sender"] as? [String],let rate = data["rate"] as? Double, let date = data["date"] as? Double,let gametitle = data["gametitle"] as? String{
+
+                    if let userID = data["userID"] as? String,let userName = data["userName"] as? String,let image = data["image"] as? String,let review = data["review"] as? String,let sender = data["sender"] as? [String],let rate = data["rate"] as? Double, let date = data["date"] as? Double,let gametitle = data["gametitle"] as? String{
                         
-                        let contentModel = ContentModel(imageURLString: image, review: review, name: name, userID: userID, sender: sender, rate: rate, gametitle: gametitle)
+                        let contentModel = ContentModel(imageURLString: image, review: review, userName: userName, userID: userID, sender: sender, rate: rate, gametitle: gametitle)
                         self.contentModelArray.append(contentModel)
                         self.getDataProtocol?.getData(dataArray: self.contentModelArray)
                     }
@@ -92,10 +93,10 @@ class LoadModel{
                 for doc in snapShotDoc{
                     
                     let  data = doc.data()
-                    if let userID = data["userID"] as? String,let name = data["name"] as? String,let image = data["image"] as? String,let review = data["review"] as? String,let sender = data["sender"] as? [String],let rate = data["rate"] as? Double,let date = data["date"] as? Double,let gametitle = data["gametitle"] as? String{
+                    if let userID = data["userID"] as? String,let userName = data["userName"] as? String,let image = data["image"] as? String,let review = data["review"] as? String,let sender = data["sender"] as? [String],let rate = data["rate"] as? Double,let date = data["date"] as? Double,let gametitle = data["gametitle"] as? String{
                         
                         
-                        let contentModel = ContentModel(imageURLString: image, review: review, name: name, userID: userID, sender: sender, rate: rate, gametitle: gametitle)
+                        let contentModel = ContentModel(imageURLString: image, review: review, userName: userName, userID: userID, sender: sender, rate: rate, gametitle: gametitle)
                         
                         self.contentModelArray.append(contentModel)
                         
@@ -127,9 +128,8 @@ class LoadModel{
             if let snapShotDoc = snapShot?.data(){
                 
                 
-                if let userID = snapShotDoc["userID"] as? String,let name = snapShotDoc["name"] as? String,let image = snapShotDoc["image"] as? String,let profileText = snapShotDoc["profileText"] as? String{
-                    
-                    let profileModel = ProfileModel(name: name, id: id,profileText: profileText, imageURLString: image, userID: userID)
+                if let userID = snapShotDoc["userID"] as? String,let userName = snapShotDoc["userName"] as? String,let image = snapShotDoc["image"] as? String,let profileText = snapShotDoc["profileText"] as? String{
+                    let profileModel = ProfileModel(userName: userName, id: id,profileText: profileText, imageURLString: image, userID: userID)
                     self.profileModelArray.append(profileModel)
                     
                 }
@@ -151,14 +151,14 @@ class LoadModel{
                 for doc in snapShotDoc{
                     let data = doc.data()
                     //フォローしているどうかを見分ける
-                    if let follower = data["follower"] as? String,let followOrNot = data["followOrNot"] as? Bool,let image = data["image"] as? String,let profileText = data["profileText"] as? String,let userID = data["userID"] as? String,let name = data["name"] as? String{
+                    if let follower = data["follower"] as? String,let followOrNot = data["followOrNot"] as? Bool,let image = data["image"] as? String,let profileText = data["profileText"] as? String,let userID = data["userID"] as? String,let userName = data["userName"] as? String{
                         
                         if userID == Auth.auth().currentUser!.uid{
                             self.ownFollowOrNot = followOrNot
                         }
                         //trueの数だけその人にフォロワーがいて、自分がtrueだったら、ボタン操作
                         if followOrNot == true{
-                            let followerModel = FollowerModel(follower: follower, followerOrNot: followOrNot, image: image, profileText: profileText, userID: userID, name: name)
+                            let followerModel = FollowerModel(follower: follower, followerOrNot: followOrNot, image: image, profileText: profileText, userID: userID, userName: userName)
                             self.followerModelArray.append(followerModel)
                         }
                         //自分の状態だけ渡す（フォローしてるんだったら、existの情報を渡す、フォロワーのみんなを同時に渡す）
@@ -187,12 +187,12 @@ class LoadModel{
                     
                     let data = doc.data()
                     //フォローしているどうかを見分ける
-                    if let follow = data["follow"] as? String,let followOrNot = data["followOrNot"] as? Bool,let image = data["image"] as? String,let profileText = data["profileText"] as? String,let userID = data["userID"] as? String,let name = data["name"] as? String{
+                    if let follow = data["follow"] as? String,let followOrNot = data["followOrNot"] as? Bool,let image = data["image"] as? String,let profileText = data["profileText"] as? String,let userID = data["userID"] as? String,let userName = data["userName"] as? String{
                         
                         //trueの数だけその人にフォロワーがいて、自分がtrueだったら、ボタン操作
                         if followOrNot == true{
                             
-                            let followModel = FollowModel(follow: follow, followOrNot: followOrNot, image: image, profileText: profileText, userID: userID, name: name)
+                            let followModel = FollowModel(follow: follow, followOrNot: followOrNot, image: image, profileText: profileText, userID: userID, userName: userName)
                             
                             self.followModelArray.append(followModel)
                             

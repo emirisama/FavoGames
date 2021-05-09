@@ -14,7 +14,7 @@ struct ContentModel{
     
     let imageURLString:String?
     let review:String?
-    let name:String?
+    let userName:String?
     let userID:String?
     let sender:[String]?
     let rate:Double?

@@ -9,15 +9,18 @@ import UIKit
 import PKHUD
 
 
-class SearchViewController: UIViewController {
+class SearchViewController: UIViewController,DoneCatchDataProtocol {
 
     
     @IBOutlet weak var textField: UITextField!
-    
+    var dataSetsArray = [DataSets]()
 
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        
+        
         // Do any additional setup after loading the view.
     }
     
@@ -29,6 +32,11 @@ class SearchViewController: UIViewController {
         //ローディングを行う
         HUD.hide()
         //textfieldに入っているキーワードをもとにゲームの検索を行う
+        let urlString = "https://app.rakuten.co.jp/services/api/BooksGame/Search/20170404?format=json&title=\(textField.text!)&booksGenreId=006&applicationId=1078790856161658200"
+        
+        let searchModel = SearchAndLoadModel(urlString: urlString)
+        searchModel.doneCatchDataProtocol = self
+        searchModel.search()
         //通信を行う
         
         //画面遷移
@@ -37,6 +45,12 @@ class SearchViewController: UIViewController {
     }
     
     
+    func doneCatchData(array: [DataSets]) {
+        print(array.debugDescription)
+        dataSetsArray = array
+
+        
+    }
 
     
     

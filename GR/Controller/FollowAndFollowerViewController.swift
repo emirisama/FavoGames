@@ -73,13 +73,13 @@ class FollowAndFollowerViewController: UIViewController,UITableViewDelegate,UITa
         if segmentControl.selectedSegmentIndex == 0{
             
             imageView.sd_setImage(with: URL(string: followArray[indexPath.row].image!), completed: nil)
-            label.text = followArray[indexPath.row].name
+            label.text = followArray[indexPath.row].userName
             
             
         }else if segmentControl.selectedSegmentIndex == 1{
             
             imageView.sd_setImage(with: URL(string: followersArray[indexPath.row].image!), completed: nil)
-            label.text = followersArray[indexPath.row].name
+            label.text = followersArray[indexPath.row].userName
             
         }
         

@@ -14,6 +14,6 @@ struct FollowModel{
     var image:String?
     var profileText:String?
     var userID:String?
-    var name:String?
+    var userName:String?
     
 }

@@ -42,8 +42,41 @@ class SendDBModel {
     var doneSendContents2:DoneSendContents2?
     var doneSendContents:DoneSendContents?
     
+    var userID = String()
+    var userName = String()
+    var title = String()
+    var hardware = String()
+    var salesDate = String()
+    var mediumImageUrl = String()
+    var itemPrice = Int()
+    
+    
+    init(){
+        
+    }
+    
+    init(userID:String,userName:String,mediumImageUrl:String,title:String,hardware:String,salesDate:String,itemPrice:Int){
+        
+        self.userID = userID
+        self.userName = userName
+        self.mediumImageUrl = mediumImageUrl
+        self.title = title
+        self.hardware = hardware
+        self.salesDate = salesDate
+        self.itemPrice = itemPrice
+        
+    }
+    
+    func sendData(userName:String){
+        //コンテンツの中にデータを入れる
+        self.db.collection("contents").document(userName).collection("collection").document().setData(
+            ["userID":self.userID as Any,"userName":self.userName as Any,"mediumImageUrl":self.mediumImageUrl as Any,"title":self.title as Any,"hardware":self.hardware as Any,"salesDate":self.salesDate as Any,"itemPrice":self.itemPrice as Any,"postDate":Date().timeIntervalSince1970])
+        //どのユーザーがいるのかを名前だけ入れる
+        self.db.collection("Users").addDocument(data: ["userName":self.userName])
+    }
+    
     //プロフィールをDBへ送信する
-    func sendProfileDB(name:String, email:String, id:String,profileText:String, imageData: Data){
+    func sendProfileDB(userName:String, email:String, id:String,profileText:String, imageData: Data){
         
         //プロフィール画像
         let usernoimage = UIImage(named: "userimage")
@@ -75,12 +108,12 @@ class SendDBModel {
 
                 if url != nil{
                     
-        let profileModel = ProfileModel(name: name, id: id, email: email, profileText: profileText, imageURLString: url?.absoluteString, userID: Auth.auth().currentUser!.uid)
+                    let profileModel = ProfileModel(userName: userName, id: id, email: email, profileText: profileText, imageURLString: url?.absoluteString, userID: Auth.auth().currentUser!.uid)
                     //アプリ内に自分のProfileを保存しておく
         self.userDefaultsEX.set(value: profileModel, forKey: "profile")
         
                     //送信
-                    self.db.collection("Users").document(Auth.auth().currentUser!.uid).setData(["name":name,"email": email,"id":id,"userID":Auth.auth().currentUser!.uid,"Date":Date().timeIntervalSince1970,"image":url?.absoluteString,"profileText":profileText])
+                    self.db.collection("Users").document(Auth.auth().currentUser!.uid).setData(["userName":userName,"email": email,"id":id,"userID":Auth.auth().currentUser!.uid,"Date":Date().timeIntervalSince1970,"image":url?.absoluteString,"profileText":profileText])
                     print("保存する")
         
         //画面遷移
@@ -94,9 +127,9 @@ class SendDBModel {
     func sendDB(category:String,name:String,reView:String,userID:String,sender:ProfileModel,rate:Double){
        
                     //送信（ownContentsの中に入れる）
-        self.db.collection("Users").document(Auth.auth().currentUser!.uid).collection("ownContents").document().setData(["name":name,"userID":Auth.auth().currentUser!.uid,"review":reView,"sender":self.myProfile,"rate":rate,"date":Date().timeIntervalSince1970])
+        self.db.collection("Users").document(Auth.auth().currentUser!.uid).collection("ownContents").document().setData(["userName":userName,"userID":Auth.auth().currentUser!.uid,"review":reView,"sender":self.myProfile,"rate":rate,"date":Date().timeIntervalSince1970])
                     
-        self.db.collection(category).document().setData(["name":name,"userID":Auth.auth().currentUser!.uid,"review":reView,"sender":self.myProfile,"rate":rate,"date":Date().timeIntervalSince1970])
+        self.db.collection(category).document().setData(["userName":userName,"userID":Auth.auth().currentUser!.uid,"review":reView,"sender":self.myProfile,"rate":rate,"date":Date().timeIntervalSince1970])
                     
                     self.doneSendContents2?.checkDone2()
     }
@@ -116,14 +149,14 @@ class SendDBModel {
             
             //フォロワーの数(自分のデータを入れる）
             self.db.collection("Users!").document(id).collection("follower").document(Auth.auth().currentUser!.uid).setData(
-                ["follower":Auth.auth().currentUser!.uid,"followOrNot":followOrNot,"userID":profile?.userID,"name":profile?.name,"image":profile?.imageURLString,"profileText":profile?.profileText]
+                ["follower":Auth.auth().currentUser!.uid,"followOrNot":followOrNot,"userID":profile?.userID,"userName":profile?.userName,"image":profile?.imageURLString,"profileText":profile?.profileText]
             )
             
         }
         
         //
         self.db.collection("Users").document(Auth.auth().currentUser!.uid).collection("follow").document(id).setData(
-            ["follower":id,"followOrNot":followOrNot,"userID":contentModel.userID,"name":contentModel.sender![3],"image":contentModel.sender![0],"profileText":contentModel.sender![1]]
+            ["follower":id,"followOrNot":followOrNot,"userID":contentModel.userID,"userName":contentModel.sender![3],"image":contentModel.sender![0],"profileText":contentModel.sender![1]]
         )
         
         self.doneSendContents?.checkDone(flag: followOrNot)

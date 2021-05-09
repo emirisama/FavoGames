@@ -10,7 +10,7 @@ import Foundation
 
 struct ProfileModel:Codable {
         
-    var name:String?
+    var userName:String?
     var id:String?
     var email:String?
     var profileText:String?

@@ -82,7 +82,7 @@ class ContentsViewController: UIViewController,UICollectionViewDelegate,UICollec
 
         
         let label = cell.contentView.viewWithTag(2) as! UILabel
-        label.text = contentModelArray[indexPath.row].name
+        label.text = contentModelArray[indexPath.row].userName
         
         let reviewView = cell.contentView.viewWithTag(3) as! CosmosView
         reviewView.rating = contentModelArray[indexPath.row].rate!

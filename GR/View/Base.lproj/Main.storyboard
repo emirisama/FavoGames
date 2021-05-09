@@ -691,11 +691,11 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" tag="1" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="YeU-9l-khP">
-                                                    <rect key="frame" x="8" y="8" width="175" height="289"/>
+                                                    <rect key="frame" x="8" y="8" width="200" height="300"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" secondItem="YeU-9l-khP" secondAttribute="height" multiplier="175:289" id="MV3-Qp-30K"/>
-                                                        <constraint firstAttribute="height" constant="289" id="Tkl-ht-wjx"/>
-                                                        <constraint firstAttribute="width" constant="175" id="pCf-kH-Jhv"/>
+                                                        <constraint firstAttribute="width" secondItem="YeU-9l-khP" secondAttribute="height" multiplier="175:289" constant="18.339100346020786" id="MV3-Qp-30K"/>
+                                                        <constraint firstAttribute="height" constant="300" id="Tkl-ht-wjx"/>
+                                                        <constraint firstAttribute="width" constant="200" id="pCf-kH-Jhv"/>
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" tag="2" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="q4M-5V-Wiy">
@@ -723,7 +723,7 @@
                                                 </view>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="bottom" secondItem="YeU-9l-khP" secondAttribute="bottom" constant="8" id="1pw-2T-X7N"/>
+                                                <constraint firstAttribute="bottom" secondItem="YeU-9l-khP" secondAttribute="bottom" constant="-3" id="1pw-2T-X7N"/>
                                                 <constraint firstItem="q4M-5V-Wiy" firstAttribute="leading" secondItem="rkh-lV-O5D" secondAttribute="leading" constant="16" id="2Yh-V5-IPu"/>
                                                 <constraint firstItem="YeU-9l-khP" firstAttribute="top" secondItem="rkh-lV-O5D" secondAttribute="top" constant="8" id="6Hm-Vc-Fn8"/>
                                                 <constraint firstItem="q4M-5V-Wiy" firstAttribute="top" secondItem="rkh-lV-O5D" secondAttribute="top" constant="167" id="8n4-32-Vqc"/>
@@ -731,7 +731,7 @@
                                                 <constraint firstAttribute="trailing" secondItem="4Lh-wu-4vs" secondAttribute="trailing" constant="25" id="Fzc-05-mcZ"/>
                                                 <constraint firstItem="YeU-9l-khP" firstAttribute="leading" secondItem="rkh-lV-O5D" secondAttribute="leading" constant="8" id="dVi-4B-tWX"/>
                                                 <constraint firstAttribute="bottom" secondItem="4Lh-wu-4vs" secondAttribute="bottom" constant="30" id="fvI-di-y7v"/>
-                                                <constraint firstAttribute="trailing" secondItem="YeU-9l-khP" secondAttribute="trailing" constant="8" id="lYp-mJ-Im5"/>
+                                                <constraint firstAttribute="trailing" secondItem="YeU-9l-khP" secondAttribute="trailing" constant="-17" id="lYp-mJ-Im5"/>
                                                 <constraint firstAttribute="trailing" secondItem="q4M-5V-Wiy" secondAttribute="trailing" constant="25" id="ye8-hY-cBG"/>
                                             </constraints>
                                         </collectionViewCellContentView>
@@ -1483,10 +1483,13 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="★"/>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oAX-bS-f48">
+                            <button opaque="NO" tag="1" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oAX-bS-f48">
                                 <rect key="frame" x="174" y="433" width="131" height="54"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="自分のリスト"/>
+                                <connections>
+                                    <action selector="niceList:" destination="juJ-Pj-drF" eventType="touchUpInside" id="4hx-3d-a4V"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="jW3-Sw-fd7"/>
@@ -1508,6 +1511,36 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Wcm-m7-0zI" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="4160.8695652173919" y="1595.7589285714284"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="KMc-KV-84K">
+            <objects>
+                <viewController id="Fd9-un-uZ9" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="ZNY-Gh-ZWg">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="3NW-Ex-kZl"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="iec-Vu-D8w" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3926" y="2269"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="R0R-0L-h09">
+            <objects>
+                <viewController id="KoS-q1-pJS" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="7KC-sx-da9">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="AIB-mV-nMb"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="xS8-3z-dFb" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4648" y="2269"/>
         </scene>
         <!--ログイン-->
         <scene sceneID="Uwh-xT-fYo">
@@ -1594,6 +1627,17 @@
             <point key="canvasLocation" x="4555" y="-1341"/>
         </scene>
     </scenes>
+    <designables>
+        <designable name="4Lh-wu-4vs">
+            <size key="intrinsicContentSize" width="150" height="26"/>
+        </designable>
+        <designable name="4sz-sA-yhe">
+            <size key="intrinsicContentSize" width="120" height="20"/>
+        </designable>
+        <designable name="Wj9-BC-CyQ">
+            <size key="intrinsicContentSize" width="270" height="50"/>
+        </designable>
+    </designables>
     <inferredMetricsTieBreakers>
         <segue reference="3K0-bH-dte"/>
     </inferredMetricsTieBreakers>

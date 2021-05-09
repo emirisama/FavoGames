@@ -67,7 +67,7 @@ class CreateUserViewController: UIViewController,UITextFieldDelegate,SendProfile
                         print("エラーです")
                     }else{
                         
-                        sendDBModel.sendProfileDB(name: nameTextField.text!, email: emailTextField.text!, id: idTextField.text!, profileText: "", imageData: usernoimagedata!)
+                        sendDBModel.sendProfileDB(userName: nameTextField.text!, email: emailTextField.text!, id: idTextField.text!, profileText: "", imageData: usernoimagedata!)
                         print("データをSendDBModelへ")
                     }
                 }

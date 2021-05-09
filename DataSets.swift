@@ -13,6 +13,6 @@ struct DataSets{
     let hardware:String?
     let salesDate:String?
     let mediumImageUrl:String?
-    let itemPrice:String?
+    let itemPrice:Int?
     
 }
