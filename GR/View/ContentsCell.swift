@@ -12,11 +12,10 @@ class ContentsCell: UITableViewCell {
 
     
     @IBOutlet weak var contentImageView: UIImageView!
-    
     @IBOutlet weak var gameTitleLabel: UILabel!
+    @IBOutlet weak var likeButton: UIButton!
+    @IBOutlet weak var likeCountLabel: UILabel!
     
-
-    @IBOutlet weak var reviewView: CosmosView!
     
     override func awakeFromNib() {
         super.awakeFromNib()

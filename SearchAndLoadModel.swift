@@ -56,8 +56,8 @@ class SearchAndLoadModel {
                     }
                     print(self.count)
                     for i in 0...self.count - 1{
-                        if let title = json["items"][i]["item"]["title"].string,let hardware = json["items"][i]["item"]["hardware"].string,let mediumImageUrl = json["items"][i]["item"]["mediumImageUrl"].string,let salesDate = json["items"][i]["item"]["salesDate"].string,let itemPrice = json["items"][i]["item"]["itemPrice"].int{
-                            
+                        if let title = json["Items"][0]["Item"]["title"].string,let hardware = json["Items"][i]["Item"]["hardware"].string,let mediumImageUrl = json["Items"][i]["Item"]["mediumImageUrl"].string,let salesDate = json["Items"][i]["Item"]["salesDate"].string,let itemPrice = json["Items"][i]["Item"]["itemPrice"].int{
+
                             //もし、ゲームソフト以外の商品は、検索させないようにする（if)
                             let dataSets = DataSets(title: title, hardware: hardware, salesDate: salesDate, mediumImageUrl: mediumImageUrl, itemPrice: itemPrice)
                             
@@ -69,6 +69,9 @@ class SearchAndLoadModel {
                         }
                     }
                     
+                    //コントローラー値に値を渡す必要がある
+                    self.doneCatchDataProtocol?.doneCatchData(array: self.dataSetsArray)
+                    
                 }catch{
                     
                 }
@@ -78,7 +81,6 @@ class SearchAndLoadModel {
             }
         }
         
-        //コントローラー値に値を渡す必要がある
-        self.doneCatchDataProtocol?.doneCatchData(array: self.dataSetsArray)
+
     }
 }

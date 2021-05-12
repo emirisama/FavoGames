@@ -48,8 +48,8 @@ class ContentDetailViewController: UIViewController,UITableViewDelegate,UITableV
         //ContentsCell.xibのゲームソフトの画像をCellに表示
         cell.contentImageView.sd_setImage(with: URL(string: contentModelArray[indexPath.row].imageURLString!), completed: nil)
         
-        cell.reviewView.rating = contentModelArray[indexPath.row].rate!
-        
+//        cell.reviewView.rating = contentModelArray[indexPath.row].rate!
+//
         
         return cell
         

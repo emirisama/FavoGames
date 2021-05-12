@@ -20,6 +20,7 @@ class SearchResultsViewController: UIViewController,UITableViewDelegate,UITableV
     var userName = String()
     var db = Firestore.firestore()
     var userID = String()
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,10 +41,19 @@ class SearchResultsViewController: UIViewController,UITableViewDelegate,UITableV
         // Do any additional setup after loading the view.
     }
     
+    //高さを揃える
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        
+        return 300
+        
+    }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.isNavigationBarHidden = true
+  
+        
+        
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -59,7 +69,7 @@ class SearchResultsViewController: UIViewController,UITableViewDelegate,UITableV
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "ContentsCell", for: indexPath) as! ContentsCell
-        //tableViewをどこで更新するか
+
         
         cell.contentImageView.sd_setImage(with: URL(string: dataSetsArray[indexPath.row].mediumImageUrl!), completed: nil)
         cell.gameTitleLabel.text = dataSetsArray[indexPath.row].title
@@ -78,8 +88,10 @@ class SearchResultsViewController: UIViewController,UITableViewDelegate,UITableV
         
         //DBへ情報を送信する
         print(sender.tag)
+        
         let sendDB = SendDBModel(userID: Auth.auth().currentUser!.uid, userName: userName, mediumImageUrl: dataSetsArray[sender.tag].mediumImageUrl!, title: dataSetsArray[sender.tag].title!, hardware: dataSetsArray[sender.tag].hardware!, salesDate: dataSetsArray[sender.tag].salesDate!, itemPrice: dataSetsArray[sender.tag].itemPrice!)
         sendDB.sendData(userName: userName)
+       
     }
 
     

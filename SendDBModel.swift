@@ -71,7 +71,7 @@ class SendDBModel {
         //コンテンツの中にデータを入れる
         self.db.collection("contents").document(userName).collection("collection").document().setData(
             ["userID":self.userID as Any,"userName":self.userName as Any,"mediumImageUrl":self.mediumImageUrl as Any,"title":self.title as Any,"hardware":self.hardware as Any,"salesDate":self.salesDate as Any,"itemPrice":self.itemPrice as Any,"postDate":Date().timeIntervalSince1970])
-        //どのユーザーがいるのかを名前だけ入れる
+        //どのユーザーがいるのかを名前だけ入れる(２回送信）
         self.db.collection("Users").addDocument(data: ["userName":self.userName])
     }
     

@@ -39,16 +39,18 @@ class SearchViewController: UIViewController,DoneCatchDataProtocol {
         searchModel.search()
         //通信を行う
         
-        //画面遷移
-        let searchVC = self.storyboard?.instantiateViewController(identifier: "searchVC") as! SearchResultsViewController
-        self.navigationController?.pushViewController(searchVC, animated: true)
+
+
     }
     
     
     func doneCatchData(array: [DataSets]) {
         print(array.debugDescription)
-        dataSetsArray = array
-
+        //画面遷移
+        let searchVC = self.storyboard?.instantiateViewController(identifier: "searchVC") as! SearchResultsViewController
+        //値を渡して画面遷移
+        searchVC.dataSetsArray = array
+        self.navigationController?.pushViewController(searchVC, animated: true)
         
     }
 
