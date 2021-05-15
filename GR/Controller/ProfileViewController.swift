@@ -11,6 +11,7 @@ import SDWebImage
 import Cosmos
 import SSSpinnerButton
 
+
 class ProfileViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,GetDataProtocol,GetProfileDataProtocol,DoneSendContents,GetFollows,GetFollowers{
     
     
@@ -33,6 +34,8 @@ class ProfileViewController: UIViewController,UITableViewDelegate,UITableViewDat
     var followersArray = [FollowerModel]()
     var followArray = [FollowModel]()
     
+    var userID = String()
+    var userName = String()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -62,11 +65,12 @@ class ProfileViewController: UIViewController,UITableViewDelegate,UITableViewDat
          
             //setUp
             setUp(id: (contentModel?.userID)!)
-            imageView.sd_setImage(with: URL(string: (contentModel?.sender![0])!), completed: nil)
+            imageView.sd_setImage(with: URL(string: (contentModel?.sender![3])!), completed: nil)
             imageView.layer.cornerRadius = 20
             imageView.clipsToBounds = true
-            nameLabel.text = contentModel?.sender![3]
-            profileTextLabel.text = contentModel?.sender![1]
+            nameLabel.text = contentModel?.sender![6]
+            profileTextLabel.text = contentModel?.sender![4]
+
         }
         
     }
@@ -117,7 +121,6 @@ class ProfileViewController: UIViewController,UITableViewDelegate,UITableViewDat
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 400
     }
-    
     
     
     func getData(dataArray: [ContentModel]) {
@@ -213,6 +216,22 @@ class ProfileViewController: UIViewController,UITableViewDelegate,UITableViewDat
     
     
     @IBAction func niceList(_ sender: Any) {
+        
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let listVC = storyboard.instantiateViewController(withIdentifier: "listVC") as! ListViewController
+        
+        if userID == Auth.auth().currentUser?.uid{
+            
+            //自分のリスト
+            listVC.userName = userName
+            
+        }else{
+            
+            //みんなのリスト
+            
+            
+        }
+        self.navigationController?.pushViewController(listVC, animated: true)
         
     }
     

@@ -13,9 +13,7 @@ class ContentsCell: UITableViewCell {
     
     @IBOutlet weak var contentImageView: UIImageView!
     @IBOutlet weak var gameTitleLabel: UILabel!
-    @IBOutlet weak var likeButton: UIButton!
-    @IBOutlet weak var likeCountLabel: UILabel!
-    
+
     
     override func awakeFromNib() {
         super.awakeFromNib()

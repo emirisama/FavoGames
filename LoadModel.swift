@@ -112,7 +112,7 @@ class LoadModel{
         }
     }
     
-    
+    //プロフィールの受信
     func loadProfile(id:String){
         
         db.collection("Users").document(id).addSnapshotListener { (snapShot, error) in

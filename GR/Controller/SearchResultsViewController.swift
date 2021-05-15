@@ -75,7 +75,7 @@ class SearchResultsViewController: UIViewController,UITableViewDelegate,UITableV
         cell.gameTitleLabel.text = dataSetsArray[indexPath.row].title
       
         //お気に入りButton（お気に入りを自分のユーザーのデータに入れる）
-        let favButton = UIButton(frame: CGRect(x: 300, y: 30, width: 40, height: 40))
+        let favButton = UIButton(frame: CGRect(x: 100, y: 200, width: 40, height: 40))
         favButton.setImage(UIImage(named:"fav"), for: .normal)
         favButton.addTarget(self, action: #selector(favButtonTap(_:)), for: .touchUpInside)
         favButton.tag = indexPath.row
@@ -88,7 +88,7 @@ class SearchResultsViewController: UIViewController,UITableViewDelegate,UITableV
         
         //DBへ情報を送信する
         print(sender.tag)
-        
+        print(userID)
         let sendDB = SendDBModel(userID: Auth.auth().currentUser!.uid, userName: userName, mediumImageUrl: dataSetsArray[sender.tag].mediumImageUrl!, title: dataSetsArray[sender.tag].title!, hardware: dataSetsArray[sender.tag].hardware!, salesDate: dataSetsArray[sender.tag].salesDate!, itemPrice: dataSetsArray[sender.tag].itemPrice!)
         sendDB.sendData(userName: userName)
        
