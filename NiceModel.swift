@@ -13,5 +13,6 @@ struct NiceModel{
     var likeCount:Int
     var likeFlagDic:Dictionary<String, Any>
     var userName:String?
+    let gametitle:String?
     
 }

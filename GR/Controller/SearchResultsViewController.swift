@@ -21,6 +21,7 @@ class SearchResultsViewController: UIViewController,UITableViewDelegate,UITableV
     var db = Firestore.firestore()
     var userID = String()
 
+    var idString = String()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,7 +31,7 @@ class SearchResultsViewController: UIViewController,UITableViewDelegate,UITableV
         tableView.delegate = self
         tableView.dataSource = self
         
-        
+        //カステムCellを作るためにはregisternibを記載する必要がある。
         tableView.register(UINib(nibName: "ContentsCell", bundle: nil), forCellReuseIdentifier: "ContentsCell")
         //アプリ内に入っているユーザー名を取り出す
         if UserDefaults.standard.object(forKey: "userName") != nil{
@@ -52,7 +53,17 @@ class SearchResultsViewController: UIViewController,UITableViewDelegate,UITableV
         super.viewWillAppear(animated)
         self.navigationController?.isNavigationBarHidden = true
   
-        
+        if UserDefaults.standard.object(forKey: "documentID") != nil{
+            
+            idString = UserDefaults.standard.object(forKey: "documentID") as! String
+            
+        }else{
+            
+            idString = db.collection("contents").document().path
+            print(idString)
+            idString = String(idString.dropFirst(9))
+            UserDefaults.standard.setValue(idString, forKey: "documentID")
+        }
         
     }
     
@@ -75,12 +86,16 @@ class SearchResultsViewController: UIViewController,UITableViewDelegate,UITableV
         cell.gameTitleLabel.text = dataSetsArray[indexPath.row].title
       
         //お気に入りButton（お気に入りを自分のユーザーのデータに入れる）
+        
         let favButton = UIButton(frame: CGRect(x: 100, y: 200, width: 40, height: 40))
         favButton.setImage(UIImage(named:"fav"), for: .normal)
         favButton.addTarget(self, action: #selector(favButtonTap(_:)), for: .touchUpInside)
-        favButton.tag = indexPath.row
         cell.contentView.addSubview(favButton)
+        favButton.tag = indexPath.row
+
         
+
+
         return cell
     }
     
@@ -91,7 +106,7 @@ class SearchResultsViewController: UIViewController,UITableViewDelegate,UITableV
         print(userID)
         let sendDB = SendDBModel(userID: Auth.auth().currentUser!.uid, userName: userName, mediumImageUrl: dataSetsArray[sender.tag].mediumImageUrl!, title: dataSetsArray[sender.tag].title!, hardware: dataSetsArray[sender.tag].hardware!, salesDate: dataSetsArray[sender.tag].salesDate!, itemPrice: dataSetsArray[sender.tag].itemPrice!)
         sendDB.sendData(userName: userName)
-       
+             
     }
 
     

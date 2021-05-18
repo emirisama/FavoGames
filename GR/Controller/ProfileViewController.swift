@@ -65,11 +65,12 @@ class ProfileViewController: UIViewController,UITableViewDelegate,UITableViewDat
          
             //setUp
             setUp(id: (contentModel?.userID)!)
-            imageView.sd_setImage(with: URL(string: (contentModel?.sender![3])!), completed: nil)
+            imageView.sd_setImage(with: URL(string: (contentModel?.sender![0])!), completed: nil)
             imageView.layer.cornerRadius = 20
             imageView.clipsToBounds = true
-            nameLabel.text = contentModel?.sender![6]
-            profileTextLabel.text = contentModel?.sender![4]
+            nameLabel.text = contentModel?.sender![1]
+            profileTextLabel.text = contentModel?.sender![2]
+            idLabel.text = contentModel?.sender![3]
 
         }
         

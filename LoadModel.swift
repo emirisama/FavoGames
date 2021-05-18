@@ -128,7 +128,7 @@ class LoadModel{
             if let snapShotDoc = snapShot?.data(){
                 
                 
-                if let userID = snapShotDoc["userID"] as? String,let userName = snapShotDoc["userName"] as? String,let image = snapShotDoc["image"] as? String,let profileText = snapShotDoc["profileText"] as? String{
+                if let userID = snapShotDoc["userID"] as? String,let userName = snapShotDoc["userName"] as? String,let image = snapShotDoc["image"] as? String,let profileText = snapShotDoc["profileText"] as? String,let id = snapShotDoc["id"] as? String{
                     let profileModel = ProfileModel(userName: userName, id: id,profileText: profileText, imageURLString: image, userID: userID)
                     self.profileModelArray.append(profileModel)
                     
@@ -206,6 +206,9 @@ class LoadModel{
             }
         }
     }
+    
+    
+    
     
     
 }

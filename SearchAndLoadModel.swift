@@ -101,6 +101,7 @@ class SearchAndLoadModel {
         }
     }
     
+    //413.誰がいいねを押しているか確認する方法の動画func loadDataの部分
     func loadMyListData(userName:String){
         
         db.collection("contents").document(userName).collection("collection").order(by: "postDate").addSnapshotListener { (snapShot, error) in
@@ -118,11 +119,15 @@ class SearchAndLoadModel {
                     
                     let data = doc.data()
                     print(data.debugDescription)
-                    if let title = data["title"] as? String,let hardware = data["hardware"] as? String,let mediumImageUrl = data["mediumImageUrl"] as? String,let salesDate = data["salesDate"] as? String,let itemPrice = data["itemPrice"] as? Int{
+                    if let title = data["title"] as? String,let hardware = data["hardware"] as? String,let mediumImageUrl = data["mediumImageUrl"] as? String,let salesDate = data["salesDate"] as? String,let itemPrice = data["itemPrice"] as? Int,let likeCount = data["like"] as? Int,let likeFlagDic = data["likeFlagDic"] as? Dictionary<String,Bool>{
                         
+                        if likeFlagDic["\(doc.documentID)"] != nil{
+                            
+                       
                         let dataSets = DataSets(title: title, hardware: hardware, salesDate: salesDate, mediumImageUrl: mediumImageUrl, itemPrice: itemPrice)
-                        self.dataSetsArray.append(dataSets)
                         
+                        self.dataSetsArray.append(dataSets)
+                        }
                     }
 
                 }

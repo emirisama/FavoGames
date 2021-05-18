@@ -87,7 +87,6 @@ class CreateUserViewController: UIViewController,UITextFieldDelegate,SendProfile
         
         HUD.hide()
         
-        //アプリ内に自分のProfileを保存しておく
         
         //Trendの画面遷移
 
