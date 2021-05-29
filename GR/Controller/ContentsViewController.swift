@@ -31,7 +31,7 @@ class ContentsViewController: UIViewController,UICollectionViewDelegate,UICollec
             
             //ロードするものを変更
             loadModel.getDataProtocol = self
-            loadModel.loadContents(category: "\(Constants.menuArray[index])")
+            loadModel.loadContents(title: "\(Constants.menuArray[index])")
             
             collectionView.delegate = self
             collectionView.dataSource = self
@@ -109,6 +109,7 @@ class ContentsViewController: UIViewController,UICollectionViewDelegate,UICollec
         
         let detailVC = segue.destination as? DetailViewController
         detailVC?.contentModel = contentModelArray[sender as! Int]
+//        detailVC?.contentModel = \(Constants.menuArray[index])
     }
     
     

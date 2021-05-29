@@ -33,6 +33,12 @@ protocol GetFollows{
     
 }
 
+protocol GetLikeCountProtocol{
+    
+    func loadLikeCount(likeCount:Int,likeFlag:Bool)
+    
+}
+
 class LoadModel{
     
     let db = Firestore.firestore()
@@ -56,12 +62,15 @@ class LoadModel{
     
     var ownFollowOrNot = Bool()
     
+    //いいねに受信に関する記述
+    var likeCount = Int()
+    var likeFlag = Bool()
+    var getLikeCountProtocol:GetLikeCountProtocol?
     
-    
-    //コンテンツを受信するメソッド
-    func loadContents(category:String){
+    //コンテンツを受信するメソッド(ゲームタイトルに紐づくレビューや名前などのデータを受信する）
+    func loadContents(title:String){
         
-        db.collection(category).order(by: "date").addSnapshotListener { (snapShot, error) in
+        db.collection(title).order(by: "date").addSnapshotListener { (snapShot, error) in
             
             self.contentModelArray = []
             if let snapShotDoc = snapShot?.documents{
@@ -70,7 +79,7 @@ class LoadModel{
                     
                     let data = doc.data()
                     //if letでもし空じゃなかったらの意味（!= nilと同じ)
-
+                    
                     if let userID = data["userID"] as? String,let userName = data["userName"] as? String,let image = data["image"] as? String,let review = data["review"] as? String,let sender = data["sender"] as? [String],let rate = data["rate"] as? Double, let date = data["date"] as? Double,let gametitle = data["gametitle"] as? String{
                         
                         let contentModel = ContentModel(imageURLString: image, review: review, userName: userName, userID: userID, sender: sender, rate: rate, gametitle: gametitle)
@@ -207,8 +216,49 @@ class LoadModel{
         }
     }
     
+    //いいねを押す（受信）
+    func loadLikeCount(uuid:String){
+        var likeFlag = Bool()
+        
+        db.collection("Users").document(uuid).collection("like").addSnapshotListener { (snapShot, error) in
+            
+            
+            if  error != nil{
+                return
+            }
+            if let snapShotDoc = snapShot?.documents{
+                for doc in snapShotDoc{
+                    let data = doc.data()
+                    print(doc.documentID)
+                    print(Auth.auth().currentUser!.uid)
+                    if doc.documentID == Auth.auth().currentUser?.uid{
+                        if let like = data["like"] as? Bool{
+                            
+                            likeFlag = like
+                        }
+                    }
+                }
+                
+                let docCount = snapShotDoc.count
+                self.getLikeCountProtocol?.loadLikeCount(likeCount: docCount, likeFlag: likeFlag)
+                
+            }
+        }
+        
+    }
     
-    
+    //いいねを消す（受信）
+    func deleteToLike(thisUserID:String){
+        
+        db.collection("Users").document(thisUserID).collection("like").document(Auth.auth().currentUser!.uid).delete() { err in
+            if let err = err{
+                print("Error removing document: \(err)")
+            }else{
+                print("Document successfully removed!")
+            }
+        }
+        
+    }
     
     
 }

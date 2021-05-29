@@ -15,5 +15,4 @@ struct DataSets{
     let mediumImageUrl:String?
     let itemPrice:Int?
 
-
 }

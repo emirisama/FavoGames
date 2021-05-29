@@ -9,7 +9,7 @@ import UIKit
 import PKHUD
 import Cosmos
 
-class ReviewViewController: UIViewController,DoneSendContents2 {
+class ReviewViewController: UIViewController {
 
     var index = Int()
 
@@ -26,7 +26,6 @@ class ReviewViewController: UIViewController,DoneSendContents2 {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        sendDBModel.doneSendContents2 = self
         
         
         
@@ -45,20 +44,13 @@ class ReviewViewController: UIViewController,DoneSendContents2 {
         //コンテンツとともに送信（動画：受信クラスを作成しよう）
         if reviewTextField.text?.isEmpty != true {
             
-            self.sendDBModel.sendDB(category: categoryString,name: (profile?.userName)!, reView: reviewTextField.text!, userID: (profile?.userID)!, sender: profile!, rate: self.reviewScore.rating)
-
+            self.sendDBModel.sendGameTitle(title: title!, name: (profile?.userName)!, reView: reviewTextField.text!, userID: (profile?.userID)!, sender: profile!, rate: self.reviewScore.rating)
+            
 
         }
     }
     
-    
-    func checkDone2() {
-        
-        HUD.hide()
-        self.tabBarController?.selectedIndex = 0
-        //受信
-        loadModel.loadContents(category: "\(Constants.menuArray[0])")
-    }
+
     
 
 }

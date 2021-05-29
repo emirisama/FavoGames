@@ -37,6 +37,8 @@ class ProfileViewController: UIViewController,UITableViewDelegate,UITableViewDat
     var userID = String()
     var userName = String()
     
+    var dataArray = [ProfileModel]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -208,9 +210,13 @@ class ProfileViewController: UIViewController,UITableViewDelegate,UITableViewDat
     //プロフィールが入ったdataArray
     func getProfileData(dataArray: [ProfileModel]) {
         
+        self.dataArray = dataArray
+        
         imageView.sd_setImage(with: URL(string: dataArray[0].imageURLString!), completed: nil)
         nameLabel.text = dataArray[0].userName
         profileTextLabel.text = dataArray[0].profileText
+        idLabel.text = dataArray[0].userID
+
         
         
     }
@@ -229,6 +235,7 @@ class ProfileViewController: UIViewController,UITableViewDelegate,UITableViewDat
         }else{
             
             //みんなのリスト
+            listVC.dataArray = self.dataArray
             
             
         }

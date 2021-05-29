@@ -45,24 +45,18 @@ class TrendViewController: AMPagerTabsViewController {
     }
     
     func getTabs() -> [UIViewController]{
-       
-//        var vcArray = [UIViewController]()
-
-//            vcArray.append(trendviewController)
-            
-            let ps5ViewController = self.storyboard?.instantiateViewController(withIdentifier: "ps5")
-            let ps4ViewController = self.storyboard?.instantiateViewController(withIdentifier: "ps4")
-            let switchViewController = self.storyboard?.instantiateViewController(withIdentifier: "switch")
-            let steamViewController = self.storyboard?.instantiateViewController(withIdentifier: "steam")
-           
-             // set the title for the tabs
-            ps5ViewController?.title = "PS5"
-            ps4ViewController?.title = "PS4"
-            switchViewController?.title = "Switch"
-            steamViewController?.title = "Steam"
-
         
-        return [ps5ViewController!,ps4ViewController!,switchViewController!,steamViewController!]
+        var vcArray = [UIViewController]()
+        for i in 0..<3{
+            
+            let ps5ViewController = self.storyboard?.instantiateViewController(withIdentifier: "ps5") as! PS5ViewController
+            ps5ViewController.title = ""
+            ps5ViewController.index = i
+            vcArray.append(ps5ViewController)
+            
+            
+        }
+        return vcArray
     }
 }
 

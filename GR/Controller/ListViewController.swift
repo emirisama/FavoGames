@@ -12,7 +12,7 @@ import SDWebImage
 class ListViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,DoneLoadDataProtocol,DoneLoadUserNameProtocol {
 
 
-    
+    var dataArray = [ProfileModel]()
 
 
     var tag = Int()
@@ -31,7 +31,7 @@ class ListViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
         tableView.dataSource = self
         
         tableView.register(UINib(nibName: "ContentsCell", bundle: nil), forCellReuseIdentifier: "ContentsCell")
-        tableView.register(UINib(nibName: "userNameCell", bundle: nil), forCellReuseIdentifier: "Cell")
+        tableView.register(UINib(nibName: "UserNameCell", bundle: nil), forCellReuseIdentifier: "Cell")
         
         searchAndLoad.doneLoadDataProtocol = self
         searchAndLoad.doneLoadUserNameProtocol = self

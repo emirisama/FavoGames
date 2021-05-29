@@ -9,7 +9,10 @@ import UIKit
 import FirebaseAuth
 import FirebaseFirestore
 
-class SearchResultsViewController: UIViewController,UITableViewDelegate,UITableViewDataSource {
+class SearchResultsViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,GetLikeCountProtocol {
+
+    
+
    
 
     
@@ -23,6 +26,12 @@ class SearchResultsViewController: UIViewController,UITableViewDelegate,UITableV
 
     var idString = String()
     
+    var loadModel = LoadModel()
+    var likeCount = Int()
+    var likeFlag = Bool()
+
+    var imageView = String()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -30,12 +39,15 @@ class SearchResultsViewController: UIViewController,UITableViewDelegate,UITableV
         
         tableView.delegate = self
         tableView.dataSource = self
+        loadModel.getLikeCountProtocol = self
+
+        
         
         //カステムCellを作るためにはregisternibを記載する必要がある。
         tableView.register(UINib(nibName: "ContentsCell", bundle: nil), forCellReuseIdentifier: "ContentsCell")
-        //アプリ内に入っているユーザー名を取り出す
-        if UserDefaults.standard.object(forKey: "userName") != nil{
-            userName = UserDefaults.standard.object(forKey: "userName") as! String
+        //アプリ内に入っているユーザーIDを取り出す
+        if UserDefaults.standard.object(forKey: "documentID") != nil{
+            idString = UserDefaults.standard.object(forKey: "documentID") as! String
         }
         
         tableView.reloadData()
@@ -64,6 +76,8 @@ class SearchResultsViewController: UIViewController,UITableViewDelegate,UITableV
             idString = String(idString.dropFirst(9))
             UserDefaults.standard.setValue(idString, forKey: "documentID")
         }
+        self.navigationController?.isNavigationBarHidden = true
+        loadLikeCount(likeCount: likeCount, likeFlag: likeFlag)
         
     }
     
@@ -87,29 +101,63 @@ class SearchResultsViewController: UIViewController,UITableViewDelegate,UITableV
       
         //お気に入りButton（お気に入りを自分のユーザーのデータに入れる）
         
-        let favButton = UIButton(frame: CGRect(x: 100, y: 200, width: 40, height: 40))
-        favButton.setImage(UIImage(named:"fav"), for: .normal)
-        favButton.addTarget(self, action: #selector(favButtonTap(_:)), for: .touchUpInside)
-        cell.contentView.addSubview(favButton)
-        favButton.tag = indexPath.row
-
-        
+        cell.likeButton.tag = indexPath.row
+        cell.countLabel.text = String(likeCount)
+        cell.likeButton.addTarget(self, action: #selector(likeButtonTap(_:)), for: .touchUpInside)
+    
+        if likeFlag == true{
+            cell.likeButton.setImage(UIImage(named: "like"), for: .normal)
+        }else{
+            cell.likeButton.setImage(UIImage(named: "nolike"), for: .normal)
+        }
 
 
         return cell
     }
     
-    @objc func favButtonTap(_ sender:UIButton){
+    @objc func likeButtonTap(_ sender:UIButton){
         
         //DBへ情報を送信する
         print(sender.tag)
         print(userID)
-        let sendDB = SendDBModel(userID: Auth.auth().currentUser!.uid, userName: userName, mediumImageUrl: dataSetsArray[sender.tag].mediumImageUrl!, title: dataSetsArray[sender.tag].title!, hardware: dataSetsArray[sender.tag].hardware!, salesDate: dataSetsArray[sender.tag].salesDate!, itemPrice: dataSetsArray[sender.tag].itemPrice!)
-        sendDB.sendData(userName: userName)
-             
+//        let sendDB = SendDBModel(userID: Auth.auth().currentUser!.uid, userName: userName, mediumImageUrl: dataSetsArray[sender.tag].mediumImageUrl!, title: dataSetsArray[sender.tag].title!, hardware: dataSetsArray[sender.tag].hardware!, salesDate: dataSetsArray[sender.tag].salesDate!, itemPrice: dataSetsArray[sender.tag].itemPrice!)
+//        sendDB.sendData(userName: userName)
+
+        
+        loadLikeCount(likeCount: likeCount, likeFlag: likeFlag)
+        tableView.reloadData()
     }
 
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        
+        let DetailVC = storyboard?.instantiateViewController(identifier: "detailVC") as! DetailViewController
+        DetailVC.gameTitle = dataSetsArray[indexPath.row].title!
+        DetailVC.ImageView = dataSetsArray[indexPath.row].mediumImageUrl!
+        DetailVC.salesDate = dataSetsArray[indexPath.row].salesDate!
+        DetailVC.hardware = dataSetsArray[indexPath.row].hardware!
+        DetailVC.price = dataSetsArray[indexPath.row].itemPrice!
+        self.navigationController?.pushViewController(DetailVC, animated: true)
+
+        print("確認")
+        print(DetailVC.gameTitle)
+    }
+
+        
+
+
     
+    
+    func loadLikeCount(likeCount: Int, likeFlag: Bool) {
+        
+        if likeFlag == true{
+            
+        }else if likeFlag == false{
+            return
+        }
+       
+        
+    }
     
     /*
     // MARK: - Navigation

@@ -6,3 +6,10 @@
 //
 
 import Foundation
+
+struct LikeModel{
+    
+    var likeCount:Int
+    var likeFlagDic:Dictionary<String, Any>
+    
+}

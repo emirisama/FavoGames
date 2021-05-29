@@ -27,6 +27,18 @@
                         <rect key="frame" x="10" y="43" width="150" height="150"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7sD-Qs-jJS">
+                        <rect key="frame" x="112" y="232" width="48" height="21"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qlH-Ae-wBE">
+                        <rect key="frame" x="100" y="201" width="30" height="30"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <state key="normal" image="nolike"/>
+                    </button>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             </tableViewCellContentView>
@@ -34,9 +46,14 @@
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <connections>
                 <outlet property="contentImageView" destination="jwW-c3-egI" id="Z41-i2-I2D"/>
+                <outlet property="countLabel" destination="7sD-Qs-jJS" id="M2w-Uy-NsQ"/>
                 <outlet property="gameTitleLabel" destination="KVA-OB-6Qf" id="xDS-ic-IdH"/>
+                <outlet property="likeButton" destination="qlH-Ae-wBE" id="jv2-h4-v3j"/>
             </connections>
             <point key="canvasLocation" x="1243.4782608695652" y="-27.455357142857142"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="nolike" width="256" height="256"/>
+    </resources>
 </document>

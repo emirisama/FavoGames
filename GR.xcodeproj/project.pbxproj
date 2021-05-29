@@ -12,6 +12,8 @@
 		50318457262BC9880005D9BF /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50318456262BC9880005D9BF /* SignInViewController.swift */; };
 		5046C4D7261DD7B5006939C7 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5046C4D6261DD7B5006939C7 /* Constants.swift */; };
 		504C276C260CB0E600179AF9 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 504C276B260CB0E600179AF9 /* GoogleService-Info.plist */; };
+		504C30D7265BC30300C520B0 /* ContentDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 504C30D5265BC30300C520B0 /* ContentDetailCell.swift */; };
+		504C30D8265BC30300C520B0 /* ContentDetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 504C30D6265BC30300C520B0 /* ContentDetailCell.xib */; };
 		504E35522625982D00A119D1 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 504E35512625982D00A119D1 /* ProfileViewController.swift */; };
 		504E35562625C68700A119D1 /* ContentsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 504E35542625C68700A119D1 /* ContentsCell.swift */; };
 		504E35572625C68700A119D1 /* ContentsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 504E35552625C68700A119D1 /* ContentsCell.xib */; };
@@ -29,7 +31,6 @@
 		50777FA1261CAB58005314BF /* ReviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50777FA0261CAB58005314BF /* ReviewViewController.swift */; };
 		50849734264D517B0052DBF4 /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50849733264D517B0052DBF4 /* ListViewController.swift */; };
 		50849737264F65500052DBF4 /* OtherListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50849736264F65500052DBF4 /* OtherListViewController.swift */; };
-		5084973A264FE48D0052DBF4 /* NiceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50849739264FE48D0052DBF4 /* NiceModel.swift */; };
 		508B0B47260B615700FBA8C5 /* CreateUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 508B0B46260B615700FBA8C5 /* CreateUserViewController.swift */; };
 		508B0B4F260B762A00FBA8C5 /* UIColor-Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 508B0B4E260B762A00FBA8C5 /* UIColor-Extension.swift */; };
 		508C95DB2622D6FC0077F3A6 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 508C95DA2622D6FC0077F3A6 /* DetailViewController.swift */; };
@@ -43,7 +44,6 @@
 		50CF1B9D263525DA00ECF7E4 /* PS5ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50CF1B9C263525DA00ECF7E4 /* PS5ViewController.swift */; };
 		50CF1BA0263525E700ECF7E4 /* PS4ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50CF1B9F263525E700ECF7E4 /* PS4ViewController.swift */; };
 		50CF1BA32635260E00ECF7E4 /* SwitchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50CF1BA22635260E00ECF7E4 /* SwitchViewController.swift */; };
-		50CF1BA62635261E00ECF7E4 /* SteamViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50CF1BA52635261E00ECF7E4 /* SteamViewController.swift */; };
 		50D9222B26078EB5009A7BB0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50D9222A26078EB5009A7BB0 /* AppDelegate.swift */; };
 		50D9222D26078EB5009A7BB0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50D9222C26078EB5009A7BB0 /* SceneDelegate.swift */; };
 		50D9222F26078EB5009A7BB0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50D9222E26078EB5009A7BB0 /* ViewController.swift */; };
@@ -61,6 +61,8 @@
 		50318456262BC9880005D9BF /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		5046C4D6261DD7B5006939C7 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		504C276B260CB0E600179AF9 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		504C30D5265BC30300C520B0 /* ContentDetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentDetailCell.swift; sourceTree = "<group>"; };
+		504C30D6265BC30300C520B0 /* ContentDetailCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ContentDetailCell.xib; sourceTree = "<group>"; };
 		504E35512625982D00A119D1 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		504E35542625C68700A119D1 /* ContentsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentsCell.swift; sourceTree = "<group>"; };
 		504E35552625C68700A119D1 /* ContentsCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ContentsCell.xib; sourceTree = "<group>"; };
@@ -78,7 +80,6 @@
 		50777FA0261CAB58005314BF /* ReviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewViewController.swift; sourceTree = "<group>"; };
 		50849733264D517B0052DBF4 /* ListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
 		50849736264F65500052DBF4 /* OtherListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtherListViewController.swift; sourceTree = "<group>"; };
-		50849739264FE48D0052DBF4 /* NiceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NiceModel.swift; sourceTree = "<group>"; };
 		508B0B46260B615700FBA8C5 /* CreateUserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateUserViewController.swift; sourceTree = "<group>"; };
 		508B0B4E260B762A00FBA8C5 /* UIColor-Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor-Extension.swift"; sourceTree = "<group>"; };
 		508C95DA2622D6FC0077F3A6 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
@@ -92,7 +93,6 @@
 		50CF1B9C263525DA00ECF7E4 /* PS5ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PS5ViewController.swift; sourceTree = "<group>"; };
 		50CF1B9F263525E700ECF7E4 /* PS4ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PS4ViewController.swift; sourceTree = "<group>"; };
 		50CF1BA22635260E00ECF7E4 /* SwitchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwitchViewController.swift; sourceTree = "<group>"; };
-		50CF1BA52635261E00ECF7E4 /* SteamViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SteamViewController.swift; sourceTree = "<group>"; };
 		50D9222726078EB5009A7BB0 /* GR.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GR.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		50D9222A26078EB5009A7BB0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		50D9222C26078EB5009A7BB0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -142,6 +142,8 @@
 				504E35552625C68700A119D1 /* ContentsCell.xib */,
 				50A62CD5264C23C60012412F /* UserNameCell.swift */,
 				50A62CD6264C23C60012412F /* UserNameCell.xib */,
+				504C30D5265BC30300C520B0 /* ContentDetailCell.swift */,
+				504C30D6265BC30300C520B0 /* ContentDetailCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -151,24 +153,23 @@
 			children = (
 				50D9222E26078EB5009A7BB0 /* ViewController.swift */,
 				508B0B46260B615700FBA8C5 /* CreateUserViewController.swift */,
-				50763BEA26104CA60071941E /* MypageViewController.swift */,
-				50763BEE261057210071941E /* TrendViewController.swift */,
-				50BCC9D02614B77A0021D405 /* ContentsViewController.swift */,
-				50777F9B261C8B77005314BF /* TabBarController.swift */,
-				50777FA0261CAB58005314BF /* ReviewViewController.swift */,
-				508C95DA2622D6FC0077F3A6 /* DetailViewController.swift */,
-				508C95DD2623356B0077F3A6 /* WebViewController.swift */,
-				504E35512625982D00A119D1 /* ProfileViewController.swift */,
-				5065E471262AA2EE00BE0316 /* FollowAndFollowerViewController.swift */,
-				50318453262B22E30005D9BF /* ContentDetailViewController.swift */,
 				50318456262BC9880005D9BF /* SignInViewController.swift */,
-				505854542635081B00182CFD /* SearchViewController.swift */,
-				505854572635084F00182CFD /* NiceViewController.swift */,
+				504E35512625982D00A119D1 /* ProfileViewController.swift */,
+				50763BEA26104CA60071941E /* MypageViewController.swift */,
+				50777F9B261C8B77005314BF /* TabBarController.swift */,
+				50763BEE261057210071941E /* TrendViewController.swift */,
 				50CF1B9C263525DA00ECF7E4 /* PS5ViewController.swift */,
 				50CF1B9F263525E700ECF7E4 /* PS4ViewController.swift */,
 				50CF1BA22635260E00ECF7E4 /* SwitchViewController.swift */,
-				50CF1BA52635261E00ECF7E4 /* SteamViewController.swift */,
+				505854542635081B00182CFD /* SearchViewController.swift */,
 				50A8D81E2645310C008B5CEA /* SearchResultsViewController.swift */,
+				50BCC9D02614B77A0021D405 /* ContentsViewController.swift */,
+				50777FA0261CAB58005314BF /* ReviewViewController.swift */,
+				508C95DA2622D6FC0077F3A6 /* DetailViewController.swift */,
+				508C95DD2623356B0077F3A6 /* WebViewController.swift */,
+				50318453262B22E30005D9BF /* ContentDetailViewController.swift */,
+				5065E471262AA2EE00BE0316 /* FollowAndFollowerViewController.swift */,
+				505854572635084F00182CFD /* NiceViewController.swift */,
 				50849733264D517B0052DBF4 /* ListViewController.swift */,
 				50849736264F65500052DBF4 /* OtherListViewController.swift */,
 			);
@@ -187,7 +188,6 @@
 				5065E46E2629C3FD00BE0316 /* FollowModel.swift */,
 				50A8D81B26452B1C008B5CEA /* SearchAndLoadModel.swift */,
 				50A8D8212645336D008B5CEA /* DataSets.swift */,
-				50849739264FE48D0052DBF4 /* NiceModel.swift */,
 			);
 			name = Model;
 			path = ..;
@@ -299,6 +299,7 @@
 			files = (
 				50D9223726078EB6009A7BB0 /* LaunchScreen.storyboard in Resources */,
 				50A62CD8264C23C60012412F /* UserNameCell.xib in Resources */,
+				504C30D8265BC30300C520B0 /* ContentDetailCell.xib in Resources */,
 				504E35572625C68700A119D1 /* ContentsCell.xib in Resources */,
 				504C276C260CB0E600179AF9 /* GoogleService-Info.plist in Resources */,
 				50D9223426078EB6009A7BB0 /* Assets.xcassets in Resources */,
@@ -361,7 +362,6 @@
 				50318454262B22E30005D9BF /* ContentDetailViewController.swift in Sources */,
 				5065E472262AA2EE00BE0316 /* FollowAndFollowerViewController.swift in Sources */,
 				5065E4682629C33500BE0316 /* FollowerModel.swift in Sources */,
-				5084973A264FE48D0052DBF4 /* NiceModel.swift in Sources */,
 				50A62CD7264C23C60012412F /* UserNameCell.swift in Sources */,
 				508C95DB2622D6FC0077F3A6 /* DetailViewController.swift in Sources */,
 				50D9222F26078EB5009A7BB0 /* ViewController.swift in Sources */,
@@ -382,11 +382,11 @@
 				50CF1BA0263525E700ECF7E4 /* PS4ViewController.swift in Sources */,
 				507375C626217F5200D8E6D6 /* ContentModel.swift in Sources */,
 				504E35562625C68700A119D1 /* ContentsCell.swift in Sources */,
+				504C30D7265BC30300C520B0 /* ContentDetailCell.swift in Sources */,
 				50763BEF261057210071941E /* TrendViewController.swift in Sources */,
 				50F6F3212612207400B65E21 /* ProfileModel.swift in Sources */,
 				505854582635084F00182CFD /* NiceViewController.swift in Sources */,
 				50A8D81F2645310C008B5CEA /* SearchResultsViewController.swift in Sources */,
-				50CF1BA62635261E00ECF7E4 /* SteamViewController.swift in Sources */,
 				50F6F31E26121FC200B65E21 /* UserDefaultsEX.swift in Sources */,
 				50763BF5261068D00071941E /* SendDBModel.swift in Sources */,
 				50777F9C261C8B77005314BF /* TabBarController.swift in Sources */,

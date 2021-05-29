@@ -8,37 +8,60 @@
 import UIKit
 import SDWebImage
 import Cosmos
+import PKHUD
 
-class DetailViewController: UIViewController,UITableViewDelegate,UITableViewDataSource {
+class DetailViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,DoneSendContents2,GetDataProtocol {
+ 
+    
+ 
 
  
     @IBOutlet weak var tableView: UITableView!
-    var imageView = UIImageView()
-    
+
     
     var contentModel:ContentModel?
     var profileModel:ProfileModel?
     var loadModel = LoadModel()
+    var sendDBModel = SendDBModel()
 
+    var dataSetsArray = [DataSets]()
+    
+    var dataArray = [ContentModel]()
+    
+    var gameTitle = String()
+    var salesDate = String()
+    var ImageView = String()
+    var hardware = String()
+    var price = Int()
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         tableView.delegate = self
         tableView.dataSource = self
-        imageView.sd_setImage(with: URL(string: (contentModel?.imageURLString)!), completed: nil)
-//        loadModel.loadContents(category: <#T##String#>)
+        sendDBModel.doneSendContents2 = self
+        tableView.register(UINib(nibName: "ContentDetailCell", bundle: nil), forCellReuseIdentifier: "ContentDetailCell")
         
+
+
+
+        //皆のレビューを見れるようにさせる(ロードさせる）
+//        loadModel.loadContents(title: contentModel?.gametitle)
+        
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 800
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        self.navigationController?.isNavigationBarHidden = false
+        self.navigationController?.isNavigationBarHidden = true
         
     }
     
-    
+
     
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -46,37 +69,35 @@ class DetailViewController: UIViewController,UITableViewDelegate,UITableViewData
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return dataArray.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "ContentDetailCell", for: indexPath) as! ContentDetailCell
+//        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
         
-        let profileImageView = cell.contentView.viewWithTag(1) as! UIImageView
-        profileImageView.sd_setImage(with: URL(string: (contentModel?.sender![0])!), completed: nil)
-        profileImageView.layer.cornerRadius = 20
-
-        let nameLabel = cell.contentView.viewWithTag(2) as! UILabel
-        nameLabel.text = contentModel?.sender![3]
+        cell.ImageView.sd_setImage(with: URL(string: self.dataArray[indexPath.row].imageURLString!, relativeTo: nil))
         
+        cell.gameTitleLabel.text = self.dataArray[indexPath.row].userName
+        print("確認")
+        print(cell.gameTitleLabel.text)
         
-        let id = cell.contentView.viewWithTag(3) as! UILabel
-        id.text = contentModel?.sender![2]
+//        cell..text = self.dataArray[indexPath.row].userID
         
-        let reviewView = cell.contentView.viewWithTag(4) as! CosmosView
-        reviewView.rating = (contentModel?.rate)!
-        
-        let reviewTextView = cell.contentView.viewWithTag(5) as! UITextView
-        reviewTextView.text = contentModel?.review
-
+//        let reviewView = cell.contentView.viewWithTag(4) as! CosmosView
+//        reviewView.rating = self.dataArray[indexPath.row].rate!
+//        
+//        let reViewTextView = cell.contentView.viewWithTag(5) as! UITextView
+//        reviewView.text = self.dataArray[indexPath.row].review
+//        
         return cell
+
+
         
     }
     
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 996
-    }
+
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
@@ -99,6 +120,21 @@ class DetailViewController: UIViewController,UITableViewDelegate,UITableViewData
         profileVC.contentModel = contentModel
         self.navigationController?.pushViewController(profileVC, animated: true)
         
+    }
+    
+    
+    func checkDone2() {
+        
+        HUD.hide()
+        self.tabBarController?.selectedIndex = 0
+        //受信
+        loadModel.loadContents(title: "\(Constants.menuArray[0])")
+        
+    }
+    
+    func getData(dataArray: [ContentModel]) {
+        self.dataArray = dataArray
+        tableView.reloadData()
     }
     
     

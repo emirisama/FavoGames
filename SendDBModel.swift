@@ -124,12 +124,12 @@ class SendDBModel {
     }
     
     //カテゴリーとUsersのOwndContentsの中に入れるメソッド（関数）
-    func sendDB(category:String,name:String,reView:String,userID:String,sender:ProfileModel,rate:Double){
+    func sendDB(title:String,name:String,reView:String,userID:String,sender:ProfileModel,rate:Double){
        
                     //送信（ownContentsの中に入れる）
         self.db.collection("Users").document(Auth.auth().currentUser!.uid).collection("ownContents").document().setData(["userName":userName,"userID":Auth.auth().currentUser!.uid,"review":reView,"sender":self.myProfile,"rate":rate,"date":Date().timeIntervalSince1970])
                     
-        self.db.collection(category).document().setData(["userName":userName,"userID":Auth.auth().currentUser!.uid,"review":reView,"sender":self.myProfile,"rate":rate,"date":Date().timeIntervalSince1970])
+        self.db.collection(title).document().setData(["userName":userName,"userID":Auth.auth().currentUser!.uid,"review":reView,"sender":self.myProfile,"rate":rate,"date":Date().timeIntervalSince1970])
                     
                     self.doneSendContents2?.checkDone2()
     }
@@ -163,6 +163,17 @@ class SendDBModel {
         
         
     }
+    
+    //ゲームタイトルに紐づくデータを送信
+    func sendGameTitle(title:String,name:String,reView:String,userID:String,sender:ProfileModel,rate:Double){
+        
+        self.db.collection(title).document(Auth.auth().currentUser!.uid).collection("ownContents").document().setData(
+            ["userName":userName,"userID":Auth.auth().currentUser!.uid,"review":reView,"sender":self.myProfile,"rate":rate,"date":Date().timeIntervalSince1970])
+        
+        self.doneSendContents2?.checkDone2()
+    }
+    
+    
     
     
 }

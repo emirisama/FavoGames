@@ -9,6 +9,14 @@ import UIKit
 
 class ContentDetailCell: UITableViewCell {
 
+    
+    @IBOutlet weak var gameTitleLabel: UILabel!
+    @IBOutlet weak var ImageView: UIImageView!
+    @IBOutlet weak var salesDate: UILabel!
+    @IBOutlet weak var hardware: UILabel!
+    @IBOutlet weak var price: UILabel!
+    
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
