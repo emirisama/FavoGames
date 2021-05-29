@@ -138,9 +138,9 @@ class SearchResultsViewController: UIViewController,UITableViewDelegate,UITableV
         DetailVC.hardware = dataSetsArray[indexPath.row].hardware!
         DetailVC.price = dataSetsArray[indexPath.row].itemPrice!
         self.navigationController?.pushViewController(DetailVC, animated: true)
+        print("dataSetsArrayの中身")
+        print(dataSetsArray)
 
-        print("確認")
-        print(DetailVC.gameTitle)
     }
 
         

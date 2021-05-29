@@ -43,7 +43,9 @@ class DetailViewController: UIViewController,UITableViewDelegate,UITableViewData
         tableView.register(UINib(nibName: "ContentDetailCell", bundle: nil), forCellReuseIdentifier: "ContentDetailCell")
         
 
-
+        tableView.reloadData()
+        print("確認")
+        print(gameTitle)
 
         //皆のレビューを見れるようにさせる(ロードさせる）
 //        loadModel.loadContents(title: contentModel?.gametitle)
@@ -69,20 +71,28 @@ class DetailViewController: UIViewController,UITableViewDelegate,UITableViewData
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return dataArray.count
+        return 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "ContentDetailCell", for: indexPath) as! ContentDetailCell
 //        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
+
+        cell.gameTitleLabel.text = self.gameTitle
+        cell.ImageView.sd_setImage(with: URL(string: self.ImageView), completed: nil)
+        cell.salesDate.text = self.salesDate
+        cell.hardware.text = self.hardware
+        cell.price.text = String(self.price)
+//
+//        cell.salesDate.text = self.salesDate
+
+//        cell.ImageView.sd_setImage(with: URL(string: self.dataArray[indexPath.row].imageURLString!, relativeTo: nil))
+//
+//        cell.gameTitleLabel.text = self.dataArray[indexPath.row].gametitle
+
         
-        cell.ImageView.sd_setImage(with: URL(string: self.dataArray[indexPath.row].imageURLString!, relativeTo: nil))
-        
-        cell.gameTitleLabel.text = self.dataArray[indexPath.row].userName
-        print("確認")
-        print(cell.gameTitleLabel.text)
-        
+
 //        cell..text = self.dataArray[indexPath.row].userID
         
 //        let reviewView = cell.contentView.viewWithTag(4) as! CosmosView
