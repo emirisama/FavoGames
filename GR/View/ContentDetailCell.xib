@@ -70,9 +70,12 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5aD-5u-YPj">
-                        <rect key="frame" x="24" y="195" width="30" height="30"/>
+                        <rect key="frame" x="24" y="195" width="50" height="29"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <state key="normal" title="★"/>
+                        <connections>
+                            <action selector="reviewSend:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="082-BT-Nz5"/>
+                        </connections>
                     </button>
                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mh8-am-aUK">
                         <rect key="frame" x="111" y="195" width="30" height="30"/>

@@ -459,9 +459,6 @@
                                                     <rect key="frame" x="0.0" y="278" width="80" height="69"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <state key="normal" title="★"/>
-                                                    <connections>
-                                                        <segue destination="5ac-yS-oMF" kind="show" id="EVe-o6-R0F"/>
-                                                    </connections>
                                                 </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="機種" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qnp-cq-XSp">
                                                     <rect key="frame" x="227" y="73" width="58" height="17"/>
@@ -518,6 +515,7 @@
                         <outlet property="tableView" destination="NRb-P2-KD1" id="W2D-VU-7pS"/>
                         <segue destination="DeC-ck-r7K" kind="show" id="glr-kS-HED"/>
                         <segue destination="WcL-D3-6JI" kind="presentation" identifier="webVC" id="lYq-Fd-tCW"/>
+                        <segue destination="5ac-yS-oMF" kind="show" id="7nW-Ce-17L"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="crE-yT-las" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -714,7 +712,7 @@
         <!--Review View Controller-->
         <scene sceneID="hJz-HN-pde">
             <objects>
-                <viewController storyboardIdentifier="review1" useStoryboardIdentifierAsRestorationIdentifier="YES" id="5ac-yS-oMF" customClass="ReviewViewController" customModule="GR" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="reviewVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="5ac-yS-oMF" customClass="ReviewViewController" customModule="GR" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="CdB-Gv-PAK">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

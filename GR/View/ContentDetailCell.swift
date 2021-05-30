@@ -7,8 +7,15 @@
 
 import UIKit
 
+protocol ReviewListViewDelegate{
+    
+    func reviewSendTap()
+}
+
+
 class ContentDetailCell: UITableViewCell {
 
+    var reviewListViewDelegate:ReviewListViewDelegate? = nil
     
     @IBOutlet weak var gameTitleLabel: UILabel!
     @IBOutlet weak var ImageView: UIImageView!
@@ -27,5 +34,14 @@ class ContentDetailCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
+    
+
+    @IBAction func reviewSend(_ sender: Any) {
+        print("1")
+        reviewListViewDelegate?.reviewSendTap()
+        print("2")
+    }
+    
+
     
 }

@@ -10,7 +10,9 @@ import SDWebImage
 import Cosmos
 import PKHUD
 
-class DetailViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,DoneSendContents2,GetDataProtocol {
+class DetailViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,DoneSendContents2,GetDataProtocol, ReviewListViewDelegate{
+ 
+    
 
     
 
@@ -42,12 +44,14 @@ class DetailViewController: UIViewController,UITableViewDelegate,UITableViewData
  
     var sectionTitle = ["","スコア・レビュー"]
 
+    var contentDetailCell = ContentDetailCell()
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         tableView.delegate = self
         tableView.dataSource = self
+        contentDetailCell.reviewListViewDelegate = self
 
         sendDBModel.doneSendContents2 = self
         tableView.register(UINib(nibName: "ContentDetailCell", bundle: nil), forCellReuseIdentifier: "ContentDetailCell")
@@ -182,6 +186,13 @@ class DetailViewController: UIViewController,UITableViewDelegate,UITableViewData
     func getData(dataArray: [ContentModel]) {
         self.dataArray = dataArray
         tableView.reloadData()
+    }
+    
+    func reviewSendTap() {
+
+        let ReviewVC = self.storyboard?.instantiateViewController(withIdentifier: "reviewVC") as! ReviewViewController
+        self.navigationController?.pushViewController(ReviewVC, animated: true)
+
     }
     
     
