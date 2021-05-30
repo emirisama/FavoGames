@@ -39,10 +39,10 @@ class CreateUserViewController: UIViewController,UITextFieldDelegate,SendProfile
             emailTextField.delegate = self
             passwordTextField.delegate = self
             
-            
+
         }
         
-        
+
         
         
         //他のところをタップするとキーボードが下がる

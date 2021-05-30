@@ -11,6 +11,8 @@ import Cosmos
 
 class ReviewViewController: UIViewController {
 
+    
+
     var index = Int()
 
     @IBOutlet weak var reviewTextField: UITextView!
@@ -21,6 +23,7 @@ class ReviewViewController: UIViewController {
     var userDefaultsEX = UserDefaultsEX()
     var sendDBModel = SendDBModel()
     var loadModel = LoadModel()
+    
     
     
     override func viewDidLoad() {

@@ -63,7 +63,7 @@ class SearchResultsViewController: UIViewController,UITableViewDelegate,UITableV
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.navigationController?.isNavigationBarHidden = true
+        self.navigationController?.isNavigationBarHidden = false
   
         if UserDefaults.standard.object(forKey: "documentID") != nil{
             
@@ -76,7 +76,7 @@ class SearchResultsViewController: UIViewController,UITableViewDelegate,UITableV
             idString = String(idString.dropFirst(9))
             UserDefaults.standard.setValue(idString, forKey: "documentID")
         }
-        self.navigationController?.isNavigationBarHidden = true
+
         loadLikeCount(likeCount: likeCount, likeFlag: likeFlag)
         
     }

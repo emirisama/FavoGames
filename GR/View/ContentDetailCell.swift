@@ -7,21 +7,20 @@
 
 import UIKit
 
-protocol ReviewListViewDelegate{
-    
-    func reviewSendTap()
-}
+
 
 
 class ContentDetailCell: UITableViewCell {
 
-    var reviewListViewDelegate:ReviewListViewDelegate? = nil
+ 
     
     @IBOutlet weak var gameTitleLabel: UILabel!
     @IBOutlet weak var ImageView: UIImageView!
     @IBOutlet weak var salesDate: UILabel!
     @IBOutlet weak var hardware: UILabel!
     @IBOutlet weak var price: UILabel!
+    @IBOutlet weak var reviewButton: UIButton!
+    
     
     
     override func awakeFromNib() {
@@ -36,11 +35,6 @@ class ContentDetailCell: UITableViewCell {
     }
     
 
-    @IBAction func reviewSend(_ sender: Any) {
-        print("1")
-        reviewListViewDelegate?.reviewSendTap()
-        print("2")
-    }
     
 
     

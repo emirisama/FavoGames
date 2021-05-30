@@ -10,7 +10,7 @@ import SDWebImage
 import Cosmos
 import PKHUD
 
-class DetailViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,DoneSendContents2,GetDataProtocol, ReviewListViewDelegate{
+class DetailViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,DoneSendContents2,GetDataProtocol{
  
     
 
@@ -45,13 +45,14 @@ class DetailViewController: UIViewController,UITableViewDelegate,UITableViewData
     var sectionTitle = ["","スコア・レビュー"]
 
     var contentDetailCell = ContentDetailCell()
+   
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         tableView.delegate = self
         tableView.dataSource = self
-        contentDetailCell.reviewListViewDelegate = self
+
 
         sendDBModel.doneSendContents2 = self
         tableView.register(UINib(nibName: "ContentDetailCell", bundle: nil), forCellReuseIdentifier: "ContentDetailCell")
@@ -74,7 +75,7 @@ class DetailViewController: UIViewController,UITableViewDelegate,UITableViewData
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        self.navigationController?.isNavigationBarHidden = true
+        self.navigationController?.isNavigationBarHidden = false
 
     }
     
@@ -110,8 +111,10 @@ class DetailViewController: UIViewController,UITableViewDelegate,UITableViewData
             cell.salesDate.text = self.dataSetsArray[indexPath.row].salesDate
             cell.hardware.text = self.dataSetsArray[indexPath.row].hardware
             cell.price.text = String(self.dataSetsArray[indexPath.row].itemPrice!)
+            
+            cell.reviewButton.addTarget(self, action: #selector(reviewButtonTap(_:)), for: .touchUpInside)
+ 
             return cell
-            print("numberOfSections")
             
         }else{
 
@@ -121,18 +124,12 @@ class DetailViewController: UIViewController,UITableViewDelegate,UITableViewData
         }
     }
 
+    @objc func reviewButtonTap(_ sender:UIButton){
         
-
-//        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
-
-//        cell2.userNameLabel.text = self.loadModelArray[indexPath.row].userName
-//
-//        cell.salesDate.text = self.salesDate
-
-//        cell.ImageView.sd_setImage(with: URL(string: self.dataArray[indexPath.row].imageURLString!, relativeTo: nil))
-//
-//        cell.gameTitleLabel.text = self.dataArray[indexPath.row].gametitle
-
+        let ReviewVC = self.storyboard?.instantiateViewController(withIdentifier: "reviewVC") as! ReviewViewController
+        self.navigationController?.pushViewController(ReviewVC, animated: true)
+        
+    }
         
 
 //        cell..text = self.dataArray[indexPath.row].userID
@@ -186,14 +183,13 @@ class DetailViewController: UIViewController,UITableViewDelegate,UITableViewData
     func getData(dataArray: [ContentModel]) {
         self.dataArray = dataArray
         tableView.reloadData()
+
     }
     
-    func reviewSendTap() {
+    
 
-        let ReviewVC = self.storyboard?.instantiateViewController(withIdentifier: "reviewVC") as! ReviewViewController
-        self.navigationController?.pushViewController(ReviewVC, animated: true)
 
-    }
+
     
     
 }

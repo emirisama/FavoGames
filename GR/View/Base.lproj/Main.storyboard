@@ -17,22 +17,22 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ODx-zz-juC">
-                                <rect key="frame" x="0.0" y="248" width="414" height="444"/>
+                                <rect key="frame" x="0.0" y="204" width="414" height="488"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RND-8P-TB9">
-                                        <rect key="frame" x="0.0" y="0.0" width="1656" height="444"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="1656" height="488"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="vz2-Bw-rqs">
-                                                <rect key="frame" x="0.0" y="0.0" width="414" height="444"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="488"/>
                                             </imageView>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="yIA-83-sqq">
-                                                <rect key="frame" x="414" y="0.0" width="414" height="444"/>
+                                                <rect key="frame" x="414" y="0.0" width="414" height="488"/>
                                             </imageView>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="A8C-zx-8LD">
-                                                <rect key="frame" x="828" y="0.0" width="414" height="444"/>
+                                                <rect key="frame" x="828" y="0.0" width="414" height="488"/>
                                             </imageView>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="zK9-iM-RpO">
-                                                <rect key="frame" x="1242" y="0.0" width="414" height="444"/>
+                                                <rect key="frame" x="1242" y="0.0" width="414" height="488"/>
                                             </imageView>
                                         </subviews>
                                     </stackView>
@@ -938,10 +938,9 @@
         <!--Navigation Controller-->
         <scene sceneID="FrQ-7J-ZR7">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Pwn-Ff-Omf" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="Pwn-Ff-Omf" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="RbC-Nn-b81">
-                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -978,11 +977,10 @@
         <!--Trend-->
         <scene sceneID="qE9-zl-C6i">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="4lp-Jq-kt0" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="4lp-Jq-kt0" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Trend" id="dm7-XV-3jb"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="G8M-b3-dFq">
-                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -997,11 +995,10 @@
         <!--Search-->
         <scene sceneID="5qE-U7-jbd">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="NMD-DG-wcJ" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="NMD-DG-wcJ" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Search" id="sqh-7R-Fbm"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="YHY-ni-ZUE">
-                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -1035,11 +1032,10 @@
         <!--Mypage-->
         <scene sceneID="hS0-P3-JiR">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="0v0-RY-2zf" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="0v0-RY-2zf" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Mypage" id="OeF-hS-dE4"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="bnt-he-1Ft">
-                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>

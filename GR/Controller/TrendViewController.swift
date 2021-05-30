@@ -17,7 +17,7 @@ class TrendViewController: AMPagerTabsViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
+
         settings.tabBackgroundColor = #colorLiteral(red: 0.2819149196, green: 0.7462226748, blue: 0.6821211576, alpha: 1)
         settings.tabButtonColor = #colorLiteral(red: 0.2819149196, green: 0.7462226748, blue: 0.6821211576, alpha: 1)
         settings.tabHeight = 100
@@ -42,6 +42,8 @@ class TrendViewController: AMPagerTabsViewController {
         
         super.viewWillAppear(animated)
         self.navigationController?.isNavigationBarHidden = true
+
+
     }
     
     func getTabs() -> [UIViewController]{
