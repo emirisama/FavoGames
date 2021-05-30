@@ -132,14 +132,16 @@ class SearchResultsViewController: UIViewController,UITableViewDelegate,UITableV
         
         
         let DetailVC = storyboard?.instantiateViewController(identifier: "detailVC") as! DetailViewController
-        DetailVC.gameTitle = dataSetsArray[indexPath.row].title!
-        DetailVC.ImageView = dataSetsArray[indexPath.row].mediumImageUrl!
-        DetailVC.salesDate = dataSetsArray[indexPath.row].salesDate!
-        DetailVC.hardware = dataSetsArray[indexPath.row].hardware!
-        DetailVC.price = dataSetsArray[indexPath.row].itemPrice!
+        DetailVC.dataSetsArray = dataSetsArray
+        DetailVC.loadModelArray = loadModel.profileModelArray
+//        DetailVC.gameTitle = dataSetsArray[indexPath.row].title!
+//        DetailVC.ImageView = dataSetsArray[indexPath.row].mediumImageUrl!
+//        DetailVC.salesDate = dataSetsArray[indexPath.row].salesDate!
+//        DetailVC.hardware = dataSetsArray[indexPath.row].hardware!
+//        DetailVC.price = dataSetsArray[indexPath.row].itemPrice!
         self.navigationController?.pushViewController(DetailVC, animated: true)
-        print("dataSetsArrayの中身")
-        print(dataSetsArray)
+print("DetailVC.loadModelArrayの中身")
+        print(DetailVC.loadModelArray)
 
     }
 

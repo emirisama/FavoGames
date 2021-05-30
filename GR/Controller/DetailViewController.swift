@@ -11,12 +11,16 @@ import Cosmos
 import PKHUD
 
 class DetailViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,DoneSendContents2,GetDataProtocol {
+
+    
+
  
     
  
 
  
     @IBOutlet weak var tableView: UITableView!
+
 
     
     var contentModel:ContentModel?
@@ -25,6 +29,7 @@ class DetailViewController: UIViewController,UITableViewDelegate,UITableViewData
     var sendDBModel = SendDBModel()
 
     var dataSetsArray = [DataSets]()
+    var loadModelArray = [ProfileModel]()
     
     var dataArray = [ContentModel]()
     
@@ -34,18 +39,24 @@ class DetailViewController: UIViewController,UITableViewDelegate,UITableViewData
     var hardware = String()
     var price = Int()
     
+ 
+    var sectionTitle = ["","スコア・レビュー"]
+
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         tableView.delegate = self
         tableView.dataSource = self
+
         sendDBModel.doneSendContents2 = self
         tableView.register(UINib(nibName: "ContentDetailCell", bundle: nil), forCellReuseIdentifier: "ContentDetailCell")
+        tableView.register(UINib(nibName: "ReviewViewCell", bundle: nil), forCellReuseIdentifier: "ReviewViewCell")
         
 
         tableView.reloadData()
-        print("確認")
-        print(gameTitle)
+        print("dataSetsArrayの中身")
+        print(dataSetsArray)
 
         //皆のレビューを見れるようにさせる(ロードさせる）
 //        loadModel.loadContents(title: contentModel?.gametitle)
@@ -53,37 +64,64 @@ class DetailViewController: UIViewController,UITableViewDelegate,UITableViewData
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 800
+        return 500
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         self.navigationController?.isNavigationBarHidden = true
-        
+
     }
     
 
     
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
+
+
+        return sectionTitle.count
+        }
+    
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        
+            return 1
+
+        
+    }
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        
+        return sectionTitle[section]
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if  indexPath.section == 0 {
+            
+
+            let cell = tableView.dequeueReusableCell(withIdentifier: "ContentDetailCell", for: indexPath) as! ContentDetailCell
+            cell.gameTitleLabel.text = self.dataSetsArray[indexPath.row].title
+            cell.ImageView.sd_setImage(with: URL(string: self.dataSetsArray[indexPath.row].mediumImageUrl!), completed: nil)
+            cell.salesDate.text = self.dataSetsArray[indexPath.row].salesDate
+            cell.hardware.text = self.dataSetsArray[indexPath.row].hardware
+            cell.price.text = String(self.dataSetsArray[indexPath.row].itemPrice!)
+            return cell
+            print("numberOfSections")
+            
+        }else{
+
+            let cell2 = tableView.dequeueReusableCell(withIdentifier: "ReviewViewCell", for: indexPath) as! ReviewViewCell
+//            cell2.userNameLabel.text = self.loadModelArray[indexPath.row].userName
+            return cell2
+        }
+    }
+
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "ContentDetailCell", for: indexPath) as! ContentDetailCell
+
 //        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
 
-        cell.gameTitleLabel.text = self.gameTitle
-        cell.ImageView.sd_setImage(with: URL(string: self.ImageView), completed: nil)
-        cell.salesDate.text = self.salesDate
-        cell.hardware.text = self.hardware
-        cell.price.text = String(self.price)
+//        cell2.userNameLabel.text = self.loadModelArray[indexPath.row].userName
 //
 //        cell.salesDate.text = self.salesDate
 
@@ -101,11 +139,10 @@ class DetailViewController: UIViewController,UITableViewDelegate,UITableViewData
 //        let reViewTextView = cell.contentView.viewWithTag(5) as! UITextView
 //        reviewView.text = self.dataArray[indexPath.row].review
 //        
-        return cell
-
+        
 
         
-    }
+    
     
 
     

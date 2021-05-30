@@ -29,6 +29,8 @@
 		50763BF5261068D00071941E /* SendDBModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50763BF4261068D00071941E /* SendDBModel.swift */; };
 		50777F9C261C8B77005314BF /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50777F9B261C8B77005314BF /* TabBarController.swift */; };
 		50777FA1261CAB58005314BF /* ReviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50777FA0261CAB58005314BF /* ReviewViewController.swift */; };
+		507B8DFD266266770001B8DC /* ReviewViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 507B8DFB266266770001B8DC /* ReviewViewCell.swift */; };
+		507B8DFE266266770001B8DC /* ReviewViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 507B8DFC266266770001B8DC /* ReviewViewCell.xib */; };
 		50849734264D517B0052DBF4 /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50849733264D517B0052DBF4 /* ListViewController.swift */; };
 		50849737264F65500052DBF4 /* OtherListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50849736264F65500052DBF4 /* OtherListViewController.swift */; };
 		508B0B47260B615700FBA8C5 /* CreateUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 508B0B46260B615700FBA8C5 /* CreateUserViewController.swift */; };
@@ -78,6 +80,8 @@
 		50763BF4261068D00071941E /* SendDBModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendDBModel.swift; sourceTree = "<group>"; };
 		50777F9B261C8B77005314BF /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		50777FA0261CAB58005314BF /* ReviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewViewController.swift; sourceTree = "<group>"; };
+		507B8DFB266266770001B8DC /* ReviewViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewViewCell.swift; sourceTree = "<group>"; };
+		507B8DFC266266770001B8DC /* ReviewViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReviewViewCell.xib; sourceTree = "<group>"; };
 		50849733264D517B0052DBF4 /* ListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
 		50849736264F65500052DBF4 /* OtherListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtherListViewController.swift; sourceTree = "<group>"; };
 		508B0B46260B615700FBA8C5 /* CreateUserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateUserViewController.swift; sourceTree = "<group>"; };
@@ -144,6 +148,8 @@
 				50A62CD6264C23C60012412F /* UserNameCell.xib */,
 				504C30D5265BC30300C520B0 /* ContentDetailCell.swift */,
 				504C30D6265BC30300C520B0 /* ContentDetailCell.xib */,
+				507B8DFB266266770001B8DC /* ReviewViewCell.swift */,
+				507B8DFC266266770001B8DC /* ReviewViewCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -297,6 +303,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				507B8DFE266266770001B8DC /* ReviewViewCell.xib in Resources */,
 				50D9223726078EB6009A7BB0 /* LaunchScreen.storyboard in Resources */,
 				50A62CD8264C23C60012412F /* UserNameCell.xib in Resources */,
 				504C30D8265BC30300C520B0 /* ContentDetailCell.xib in Resources */,
@@ -368,6 +375,7 @@
 				505854552635081B00182CFD /* SearchViewController.swift in Sources */,
 				50849737264F65500052DBF4 /* OtherListViewController.swift in Sources */,
 				50CF1B9D263525DA00ECF7E4 /* PS5ViewController.swift in Sources */,
+				507B8DFD266266770001B8DC /* ReviewViewCell.swift in Sources */,
 				50318457262BC9880005D9BF /* SignInViewController.swift in Sources */,
 				50777FA1261CAB58005314BF /* ReviewViewController.swift in Sources */,
 				50CF1BA32635260E00ECF7E4 /* SwitchViewController.swift in Sources */,
