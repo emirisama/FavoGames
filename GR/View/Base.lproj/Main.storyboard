@@ -1283,14 +1283,6 @@
             <point key="canvasLocation" x="4555" y="-1341"/>
         </scene>
     </scenes>
-    <designables>
-        <designable name="Wj9-BC-CyQ">
-            <size key="intrinsicContentSize" width="270" height="50"/>
-        </designable>
-        <designable name="n6g-FM-KHL">
-            <size key="intrinsicContentSize" width="120" height="20"/>
-        </designable>
-    </designables>
     <inferredMetricsTieBreakers>
         <segue reference="XHd-pz-mUq"/>
     </inferredMetricsTieBreakers>

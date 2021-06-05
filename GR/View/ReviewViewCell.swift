@@ -17,6 +17,7 @@ class ReviewViewCell: UITableViewCell {
     @IBOutlet weak var userIDLabel: UILabel!
     @IBOutlet weak var scoreCountLabel: UILabel!
     @IBOutlet weak var reviewViewLabel: UITextView!
+    @IBOutlet weak var scoreView: CosmosView!
     
     
     

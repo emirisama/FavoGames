@@ -20,7 +20,7 @@ class SearchResultsViewController: UIViewController,UITableViewDelegate,UITableV
     
     @IBOutlet weak var tableView: UITableView!
     var array = [DataSets]()
-    var dataArray = [ContentModel]()
+    var contentModelArray = [ContentModel]()
     var userName = String()
     var db = Firestore.firestore()
     var userID = String()
@@ -133,13 +133,12 @@ class SearchResultsViewController: UIViewController,UITableViewDelegate,UITableV
         
         
         let DetailVC = storyboard?.instantiateViewController(identifier: "detailVC") as! DetailViewController
-        DetailVC.array = array
-        DetailVC.contentModelArray = dataArray
         DetailVC.gameTitle = array[indexPath.row].title!
-//        DetailVC.ImageView = dataSetsArray[indexPath.row].mediumImageUrl!
-//        DetailVC.salesDate = dataSetsArray[indexPath.row].salesDate!
-//        DetailVC.hardware = dataSetsArray[indexPath.row].hardware!
-//        DetailVC.price = dataSetsArray[indexPath.row].itemPrice!
+        DetailVC.hardware = array[indexPath.row].hardware!
+        DetailVC.salesDate = array[indexPath.row].salesDate!
+        DetailVC.mediumImageUrl = array[indexPath.row].mediumImageUrl!
+        DetailVC.itemPrice = array[indexPath.row].itemPrice!
+
         self.navigationController?.pushViewController(DetailVC, animated: true)
 
 

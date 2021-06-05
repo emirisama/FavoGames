@@ -37,6 +37,11 @@ class DetailViewController: UIViewController,UITableViewDelegate,UITableViewData
     var contentModelArray = [ContentModel]()
     
     var gameTitle = String()
+    var hardware = String()
+    var salesDate = String()
+    var mediumImageUrl = String()
+    var itemPrice = Int()
+
     
  
     var sectionTitle = ["","スコア・レビュー"]
@@ -70,7 +75,12 @@ class DetailViewController: UIViewController,UITableViewDelegate,UITableViewData
         
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 2000
+        if  indexPath.section == 0 {
+            return 300
+        }else if indexPath.section == 1{
+            return 300
+        }
+        return 0
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -91,9 +101,12 @@ class DetailViewController: UIViewController,UITableViewDelegate,UITableViewData
     
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
-        
-        return 1
+        if  section == 0 {
+            return 1
+        }else if section == 1{
+            return contentModelArray.count
+        }
+        return 0
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -106,11 +119,11 @@ class DetailViewController: UIViewController,UITableViewDelegate,UITableViewData
             
 
             let cell = tableView.dequeueReusableCell(withIdentifier: "ContentDetailCell", for: indexPath) as! ContentDetailCell
-            cell.gameTitleLabel.text = self.array[indexPath.row].title
-            cell.ImageView.sd_setImage(with: URL(string: self.array[indexPath.row].mediumImageUrl!), completed: nil)
-            cell.salesDate.text = self.array[indexPath.row].salesDate
-            cell.hardware.text = self.array[indexPath.row].hardware
-            cell.price.text = String(self.array[indexPath.row].itemPrice!)
+            cell.gameTitleLabel.text = self.gameTitle
+            cell.ImageView.sd_setImage(with: URL(string: self.mediumImageUrl), completed: nil)
+            cell.salesDate.text = self.salesDate
+            cell.hardware.text = self.hardware
+            cell.price.text = String(self.itemPrice)
             
             cell.reviewButton.addTarget(self, action: #selector(reviewButtonTap(_:)), for: .touchUpInside)
  
@@ -119,12 +132,17 @@ class DetailViewController: UIViewController,UITableViewDelegate,UITableViewData
         }else{
 
             let cell2 = tableView.dequeueReusableCell(withIdentifier: "ReviewViewCell", for: indexPath) as! ReviewViewCell
-//            cell2.userNameLabel.text = self.contentModelArray[indexPath.row].sender![3]
-            
+            cell2.userNameLabel.text = self.contentModelArray[indexPath.row].sender![3]
+            cell2.reviewViewLabel.text = self.contentModelArray[indexPath.row].review
+            cell2.scoreCountLabel.text = String(self.contentModelArray[indexPath.row].rate!)
+            cell2.scoreView.rating = self.contentModelArray[indexPath.row].rate!
+            cell2.profileImage.image = UIImage(contentsOfFile: self.contentModelArray[indexPath.row].sender![0])
+            print("スコアの内容")
+            print(self.contentModelArray[indexPath.row].rate!)
 //            cell2.userIDLabel.text = contentModel.sender[]
-            cell2.reviewViewLabel.text = contentModel?.review
+
 //            cell2.scoreCountLabel.text = String(((contentModel?.rate)!))
-//            cell2.scoreView.rating = (contentModel?.rate)!
+
             return cell2
         }
     }
