@@ -23,22 +23,12 @@
                         <gestureRecognizers/>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" tag="2" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="名前" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gyX-OY-0NV">
-                        <rect key="frame" x="112" y="26" width="224" height="30"/>
+                        <rect key="frame" x="112" y="14" width="257" height="42"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <view tag="4" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="elN-bi-7Pa" customClass="CosmosView" customModule="Cosmos">
-                        <rect key="frame" x="114" y="96" width="123" height="21"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <userDefinedRuntimeAttributes>
-                            <userDefinedRuntimeAttribute type="number" keyPath="starSize">
-                                <real key="value" value="20"/>
-                            </userDefinedRuntimeAttribute>
-                        </userDefinedRuntimeAttributes>
-                    </view>
                     <label opaque="NO" userInteractionEnabled="NO" tag="3" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="@" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E0I-JI-0tv">
                         <rect key="frame" x="114" y="58" width="224" height="30"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -71,18 +61,12 @@
                 <outlet property="profileImage" destination="d9a-Hb-rGa" id="KeK-OF-eXM"/>
                 <outlet property="reviewViewLabel" destination="zJT-v5-Oat" id="O8O-ME-tzw"/>
                 <outlet property="scoreCountLabel" destination="dB1-s9-bmA" id="vnj-Eh-Cnw"/>
-                <outlet property="scoreView" destination="elN-bi-7Pa" id="6s1-Uj-bSx"/>
                 <outlet property="userIDLabel" destination="E0I-JI-0tv" id="Pfm-Mo-P9e"/>
                 <outlet property="userNameLabel" destination="gyX-OY-0NV" id="XbZ-C2-Bix"/>
             </connections>
             <point key="canvasLocation" x="189.85507246376812" y="158.70535714285714"/>
         </tableViewCell>
     </objects>
-    <designables>
-        <designable name="elN-bi-7Pa">
-            <size key="intrinsicContentSize" width="120" height="20"/>
-        </designable>
-    </designables>
     <resources>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

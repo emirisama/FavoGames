@@ -10,7 +10,8 @@ import SDWebImage
 import Cosmos
 import PKHUD
 
-class DetailViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,DoneSendContents2,GetDataProtocol{
+class DetailViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,GetDataProtocol{
+ 
  
     
 
@@ -23,23 +24,19 @@ class DetailViewController: UIViewController,UITableViewDelegate,UITableViewData
  
     @IBOutlet weak var tableView: UITableView!
 
-
+    var index = Int()
     
     var contentModel:ContentModel?
     var profileModel:ProfileModel?
     var loadModel = LoadModel()
     var sendDBModel = SendDBModel()
 
-    var dataSetsArray = [DataSets]()
+    var array = [DataSets]()
     var loadModelArray = [ProfileModel]()
     
-    var dataArray = [ContentModel]()
+    var contentModelArray = [ContentModel]()
     
     var gameTitle = String()
-    var salesDate = String()
-    var ImageView = String()
-    var hardware = String()
-    var price = Int()
     
  
     var sectionTitle = ["","スコア・レビュー"]
@@ -49,27 +46,31 @@ class DetailViewController: UIViewController,UITableViewDelegate,UITableViewData
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        tableView.delegate = self
-        tableView.dataSource = self
-
-
-        sendDBModel.doneSendContents2 = self
-        tableView.register(UINib(nibName: "ContentDetailCell", bundle: nil), forCellReuseIdentifier: "ContentDetailCell")
-        tableView.register(UINib(nibName: "ReviewViewCell", bundle: nil), forCellReuseIdentifier: "ReviewViewCell")
         
-
-        tableView.reloadData()
-        print("dataSetsArrayの中身")
-        print(dataSetsArray)
-
-        //皆のレビューを見れるようにさせる(ロードさせる）
-//        loadModel.loadContents(title: contentModel?.gametitle)
+        switch index{
         
+        case index:
+            //皆のレビューを見れるようにさせる(ロードさせる）
+            loadModel.getDataProtocol = self
+            loadModel.loadContents(title: gameTitle)
+
+
+                tableView.delegate = self
+                tableView.dataSource = self
+                
+                tableView.register(UINib(nibName: "ContentDetailCell", bundle: nil), forCellReuseIdentifier: "ContentDetailCell")
+                tableView.register(UINib(nibName: "ReviewViewCell", bundle: nil), forCellReuseIdentifier: "ReviewViewCell")
+                
+                break
+                
+                default:
+                break
+        }
     }
+        
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 500
+        return 2000
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -91,9 +92,8 @@ class DetailViewController: UIViewController,UITableViewDelegate,UITableViewData
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-            return 1
-
         
+        return 1
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -106,28 +106,36 @@ class DetailViewController: UIViewController,UITableViewDelegate,UITableViewData
             
 
             let cell = tableView.dequeueReusableCell(withIdentifier: "ContentDetailCell", for: indexPath) as! ContentDetailCell
-            cell.gameTitleLabel.text = self.dataSetsArray[indexPath.row].title
-            cell.ImageView.sd_setImage(with: URL(string: self.dataSetsArray[indexPath.row].mediumImageUrl!), completed: nil)
-            cell.salesDate.text = self.dataSetsArray[indexPath.row].salesDate
-            cell.hardware.text = self.dataSetsArray[indexPath.row].hardware
-            cell.price.text = String(self.dataSetsArray[indexPath.row].itemPrice!)
+            cell.gameTitleLabel.text = self.array[indexPath.row].title
+            cell.ImageView.sd_setImage(with: URL(string: self.array[indexPath.row].mediumImageUrl!), completed: nil)
+            cell.salesDate.text = self.array[indexPath.row].salesDate
+            cell.hardware.text = self.array[indexPath.row].hardware
+            cell.price.text = String(self.array[indexPath.row].itemPrice!)
             
             cell.reviewButton.addTarget(self, action: #selector(reviewButtonTap(_:)), for: .touchUpInside)
  
             return cell
-            
+
         }else{
 
             let cell2 = tableView.dequeueReusableCell(withIdentifier: "ReviewViewCell", for: indexPath) as! ReviewViewCell
-//            cell2.userNameLabel.text = self.loadModelArray[indexPath.row].userName
+//            cell2.userNameLabel.text = self.contentModelArray[indexPath.row].sender![3]
+            
+//            cell2.userIDLabel.text = contentModel.sender[]
+            cell2.reviewViewLabel.text = contentModel?.review
+//            cell2.scoreCountLabel.text = String(((contentModel?.rate)!))
+//            cell2.scoreView.rating = (contentModel?.rate)!
             return cell2
         }
     }
 
     @objc func reviewButtonTap(_ sender:UIButton){
         
-        let ReviewVC = self.storyboard?.instantiateViewController(withIdentifier: "reviewVC") as! ReviewViewController
-        self.navigationController?.pushViewController(ReviewVC, animated: true)
+        let reviewVC = self.storyboard?.instantiateViewController(withIdentifier: "reviewVC") as! ReviewViewController
+        
+        reviewVC.array = array
+        reviewVC.gameTitle = gameTitle
+        self.navigationController?.pushViewController(reviewVC, animated: true)
         
     }
         
@@ -147,12 +155,12 @@ class DetailViewController: UIViewController,UITableViewDelegate,UITableViewData
     
 
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
-        let webVC = segue.destination as! WebViewController
-        //↓？ゲーム画像を押すと自動検索の画面遷移
-        webVC.gametitle = (contentModel?.gametitle)!
-    }
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//
+//        let webVC = segue.destination as! WebViewController
+//        //↓？ゲーム画像を押すと自動検索の画面遷移
+////        webVC.contentModel = contentModelArray[sender as! Int]
+//    }
 
     
     @IBAction func toWebView(_ sender: Any) {
@@ -164,25 +172,22 @@ class DetailViewController: UIViewController,UITableViewDelegate,UITableViewData
     
     @IBAction func toProfileVC(_ sender: Any) {
         let profileVC = self.storyboard?.instantiateViewController(identifier: "profileVC") as! ProfileViewController
-        
         profileVC.contentModel = contentModel
         self.navigationController?.pushViewController(profileVC, animated: true)
         
     }
     
+
     
-    func checkDone2() {
-        
-        HUD.hide()
-        self.tabBarController?.selectedIndex = 0
-        //受信
-        loadModel.loadContents(title: "\(Constants.menuArray[0])")
-        
-    }
+    
     
     func getData(dataArray: [ContentModel]) {
-        self.dataArray = dataArray
+
+        contentModelArray = []
+        contentModelArray = dataArray
+        print("getDataだよ")
         tableView.reloadData()
+        
 
     }
     

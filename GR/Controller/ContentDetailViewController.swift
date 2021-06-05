@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ContentDetailViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,GetDataProtocol {
+class ContentDetailViewController: UIViewController,UITableViewDelegate,UITableViewDataSource{
  
 
     
@@ -26,9 +26,8 @@ class ContentDetailViewController: UIViewController,UITableViewDelegate,UITableV
 
         tableView.delegate = self
         tableView.dataSource = self
-        loadModel.getDataProtocol = self
         tableView.register(UINib(nibName: "ContentsCell", bundle: nil), forCellReuseIdentifier: "Cell")
-        loadModel.loadOwnContents(id: userID)
+//        loadModel.loadContents(title: userID)
         
         // Do any additional setup after loading the view.
     }
@@ -46,7 +45,7 @@ class ContentDetailViewController: UIViewController,UITableViewDelegate,UITableV
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! ContentsCell
         
         //ContentsCell.xibのゲームソフトの画像をCellに表示
-        cell.contentImageView.sd_setImage(with: URL(string: contentModelArray[indexPath.row].imageURLString!), completed: nil)
+//        cell.contentImageView.sd_setImage(with: URL(string: contentModelArray[indexPath.row].imageURLString!), completed: nil)
         
 //        cell.reviewView.rating = contentModelArray[indexPath.row].rate!
 //
@@ -59,12 +58,7 @@ class ContentDetailViewController: UIViewController,UITableViewDelegate,UITableV
         return 327
     }
     
-    func getData(dataArray: [ContentModel]) {
-        contentModelArray = []
-        contentModelArray = dataArray
-        tableView.reloadData()
-        
-    }
+
     
     
     

@@ -19,8 +19,9 @@ protocol SendProfileDone{
 }
 
 //レビューを投稿し終えたら画面遷移
-protocol DoneSendContents2{
-    func checkDone2()
+protocol DoneSendReviewContents{
+    
+    func checkDoneReview()
 }
 
 
@@ -39,7 +40,7 @@ class SendDBModel {
     var userDefaultsEX = UserDefaultsEX()
     var imageDatauser = Data()
     var myProfile = [String]()
-    var doneSendContents2:DoneSendContents2?
+    var doneSendReviewContents:DoneSendReviewContents?
     var doneSendContents:DoneSendContents?
     
     var userID = String()
@@ -123,16 +124,7 @@ class SendDBModel {
         }
     }
     
-    //カテゴリーとUsersのOwndContentsの中に入れるメソッド（関数）
-    func sendDB(title:String,name:String,reView:String,userID:String,sender:ProfileModel,rate:Double){
-       
-                    //送信（ownContentsの中に入れる）
-        self.db.collection("Users").document(Auth.auth().currentUser!.uid).collection("ownContents").document().setData(["userName":userName,"userID":Auth.auth().currentUser!.uid,"review":reView,"sender":self.myProfile,"rate":rate,"date":Date().timeIntervalSince1970])
-                    
-        self.db.collection(title).document().setData(["userName":userName,"userID":Auth.auth().currentUser!.uid,"review":reView,"sender":self.myProfile,"rate":rate,"date":Date().timeIntervalSince1970])
-                    
-                    self.doneSendContents2?.checkDone2()
-    }
+
 
 
     
@@ -156,7 +148,7 @@ class SendDBModel {
         
         //
         self.db.collection("Users").document(Auth.auth().currentUser!.uid).collection("follow").document(id).setData(
-            ["follower":id,"followOrNot":followOrNot,"userID":contentModel.userID,"userName":contentModel.sender![3],"image":contentModel.sender![0],"profileText":contentModel.sender![1]]
+            ["follower":id,"followOrNot":followOrNot,"userID":contentModel.sender![2],"userName":contentModel.sender![3],"image":contentModel.sender![0],"profileText":contentModel.sender![1]]
         )
         
         self.doneSendContents?.checkDone(flag: followOrNot)
@@ -165,12 +157,25 @@ class SendDBModel {
     }
     
     //ゲームタイトルに紐づくデータを送信
-    func sendGameTitle(title:String,name:String,reView:String,userID:String,sender:ProfileModel,rate:Double){
+    func sendGameTitle(title:String,sender:ProfileModel,review:String,rate:Double){
         
-        self.db.collection(title).document(Auth.auth().currentUser!.uid).collection("ownContents").document().setData(
-            ["userName":userName,"userID":Auth.auth().currentUser!.uid,"review":reView,"sender":self.myProfile,"rate":rate,"date":Date().timeIntervalSince1970])
+        print("レビュー保存する1")
+
+        self.myProfile.append(sender.imageURLString!)
+        self.myProfile.append(sender.profileText!)
+        self.myProfile.append(sender.userID!)
+        self.myProfile.append(sender.userName!)
         
-        self.doneSendContents2?.checkDone2()
+        self.db.collection("Users").document(Auth.auth().currentUser!.uid).collection("reviewContents").document().setData(
+            ["review":review,"rate":rate,"sender":self.myProfile,"date":Date().timeIntervalSince1970])
+        
+        self.db.collection(title).document(Auth.auth().currentUser!.uid).setData(
+            ["review":review,"rate":rate,"sender":self.myProfile,"date":Date().timeIntervalSince1970])
+        
+        print("レビュー保存する2")
+        self.doneSendReviewContents?.checkDoneReview()
+        print("レビュー保存する3")
+        
     }
     
     

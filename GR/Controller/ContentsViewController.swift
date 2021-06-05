@@ -31,7 +31,7 @@ class ContentsViewController: UIViewController,UICollectionViewDelegate,UICollec
             
             //ロードするものを変更
             loadModel.getDataProtocol = self
-            loadModel.loadContents(title: "\(Constants.menuArray[index])")
+//            loadModel.loadContents(title: "\(Constants.menuArray[index])", userID:)
             
             collectionView.delegate = self
             collectionView.dataSource = self
@@ -82,7 +82,7 @@ class ContentsViewController: UIViewController,UICollectionViewDelegate,UICollec
 
         
         let label = cell.contentView.viewWithTag(2) as! UILabel
-        label.text = contentModelArray[indexPath.row].userName
+        label.text = contentModelArray[indexPath.row].sender![3]
         
         let reviewView = cell.contentView.viewWithTag(3) as! CosmosView
         reviewView.rating = contentModelArray[indexPath.row].rate!

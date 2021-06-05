@@ -19,7 +19,8 @@ class SearchResultsViewController: UIViewController,UITableViewDelegate,UITableV
 
     
     @IBOutlet weak var tableView: UITableView!
-    var dataSetsArray = [DataSets]()
+    var array = [DataSets]()
+    var dataArray = [ContentModel]()
     var userName = String()
     var db = Firestore.firestore()
     var userID = String()
@@ -86,7 +87,7 @@ class SearchResultsViewController: UIViewController,UITableViewDelegate,UITableV
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return dataSetsArray.count
+        return array.count
     }
     
     
@@ -96,8 +97,8 @@ class SearchResultsViewController: UIViewController,UITableViewDelegate,UITableV
         let cell = tableView.dequeueReusableCell(withIdentifier: "ContentsCell", for: indexPath) as! ContentsCell
 
         
-        cell.contentImageView.sd_setImage(with: URL(string: dataSetsArray[indexPath.row].mediumImageUrl!), completed: nil)
-        cell.gameTitleLabel.text = dataSetsArray[indexPath.row].title
+        cell.contentImageView.sd_setImage(with: URL(string: array[indexPath.row].mediumImageUrl!), completed: nil)
+        cell.gameTitleLabel.text = array[indexPath.row].title
       
         //お気に入りButton（お気に入りを自分のユーザーのデータに入れる）
         
@@ -132,16 +133,15 @@ class SearchResultsViewController: UIViewController,UITableViewDelegate,UITableV
         
         
         let DetailVC = storyboard?.instantiateViewController(identifier: "detailVC") as! DetailViewController
-        DetailVC.dataSetsArray = dataSetsArray
-        DetailVC.loadModelArray = loadModel.profileModelArray
-//        DetailVC.gameTitle = dataSetsArray[indexPath.row].title!
+        DetailVC.array = array
+        DetailVC.contentModelArray = dataArray
+        DetailVC.gameTitle = array[indexPath.row].title!
 //        DetailVC.ImageView = dataSetsArray[indexPath.row].mediumImageUrl!
 //        DetailVC.salesDate = dataSetsArray[indexPath.row].salesDate!
 //        DetailVC.hardware = dataSetsArray[indexPath.row].hardware!
 //        DetailVC.price = dataSetsArray[indexPath.row].itemPrice!
         self.navigationController?.pushViewController(DetailVC, animated: true)
-print("DetailVC.loadModelArrayの中身")
-        print(DetailVC.loadModelArray)
+
 
     }
 

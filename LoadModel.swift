@@ -69,22 +69,30 @@ class LoadModel{
     
     //コンテンツを受信するメソッド(ゲームタイトルに紐づくレビューや名前などのデータを受信する）
     func loadContents(title:String){
-        
+        print("レビューの受信が呼ばれない1")
         db.collection(title).order(by: "date").addSnapshotListener { (snapShot, error) in
-            
+            print("レビューの受信が呼ばれない2")
             self.contentModelArray = []
+            print("レビューの受信が呼ばれない3")
+            
             if let snapShotDoc = snapShot?.documents{
+                print(snapShot.debugDescription)
+                print("レビューの受信が呼ばれない4")
                 //ドキュメントの数だけcontentModelの値を入れる
+                print(snapShotDoc.debugDescription)
                 for doc in snapShotDoc{
-                    
+                    print("レビューの受信が呼ばれない6")
                     let data = doc.data()
+                    print(data.debugDescription)
                     //if letでもし空じゃなかったらの意味（!= nilと同じ)
-                    
-                    if let userID = data["userID"] as? String,let userName = data["userName"] as? String,let image = data["image"] as? String,let review = data["review"] as? String,let sender = data["sender"] as? [String],let rate = data["rate"] as? Double, let date = data["date"] as? Double,let gametitle = data["gametitle"] as? String{
+                    print("レビューの受信が呼ばれない7")
+                    if let review = data["review"] as? String,let rate = data["rate"] as? Double,let sender = data["sender"] as? [String],let date = data["date"] as? Double{
                         
-                        let contentModel = ContentModel(imageURLString: image, review: review, userName: userName, userID: userID, sender: sender, rate: rate, gametitle: gametitle)
+                        let contentModel = ContentModel(review: review, sender: sender, rate: rate)
                         self.contentModelArray.append(contentModel)
+                        print("レビューの受信が呼ばれない8")
                         self.getDataProtocol?.getData(dataArray: self.contentModelArray)
+                        print("レビューの受信が呼ばれない9")
                     }
                 }
             }
@@ -93,33 +101,7 @@ class LoadModel{
     }
     
     
-    func loadOwnContents(id:String){
-        
-        db.collection("Users").document(id).collection("ownContents").order(by: "date").addSnapshotListener { (snapShot, error) in
-            
-            self.contentModelArray = []
-            if let snapShotDoc = snapShot?.documents{
-                for doc in snapShotDoc{
-                    
-                    let  data = doc.data()
-                    if let userID = data["userID"] as? String,let userName = data["userName"] as? String,let image = data["image"] as? String,let review = data["review"] as? String,let sender = data["sender"] as? [String],let rate = data["rate"] as? Double,let date = data["date"] as? Double,let gametitle = data["gametitle"] as? String{
-                        
-                        
-                        let contentModel = ContentModel(imageURLString: image, review: review, userName: userName, userID: userID, sender: sender, rate: rate, gametitle: gametitle)
-                        
-                        self.contentModelArray.append(contentModel)
-                        
-                        
-                        
-                    }
-                    
-                }
-                
-                self.getDataProtocol?.getData(dataArray: self.contentModelArray)
-                
-            }
-        }
-    }
+
     
     //プロフィールの受信
     func loadProfile(id:String){

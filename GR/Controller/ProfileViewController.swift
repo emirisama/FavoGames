@@ -60,13 +60,13 @@ class ProfileViewController: UIViewController,UITableViewDelegate,UITableViewDat
             
         }else{
             
-            if contentModel?.userID == Auth.auth().currentUser!.uid{
+            if contentModel?.sender![2] == Auth.auth().currentUser!.uid{
                 
                 followButton.isHidden = true
             }
          
             //setUp
-            setUp(id: (contentModel?.userID)!)
+            setUp(id: (contentModel?.sender![2])!)
             imageView.sd_setImage(with: URL(string: (contentModel?.sender![0])!), completed: nil)
             imageView.layer.cornerRadius = 20
             imageView.clipsToBounds = true
@@ -97,7 +97,7 @@ class ProfileViewController: UIViewController,UITableViewDelegate,UITableViewDat
         loadModel.getFollowData(id: id)
         
         //コンテンツデータの受信機能
-        loadModel.loadOwnContents(id: id)
+        loadModel.loadContents(title: id)
         
     }
     
@@ -142,10 +142,10 @@ class ProfileViewController: UIViewController,UITableViewDelegate,UITableViewDat
             
             if self.followButton.titleLabel?.text == "フォローをする"{
                 
-                self.sendDBModel.followAction(id: (self.contentModel?.userID)!, followOrNot: true, contentModel: self.contentModel!)
+                self.sendDBModel.followAction(id: (self.contentModel?.sender![2])!, followOrNot: true, contentModel: self.contentModel!)
             }else if self.followButton.titleLabel?.text == "フォローをやめる"{
                 
-                self.sendDBModel.followAction(id: (self.contentModel?.userID)!, followOrNot: false, contentModel: self.contentModel!)
+                self.sendDBModel.followAction(id: (self.contentModel?.sender![2])!, followOrNot: false, contentModel: self.contentModel!)
                 
             }
 

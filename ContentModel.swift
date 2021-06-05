@@ -8,16 +8,11 @@
 import Foundation
 
 struct ContentModel{
-    
-    
-//    var profileModel:ProfileModel?
-    
-    let imageURLString:String?
+
+
     let review:String?
-    let userName:String?
-    let userID:String?
-    let sender:[String]?
+    var sender:[String]?
     let rate:Double?
-    let gametitle:String?
+
     
 }
