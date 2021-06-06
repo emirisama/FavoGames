@@ -81,8 +81,9 @@ class SendDBModel {
         
         //プロフィール画像
         let usernoimage = UIImage(named: "userimage")
-        let usernoimagedata = usernoimage?.jpegData(compressionQuality: 1)
-        var imageRef = Storage.storage().reference().child("ProfielImage").child("\(UUID().uuidString + String(Date().timeIntervalSince1970)).jpg")
+        let usernoimagedata = usernoimage!.pngData()
+
+        let imageRef = Storage.storage().reference().child("ProfielImage").child("\(UUID().uuidString + String(Date().timeIntervalSince1970)).jpg")
         //処理
         HUD.show(.progress)
         HUD.dimsBackground = true
@@ -159,22 +160,23 @@ class SendDBModel {
     //ゲームタイトルに紐づくデータを送信
     func sendGameTitle(title:String,sender:ProfileModel,review:String,rate:Double){
         
-        print("レビュー保存する1")
+
 
         self.myProfile.append(sender.imageURLString!)
         self.myProfile.append(sender.profileText!)
         self.myProfile.append(sender.userID!)
         self.myProfile.append(sender.userName!)
+        self.myProfile.append(sender.id!)
         
         self.db.collection("Users").document(Auth.auth().currentUser!.uid).collection("reviewContents").document().setData(
             ["review":review,"rate":rate,"sender":self.myProfile,"date":Date().timeIntervalSince1970])
         
         self.db.collection(title).document(Auth.auth().currentUser!.uid).setData(
             ["review":review,"rate":rate,"sender":self.myProfile,"date":Date().timeIntervalSince1970])
-        
-        print("レビュー保存する2")
+        print("レビュー送信")
+
         self.doneSendReviewContents?.checkDoneReview()
-        print("レビュー保存する3")
+
         
     }
     

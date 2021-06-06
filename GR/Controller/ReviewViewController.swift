@@ -52,7 +52,7 @@ class ReviewViewController: UIViewController,DoneSendReviewContents{
 
 
             sendDBModel.sendGameTitle(title: gameTitle,sender: profile!, review: reviewTextField.text!, rate: self.reviewScore.rating)
-            print("データをSendDBModelへ")
+            print("ゲームタイトルに紐づくレビューをSendDBModelへ")
                 
             }else{
 
@@ -65,12 +65,12 @@ class ReviewViewController: UIViewController,DoneSendReviewContents{
     }
     
     func checkDoneReview() {
-        print("レビュー受信")
+
         HUD.hide()
         //受信
         loadModel.loadContents(title: gameTitle)
         self.navigationController?.popViewController(animated: true)
-        print("レビュー受信2")
+        print("レビュー受信")
     }
     
     

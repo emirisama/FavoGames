@@ -69,30 +69,27 @@ class LoadModel{
     
     //コンテンツを受信するメソッド(ゲームタイトルに紐づくレビューや名前などのデータを受信する）
     func loadContents(title:String){
-        print("レビューの受信が呼ばれない1")
+
         db.collection(title).order(by: "date").addSnapshotListener { (snapShot, error) in
-            print("レビューの受信が呼ばれない2")
+
             self.contentModelArray = []
-            print("レビューの受信が呼ばれない3")
             
             if let snapShotDoc = snapShot?.documents{
-                print(snapShot.debugDescription)
-                print("レビューの受信が呼ばれない4")
+
                 //ドキュメントの数だけcontentModelの値を入れる
-                print(snapShotDoc.debugDescription)
                 for doc in snapShotDoc{
-                    print("レビューの受信が呼ばれない6")
+
                     let data = doc.data()
-                    print(data.debugDescription)
+
                     //if letでもし空じゃなかったらの意味（!= nilと同じ)
-                    print("レビューの受信が呼ばれない7")
+
                     if let review = data["review"] as? String,let rate = data["rate"] as? Double,let sender = data["sender"] as? [String],let date = data["date"] as? Double{
                         
                         let contentModel = ContentModel(review: review, sender: sender, rate: rate)
                         self.contentModelArray.append(contentModel)
-                        print("レビューの受信が呼ばれない8")
+
                         self.getDataProtocol?.getData(dataArray: self.contentModelArray)
-                        print("レビューの受信が呼ばれない9")
+
                     }
                 }
             }

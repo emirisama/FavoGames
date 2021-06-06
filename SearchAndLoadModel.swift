@@ -55,7 +55,7 @@ class SearchAndLoadModel {
         
         let encodeUrlString = self.urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
         
-        AF.request(encodeUrlString as! URLConvertible, method: .get, parameters: nil, encoding: JSONEncoding.default).responseJSON { (response) in
+        AF.request(encodeUrlString as! URLConvertible, method: .get, parameters: nil, encoding: JSONEncoding.default).responseJSON { [self] (response) in
             
             
             print(response)
@@ -74,20 +74,26 @@ class SearchAndLoadModel {
                         self.count = totalHitCount!
                     }
                     print(self.count)
-                    for i in 0...self.count - 1{
-                        if let title = json["Items"][0]["Item"]["title"].string,let hardware = json["Items"][i]["Item"]["hardware"].string,let mediumImageUrl = json["Items"][i]["Item"]["mediumImageUrl"].string,let salesDate = json["Items"][i]["Item"]["salesDate"].string,let itemPrice = json["Items"][i]["Item"]["itemPrice"].int{
+                    if self.count == 0{
+                        return
+                    }else{
+                        
+                        for i in 0...self.count - 1{
+                            if let title = json["Items"][i]["Item"]["title"].string,let hardware = json["Items"][i]["Item"]["hardware"].string,let mediumImageUrl = json["Items"][i]["Item"]["mediumImageUrl"].string,let salesDate = json["Items"][i]["Item"]["salesDate"].string,let itemPrice = json["Items"][i]["Item"]["itemPrice"].int{
+                                
+                                //タイトル名の重複をさける（if)
+
+                                    let dataSets = DataSets(title: title, hardware: hardware, salesDate: salesDate, mediumImageUrl: mediumImageUrl, itemPrice: itemPrice)
+                                    
+                                    
+                                    self.dataSetsArray.append(dataSets)
+                                
+                            }else{
+                                print("空です。何か不足しています")
+                            }
                             
-                            //もし、ゲームソフト以外の商品は、検索させないようにする（if)
-                            let dataSets = DataSets(title: title, hardware: hardware, salesDate: salesDate, mediumImageUrl: mediumImageUrl, itemPrice: itemPrice)
-                            
-                            self.dataSetsArray.append(dataSets)
-                            
-                            
-                        }else{
-                            print("空です。何か不足しています")
                         }
                     }
-                    
                     //コントローラー値に値を渡す必要がある
                     self.doneCatchDataProtocol?.doneCatchData(array: self.dataSetsArray)
                     

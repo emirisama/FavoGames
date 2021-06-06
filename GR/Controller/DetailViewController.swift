@@ -133,12 +133,11 @@ class DetailViewController: UIViewController,UITableViewDelegate,UITableViewData
 
             let cell2 = tableView.dequeueReusableCell(withIdentifier: "ReviewViewCell", for: indexPath) as! ReviewViewCell
             cell2.userNameLabel.text = self.contentModelArray[indexPath.row].sender![3]
+            cell2.userIDLabel.text = self.contentModelArray[indexPath.row].sender![4]
             cell2.reviewViewLabel.text = self.contentModelArray[indexPath.row].review
             cell2.scoreCountLabel.text = String(self.contentModelArray[indexPath.row].rate!)
             cell2.scoreView.rating = self.contentModelArray[indexPath.row].rate!
-            cell2.profileImage.image = UIImage(contentsOfFile: self.contentModelArray[indexPath.row].sender![0])
-            print("スコアの内容")
-            print(self.contentModelArray[indexPath.row].rate!)
+            cell2.profileImage.sd_setImage(with: URL(string: self.contentModelArray[indexPath.row].sender![0]), completed: nil)
 //            cell2.userIDLabel.text = contentModel.sender[]
 
 //            cell2.scoreCountLabel.text = String(((contentModel?.rate)!))
@@ -203,9 +202,8 @@ class DetailViewController: UIViewController,UITableViewDelegate,UITableViewData
 
         contentModelArray = []
         contentModelArray = dataArray
-        print("getDataだよ")
         tableView.reloadData()
-        
+        print("レビュー表示")
 
     }
     

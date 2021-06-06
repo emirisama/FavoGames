@@ -63,16 +63,17 @@ class ProfileViewController: UIViewController,UITableViewDelegate,UITableViewDat
             if contentModel?.sender![2] == Auth.auth().currentUser!.uid{
                 
                 followButton.isHidden = true
+ 
             }
-         
-            //setUp
+
+            //setUp（自分かどうかわからない場合）
             setUp(id: (contentModel?.sender![2])!)
             imageView.sd_setImage(with: URL(string: (contentModel?.sender![0])!), completed: nil)
-            imageView.layer.cornerRadius = 20
             imageView.clipsToBounds = true
-            nameLabel.text = contentModel?.sender![1]
-            profileTextLabel.text = contentModel?.sender![2]
-            idLabel.text = contentModel?.sender![3]
+            nameLabel.text = contentModel?.sender![3]
+            profileTextLabel.text = contentModel?.sender![1]
+            idLabel.text = contentModel?.sender![4]
+
 
         }
         
@@ -215,7 +216,7 @@ class ProfileViewController: UIViewController,UITableViewDelegate,UITableViewDat
         imageView.sd_setImage(with: URL(string: dataArray[0].imageURLString!), completed: nil)
         nameLabel.text = dataArray[0].userName
         profileTextLabel.text = dataArray[0].profileText
-        idLabel.text = dataArray[0].userID
+        idLabel.text = dataArray[0].id
 
         
         
@@ -242,6 +243,8 @@ class ProfileViewController: UIViewController,UITableViewDelegate,UITableViewDat
         self.navigationController?.pushViewController(listVC, animated: true)
         
     }
+    
+    
     
     /*
      // MARK: - Navigation

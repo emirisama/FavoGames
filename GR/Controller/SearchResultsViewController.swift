@@ -99,6 +99,7 @@ class SearchResultsViewController: UIViewController,UITableViewDelegate,UITableV
         
         cell.contentImageView.sd_setImage(with: URL(string: array[indexPath.row].mediumImageUrl!), completed: nil)
         cell.gameTitleLabel.text = array[indexPath.row].title
+
       
         //お気に入りButton（お気に入りを自分のユーザーのデータに入れる）
         

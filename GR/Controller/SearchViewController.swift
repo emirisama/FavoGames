@@ -33,6 +33,7 @@ class SearchViewController: UIViewController,DoneCatchDataProtocol {
         HUD.hide()
         //textfieldに入っているキーワードをもとにゲームの検索を行う
         let urlString = "https://app.rakuten.co.jp/services/api/BooksGame/Search/20170404?format=json&title=\(textField.text!)&booksGenreId=006&applicationId=1078790856161658200"
+
         
         let searchModel = SearchAndLoadModel(urlString: urlString)
         searchModel.doneCatchDataProtocol = self
