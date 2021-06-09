@@ -65,7 +65,7 @@ class SearchAndLoadModel {
             case .success:
                 do{
                     let json:JSON = try JSON(data: response.data!)
-                    print(json.debugDescription)
+//                    print(json.debugDescription)
                     
                     let totalHitCount = json["count"].int
                     if totalHitCount! < 50{
@@ -87,7 +87,8 @@ class SearchAndLoadModel {
                                     
                                     
                                     self.dataSetsArray.append(dataSets)
-                                
+                                print("dataSetsArrayの中身")
+                                print(dataSetsArray.debugDescription)
                             }else{
                                 print("空です。何か不足しています")
                             }
@@ -106,6 +107,62 @@ class SearchAndLoadModel {
             }
         }
     }
+    
+    func search2(){
+        
+        let encodeUrlString = self.urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
+        
+        AF.request(encodeUrlString as! URLConvertible, method: .get, parameters: nil, encoding: JSONEncoding.default).responseJSON { [self] (response) in
+            
+            
+            print(response)
+            
+            switch response.result{
+            
+            case .success:
+                do{
+                    let json:JSON = try JSON(data: response.data!)
+//                    print(json.debugDescription)
+                    
+                    let totalHitCount = json["count"].int
+
+                    if self.count == 0{
+                        return
+                    }else{
+                        self.count = totalHitCount!
+                        
+                        for i in 0...self.count - 1{
+                            if let title = json["Items"][i]["Item"]["title"].string,let hardware = json["Items"][i]["Item"]["hardware"].string,let mediumImageUrl = json["Items"][i]["Item"]["mediumImageUrl"].string,let salesDate = json["Items"][i]["Item"]["salesDate"].string,let itemPrice = json["Items"][i]["Item"]["itemPrice"].int{
+                                
+                                //タイトル名の重複をさける（if)
+
+                                    let dataSets = DataSets(title: title, hardware: hardware, salesDate: salesDate, mediumImageUrl: mediumImageUrl, itemPrice: itemPrice)
+                                    
+                                    
+                                    self.dataSetsArray.append(dataSets)
+                                print("dataSetsArrayの中身")
+                                print(dataSetsArray.debugDescription)
+                            }else{
+                                print("空です。何か不足しています")
+                            }
+                            
+                        }
+                    }
+                    //コントローラー値に値を渡す必要がある
+                    self.doneCatchDataProtocol?.doneCatchData(array: self.dataSetsArray)
+                    
+                }catch{
+                    
+                }
+                
+            case.failure(_): break
+                
+            }
+        }
+    }
+    
+    
+    
     
     //413.誰がいいねを押しているか確認する方法の動画func loadDataの部分
     func loadMyListData(userName:String){

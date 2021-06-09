@@ -52,7 +52,7 @@ class TrendViewController: AMPagerTabsViewController {
         for i in 0..<3{
             
             let ps5ViewController = self.storyboard?.instantiateViewController(withIdentifier: "ps5") as! PS5ViewController
-            ps5ViewController.title = ""
+            ps5ViewController.title = "\(Constants.menuArray[i])"
             ps5ViewController.index = i
             vcArray.append(ps5ViewController)
             

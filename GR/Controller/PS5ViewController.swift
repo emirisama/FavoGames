@@ -17,6 +17,8 @@ class PS5ViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
     @IBOutlet weak var tableView: UITableView!
     
     
+    let urlString = "https://app.rakuten.co.jp/services/api/BooksGame/Search/20170404?format=json&hardware=PS4&booksGenreId=006513&applicationId=1078790856161658200"
+    
 
     var index = Int()
     
@@ -32,6 +34,8 @@ class PS5ViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
         
         tableView.register(UINib(nibName: "ContentsCell", bundle: nil), forCellReuseIdentifier: "ContentsCell")
 
+        let searchModel = SearchAndLoadModel(urlString: urlString)
+        searchModel.search()
         
 
         // Do any additional setup after loading the view.
@@ -53,7 +57,8 @@ class PS5ViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ContentsCell", for: indexPath) as! ContentsCell
 
-        
+        print("dataSetsArrayの中身")
+        print(dataSetsArray[indexPath.row].title.debugDescription)
         cell.contentImageView.sd_setImage(with: URL(string: dataSetsArray[indexPath.row].mediumImageUrl!), completed: nil)
         cell.gameTitleLabel.text = dataSetsArray[indexPath.row].title
         
