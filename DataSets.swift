@@ -14,5 +14,7 @@ struct DataSets{
     let salesDate:String?
     let mediumImageUrl:String?
     let itemPrice:Int?
+    let booksGenreId:String?
+    
 
 }

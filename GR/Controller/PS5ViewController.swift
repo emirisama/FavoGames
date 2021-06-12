@@ -9,7 +9,7 @@ import UIKit
 import FirebaseAuth
 import FirebaseFirestore
 
-class PS5ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource {
+class PS5ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,DoneCatchDataProtocol {
 
     
     @IBOutlet weak var rankingLabel: UILabel!
@@ -17,7 +17,7 @@ class PS5ViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
     @IBOutlet weak var tableView: UITableView!
     
     
-    let urlString = "https://app.rakuten.co.jp/services/api/BooksGame/Search/20170404?format=json&hardware=PS4&booksGenreId=006513&applicationId=1078790856161658200"
+
     
 
     var index = Int()
@@ -34,38 +34,59 @@ class PS5ViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
         
         tableView.register(UINib(nibName: "ContentsCell", bundle: nil), forCellReuseIdentifier: "ContentsCell")
 
-        let searchModel = SearchAndLoadModel(urlString: urlString)
-        searchModel.search()
         
+        let urlString = "https://app.rakuten.co.jp/services/api/BooksGame/Search/20170404?format=json&hardware=PS4&booksGenreId=006513&applicationId=1078790856161658200"
+            let searchModel = SearchAndLoadModel(urlString: urlString)
+            searchModel.doneCatchDataProtocol = self
+            searchModel.search()
+
+
+        
+        
+        print("あ")
+        print(dataSetsArray.debugDescription)
 
         // Do any additional setup after loading the view.
     }
     
     //高さを揃える
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 300
+
+        return 500
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
+
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return dataSetsArray.count
+ 
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ContentsCell", for: indexPath) as! ContentsCell
 
-        print("dataSetsArrayの中身")
+
         print(dataSetsArray[indexPath.row].title.debugDescription)
         cell.contentImageView.sd_setImage(with: URL(string: dataSetsArray[indexPath.row].mediumImageUrl!), completed: nil)
         cell.gameTitleLabel.text = dataSetsArray[indexPath.row].title
-        
+
         return cell
     }
     
+    func doneCatchData(array: [DataSets]) {
+        print("arrayの中身")
+        print(array.debugDescription)
 
+
+        self.dataSetsArray = array
+        tableView.reloadData()
+    }
+
+    
+    
     
     
     /*
