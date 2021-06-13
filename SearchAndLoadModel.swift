@@ -45,6 +45,7 @@ class SearchAndLoadModel {
     init(urlString:String){
         
         self.urlString = urlString
+
     }
     
     init(){
@@ -69,7 +70,8 @@ class SearchAndLoadModel {
                     //                    print(json.debugDescription)
                     
                     let totalHitCount = json["count"].int
-                    if totalHitCount! < 200{
+
+                    
                         self.count = totalHitCount!
                    // }else{
                    //     self.count = totalHitCount!
@@ -81,21 +83,21 @@ class SearchAndLoadModel {
                                 
                                 let dataSets = DataSets(title: title, hardware: hardware, salesDate: salesDate, mediumImageUrl: mediumImageUrl, itemPrice: itemPrice, booksGenreId: booksGenreId)
                                 
+                                if dataSets.title!.contains("コントローラー") == false{
                                 self.dataSetsArray.append(dataSets)
-                                
-
-                                print(self.dataSetsArray)
-                                print("show data")
-//                                if dataSets.hardware != "その他" && dataSets.hardware != "玩具" && dataSets.hardware != "雑貨" && dataSets.hardware != "Nintendo 3DS" && dataSets.hardware != "Nintendo DS" && dataSets.hardware != "GAMECUBE" && dataSets.hardware != "PSP" && dataSets.hardware != "PS Vita" && dataSets.hardware != "PS2" && dataSets.hardware != "PS3" && dataSets.hardware != "PS1" && dataSets.hardware != "Xbox360" &&  dataSets.hardware != "GAMEBOY ADVANCE" && dataSets.hardware != "GameBoy" && dataSets.hardware != "Xbox Series X" && dataSets.hardware != "XboxOne" && dataSets.hardware != "XboxOne/Xbox Series X" && dataSets.title!.contains("【")  ==  false && dataSets.title!.contains("】")  ==  false && dataSets.title!.contains("ジョイコン")  ==  false && dataSets.title!.contains("ポーチ")  ==  false && dataSets.title!.contains("ケース")  ==  false && dataSets.title!.contains("カセット")  ==  false && dataSets.title!.contains("アダプター")  ==  false && dataSets.title!.contains("スタンド")  ==  false && dataSets.title!.contains("USB")  ==  false && dataSets.title!.contains("ケーブル")  ==  false && dataSets.title!.contains("ブルーライト")  ==  false && dataSets.title!.contains("カバー")  ==  false && dataSets.title!.contains("カード")  ==  false && dataSets.title!.contains("コード")  ==  false && dataSets.title!.contains("CASE")  ==  false && dataSets.title!.contains("スプレー")  ==  false && dataSets.title!.contains("POUCH")  ==  false{
+                                }
 
                             }else{
                                 print("空です。何か不足しています")
                             }
                             
                         }
-                    }
-                    print(self.dataSetsArray)
-                    self.dataSetsArray = dataSetsArray.filter{ $0.booksGenreId!.contains("006513")}
+                    
+                    //抽出（コントローラーが表示されてしまう）
+                    self.dataSetsArray = dataSetsArray.filter{ $0.booksGenreId!.contains("006513") || $0.booksGenreId!.contains("006514") || $0.booksGenreId!.contains("006515") || $0.hardware!.contains("PS4") }
+                    
+//                    if dataSets.title!.contains("【")  ==  false && dataSets.title!.contains("】")  ==  false && dataSets.title!.contains("ジョイコン")  ==  false && dataSets.title!.contains("ポーチ")  ==  false && dataSets.title!.contains("ケース")  ==  false && dataSets.title!.contains("カセット")  ==  false && dataSets.title!.contains("アダプター")  ==  false && dataSets.title!.contains("スタンド")  ==  false && dataSets.title!.contains("USB")  ==  false && dataSets.title!.contains("ケーブル")  ==  false && dataSets.title!.contains("ブルーライト")  ==  false && dataSets.title!.contains("カバー")  ==  false && dataSets.title!.contains("カード")  ==  false && dataSets.title!.contains("コード")  ==  false && dataSets.title!.contains("CASE")  ==  false && dataSets.title!.contains("スプレー")  ==  false && dataSets.title!.contains("POUCH")  ==  false && dataSets.title!.contains("コントローラー")  ==  false{
+                    
                     print("だたSets")
                     print(self.dataSetsArray)
                     //コントローラー値に値を渡す必要がある
@@ -110,6 +112,9 @@ class SearchAndLoadModel {
             }
         }
     }
+    
+
+    
     
 //    func search2(){
 //

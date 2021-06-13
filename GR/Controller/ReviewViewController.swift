@@ -35,6 +35,8 @@ class ReviewViewController: UIViewController,DoneSendReviewContents{
         super.viewDidLoad()
 
         sendDBModel.doneSendReviewContents = self
+        reviewScore.settings.fillMode = .half
+
 
         // Do any additional setup after loading the view.
     }

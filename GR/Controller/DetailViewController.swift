@@ -12,14 +12,6 @@ import PKHUD
 
 class DetailViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,GetDataProtocol{
  
- 
-    
-
-    
-
- 
-    
- 
 
  
     @IBOutlet weak var tableView: UITableView!
@@ -52,6 +44,7 @@ class DetailViewController: UIViewController,UITableViewDelegate,UITableViewData
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
         switch index{
         
         case index:
@@ -65,6 +58,7 @@ class DetailViewController: UIViewController,UITableViewDelegate,UITableViewData
                 
                 tableView.register(UINib(nibName: "ContentDetailCell", bundle: nil), forCellReuseIdentifier: "ContentDetailCell")
                 tableView.register(UINib(nibName: "ReviewViewCell", bundle: nil), forCellReuseIdentifier: "ReviewViewCell")
+            
                 
                 break
                 
@@ -137,6 +131,7 @@ class DetailViewController: UIViewController,UITableViewDelegate,UITableViewData
             cell2.reviewViewLabel.text = self.contentModelArray[indexPath.row].review
             cell2.scoreCountLabel.text = String(self.contentModelArray[indexPath.row].rate!)
             cell2.scoreView.rating = self.contentModelArray[indexPath.row].rate!
+            cell2.scoreView.settings.fillMode = .half
             cell2.profileImage.sd_setImage(with: URL(string: self.contentModelArray[indexPath.row].sender![0]), completed: nil)
 //            cell2.userIDLabel.text = contentModel.sender[]
 
