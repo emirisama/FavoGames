@@ -28,7 +28,7 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7sD-Qs-jJS">
-                        <rect key="frame" x="141" y="233" width="48" height="21"/>
+                        <rect key="frame" x="141" y="233" width="35" height="21"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
@@ -46,6 +46,13 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FFS-Aj-pF1">
+                        <rect key="frame" x="45" y="232" width="35" height="21"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             </tableViewCellContentView>
@@ -57,6 +64,7 @@
                 <outlet property="gameTitleLabel" destination="KVA-OB-6Qf" id="xDS-ic-IdH"/>
                 <outlet property="likeButton" destination="qlH-Ae-wBE" id="jv2-h4-v3j"/>
                 <outlet property="rankLabel" destination="m4j-f6-MuW" id="1yZ-8T-IPD"/>
+                <outlet property="reviewCountLabel" destination="FFS-Aj-pF1" id="aUB-lj-HSF"/>
             </connections>
             <point key="canvasLocation" x="1376.8115942028987" y="-27.455357142857142"/>
         </tableViewCell>

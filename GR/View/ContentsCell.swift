@@ -16,7 +16,7 @@ class ContentsCell: UITableViewCell {
     @IBOutlet weak var countLabel: UILabel!
     @IBOutlet weak var likeButton: UIButton!
     @IBOutlet weak var rankLabel: UILabel!
-    
+    @IBOutlet weak var reviewCountLabel: UILabel!
     
     
     override func awakeFromNib() {

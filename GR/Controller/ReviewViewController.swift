@@ -36,10 +36,14 @@ class ReviewViewController: UIViewController,DoneSendReviewContents{
 
         sendDBModel.doneSendReviewContents = self
         reviewScore.settings.fillMode = .half
-
-
-        // Do any additional setup after loading the view.
+        reviewScore.rating = 3.0
+        
+        
     }
+    
+
+    
+    
     
     @IBAction func send(_ sender: Any) {
         //ぐるぐるの表示

@@ -22,7 +22,6 @@ class ContentDetailCell: UITableViewCell {
     @IBOutlet weak var reviewButton: UIButton!
     
     
-    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

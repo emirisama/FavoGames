@@ -76,7 +76,7 @@ class SearchAndLoadModel {
                    // }else{
                    //     self.count = totalHitCount!
                         
-                        for i in 0...self.count - 1{
+                        for i in 0...self.count{
                             if let title = json["Items"][i]["Item"]["title"].string,let hardware = json["Items"][i]["Item"]["hardware"].string,let mediumImageUrl = json["Items"][i]["Item"]["mediumImageUrl"].string,let salesDate = json["Items"][i]["Item"]["salesDate"].string,let itemPrice = json["Items"][i]["Item"]["itemPrice"].int,let booksGenreId = json["Items"][i]["Item"]["booksGenreId"].string{
                                 
                                 //タイトル名の重複をさける（if)
@@ -94,12 +94,11 @@ class SearchAndLoadModel {
                         }
                     
                     //抽出（コントローラーが表示されてしまう）
-                    self.dataSetsArray = dataSetsArray.filter{ $0.booksGenreId!.contains("006513") || $0.booksGenreId!.contains("006514") || $0.booksGenreId!.contains("006515") || $0.hardware!.contains("PS4") }
+                    self.dataSetsArray = dataSetsArray.filter{ ($0.booksGenreId!.contains("006513") || $0.booksGenreId!.contains("006514") || $0.booksGenreId!.contains("006515")) && !$0.booksGenreId!.contains("006513001") && !$0.booksGenreId!.contains("006513002") && !$0.booksGenreId!.contains("006514001") && !$0.booksGenreId!.contains("006514002") && !$0.booksGenreId!.contains("006515001") && !$0.booksGenreId!.contains("006515002") }
                     
-//                    if dataSets.title!.contains("【")  ==  false && dataSets.title!.contains("】")  ==  false && dataSets.title!.contains("ジョイコン")  ==  false && dataSets.title!.contains("ポーチ")  ==  false && dataSets.title!.contains("ケース")  ==  false && dataSets.title!.contains("カセット")  ==  false && dataSets.title!.contains("アダプター")  ==  false && dataSets.title!.contains("スタンド")  ==  false && dataSets.title!.contains("USB")  ==  false && dataSets.title!.contains("ケーブル")  ==  false && dataSets.title!.contains("ブルーライト")  ==  false && dataSets.title!.contains("カバー")  ==  false && dataSets.title!.contains("カード")  ==  false && dataSets.title!.contains("コード")  ==  false && dataSets.title!.contains("CASE")  ==  false && dataSets.title!.contains("スプレー")  ==  false && dataSets.title!.contains("POUCH")  ==  false && dataSets.title!.contains("コントローラー")  ==  false{
+                    print("dataSetsArrayの中身")
+                    print(self.dataSetsArray.debugDescription)
                     
-                    print("だたSets")
-                    print(self.dataSetsArray)
                     //コントローラー値に値を渡す必要がある
                     self.doneCatchDataProtocol?.doneCatchData(array: self.dataSetsArray)
                     

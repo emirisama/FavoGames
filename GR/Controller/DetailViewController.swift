@@ -41,6 +41,8 @@ class DetailViewController: UIViewController,UITableViewDelegate,UITableViewData
     var contentDetailCell = ContentDetailCell()
    
     
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -113,6 +115,7 @@ class DetailViewController: UIViewController,UITableViewDelegate,UITableViewData
             
 
             let cell = tableView.dequeueReusableCell(withIdentifier: "ContentDetailCell", for: indexPath) as! ContentDetailCell
+
             cell.gameTitleLabel.text = self.gameTitle
             cell.ImageView.sd_setImage(with: URL(string: self.mediumImageUrl), completed: nil)
             cell.salesDate.text = self.salesDate
@@ -120,7 +123,7 @@ class DetailViewController: UIViewController,UITableViewDelegate,UITableViewData
             cell.price.text = String(self.itemPrice)
             
             cell.reviewButton.addTarget(self, action: #selector(reviewButtonTap(_:)), for: .touchUpInside)
- 
+
             return cell
 
         }else{
@@ -133,6 +136,10 @@ class DetailViewController: UIViewController,UITableViewDelegate,UITableViewData
             cell2.scoreView.rating = self.contentModelArray[indexPath.row].rate!
             cell2.scoreView.settings.fillMode = .half
             cell2.profileImage.sd_setImage(with: URL(string: self.contentModelArray[indexPath.row].sender![0]), completed: nil)
+            
+            
+//            let ScoreLabel.text = String(cell2.scoreCountLabel.text! + cell2.scoreCountLabel.text!)
+
 //            cell2.userIDLabel.text = contentModel.sender[]
 
 //            cell2.scoreCountLabel.text = String(((contentModel?.rate)!))
@@ -151,6 +158,9 @@ class DetailViewController: UIViewController,UITableViewDelegate,UITableViewData
         
     }
         
+    
+    
+
 
 //        cell..text = self.dataArray[indexPath.row].userID
         

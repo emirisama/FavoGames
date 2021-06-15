@@ -98,6 +98,37 @@ class LoadModel{
     }
     
     
+    //PS５ViewControllerでレビューが高いゲームソフトを並べる
+    func loadContents2(title:String){
+
+        db.collection(title).order(by: "Score").addSnapshotListener { (snapShot, error) in
+
+            self.contentModelArray = []
+            
+            if let snapShotDoc = snapShot?.documents{
+
+                //ドキュメントの数だけcontentModelの値を入れる
+                for doc in snapShotDoc{
+
+                    let data = doc.data()
+
+                    //if letでもし空じゃなかったらの意味（!= nilと同じ)
+
+                    if let review = data["review"] as? String,let rate = data["rate"] as? Double,let sender = data["sender"] as? [String],let date = data["date"] as? Double{
+                        
+                        let contentModel = ContentModel(review: review, sender: sender, rate: rate)
+                        self.contentModelArray.append(contentModel)
+
+                        self.getDataProtocol?.getData(dataArray: self.contentModelArray)
+
+                    }
+                }
+            }
+            
+        }
+    }
+    
+    
 
     
     //プロフィールの受信

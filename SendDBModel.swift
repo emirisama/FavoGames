@@ -159,9 +159,7 @@ class SendDBModel {
     
     //ゲームタイトルに紐づくデータを送信
     func sendGameTitle(title:String,sender:ProfileModel,review:String,rate:Double){
-        
-
-
+ 
         self.myProfile.append(sender.imageURLString!)
         self.myProfile.append(sender.profileText!)
         self.myProfile.append(sender.userID!)
@@ -174,6 +172,8 @@ class SendDBModel {
         self.db.collection(title).document(Auth.auth().currentUser!.uid).setData(
             ["review":review,"rate":rate,"sender":self.myProfile,"date":Date().timeIntervalSince1970])
         print("レビュー送信")
+        
+
 
         self.doneSendReviewContents?.checkDoneReview()
 
