@@ -10,7 +10,11 @@ import SDWebImage
 import Cosmos
 import PKHUD
 
-class DetailViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,GetDataProtocol{
+class DetailViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,GetDataProtocol,GetrateAverageCountProtocol{
+  
+
+
+    
  
 
  
@@ -24,7 +28,7 @@ class DetailViewController: UIViewController,UITableViewDelegate,UITableViewData
     var sendDBModel = SendDBModel()
 
     var array = [DataSets]()
-    var loadModelArray = [ProfileModel]()
+    var profileModelArray = [ProfileModel]()
     
     var contentModelArray = [ContentModel]()
     
@@ -35,12 +39,13 @@ class DetailViewController: UIViewController,UITableViewDelegate,UITableViewData
     var itemPrice = Int()
 
     
+    
  
     var sectionTitle = ["","スコア・レビュー"]
 
     var contentDetailCell = ContentDetailCell()
    
-    
+    var rateAverrage = Double()
     
     
     override func viewDidLoad() {
@@ -54,6 +59,9 @@ class DetailViewController: UIViewController,UITableViewDelegate,UITableViewData
             loadModel.getDataProtocol = self
             loadModel.loadContents(title: gameTitle)
 
+            //レビュー平均値を表示させる
+            loadModel.getrateAverageCountProtocol = self
+            loadModel.loadrateAverageCount(title: gameTitle, rateAverage: rateAverrage)
 
                 tableView.delegate = self
                 tableView.dataSource = self
@@ -213,9 +221,14 @@ class DetailViewController: UIViewController,UITableViewDelegate,UITableViewData
     }
     
     
+    func getrateAverageCount(rateAverage: Double) {
+        self.rateAverrage = rateAverage
+        
+        tableView.reloadData()
+    }
 
 
-
+    
     
     
 }

@@ -166,18 +166,19 @@ class SendDBModel {
         self.myProfile.append(sender.userName!)
         self.myProfile.append(sender.id!)
         
-        self.db.collection("Users").document(Auth.auth().currentUser!.uid).collection("reviewContents").document().setData(
+        self.db.collection("Users").document(Auth.auth().currentUser!.uid).collection("reviewContents").document(title).setData(
             ["review":review,"rate":rate,"sender":self.myProfile,"date":Date().timeIntervalSince1970])
         
         self.db.collection(title).document(Auth.auth().currentUser!.uid).setData(
             ["review":review,"rate":rate,"sender":self.myProfile,"date":Date().timeIntervalSince1970])
+        
+        self.db.collection("ScoreAverage").document(title).collection("review").document().setData(
+            ["rate":rate])
         print("レビュー送信")
         
 
-
         self.doneSendReviewContents?.checkDoneReview()
 
-        
     }
     
     

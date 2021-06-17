@@ -39,6 +39,11 @@ protocol GetLikeCountProtocol{
     
 }
 
+protocol GetrateAverageCountProtocol{
+    func getrateAverageCount(rateAverage:Double)
+}
+
+
 class LoadModel{
     
     let db = Firestore.firestore()
@@ -66,6 +71,10 @@ class LoadModel{
     var likeCount = Int()
     var likeFlag = Bool()
     var getLikeCountProtocol:GetLikeCountProtocol?
+    
+    //レビューの平均値に関する記述
+    var getrateAverageCountProtocol:GetrateAverageCountProtocol?
+    
     
     //コンテンツを受信するメソッド(ゲームタイトルに紐づくレビューや名前などのデータを受信する）
     func loadContents(title:String){
@@ -269,6 +278,38 @@ class LoadModel{
         }
         
     }
+    
+    
+    //rateの平均値を出す
+    func loadrateAverageCount(title:String,rateAverage:Double){
+        
+        var total = Double()
+        db.collection("ScoreAverage").document(title).collection("review").addSnapshotListener { snapShot, error in
+            if error != nil{
+                return
+            }
+            if let snapShotDoc = snapShot?.documents{
+                
+                for doc in snapShotDoc{
+                    let data = doc.data()
+                    if doc.documentID == Auth.auth().currentUser?.uid{
+                        if let rate = data["rate"] as? Double{
+                               total = rate * Double(snapShotDoc.count)
+                            }
+                        }
+                }
+                let rateAverrage = Double(total) / Double(snapShotDoc.count)
+                print("snapShotDocの中身")
+                print(snapShotDoc.debugDescription)
+                print("totalの中身")
+                print(total.debugDescription)
+                print("rateAverageの中身")
+                print(rateAverrage.debugDescription)
+                self.getrateAverageCountProtocol?.getrateAverageCount(rateAverage: rateAverrage)
+            }
+        }
+    }
+    
     
     
 }

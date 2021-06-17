@@ -20,6 +20,7 @@ class SearchResultsViewController: UIViewController,UITableViewDelegate,UITableV
     
     @IBOutlet weak var tableView: UITableView!
     var array = [DataSets]()
+    var profileModelArray = [ProfileModel]()
     var contentModelArray = [ContentModel]()
     var userName = String()
     var db = Firestore.firestore()
