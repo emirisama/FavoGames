@@ -11,6 +11,10 @@ import Cosmos
 import PKHUD
 
 class DetailViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,GetDataProtocol,GetrateAverageCountProtocol{
+
+
+
+    
   
 
 
@@ -45,7 +49,8 @@ class DetailViewController: UIViewController,UITableViewDelegate,UITableViewData
 
     var contentDetailCell = ContentDetailCell()
    
-    var rateAverrage = Double()
+    var rateArray = [RateModel]()
+    var rateAverage = Double()
     
     
     override func viewDidLoad() {
@@ -61,7 +66,7 @@ class DetailViewController: UIViewController,UITableViewDelegate,UITableViewData
 
             //レビュー平均値を表示させる
             loadModel.getrateAverageCountProtocol = self
-            loadModel.loadrateAverageCount(title: gameTitle, rateAverage: rateAverrage)
+            loadModel.loadrateAverageCount(title: gameTitle, rateAverage: rateAverage)
 
                 tableView.delegate = self
                 tableView.dataSource = self
@@ -123,13 +128,15 @@ class DetailViewController: UIViewController,UITableViewDelegate,UITableViewData
             
 
             let cell = tableView.dequeueReusableCell(withIdentifier: "ContentDetailCell", for: indexPath) as! ContentDetailCell
-
+            cell.selectionStyle = .none
             cell.gameTitleLabel.text = self.gameTitle
             cell.ImageView.sd_setImage(with: URL(string: self.mediumImageUrl), completed: nil)
             cell.salesDate.text = self.salesDate
             cell.hardware.text = self.hardware
             cell.price.text = String(self.itemPrice)
-            
+            if rateAverage.isNaN == false {
+                cell.rateAverageLabel.text = String(rateAverage)
+            }
             cell.reviewButton.addTarget(self, action: #selector(reviewButtonTap(_:)), for: .touchUpInside)
 
             return cell
@@ -137,6 +144,7 @@ class DetailViewController: UIViewController,UITableViewDelegate,UITableViewData
         }else{
 
             let cell2 = tableView.dequeueReusableCell(withIdentifier: "ReviewViewCell", for: indexPath) as! ReviewViewCell
+            cell2.selectionStyle = .none
             cell2.userNameLabel.text = self.contentModelArray[indexPath.row].sender![3]
             cell2.userIDLabel.text = self.contentModelArray[indexPath.row].sender![4]
             cell2.reviewViewLabel.text = self.contentModelArray[indexPath.row].review
@@ -221,8 +229,8 @@ class DetailViewController: UIViewController,UITableViewDelegate,UITableViewData
     }
     
     
-    func getrateAverageCount(rateAverage: Double) {
-        self.rateAverrage = rateAverage
+    func getrateAverageCount(rateArray: Double) {
+        self.rateAverage = rateArray
         
         tableView.reloadData()
     }

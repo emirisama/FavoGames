@@ -40,7 +40,7 @@ protocol GetLikeCountProtocol{
 }
 
 protocol GetrateAverageCountProtocol{
-    func getrateAverageCount(rateAverage:Double)
+    func getrateAverageCount(rateArray: Double)
 }
 
 
@@ -73,7 +73,9 @@ class LoadModel{
     var getLikeCountProtocol:GetLikeCountProtocol?
     
     //レビューの平均値に関する記述
+    var rateModelArray:[RateModel] = []
     var getrateAverageCountProtocol:GetrateAverageCountProtocol?
+
     
     
     //コンテンツを受信するメソッド(ゲームタイトルに紐づくレビューや名前などのデータを受信する）
@@ -283,33 +285,56 @@ class LoadModel{
     //rateの平均値を出す
     func loadrateAverageCount(title:String,rateAverage:Double){
         
-        var total = Double()
+        
         db.collection("ScoreAverage").document(title).collection("review").addSnapshotListener { snapShot, error in
+            self.rateModelArray = []
             if error != nil{
                 return
             }
             if let snapShotDoc = snapShot?.documents{
-                
+ 
                 for doc in snapShotDoc{
                     let data = doc.data()
-                    if doc.documentID == Auth.auth().currentUser?.uid{
                         if let rate = data["rate"] as? Double{
-                               total = rate * Double(snapShotDoc.count)
-                            }
+                            let rateArray = RateModel(rate: rate)
+ 
+                            self.rateModelArray.append(rateArray)
+//                            let total = self.rateModelArray.reduce(0.0, +)
+//                            var rateAverage = Double(total) / Double(snapShotDoc.count)
+                            print("documentID")
+                            print(doc.documentID)
+                            
                         }
+                    
                 }
-                let rateAverrage = Double(total) / Double(snapShotDoc.count)
+                
+                var totalCount = 0.0
+                var rateAverage = 0.0
+                for (index, value) in self.rateModelArray.enumerated(){
+       
+                    totalCount = totalCount + self.rateModelArray[index].rate!
+                }
+
+                rateAverage = Double(totalCount) / Double(snapShotDoc.count)
+                let rateAverageScore = (round(10*rateAverage)/10)
+                
+                
+                print("rateArrayの中身")
+                print(self.rateModelArray.debugDescription)
                 print("snapShotDocの中身")
                 print(snapShotDoc.debugDescription)
-                print("totalの中身")
-                print(total.debugDescription)
+                print("totalCountの中身")
+                print(totalCount.debugDescription)
                 print("rateAverageの中身")
-                print(rateAverrage.debugDescription)
-                self.getrateAverageCountProtocol?.getrateAverageCount(rateAverage: rateAverrage)
+                print(rateAverage.debugDescription)
+                self.getrateAverageCountProtocol?.getrateAverageCount(rateArray: rateAverageScore)
             }
+            
+            
         }
     }
     
+
     
     
 }

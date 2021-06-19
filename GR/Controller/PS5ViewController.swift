@@ -9,7 +9,14 @@ import UIKit
 import FirebaseAuth
 import FirebaseFirestore
 
-class PS5ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,DoneCatchDataProtocol {
+class PS5ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,DoneCatchDataProtocol,GetrateAverageCountProtocol, GetDataProtocol {
+
+
+
+    
+ 
+
+    
 
     
     @IBOutlet weak var rankingLabel: UILabel!
@@ -23,15 +30,41 @@ class PS5ViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
     var db = Firestore.firestore()
     var idString = String()
     var contentModelArray = [ContentModel]()
+
+    var loadModel = LoadModel()
+    var gameTitle = String()
+    var rateArray = [RateModel]()
+    var rateAverage = Double()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        tableView.delegate = self
-        tableView.dataSource = self
         
-        tableView.register(UINib(nibName: "ContentsCell", bundle: nil), forCellReuseIdentifier: "ContentsCell")
+        switch index{
+        
+        case index:
+            //皆のレビューを見れるようにさせる(ロードさせる）
+            loadModel.getDataProtocol = self
+            loadModel.loadContents(title: gameTitle)
 
+            //レビュー平均値を表示させる
+            loadModel.getrateAverageCountProtocol = self
+            loadModel.loadrateAverageCount(title: gameTitle, rateAverage: rateAverage)
+
+                tableView.delegate = self
+                tableView.dataSource = self
+                
+                tableView.register(UINib(nibName: "ContentDetailCell", bundle: nil), forCellReuseIdentifier: "ContentDetailCell")
+                tableView.register(UINib(nibName: "ReviewViewCell", bundle: nil), forCellReuseIdentifier: "ReviewViewCell")
+            
+                
+                break
+                
+                default:
+                break
+        }
+        
+        
             let urlStringPs5 = "https://app.rakuten.co.jp/services/api/BooksGame/Search/20170404?format=json&hardware=PS5&booksGenreId=006515&applicationId=1078790856161658200"
             let urlStringPs4 = "https://app.rakuten.co.jp/services/api/BooksGame/Search/20170404?format=json&hardware=PS4&booksGenreId=006513&applicationId=1078790856161658200"
             let urlStringSwitch = "https://app.rakuten.co.jp/services/api/BooksGame/Search/20170404?format=json&hardware=Nintendo Switch&booksGenreId=006514&applicationId=1078790856161658200"
@@ -80,7 +113,9 @@ class PS5ViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
         cell.contentImageView.sd_setImage(with: URL(string: dataSetsArray[indexPath.row].mediumImageUrl!), completed: nil)
         cell.gameTitleLabel.text = dataSetsArray[indexPath.row].title
         cell.rankLabel.text = String(indexPath.row + 1)
-
+        cell.reviewCountLabel.text = String(self.rateAverage)
+        print("rateArrayの中身")
+        print(rateArray.debugDescription)
         return cell
     }
     
@@ -93,7 +128,7 @@ class PS5ViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
         DetailVC.salesDate = dataSetsArray[indexPath.row].salesDate!
         DetailVC.mediumImageUrl = dataSetsArray[indexPath.row].mediumImageUrl!
         DetailVC.itemPrice = dataSetsArray[indexPath.row].itemPrice!
- 
+
         self.navigationController?.pushViewController(DetailVC, animated: true)
 
 
@@ -111,9 +146,19 @@ class PS5ViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
         tableView.reloadData()
     }
 
+    func getrateAverageCount(rateArray: Double) {
+        self.rateAverage = rateArray
+        
+        tableView.reloadData()
+    }
+
     
-    
-    
+    func getData(dataArray: [ContentModel]) {
+        contentModelArray = []
+        contentModelArray = dataArray
+        tableView.reloadData()
+        print("レビュー表示")
+    }
     
     /*
     // MARK: - Navigation

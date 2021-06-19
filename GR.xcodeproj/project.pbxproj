@@ -10,6 +10,7 @@
 		3579223637281EFA54B2D515 /* Pods_GR.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F90BE2B6597AA0DD3A514DC /* Pods_GR.framework */; };
 		50318454262B22E30005D9BF /* ContentDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50318453262B22E30005D9BF /* ContentDetailViewController.swift */; };
 		50318457262BC9880005D9BF /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50318456262BC9880005D9BF /* SignInViewController.swift */; };
+		50430506267D906A006452E9 /* RateModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50430505267D906A006452E9 /* RateModel.swift */; };
 		5046C4D7261DD7B5006939C7 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5046C4D6261DD7B5006939C7 /* Constants.swift */; };
 		504C276C260CB0E600179AF9 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 504C276B260CB0E600179AF9 /* GoogleService-Info.plist */; };
 		504C30D7265BC30300C520B0 /* ContentDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 504C30D5265BC30300C520B0 /* ContentDetailCell.swift */; };
@@ -61,6 +62,7 @@
 		238CD4109F23D90CA702E0C8 /* Pods-GR.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GR.debug.xcconfig"; path = "Target Support Files/Pods-GR/Pods-GR.debug.xcconfig"; sourceTree = "<group>"; };
 		50318453262B22E30005D9BF /* ContentDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentDetailViewController.swift; sourceTree = "<group>"; };
 		50318456262BC9880005D9BF /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
+		50430505267D906A006452E9 /* RateModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RateModel.swift; sourceTree = "<group>"; };
 		5046C4D6261DD7B5006939C7 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		504C276B260CB0E600179AF9 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		504C30D5265BC30300C520B0 /* ContentDetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentDetailCell.swift; sourceTree = "<group>"; };
@@ -194,6 +196,7 @@
 				5065E46E2629C3FD00BE0316 /* FollowModel.swift */,
 				50A8D81B26452B1C008B5CEA /* SearchAndLoadModel.swift */,
 				50A8D8212645336D008B5CEA /* DataSets.swift */,
+				50430505267D906A006452E9 /* RateModel.swift */,
 			);
 			name = Model;
 			path = ..;
@@ -379,6 +382,7 @@
 				50318457262BC9880005D9BF /* SignInViewController.swift in Sources */,
 				50777FA1261CAB58005314BF /* ReviewViewController.swift in Sources */,
 				50CF1BA32635260E00ECF7E4 /* SwitchViewController.swift in Sources */,
+				50430506267D906A006452E9 /* RateModel.swift in Sources */,
 				50849734264D517B0052DBF4 /* ListViewController.swift in Sources */,
 				50A8D81C26452B1C008B5CEA /* SearchAndLoadModel.swift in Sources */,
 				5046C4D7261DD7B5006939C7 /* Constants.swift in Sources */,
