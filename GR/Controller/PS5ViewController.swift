@@ -9,14 +9,8 @@ import UIKit
 import FirebaseAuth
 import FirebaseFirestore
 
-class PS5ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,DoneCatchDataProtocol,GetrateAverageCountProtocol, GetDataProtocol {
+class PS5ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,DoneCatchDataProtocol,GetrateAverageCountProtocol {
 
-
-
-    
- 
-
-    
 
     
     @IBOutlet weak var rankingLabel: UILabel!
@@ -25,49 +19,30 @@ class PS5ViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
 
     
     var index = Int()
-    
     var dataSetsArray = [DataSets]()
     var db = Firestore.firestore()
     var idString = String()
     var contentModelArray = [ContentModel]()
 
     var loadModel = LoadModel()
-    var gameTitle = String()
+
     var rateArray = [RateModel]()
-    var rateAverage = Double()
+    var rateAverageModelArray = [RateAverageModel]()
+    var gameTitle = String()
+    
+ 
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        tableView.delegate = self
+        tableView.dataSource = self
         
-        switch index{
+        tableView.register(UINib(nibName: "ContentsCell", bundle: nil), forCellReuseIdentifier: "ContentsCell")
         
-        case index:
-            //皆のレビューを見れるようにさせる(ロードさせる）
-            loadModel.getDataProtocol = self
-            loadModel.loadContents(title: gameTitle)
-
-            //レビュー平均値を表示させる
-            loadModel.getrateAverageCountProtocol = self
-            loadModel.loadrateAverageCount(title: gameTitle, rateAverage: rateAverage)
-
-                tableView.delegate = self
-                tableView.dataSource = self
-                
-                tableView.register(UINib(nibName: "ContentDetailCell", bundle: nil), forCellReuseIdentifier: "ContentDetailCell")
-                tableView.register(UINib(nibName: "ReviewViewCell", bundle: nil), forCellReuseIdentifier: "ReviewViewCell")
-            
-                
-                break
-                
-                default:
-                break
-        }
-        
-        
-            let urlStringPs5 = "https://app.rakuten.co.jp/services/api/BooksGame/Search/20170404?format=json&hardware=PS5&booksGenreId=006515&applicationId=1078790856161658200"
-            let urlStringPs4 = "https://app.rakuten.co.jp/services/api/BooksGame/Search/20170404?format=json&hardware=PS4&booksGenreId=006513&applicationId=1078790856161658200"
-            let urlStringSwitch = "https://app.rakuten.co.jp/services/api/BooksGame/Search/20170404?format=json&hardware=Nintendo Switch&booksGenreId=006514&applicationId=1078790856161658200"
+        let urlStringPs5 = "https://app.rakuten.co.jp/services/api/BooksGame/Search/20170404?format=json&hardware=PS5&booksGenreId=006515&applicationId=1078790856161658200"
+        let urlStringPs4 = "https://app.rakuten.co.jp/services/api/BooksGame/Search/20170404?format=json&hardware=PS4&booksGenreId=006513&applicationId=1078790856161658200"
+        let urlStringSwitch = "https://app.rakuten.co.jp/services/api/BooksGame/Search/20170404?format=json&hardware=Nintendo Switch&booksGenreId=006514&applicationId=1078790856161658200"
         
         if index == 0{
             let searchModel = SearchAndLoadModel(urlString: urlStringPs5)
@@ -82,14 +57,17 @@ class PS5ViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
             searchModel.doneCatchDataProtocol = self
             searchModel.search()
         }
+        
 
-        print("あ")
-        print(dataSetsArray.debugDescription)
+        loadModel.getrateAverageCountProtocol = self
+
+      
+    }
+  
 
         
         
         // Do any additional setup after loading the view.
-    }
     
     //高さを揃える
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -103,20 +81,32 @@ class PS5ViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return dataSetsArray.count
- 
+        if  section == 0 {
+            return dataSetsArray.count
+        }else if section == 1{
+            return rateAverageModelArray.count
+        }
+        return 0
+
     }
+    
+
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "ContentsCell", for: indexPath) as! ContentsCell
+
         cell.contentImageView.sd_setImage(with: URL(string: dataSetsArray[indexPath.row].mediumImageUrl!), completed: nil)
         cell.gameTitleLabel.text = dataSetsArray[indexPath.row].title
+
         cell.rankLabel.text = String(indexPath.row + 1)
-        cell.reviewCountLabel.text = String(self.rateAverage)
-        print("rateArrayの中身")
-        print(rateArray.debugDescription)
+ 
+        cell.reviewCountLabel.text = String(rateAverageModelArray[indexPath.row].rateAverage!)
+        print("rateAverageの中身")
+        print(self.rateAverageModelArray[indexPath.row].rateAverage!.debugDescription)
+
         return cell
+        
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -138,27 +128,28 @@ class PS5ViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
     
     
     func doneCatchData(array: [DataSets]) {
-        print("arrayの中身")
-        print(array.debugDescription)
-
+  
 
         self.dataSetsArray = array
+        gameTitle = dataSetsArray[index].title!
+        print("dataSetsArray[index].title!の中身")
+        print(gameTitle.debugDescription)
+        loadModel.loadrateAverageCount(title: gameTitle, rateAverage: rateAverageModelArray)
         tableView.reloadData()
+
     }
 
-    func getrateAverageCount(rateArray: Double) {
-        self.rateAverage = rateArray
-        
+
+    func getrateAverageCount(rateArray: [RateAverageModel]) {
+
+        self.rateAverageModelArray = rateArray
+        print("rateAverageModelArrayの中身")
+        print(rateAverageModelArray.debugDescription)
+
         tableView.reloadData()
     }
 
     
-    func getData(dataArray: [ContentModel]) {
-        contentModelArray = []
-        contentModelArray = dataArray
-        tableView.reloadData()
-        print("レビュー表示")
-    }
     
     /*
     // MARK: - Navigation

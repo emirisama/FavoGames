@@ -47,6 +47,7 @@ class SearchResultsViewController: UIViewController,UITableViewDelegate,UITableV
         
         //カステムCellを作るためにはregisternibを記載する必要がある。
         tableView.register(UINib(nibName: "ContentsCell", bundle: nil), forCellReuseIdentifier: "ContentsCell")
+        
         //アプリ内に入っているユーザーIDを取り出す
         if UserDefaults.standard.object(forKey: "documentID") != nil{
             idString = UserDefaults.standard.object(forKey: "documentID") as! String
@@ -106,6 +107,7 @@ class SearchResultsViewController: UIViewController,UITableViewDelegate,UITableV
         
         cell.likeButton.tag = indexPath.row
         cell.countLabel.text = String(likeCount)
+        cell.rankLabel.isHidden = true
         cell.likeButton.addTarget(self, action: #selector(likeButtonTap(_:)), for: .touchUpInside)
     
         if likeFlag == true{

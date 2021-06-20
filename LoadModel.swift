@@ -7,6 +7,7 @@
 
 import Foundation
 import Firebase
+import FirebaseFirestore
 
 protocol GetDataProtocol{
     
@@ -40,7 +41,7 @@ protocol GetLikeCountProtocol{
 }
 
 protocol GetrateAverageCountProtocol{
-    func getrateAverageCount(rateArray: Double)
+    func getrateAverageCount(rateArray: [RateAverageModel])
 }
 
 
@@ -75,7 +76,7 @@ class LoadModel{
     //レビューの平均値に関する記述
     var rateModelArray:[RateModel] = []
     var getrateAverageCountProtocol:GetrateAverageCountProtocol?
-
+    var rateAverageArray:[RateAverageModel] = []
     
     
     //コンテンツを受信するメソッド(ゲームタイトルに紐づくレビューや名前などのデータを受信する）
@@ -182,7 +183,6 @@ class LoadModel{
                     let data = doc.data()
                     //フォローしているどうかを見分ける
                     if let follower = data["follower"] as? String,let followOrNot = data["followOrNot"] as? Bool,let image = data["image"] as? String,let profileText = data["profileText"] as? String,let userID = data["userID"] as? String,let userName = data["userName"] as? String{
-                        
                         if userID == Auth.auth().currentUser!.uid{
                             self.ownFollowOrNot = followOrNot
                         }
@@ -283,7 +283,7 @@ class LoadModel{
     
     
     //rateの平均値を出す
-    func loadrateAverageCount(title:String,rateAverage:Double){
+    func loadrateAverageCount(title:String,rateAverage:[RateAverageModel]){
         
         
         db.collection("ScoreAverage").document(title).collection("review").addSnapshotListener { snapShot, error in
@@ -317,17 +317,18 @@ class LoadModel{
 
                 rateAverage = Double(totalCount) / Double(snapShotDoc.count)
                 let rateAverageScore = (round(10*rateAverage)/10)
-                
-                
+                let rateAverageScore2 = RateAverageModel(rateAverage: rateAverageScore)
+                self.rateAverageArray = []
+                self.rateAverageArray.append(rateAverageScore2)
                 print("rateArrayの中身")
                 print(self.rateModelArray.debugDescription)
                 print("snapShotDocの中身")
                 print(snapShotDoc.debugDescription)
                 print("totalCountの中身")
                 print(totalCount.debugDescription)
-                print("rateAverageの中身")
-                print(rateAverage.debugDescription)
-                self.getrateAverageCountProtocol?.getrateAverageCount(rateArray: rateAverageScore)
+                print("self.rateAverageArrayの中身")
+                print(self.rateAverageArray.debugDescription)
+                self.getrateAverageCountProtocol?.getrateAverageCount(rateArray: self.rateAverageArray)
             }
             
             

@@ -89,8 +89,9 @@ class CreateUserViewController: UIViewController,UITextFieldDelegate,SendProfile
         
         
         //Trendの画面遷移
+        let tabVC = self.storyboard?.instantiateViewController(withIdentifier: "tab") as! TabBarController
+        self.navigationController?.pushViewController(tabVC, animated: true)
 
-        self.navigationController?.popViewController(animated: true)
     }
     
     

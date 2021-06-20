@@ -82,7 +82,7 @@
                     <connections>
                         <outlet property="pageControl" destination="ALa-Xe-Y5G" id="6nM-ah-04S"/>
                         <outlet property="scroll" destination="ODx-zz-juC" id="OEk-4C-7pC"/>
-                        <segue destination="fVx-7x-oq4" kind="show" identifier="next" id="bRS-dw-naU"/>
+                        <segue destination="fBl-XV-G7T" kind="show" identifier="next" id="1g9-Aj-rpv"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -225,11 +225,12 @@
                         <outlet property="nameTextField" destination="jNz-IU-W2R" id="Eny-Vn-yBE"/>
                         <outlet property="passwordTextField" destination="h1C-Zq-Dj4" id="YLk-9r-ciN"/>
                         <outlet property="signupButton" destination="PuP-G1-iag" id="byS-l5-EDZ"/>
+                        <segue destination="fVx-7x-oq4" kind="show" identifier="tab" id="VtS-18-EqZ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ian-ta-8Av" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3839" y="-1340"/>
+            <point key="canvasLocation" x="1683" y="-410"/>
         </scene>
         <!--Trend View Controller-->
         <scene sceneID="aA6-A7-uQ3">
@@ -251,10 +252,6 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                     <navigationItem key="navigationItem" id="TRW-i2-r7A"/>
-                    <connections>
-                        <segue destination="fBl-XV-G7T" kind="presentation" identifier="createVC" modalPresentationStyle="fullScreen" id="C2n-WF-3P0"/>
-                        <segue destination="hr9-Ui-kYQ" kind="presentation" identifier="signinVC" id="gwa-rk-KQj"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0IP-eD-zl5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -307,11 +304,11 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="182" id="5ho-HR-XO2">
-                                        <rect key="frame" x="0.0" y="24.5" width="414" height="182"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="257" id="5ho-HR-XO2">
+                                        <rect key="frame" x="0.0" y="24.5" width="414" height="257"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="5ho-HR-XO2" id="wVy-cL-eVf">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="182"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="257"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -938,7 +935,7 @@
         <!--Tab Bar Controller-->
         <scene sceneID="Rb2-aV-eJj">
             <objects>
-                <tabBarController storyboardIdentifier="tab" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="fVx-7x-oq4" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="tab" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="fVx-7x-oq4" customClass="TabBarController" customModule="GR" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="DP4-mU-bsi"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="PCE-n9-ObH">

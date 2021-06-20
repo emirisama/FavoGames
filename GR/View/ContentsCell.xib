@@ -39,17 +39,17 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <state key="normal" image="nolike"/>
                     </button>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="１" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m4j-f6-MuW">
-                        <rect key="frame" x="297" y="122" width="109" height="36"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FFS-Aj-pF1">
+                        <rect key="frame" x="45" y="232" width="54" height="21"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <fontDescription key="fontDescription" type="boldSystem" pointSize="30"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FFS-Aj-pF1">
-                        <rect key="frame" x="45" y="232" width="35" height="21"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5op-9z-Ljl">
+                        <rect key="frame" x="305" y="130" width="99" height="36"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <fontDescription key="fontDescription" type="boldSystem" pointSize="30"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
@@ -63,7 +63,7 @@
                 <outlet property="countLabel" destination="7sD-Qs-jJS" id="M2w-Uy-NsQ"/>
                 <outlet property="gameTitleLabel" destination="KVA-OB-6Qf" id="xDS-ic-IdH"/>
                 <outlet property="likeButton" destination="qlH-Ae-wBE" id="jv2-h4-v3j"/>
-                <outlet property="rankLabel" destination="m4j-f6-MuW" id="1yZ-8T-IPD"/>
+                <outlet property="rankLabel" destination="5op-9z-Ljl" id="WIr-lN-OVb"/>
                 <outlet property="reviewCountLabel" destination="FFS-Aj-pF1" id="aUB-lj-HSF"/>
             </connections>
             <point key="canvasLocation" x="1376.8115942028987" y="-27.455357142857142"/>

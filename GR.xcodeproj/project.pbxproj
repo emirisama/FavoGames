@@ -18,6 +18,7 @@
 		504E35522625982D00A119D1 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 504E35512625982D00A119D1 /* ProfileViewController.swift */; };
 		504E35562625C68700A119D1 /* ContentsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 504E35542625C68700A119D1 /* ContentsCell.swift */; };
 		504E35572625C68700A119D1 /* ContentsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 504E35552625C68700A119D1 /* ContentsCell.xib */; };
+		50545C65267F189D0062AE1D /* RateAverageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50545C64267F189D0062AE1D /* RateAverageModel.swift */; };
 		505854552635081B00182CFD /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 505854542635081B00182CFD /* SearchViewController.swift */; };
 		505854582635084F00182CFD /* NiceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 505854572635084F00182CFD /* NiceViewController.swift */; };
 		5065E4682629C33500BE0316 /* FollowerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5065E4672629C33500BE0316 /* FollowerModel.swift */; };
@@ -70,6 +71,7 @@
 		504E35512625982D00A119D1 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		504E35542625C68700A119D1 /* ContentsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentsCell.swift; sourceTree = "<group>"; };
 		504E35552625C68700A119D1 /* ContentsCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ContentsCell.xib; sourceTree = "<group>"; };
+		50545C64267F189D0062AE1D /* RateAverageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RateAverageModel.swift; sourceTree = "<group>"; };
 		505854542635081B00182CFD /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		505854572635084F00182CFD /* NiceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NiceViewController.swift; sourceTree = "<group>"; };
 		5065E4672629C33500BE0316 /* FollowerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowerModel.swift; sourceTree = "<group>"; };
@@ -197,6 +199,7 @@
 				50A8D81B26452B1C008B5CEA /* SearchAndLoadModel.swift */,
 				50A8D8212645336D008B5CEA /* DataSets.swift */,
 				50430505267D906A006452E9 /* RateModel.swift */,
+				50545C64267F189D0062AE1D /* RateAverageModel.swift */,
 			);
 			name = Model;
 			path = ..;
@@ -375,6 +378,7 @@
 				50A62CD7264C23C60012412F /* UserNameCell.swift in Sources */,
 				508C95DB2622D6FC0077F3A6 /* DetailViewController.swift in Sources */,
 				50D9222F26078EB5009A7BB0 /* ViewController.swift in Sources */,
+				50545C65267F189D0062AE1D /* RateAverageModel.swift in Sources */,
 				505854552635081B00182CFD /* SearchViewController.swift in Sources */,
 				50849737264F65500052DBF4 /* OtherListViewController.swift in Sources */,
 				50CF1B9D263525DA00ECF7E4 /* PS5ViewController.swift in Sources */,
