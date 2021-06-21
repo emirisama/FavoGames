@@ -299,8 +299,7 @@ class LoadModel{
                             let rateArray = RateModel(rate: rate)
  
                             self.rateModelArray.append(rateArray)
-//                            let total = self.rateModelArray.reduce(0.0, +)
-//                            var rateAverage = Double(total) / Double(snapShotDoc.count)
+
                             print("documentID")
                             print(doc.documentID)
                             

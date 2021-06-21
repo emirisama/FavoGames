@@ -175,6 +175,7 @@ class SendDBModel {
         self.db.collection("ScoreAverage").document(title).collection("review").document().setData(
             ["rate":rate])
         print("レビュー送信")
+      
         
 
         self.doneSendReviewContents?.checkDoneReview()

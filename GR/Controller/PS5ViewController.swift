@@ -81,12 +81,8 @@ class PS5ViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if  section == 0 {
+
             return dataSetsArray.count
-        }else if section == 1{
-            return rateAverageModelArray.count
-        }
-        return 0
 
     }
     
@@ -129,7 +125,7 @@ class PS5ViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
     
     func doneCatchData(array: [DataSets]) {
   
-
+        self.dataSetsArray = []
         self.dataSetsArray = array
         gameTitle = dataSetsArray[index].title!
         print("dataSetsArray[index].title!の中身")
@@ -141,7 +137,7 @@ class PS5ViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
 
 
     func getrateAverageCount(rateArray: [RateAverageModel]) {
-
+        self.rateAverageModelArray = []
         self.rateAverageModelArray = rateArray
         print("rateAverageModelArrayの中身")
         print(rateAverageModelArray.debugDescription)
