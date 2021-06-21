@@ -23,12 +23,13 @@ class ReviewViewController: UIViewController,DoneSendReviewContents{
     var contentModel:ContentModel?
     @IBOutlet weak var reviewScore: CosmosView!
     
-    var categoryString = String()
+
     var userDefaultsEX = UserDefaultsEX()
     var sendDBModel = SendDBModel()
     var loadModel = LoadModel()
     var array = [DataSets]()
     var gameTitle = String()
+    var rateAverageModel = [RateAverageModel]()
     
     
     override func viewDidLoad() {
@@ -59,6 +60,7 @@ class ReviewViewController: UIViewController,DoneSendReviewContents{
 
             sendDBModel.sendGameTitle(title: gameTitle,sender: profile!, review: reviewTextField.text!, rate: self.reviewScore.rating)
             print("ゲームタイトルに紐づくレビューをSendDBModelへ")
+            sendDBModel.sendRateAverage(title: gameTitle, rateAverage: rateAverageModel)
                 
             }else{
 

@@ -284,9 +284,8 @@ class LoadModel{
     
     //rateの平均値を出す
     func loadrateAverageCount(title:String,rateAverage:[RateAverageModel]){
-        
-        
-        db.collection("ScoreAverage").document(title).collection("review").addSnapshotListener { snapShot, error in
+  
+        db.collection("Score").document(title).collection("review").addSnapshotListener { snapShot, error in
             self.rateModelArray = []
             if error != nil{
                 return
@@ -299,9 +298,6 @@ class LoadModel{
                             let rateArray = RateModel(rate: rate)
  
                             self.rateModelArray.append(rateArray)
-
-                            print("documentID")
-                            print(doc.documentID)
                             
                         }
                     
@@ -319,6 +315,8 @@ class LoadModel{
                 let rateAverageScore2 = RateAverageModel(rateAverage: rateAverageScore)
                 self.rateAverageArray = []
                 self.rateAverageArray.append(rateAverageScore2)
+                print("self.rateAverageArrayの数")
+                print(self.rateAverageArray.count)
                 print("rateArrayの中身")
                 print(self.rateModelArray.debugDescription)
                 print("snapShotDocの中身")

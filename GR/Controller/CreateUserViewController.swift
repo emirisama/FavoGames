@@ -87,7 +87,7 @@ class CreateUserViewController: UIViewController,UITextFieldDelegate,SendProfile
         
         HUD.hide()
         
-        
+   
         //Trendの画面遷移
         let tabVC = self.storyboard?.instantiateViewController(withIdentifier: "tab") as! TabBarController
         self.navigationController?.pushViewController(tabVC, animated: true)
@@ -100,6 +100,8 @@ class CreateUserViewController: UIViewController,UITextFieldDelegate,SendProfile
         let signinVC = self.storyboard?.instantiateViewController(withIdentifier: "signinVC") as! SignInViewController
         self.navigationController?.pushViewController(signinVC, animated: true)
     }
+    
+
     
     
         

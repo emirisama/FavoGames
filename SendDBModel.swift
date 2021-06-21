@@ -18,6 +18,12 @@ protocol SendProfileDone{
     
 }
 
+protocol SendProfileImageDone{
+    
+    func checkDoneProfileImage()
+    
+}
+
 //レビューを投稿し終えたら画面遷移
 protocol DoneSendReviewContents{
     
@@ -28,6 +34,13 @@ protocol DoneSendReviewContents{
 protocol DoneSendContents{
     
     func checkDone(flag:Bool)
+    
+}
+
+//レビューの平均値を送信終えたらControllerへ
+protocol DoneSendRateAverage{
+    
+    func checkDoneRateAverage()
     
 }
 
@@ -42,6 +55,9 @@ class SendDBModel {
     var myProfile = [String]()
     var doneSendReviewContents:DoneSendReviewContents?
     var doneSendContents:DoneSendContents?
+    var doneSendRateAverage:DoneSendRateAverage?
+    var sendProfileImageDone:SendProfileImageDone?
+    var rateAverageModelArray = [RateAverageModel]()
     
     var userID = String()
     var userName = String()
@@ -50,6 +66,7 @@ class SendDBModel {
     var salesDate = String()
     var mediumImageUrl = String()
     var itemPrice = Int()
+
     
     
     init(){
@@ -119,12 +136,44 @@ class SendDBModel {
                     print("保存する")
         
         //画面遷移
+                    
         self.sendProfileDone?.checkOK()
                 }
             }
         }
     }
     
+    
+    func sendProfileImage(userName:String, email:String, id:String,profileText:String, imageData: Data){
+        
+        let imageRef = Storage.storage().reference().child("ProfielImage").child("\(UUID().uuidString + String(Date().timeIntervalSince1970)).jpg")
+        
+        imageRef.putData(imageData, metadata: nil) { (metaData, error ) in
+            
+            if error != nil{
+                return
+            }
+            
+            
+            imageRef.downloadURL { [self] (url, error) in
+                
+                if url != nil{
+                    
+                    let profileModel = ProfileModel(userName: userName, id: id, email: email, profileText: profileText, imageURLString: url?.absoluteString, userID: Auth.auth().currentUser!.uid)
+                    //アプリ内に自分のProfileを保存しておく
+                    self.userDefaultsEX.set(value: profileModel, forKey: "profile")
+                    
+                    //送信
+                    imageRef.child("Users").setValue("image", forKey:url!.absoluteString)
+                    print("保存する")
+                    
+                    //画面遷移
+                    
+                    self.sendProfileImageDone?.checkDoneProfileImage()
+                }
+            }
+        }
+    }
 
 
 
@@ -172,16 +221,24 @@ class SendDBModel {
         self.db.collection(title).document(Auth.auth().currentUser!.uid).setData(
             ["review":review,"rate":rate,"sender":self.myProfile,"date":Date().timeIntervalSince1970])
         
-        self.db.collection("ScoreAverage").document(title).collection("review").document().setData(
+        self.db.collection("Score").document(title).collection("review").document().setData(
             ["rate":rate])
         print("レビュー送信")
-      
         
 
         self.doneSendReviewContents?.checkDoneReview()
 
     }
     
+    
+    func sendRateAverage(title:String,rateAverage:[RateAverageModel]){
+    
+        self.db.collection("rateAverage").document(title).collection("rateAverage").document().setData(
+            ["rateAverage":rateAverage])
+        print("RateAverageModelの中身")
+        print(rateAverage)
+        self.doneSendRateAverage?.checkDoneRateAverage()
+    }
     
     
     

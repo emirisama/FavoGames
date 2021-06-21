@@ -9,7 +9,8 @@ import UIKit
 import FirebaseAuth
 import FirebaseFirestore
 
-class PS5ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,DoneCatchDataProtocol,GetrateAverageCountProtocol {
+class PS5ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,DoneCatchDataProtocol,GetrateAverageCountProtocol,DoneSendRateAverage {
+
 
 
     
@@ -97,9 +98,9 @@ class PS5ViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
 
         cell.rankLabel.text = String(indexPath.row + 1)
  
-        cell.reviewCountLabel.text = String(rateAverageModelArray[indexPath.row].rateAverage!)
-        print("rateAverageの中身")
-        print(self.rateAverageModelArray[indexPath.row].rateAverage!.debugDescription)
+//        cell.reviewCountLabel.text = String(rateAverageModelArray[indexPath.row].rateAverage!)
+//        print("rateAverageの中身")
+//        print(self.rateAverageModelArray[indexPath.row].rateAverage!.debugDescription)
 
         return cell
         
@@ -139,12 +140,19 @@ class PS5ViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
     func getrateAverageCount(rateArray: [RateAverageModel]) {
         self.rateAverageModelArray = []
         self.rateAverageModelArray = rateArray
+        print("dataSetsArrayの数")
+        print(dataSetsArray.count)
+        print("平均の数")
+        print(self.rateAverageModelArray.count)
         print("rateAverageModelArrayの中身")
         print(rateAverageModelArray.debugDescription)
 
         tableView.reloadData()
     }
 
+    func checkDoneRateAverage() {
+        loadModel.loadrateAverageCount(title: gameTitle, rateAverage: rateAverageModelArray)
+    }
     
     
     /*

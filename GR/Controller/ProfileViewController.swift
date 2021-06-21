@@ -10,9 +10,19 @@ import FirebaseAuth
 import SDWebImage
 import Cosmos
 import SSSpinnerButton
+import YPImagePicker
+import Firebase
+import FirebaseStorage
+import FirebaseFirestore
+import PKHUD
 
 
-class ProfileViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,GetDataProtocol,GetProfileDataProtocol,DoneSendContents,GetFollows,GetFollowers{
+class ProfileViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,GetDataProtocol,GetProfileDataProtocol,DoneSendContents,GetFollows,GetFollowers,SendProfileImageDone{
+ 
+    
+ 
+
+    
     
     
     @IBOutlet weak var imageView: UIImageView!
@@ -36,8 +46,11 @@ class ProfileViewController: UIViewController,UITableViewDelegate,UITableViewDat
     
     var userID = String()
     var userName = String()
+    var email = String()
     
     var dataArray = [ProfileModel]()
+    let db = Firestore.firestore()
+    var profileModel = ProfileModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,9 +58,15 @@ class ProfileViewController: UIViewController,UITableViewDelegate,UITableViewDat
         tableView.delegate = self
         tableView.dataSource = self
         imageView.layer.cornerRadius = imageView.frame.width/2
+        imageView.clipsToBounds = true
+
+
+        
         tableView.register(UINib(nibName: "ContentsCell", bundle: nil), forCellReuseIdentifier: "Cell")
         sendDBModel.doneSendContents = self
+        sendDBModel.sendProfileImageDone = self
 
+        
         
         //自分のプロフィールを表示する→タブが２の場合
         
@@ -101,6 +120,43 @@ class ProfileViewController: UIViewController,UITableViewDelegate,UITableViewDat
         loadModel.loadContents(title: id)
         
     }
+    
+    func showCamera(){
+        
+        var config = YPImagePickerConfiguration()
+        config.isScrollToChangeModesEnabled = true
+        config.onlySquareImagesFromCamera = true
+        config.usesFrontCamera = false
+        config.showsPhotoFilters = true
+        config.showsVideoTrimmer = true
+        config.shouldSaveNewPicturesToAlbum = true
+        config.albumName = "DefaultYPImagePickerAlbumName"
+        //↓カメラの場合は[.photo]にする
+        config.screens = [.library]
+        config.showsCrop = .none
+        config.targetImageSize = YPImageSize.original
+        config.overlayView = UIView()
+        config.hidesStatusBar = true
+        config.hidesBottomBar = false
+        config.hidesCancelButton = false
+        config.preferredStatusBarStyle = UIStatusBarStyle.default
+        config.maxCameraZoomFactor = 1.0
+        let picker = YPImagePicker(configuration: config)
+        picker.didFinishPicking { [unowned picker] items, _ in
+            if let photo = items.singlePhoto{
+                self.imageView.image = photo.image
+            }
+            picker.dismiss(animated: true, completion: nil)
+        }
+        present(picker, animated: true,completion: nil)
+        print("self.imageView.imageの中身")
+        print(self.imageView.image.debugDescription)
+        
+        
+        
+        
+    }
+    
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
@@ -244,8 +300,27 @@ class ProfileViewController: UIViewController,UITableViewDelegate,UITableViewDat
         
     }
     
+
+    @IBAction func tapAction(_ sender: UITapGestureRecognizer) {
+
+            //何も設定されていない場合
+            showCamera()
+        let imageData = self.imageView.image!.pngData()
+        //送信
+        sendDBModel.sendProfileImage(userName: profileModel.userName!, email: profileModel.email!, id: profileModel.id!, profileText: profileModel.profileText!, imageData: imageData!)
+
+        
+    }
     
     
+    func checkDoneProfileImage() {
+        HUD.hide()
+        //プロフィールが更新されたら画面遷移
+        let tabVC = self.storyboard?.instantiateViewController(withIdentifier: "tab") as! TabBarController
+        self.navigationController?.pushViewController(tabVC, animated: true)
+    }
+    
+ 
     /*
      // MARK: - Navigation
      
