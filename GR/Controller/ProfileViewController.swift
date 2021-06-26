@@ -17,7 +17,8 @@ import FirebaseFirestore
 import PKHUD
 
 
-class ProfileViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,GetDataProtocol,GetProfileDataProtocol,DoneSendContents,GetFollows,GetFollowers,SendProfileImageDone{
+class ProfileViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,GetDataProtocol,GetProfileDataProtocol,DoneSendContents,GetFollows,GetFollowers,SendProfileDone, UIImagePickerControllerDelegate, UINavigationControllerDelegate{
+
  
     
  
@@ -64,7 +65,7 @@ class ProfileViewController: UIViewController,UITableViewDelegate,UITableViewDat
         
         tableView.register(UINib(nibName: "ContentsCell", bundle: nil), forCellReuseIdentifier: "Cell")
         sendDBModel.doneSendContents = self
-        sendDBModel.sendProfileImageDone = self
+
 
         
         
@@ -107,6 +108,7 @@ class ProfileViewController: UIViewController,UITableViewDelegate,UITableViewDat
         loadModel.getProfileDataProtocol = self
         loadModel.getFollows = self
         loadModel.getFollowers = self
+        sendDBModel.sendProfileDone = self
         
         //プロフィールを受信する(idにAuth.auth().currentUserが入る
         loadModel.loadProfile(id: id)
@@ -121,41 +123,38 @@ class ProfileViewController: UIViewController,UITableViewDelegate,UITableViewDat
         
     }
     
-    func showCamera(){
-        
-        var config = YPImagePickerConfiguration()
-        config.isScrollToChangeModesEnabled = true
-        config.onlySquareImagesFromCamera = true
-        config.usesFrontCamera = false
-        config.showsPhotoFilters = true
-        config.showsVideoTrimmer = true
-        config.shouldSaveNewPicturesToAlbum = true
-        config.albumName = "DefaultYPImagePickerAlbumName"
-        //↓カメラの場合は[.photo]にする
-        config.screens = [.library]
-        config.showsCrop = .none
-        config.targetImageSize = YPImageSize.original
-        config.overlayView = UIView()
-        config.hidesStatusBar = true
-        config.hidesBottomBar = false
-        config.hidesCancelButton = false
-        config.preferredStatusBarStyle = UIStatusBarStyle.default
-        config.maxCameraZoomFactor = 1.0
-        let picker = YPImagePicker(configuration: config)
-        picker.didFinishPicking { [unowned picker] items, _ in
-            if let photo = items.singlePhoto{
-                self.imageView.image = photo.image
-            }
-            picker.dismiss(animated: true, completion: nil)
-        }
-        present(picker, animated: true,completion: nil)
-        print("self.imageView.imageの中身")
-        print(self.imageView.image.debugDescription)
-        
-        
-        
-        
-    }
+//    func showCamera(){
+//
+//        var config = YPImagePickerConfiguration()
+//        config.isScrollToChangeModesEnabled = true
+//        config.onlySquareImagesFromCamera = true
+//        config.usesFrontCamera = false
+//        config.showsPhotoFilters = true
+//        config.showsVideoTrimmer = true
+//        config.shouldSaveNewPicturesToAlbum = true
+//        config.albumName = "DefaultYPImagePickerAlbumName"
+//        //↓カメラの場合は[.photo]にする
+//        config.screens = [.library]
+//        config.showsCrop = .none
+//        config.targetImageSize = YPImageSize.original
+//        config.overlayView = UIView()
+//        config.hidesStatusBar = true
+//        config.hidesBottomBar = false
+//        config.hidesCancelButton = false
+//        config.preferredStatusBarStyle = UIStatusBarStyle.default
+//        config.maxCameraZoomFactor = 1.0
+//        let picker = YPImagePicker(configuration: config)
+//        picker.didFinishPicking { [unowned picker] items, _ in
+//            if let photo = items.singlePhoto{
+//                self.imageView.image = photo.image
+//            }
+//            picker.dismiss(animated: true, completion: nil)
+//        }
+//        present(picker, animated: true,completion: nil)
+//        print("self.imageView.imageの中身")
+//        print(self.imageView.image.debugDescription)
+//
+//    }
     
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -304,22 +303,54 @@ class ProfileViewController: UIViewController,UITableViewDelegate,UITableViewDat
     @IBAction func tapAction(_ sender: UITapGestureRecognizer) {
 
             //何も設定されていない場合
-            showCamera()
-        let imageData = self.imageView.image!.pngData()
+//            showCamera()
+        openCamera()
         //送信
-//        sendDBModel.sendProfileImage(userName: profileModel.userName!, email: profileModel.email!, id: profileModel.id!, profileText: profileModel.profileText!, imageData: imageData!)
+        sendDBModel.sendProfileDB(userName: userName, email: email, id: idLabel.text!, profileText: profileTextLabel.text!, imageData: (self.imageView.image?.jpegData(compressionQuality: 0.4))!)
 
-        
+    }
+    
+    func openCamera(){
+        let sourceType:UIImagePickerController.SourceType = .photoLibrary
+        //カメラが利用可能かチェック
+        if UIImagePickerController.isSourceTypeAvailable(.photoLibrary){
+            //インスタンスの作成
+            let cameraPicker = UIImagePickerController()
+            cameraPicker.sourceType = sourceType
+            cameraPicker.delegate = self
+            cameraPicker.allowsEditing = true
+//            cameraPicker.showsCameraControls = true
+            present(cameraPicker, animated: true,completion: nil)
+            
+        }else{
+            
+        }
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        if let pickedImage = info[.editedImage] as? UIImage{
+            imageView.image = pickedImage
+            //閉じる処理
+            picker.dismiss(animated: true, completion: nil)
+            
+        }
+    }
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        picker.dismiss(animated: true, completion: nil)
     }
     
     
-    func checkDoneProfileImage() {
+
+    
+    func checkOK() {
         HUD.hide()
-        //プロフィールが更新されたら画面遷移
-        let tabVC = self.storyboard?.instantiateViewController(withIdentifier: "tab") as! TabBarController
-        self.navigationController?.pushViewController(tabVC, animated: true)
+        dismiss(animated: true, completion: nil)
+        tableView.reloadData()
     }
     
+    
+
  
     /*
      // MARK: - Navigation

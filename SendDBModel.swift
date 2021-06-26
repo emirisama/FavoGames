@@ -129,7 +129,7 @@ class SendDBModel {
         
                     //送信
                     self.db.collection("Users").document(Auth.auth().currentUser!.uid).setData(["userName":userName,"email": email,"id":id,"userID":Auth.auth().currentUser!.uid,"Date":Date().timeIntervalSince1970,"image":url?.absoluteString,"profileText":profileText])
-                    print("保存する")
+                    print("プロフィール画像を保存する")
         
         //画面遷移
                     

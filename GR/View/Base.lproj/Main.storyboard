@@ -1030,7 +1030,7 @@
         <!--Profile View Controller-->
         <scene sceneID="DW6-9N-fFz">
             <objects>
-                <viewController storyboardIdentifier="mypage" useStoryboardIdentifierAsRestorationIdentifier="YES" id="juJ-Pj-drF" customClass="ProfileViewController" customModule="GR" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="profile" useStoryboardIdentifierAsRestorationIdentifier="YES" id="juJ-Pj-drF" customClass="ProfileViewController" customModule="GR" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ITQ-PG-5Zp">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1270,6 +1270,11 @@
             <point key="canvasLocation" x="4555" y="-1341"/>
         </scene>
     </scenes>
+    <designables>
+        <designable name="Wj9-BC-CyQ">
+            <size key="intrinsicContentSize" width="270" height="50"/>
+        </designable>
+    </designables>
     <inferredMetricsTieBreakers>
         <segue reference="3K0-bH-dte"/>
     </inferredMetricsTieBreakers>
