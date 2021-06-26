@@ -40,9 +40,10 @@ protocol GetLikeCountProtocol{
     
 }
 
-protocol GetrateAverageCountProtocol{
-    func getrateAverageCount(rateArray: [RateAverageModel])
+protocol GetRateAverageCountProtocol{
+    func getRateAverageCount(rateAverage: Double)
 }
+
 
 
 class LoadModel{
@@ -75,8 +76,12 @@ class LoadModel{
     
     //レビューの平均値に関する記述
     var rateModelArray:[RateModel] = []
-    var getrateAverageCountProtocol:GetrateAverageCountProtocol?
-    var rateAverageArray:[RateAverageModel] = []
+    var getRateAverageCountProtocol:GetRateAverageCountProtocol?
+    var rateAverage = Double()
+    var rateAverageModelArray:[RateAverageModel] = []
+    
+
+
     
     
     //コンテンツを受信するメソッド(ゲームタイトルに紐づくレビューや名前などのデータを受信する）
@@ -95,9 +100,9 @@ class LoadModel{
 
                     //if letでもし空じゃなかったらの意味（!= nilと同じ)
 
-                    if let review = data["review"] as? String,let rate = data["rate"] as? Double,let sender = data["sender"] as? [String],let date = data["date"] as? Double{
+                    if let review = data["review"] as? String,let rate = data["rate"] as? Double,let sender = data["sender"] as? [String],let date = data["date"] as? Double,let rateAverage = data["rateAverage"] as? Double{
                         
-                        let contentModel = ContentModel(review: review, sender: sender, rate: rate)
+                        let contentModel = ContentModel(review: review, sender: sender, rate: rate, rateAverage: rateAverage)
                         self.contentModelArray.append(contentModel)
 
                         self.getDataProtocol?.getData(dataArray: self.contentModelArray)
@@ -110,35 +115,35 @@ class LoadModel{
     }
     
     
-    //PS５ViewControllerでレビューが高いゲームソフトを並べる
-    func loadContents2(title:String){
-
-        db.collection(title).order(by: "Score").addSnapshotListener { (snapShot, error) in
-
-            self.contentModelArray = []
-            
-            if let snapShotDoc = snapShot?.documents{
-
-                //ドキュメントの数だけcontentModelの値を入れる
-                for doc in snapShotDoc{
-
-                    let data = doc.data()
-
-                    //if letでもし空じゃなかったらの意味（!= nilと同じ)
-
-                    if let review = data["review"] as? String,let rate = data["rate"] as? Double,let sender = data["sender"] as? [String],let date = data["date"] as? Double{
-                        
-                        let contentModel = ContentModel(review: review, sender: sender, rate: rate)
-                        self.contentModelArray.append(contentModel)
-
-                        self.getDataProtocol?.getData(dataArray: self.contentModelArray)
-
-                    }
-                }
-            }
-            
-        }
-    }
+//    //PS５ViewControllerでレビューが高いゲームソフトを並べる
+//    func loadContents2(title:String){
+//
+//        db.collection(title).order(by: "Score").addSnapshotListener { (snapShot, error) in
+//
+//            self.contentModelArray = []
+//
+//            if let snapShotDoc = snapShot?.documents{
+//
+//                //ドキュメントの数だけcontentModelの値を入れる
+//                for doc in snapShotDoc{
+//
+//                    let data = doc.data()
+//
+//                    //if letでもし空じゃなかったらの意味（!= nilと同じ)
+//
+//                    if let review = data["review"] as? String,let rate = data["rate"] as? Double,let sender = data["sender"] as? [String],let date = data["date"] as? Double{
+//
+//                        let contentModel = ContentModel(review: review, sender: sender, rate: rate)
+//                        self.contentModelArray.append(contentModel)
+//
+//                        self.getDataProtocol?.getData(dataArray: self.contentModelArray)
+//
+//                    }
+//                }
+//            }
+//
+//        }
+//    }
     
     
 
@@ -283,7 +288,7 @@ class LoadModel{
     
     
     //rateの平均値を出す
-    func loadrateAverageCount(title:String,rateAverage:[RateAverageModel]){
+    func loadRateAverageCount(title:String,rateAverage:Double){
   
         db.collection("Score").document(title).collection("review").addSnapshotListener { snapShot, error in
             self.rateModelArray = []
@@ -312,25 +317,22 @@ class LoadModel{
 
                 rateAverage = Double(totalCount) / Double(snapShotDoc.count)
                 let rateAverageScore = (round(10*rateAverage)/10)
-                let rateAverageScore2 = RateAverageModel(rateAverage: rateAverageScore)
-                self.rateAverageArray = []
-                self.rateAverageArray.append(rateAverageScore2)
-                print("self.rateAverageArrayの数")
-                print(self.rateAverageArray.count)
+
+ 
                 print("rateArrayの中身")
-                print(self.rateModelArray.debugDescription)
+                print(rateAverageScore.debugDescription)
                 print("snapShotDocの中身")
                 print(snapShotDoc.debugDescription)
-                print("totalCountの中身")
-                print(totalCount.debugDescription)
-                print("self.rateAverageArrayの中身")
-                print(self.rateAverageArray.debugDescription)
-                self.getrateAverageCountProtocol?.getrateAverageCount(rateArray: self.rateAverageArray)
+
+                self.getRateAverageCountProtocol?.getRateAverageCount(rateAverage: rateAverageScore)
             }
             
             
         }
     }
+    
+    
+    
     
 
     

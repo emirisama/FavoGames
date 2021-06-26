@@ -37,12 +37,7 @@ protocol DoneSendContents{
     
 }
 
-//レビューの平均値を送信終えたらControllerへ
-protocol DoneSendRateAverage{
-    
-    func checkDoneRateAverage()
-    
-}
+
 
 
 
@@ -55,7 +50,6 @@ class SendDBModel {
     var myProfile = [String]()
     var doneSendReviewContents:DoneSendReviewContents?
     var doneSendContents:DoneSendContents?
-    var doneSendRateAverage:DoneSendRateAverage?
     var sendProfileImageDone:SendProfileImageDone?
     var rateAverageModelArray = [RateAverageModel]()
     
@@ -66,6 +60,8 @@ class SendDBModel {
     var salesDate = String()
     var mediumImageUrl = String()
     var itemPrice = Int()
+    
+    var Game = [String]()
 
     
     
@@ -196,7 +192,6 @@ class SendDBModel {
             
         }
         
-        //
         self.db.collection("Users").document(Auth.auth().currentUser!.uid).collection("follow").document(id).setData(
             ["follower":id,"followOrNot":followOrNot,"userID":contentModel.sender![2],"userName":contentModel.sender![3],"image":contentModel.sender![0],"profileText":contentModel.sender![1]]
         )
@@ -207,19 +202,21 @@ class SendDBModel {
     }
     
     //ゲームタイトルに紐づくデータを送信
-    func sendGameTitle(title:String,sender:ProfileModel,review:String,rate:Double){
+    func sendGameTitle(title:String,sender:ProfileModel,review:String,rate:Double,rateAverage:Double){
  
         self.myProfile.append(sender.imageURLString!)
         self.myProfile.append(sender.profileText!)
         self.myProfile.append(sender.userID!)
         self.myProfile.append(sender.userName!)
         self.myProfile.append(sender.id!)
+
+        
         
         self.db.collection("Users").document(Auth.auth().currentUser!.uid).collection("reviewContents").document(title).setData(
-            ["review":review,"rate":rate,"sender":self.myProfile,"date":Date().timeIntervalSince1970])
+            ["review":review,"rate":rate,"sender":self.myProfile,"date":Date().timeIntervalSince1970,"rateAverage":rateAverage])
         
         self.db.collection(title).document(Auth.auth().currentUser!.uid).setData(
-            ["review":review,"rate":rate,"sender":self.myProfile,"date":Date().timeIntervalSince1970])
+            ["review":review,"rate":rate,"sender":self.myProfile,"date":Date().timeIntervalSince1970,"rateAverage":rateAverage])
         
         self.db.collection("Score").document(title).collection("review").document().setData(
             ["rate":rate])
@@ -231,14 +228,7 @@ class SendDBModel {
     }
     
     
-    func sendRateAverage(title:String,rateAverage:[RateAverageModel]){
-    
-        self.db.collection("rateAverage").document(title).collection("rateAverage").document().setData(
-            ["rateAverage":rateAverage])
-        print("RateAverageModelの中身")
-        print(rateAverage)
-        self.doneSendRateAverage?.checkDoneRateAverage()
-    }
+
     
     
     

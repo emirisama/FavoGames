@@ -10,7 +10,7 @@ import SDWebImage
 import Cosmos
 import PKHUD
 
-class DetailViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,GetDataProtocol,GetrateAverageCountProtocol{
+class DetailViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,GetDataProtocol,GetRateAverageCountProtocol{
 
  
     @IBOutlet weak var tableView: UITableView!
@@ -23,7 +23,7 @@ class DetailViewController: UIViewController,UITableViewDelegate,UITableViewData
     var sendDBModel = SendDBModel()
     
 
-    var array = [DataSets]()
+
     var profileModelArray = [ProfileModel]()
     
     var contentModelArray = [ContentModel]()
@@ -39,8 +39,10 @@ class DetailViewController: UIViewController,UITableViewDelegate,UITableViewData
     var contentDetailCell = ContentDetailCell()
    
     var rateArray = [RateModel]()
-    var rateAverageModelArray = [RateAverageModel]()
-    
+
+    var rateAverage = Double()
+    var dataSetsArray = [DataSets]()
+    var searchAndLoadModel = SearchAndLoadModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,8 +56,10 @@ class DetailViewController: UIViewController,UITableViewDelegate,UITableViewData
             loadModel.loadContents(title: gameTitle)
 
             //レビュー平均値を表示させる
-            loadModel.getrateAverageCountProtocol = self
-            loadModel.loadrateAverageCount(title: gameTitle, rateAverage: rateAverageModelArray)
+            loadModel.getRateAverageCountProtocol = self
+            loadModel.loadRateAverageCount(title: gameTitle, rateAverage: rateAverage)
+
+
 
                 tableView.delegate = self
                 tableView.dataSource = self
@@ -100,12 +104,15 @@ class DetailViewController: UIViewController,UITableViewDelegate,UITableViewData
     
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if  section == 0 {
-            return rateAverageModelArray.count
+
+        if section == 0{
+            return 1
         }else if section == 1{
             return contentModelArray.count
         }
-        return 0
+            return 0
+
+  
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -115,16 +122,15 @@ class DetailViewController: UIViewController,UITableViewDelegate,UITableViewData
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if  indexPath.section == 0 {
-            
 
             let cell = tableView.dequeueReusableCell(withIdentifier: "ContentDetailCell", for: indexPath) as! ContentDetailCell
             cell.selectionStyle = .none
             cell.gameTitleLabel.text = self.gameTitle
-            cell.ImageView.sd_setImage(with: URL(string: self.mediumImageUrl), completed: nil)
+            cell.ImageView.sd_setImage(with: URL(string: mediumImageUrl), completed: nil)
             cell.salesDate.text = self.salesDate
             cell.hardware.text = self.hardware
             cell.price.text = String(self.itemPrice)
-            cell.rateAverageLabel.text = String(self.rateAverageModelArray[indexPath.row].rateAverage!)
+            cell.rateAverageLabel.text = String(self.rateAverage)
             cell.reviewButton.addTarget(self, action: #selector(reviewButtonTap(_:)), for: .touchUpInside)
 
             return cell
@@ -156,7 +162,7 @@ class DetailViewController: UIViewController,UITableViewDelegate,UITableViewData
         
         let reviewVC = self.storyboard?.instantiateViewController(withIdentifier: "reviewVC") as! ReviewViewController
         
-        reviewVC.array = array
+        reviewVC.array = dataSetsArray
         reviewVC.gameTitle = gameTitle
         self.navigationController?.pushViewController(reviewVC, animated: true)
         
@@ -204,7 +210,7 @@ class DetailViewController: UIViewController,UITableViewDelegate,UITableViewData
     }
     
 
-    
+
     
     
     func getData(dataArray: [ContentModel]) {
@@ -218,11 +224,11 @@ class DetailViewController: UIViewController,UITableViewDelegate,UITableViewData
     
 
 
-    func getrateAverageCount(rateArray: [RateAverageModel]) {
-        self.rateAverageModelArray = []
-        self.rateAverageModelArray = rateArray
+    func getRateAverageCount(rateAverage: Double) {
+
+        self.rateAverage = rateAverage
         print("レイト平均")
-        print(self.rateAverageModelArray.debugDescription)
+        print(self.rateAverage.debugDescription)
         tableView.reloadData()
     }
     

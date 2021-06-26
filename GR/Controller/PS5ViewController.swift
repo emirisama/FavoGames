@@ -9,7 +9,19 @@ import UIKit
 import FirebaseAuth
 import FirebaseFirestore
 
-class PS5ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,DoneCatchDataProtocol,GetrateAverageCountProtocol,DoneSendRateAverage {
+class PS5ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,DoneCatchDataProtocol,GetDataProtocol{
+
+
+    
+
+    
+    
+ 
+    
+
+    
+
+    
 
 
 
@@ -28,9 +40,12 @@ class PS5ViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
     var loadModel = LoadModel()
 
     var rateArray = [RateModel]()
-    var rateAverageModelArray = [RateAverageModel]()
+    var rateAverage = Double()
     var gameTitle = String()
     
+
+    var sendDBModel = SendDBModel()
+
  
     
     override func viewDidLoad() {
@@ -49,6 +64,7 @@ class PS5ViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
             let searchModel = SearchAndLoadModel(urlString: urlStringPs5)
             searchModel.doneCatchDataProtocol = self
             searchModel.search()
+            
         }else if index == 1{
             let searchModel = SearchAndLoadModel(urlString: urlStringPs4)
             searchModel.doneCatchDataProtocol = self
@@ -60,7 +76,10 @@ class PS5ViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
         }
         
 
-        loadModel.getrateAverageCountProtocol = self
+        loadModel.getDataProtocol = self
+        
+ 
+
 
       
     }
@@ -98,9 +117,13 @@ class PS5ViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
 
         cell.rankLabel.text = String(indexPath.row + 1)
  
-//        cell.reviewCountLabel.text = String(rateAverageModelArray[indexPath.row].rateAverage!)
-//        print("rateAverageの中身")
-//        print(self.rateAverageModelArray[indexPath.row].rateAverage!.debugDescription)
+        //レビュー平均値をDBに送信したものを受信して表示
+        print("レビューの平均の数")
+        print(contentModelArray.count)
+        print("dataSetsaArrayの数")
+        print(dataSetsArray.count)
+//        cell.reviewCountLabel.text = String(self.contentModelArray[indexPath.row].rate!)
+
 
         return cell
         
@@ -128,31 +151,31 @@ class PS5ViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
   
         self.dataSetsArray = []
         self.dataSetsArray = array
+
         gameTitle = dataSetsArray[index].title!
-        print("dataSetsArray[index].title!の中身")
-        print(gameTitle.debugDescription)
-        loadModel.loadrateAverageCount(title: gameTitle, rateAverage: rateAverageModelArray)
+//        rateAverage = contentModelArray[index].rateAverage!
+        print("rateAverageの中身")
+        print(rateAverage.debugDescription)
+        loadModel.loadContents(title: gameTitle)
+        
         tableView.reloadData()
 
     }
 
+    func getData(dataArray: [ContentModel]) {
 
-    func getrateAverageCount(rateArray: [RateAverageModel]) {
-        self.rateAverageModelArray = []
-        self.rateAverageModelArray = rateArray
-        print("dataSetsArrayの数")
-        print(dataSetsArray.count)
-        print("平均の数")
-        print(self.rateAverageModelArray.count)
-        print("rateAverageModelArrayの中身")
-        print(rateAverageModelArray.debugDescription)
-
+        self.contentModelArray = []
+        self.contentModelArray = dataArray
         tableView.reloadData()
-    }
+        print("contentModelArrayの中身")
+        print(self.contentModelArray.debugDescription)
 
-    func checkDoneRateAverage() {
-        loadModel.loadrateAverageCount(title: gameTitle, rateAverage: rateAverageModelArray)
     }
+    
+    
+
+
+ 
     
     
     /*

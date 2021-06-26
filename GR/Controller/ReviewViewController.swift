@@ -9,7 +9,8 @@ import UIKit
 import PKHUD
 import Cosmos
 
-class ReviewViewController: UIViewController,DoneSendReviewContents{
+class ReviewViewController: UIViewController,DoneSendReviewContents,GetRateAverageCountProtocol{
+ 
  
  
    
@@ -29,7 +30,8 @@ class ReviewViewController: UIViewController,DoneSendReviewContents{
     var loadModel = LoadModel()
     var array = [DataSets]()
     var gameTitle = String()
-    var rateAverageModel = [RateAverageModel]()
+    var rateAverage = Double()
+
     
     
     override func viewDidLoad() {
@@ -38,7 +40,8 @@ class ReviewViewController: UIViewController,DoneSendReviewContents{
         sendDBModel.doneSendReviewContents = self
         reviewScore.settings.fillMode = .half
         reviewScore.rating = 3.0
-        
+        loadModel.getRateAverageCountProtocol = self
+        loadModel.loadRateAverageCount(title: gameTitle, rateAverage: self.rateAverage)
         
     }
     
@@ -58,14 +61,16 @@ class ReviewViewController: UIViewController,DoneSendReviewContents{
         if reviewTextField.text?.isEmpty != true {
 
 
-            sendDBModel.sendGameTitle(title: gameTitle,sender: profile!, review: reviewTextField.text!, rate: self.reviewScore.rating)
+            sendDBModel.sendGameTitle(title: gameTitle,sender: profile!,review: reviewTextField.text!, rate: self.reviewScore.rating,rateAverage: self.rateAverage)
             print("ゲームタイトルに紐づくレビューをSendDBModelへ")
-            sendDBModel.sendRateAverage(title: gameTitle, rateAverage: rateAverageModel)
-                
+  
+            print("レビュー平均値をDBへ")
+            print(self.rateAverage.debugDescription)
+            
             }else{
 
                 print("エラーです")
-        
+                HUD.hide()
             
         }
     
@@ -82,6 +87,14 @@ class ReviewViewController: UIViewController,DoneSendReviewContents{
     }
     
     
+    func getRateAverageCount(rateAverage: Double) {
+
+        self.rateAverage = rateAverage
+        print("レビュー平均値ALl")
+        print(self.rateAverage.debugDescription)
+    }
+    
+
     
     
     

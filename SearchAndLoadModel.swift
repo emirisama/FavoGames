@@ -83,7 +83,7 @@ class SearchAndLoadModel {
                                 
                                 let dataSets = DataSets(title: title, hardware: hardware, salesDate: salesDate, mediumImageUrl: mediumImageUrl, itemPrice: itemPrice, booksGenreId: booksGenreId)
                                 
-                                if dataSets.title!.contains("コントローラー") == false{
+                                if dataSets.title!.contains("コントローラー") == false && dataSets.title!.contains("//") == false{
                                 self.dataSetsArray.append(dataSets)
                                 }
 

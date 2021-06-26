@@ -307,7 +307,7 @@ class ProfileViewController: UIViewController,UITableViewDelegate,UITableViewDat
             showCamera()
         let imageData = self.imageView.image!.pngData()
         //送信
-        sendDBModel.sendProfileImage(userName: profileModel.userName!, email: profileModel.email!, id: profileModel.id!, profileText: profileModel.profileText!, imageData: imageData!)
+//        sendDBModel.sendProfileImage(userName: profileModel.userName!, email: profileModel.email!, id: profileModel.id!, profileText: profileModel.profileText!, imageData: imageData!)
 
         
     }

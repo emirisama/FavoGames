@@ -13,6 +13,7 @@ struct ContentModel{
     let review:String?
     var sender:[String]?
     let rate:Double?
+    let rateAverage:Double?
 
     
 }
