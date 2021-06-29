@@ -119,7 +119,8 @@ class PS5ViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
  
         //レビュー平均値をDBに送信したものを受信して表示
         print("レビューの平均の数")
-        print(contentModelArray.count)
+        print(self.contentModelArray.count)
+        print(self.contentModelArray.debugDescription)
         print("dataSetsaArrayの数")
         print(dataSetsArray.count)
 //        cell.reviewCountLabel.text = String(self.contentModelArray[indexPath.row].rate!)
@@ -152,12 +153,12 @@ class PS5ViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
         self.dataSetsArray = []
         self.dataSetsArray = array
 
+        
         gameTitle = dataSetsArray[index].title!
 //        rateAverage = contentModelArray[index].rateAverage!
         print("rateAverageの中身")
         print(rateAverage.debugDescription)
-        loadModel.loadContents(title: gameTitle)
-        
+        loadModel.loadContents(title: self.dataSetsArray[index].title!)
         tableView.reloadData()
 
     }
@@ -166,10 +167,10 @@ class PS5ViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
 
         self.contentModelArray = []
         self.contentModelArray = dataArray
-        tableView.reloadData()
+
         print("contentModelArrayの中身")
         print(self.contentModelArray.debugDescription)
-
+        tableView.reloadData()
     }
     
     

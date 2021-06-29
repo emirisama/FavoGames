@@ -77,7 +77,6 @@ class LoadModel{
     //レビューの平均値に関する記述
     var rateModelArray:[RateModel] = []
     var getRateAverageCountProtocol:GetRateAverageCountProtocol?
-    var rateAverage = Double()
     var rateAverageModelArray:[RateAverageModel] = []
     
 
@@ -86,28 +85,38 @@ class LoadModel{
     
     //コンテンツを受信するメソッド(ゲームタイトルに紐づくレビューや名前などのデータを受信する）
     func loadContents(title:String){
-
+        print("コンテントモデル受信1")
         db.collection(title).order(by: "date").addSnapshotListener { (snapShot, error) in
-
+            print("コンテントモデル受信2")
             self.contentModelArray = []
-            
+            print("コンテントモデル受信3")
+            if error != nil{
+                return
+            }
             if let snapShotDoc = snapShot?.documents{
-
+                print("コンテントモデル受信4")
                 //ドキュメントの数だけcontentModelの値を入れる
                 for doc in snapShotDoc{
-
+                    print("コンテントモデル受信5")
                     let data = doc.data()
-
+                    print("コンテントモデル受信6")
                     //if letでもし空じゃなかったらの意味（!= nilと同じ)
-
+                    print("コンテントモデル受信7")
                     if let review = data["review"] as? String,let rate = data["rate"] as? Double,let sender = data["sender"] as? [String],let date = data["date"] as? Double,let rateAverage = data["rateAverage"] as? Double{
-                        
-                        let contentModel = ContentModel(review: review, sender: sender, rate: rate, rateAverage: rateAverage)
-                        self.contentModelArray.append(contentModel)
-
-                        self.getDataProtocol?.getData(dataArray: self.contentModelArray)
-
+                        if rateAverage.isNaN == true{
+                            rateAverage == 0.0
+                            let contentModel = ContentModel(review: review, sender: sender, rate: rate, rateAverage: rateAverage)
+                            self.contentModelArray.append(contentModel)
+                            self.getDataProtocol?.getData(dataArray: self.contentModelArray)
+                            print("コンテントモデル受信8")
+                            print(self.contentModelArray.debugDescription)
+                            print("コンテントモデル受信9")
+                            
+                        }
+                    }else{
+                        print("コンテントモデル受信１０")
                     }
+                    
                 }
             }
             
@@ -316,7 +325,7 @@ class LoadModel{
                 }
 
                 rateAverage = Double(totalCount) / Double(snapShotDoc.count)
-                let rateAverageScore = (round(10*rateAverage)/10)
+                var rateAverageScore = (round(10*rateAverage)/10)
 
  
                 print("rateArrayの中身")
@@ -325,6 +334,7 @@ class LoadModel{
                 print(snapShotDoc.debugDescription)
 
                 self.getRateAverageCountProtocol?.getRateAverageCount(rateAverage: rateAverageScore)
+                
             }
             
             
