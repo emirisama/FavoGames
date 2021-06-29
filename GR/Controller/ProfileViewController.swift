@@ -269,8 +269,9 @@ class ProfileViewController: UIViewController,UITableViewDelegate,UITableViewDat
     
 
     @IBAction func tapEdit(_ sender: Any) {
-        let profileEditVC = storyboard?.instantiateViewController(identifier: "profileEdit") as! ProfileEditViewController
-        self.navigationController?.pushViewController(profileEditVC, animated: true)
+        performSegue(withIdentifier: "profileEdit", sender: nil)
+//        let profileEditVC = storyboard?.instantiateViewController(identifier: "profileEdit") as! ProfileEditViewController
+//        self.navigationController?.pushViewController(profileEditVC, animated: true)
     }
     
 

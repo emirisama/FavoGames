@@ -102,19 +102,32 @@ class LoadModel{
                     print("コンテントモデル受信6")
                     //if letでもし空じゃなかったらの意味（!= nilと同じ)
                     print("コンテントモデル受信7")
-                    if let review = data["review"] as? String,let rate = data["rate"] as? Double,let sender = data["sender"] as? [String],let date = data["date"] as? Double,let rateAverage = data["rateAverage"] as? Double{
-                        if rateAverage.isNaN == true{
-                            rateAverage == 0.0
-                            let contentModel = ContentModel(review: review, sender: sender, rate: rate, rateAverage: rateAverage)
-                            self.contentModelArray.append(contentModel)
-                            self.getDataProtocol?.getData(dataArray: self.contentModelArray)
-                            print("コンテントモデル受信8")
-                            print(self.contentModelArray.debugDescription)
-                            print("コンテントモデル受信9")
+                    if let review = data["review"] as? String,let rate = data["rate"] as? Double,let sender = data["sender"] as? [String],let date = data["date"] as? Double{
+                        if let rateAverage = data["rateAverage"] as? Double{
+                            if rateAverage.isNaN == true{
+                                rateAverage == 0.0
+                                let contentModel = ContentModel(review: review, sender: sender, rate: rate, rateAverage: rateAverage)
+                                self.contentModelArray.append(contentModel)
+                                
+                                self.getDataProtocol?.getData(dataArray: self.contentModelArray)
+                            }else{
+                                
+                            }
+                            
+                        print("コンテントモデル受信8")
+                        
+                        print("コンテントモデル受信9")
+
+                            print("rateAverage0.0")
+                        print(rateAverage.debugDescription)
+                        print("コンテントモデル受信10")
+                        
+                        print("コンテントモデル受信11")
+                        print(self.contentModelArray.debugDescription)
+                        
+                        }else{
                             
                         }
-                    }else{
-                        print("コンテントモデル受信１０")
                     }
                     
                 }

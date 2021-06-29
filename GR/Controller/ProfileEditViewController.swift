@@ -71,16 +71,17 @@ class ProfileEditViewController: UIViewController,SendProfileDone, UIImagePicker
     
     func checkOK() {
         HUD.hide()
-        let profileVC = storyboard?.instantiateViewController(identifier: "profile") as! ProfileViewController
-        self.navigationController?.pushViewController(profileVC, animated: true)
-
+//        let profileVC = storyboard?.instantiateViewController(identifier: "profile") as! ProfileViewController
+//        self.navigationController?.pushViewController(profileVC, animated: true)
+        self.dismiss(animated: true, completion: nil)
+        
     }
     
     
     
     @IBAction func done(_ sender: Any) {
         
-        sendDBModel.sendProfileDB(userName: userName, email: email, id: idLabel.text!, profileText: profileTextField.text!, imageData: (self.imageView.image?.jpegData(compressionQuality: 0.4))!)
+        sendDBModel.sendProfileDB(userName: nameLabel.text!, email: email, id: idLabel.text!, profileText: profileTextField.text!, imageData: (self.imageView.image?.jpegData(compressionQuality: 0.4))!)
         
     }
     
