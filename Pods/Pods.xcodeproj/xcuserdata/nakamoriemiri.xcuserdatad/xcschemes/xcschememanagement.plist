@@ -13,6 +13,11 @@
 		</dict>
 		<key>Alamofire.xcscheme</key>
 		<dict>
+<<<<<<< HEAD
+=======
+			<key>isShown</key>
+			<false/>
+>>>>>>> main
 			<key>orderHint</key>
 			<integer>1</integer>
 		</dict>
@@ -186,6 +191,11 @@
 		</dict>
 		<key>SwiftyJSON.xcscheme</key>
 		<dict>
+<<<<<<< HEAD
+=======
+			<key>isShown</key>
+			<false/>
+>>>>>>> main
 			<key>orderHint</key>
 			<integer>33</integer>
 		</dict>
@@ -233,6 +243,11 @@
 		</dict>
 		<key>lottie-ios.xcscheme</key>
 		<dict>
+<<<<<<< HEAD
+=======
+			<key>isShown</key>
+			<false/>
+>>>>>>> main
 			<key>orderHint</key>
 			<integer>23</integer>
 		</dict>

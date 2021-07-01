@@ -7,6 +7,7 @@
 
 import UIKit
 import FirebaseAuth
+import YPImagePicker
 
 
 class MypageViewController: UIViewController,UIImagePickerControllerDelegate,UINavigationControllerDelegate {
@@ -25,8 +26,22 @@ class MypageViewController: UIViewController,UIImagePickerControllerDelegate,UIN
         
         profielImage.layer.cornerRadius = profielImage.frame.width/2
         
+        if profielImage.image != nil{
+            
+        }else{
+            //何も設定されていない場合
+            showCamera()
+            
+        }
+        
     }
     
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        self.navigationController?.isNavigationBarHidden = true
+    }
     
     
     @IBAction func tap(_ sender: Any){
@@ -51,7 +66,8 @@ class MypageViewController: UIViewController,UIImagePickerControllerDelegate,UIN
             present(cameraPicker, animated: true, completion: nil)
             
         }else{
-            
+            //何も設定されていない場合
+            showCamera()
         }
         
     }
@@ -75,14 +91,44 @@ class MypageViewController: UIViewController,UIImagePickerControllerDelegate,UIN
     
     
     
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destination.
-     // Pass the selected object to the new view controller.
-     }
-     */
+    
+    func showCamera(){
+            var config = YPImagePickerConfiguration()
+            // [Edit configuration here ...]
+            // Build a picker with your configuration
+            config.isScrollToChangeModesEnabled = true
+            config.onlySquareImagesFromCamera = true
+            config.usesFrontCamera = false
+            config.showsPhotoFilters = true
+            config.showsVideoTrimmer = true
+            config.shouldSaveNewPicturesToAlbum = true
+            config.albumName = "DefaultYPImagePickerAlbumName"
+            config.startOnScreen = YPPickerScreen.photo
+    //        config.screens = [.photo]
+            config.screens = [.library]
+            config.showsCrop = .none
+            config.targetImageSize = YPImageSize.original
+            config.overlayView = UIView()
+            config.hidesStatusBar = true
+            config.hidesBottomBar = false
+            config.hidesCancelButton = false
+            config.preferredStatusBarStyle = UIStatusBarStyle.default
+            config.maxCameraZoomFactor = 1.0
+            let picker = YPImagePicker(configuration: config)
+            picker.didFinishPicking { [unowned picker] items, _ in
+                if let photo = items.singlePhoto {
+                    self.profielImage.image = photo.image
+                }
+                picker.dismiss(animated: true, completion: nil)
+            }
+            present(picker, animated: true, completion: nil)
+            
+        }
+    
+    
+    @IBAction func retake(_ sender: Any) {
+        showCamera()
+    }
+    
     
 }

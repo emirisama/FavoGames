@@ -11,28 +11,29 @@ import FirebaseAuth
 
 class TrendViewController: AMPagerTabsViewController {
     
-    var index = Int()
+    
 
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
         
-        settings.tabBackgroundColor = #colorLiteral(red: 0.2819149196, green: 0.7462226748, blue: 0.6821211576, alpha: 1)
-        settings.tabButtonColor = #colorLiteral(red: 0.2819149196, green: 0.7462226748, blue: 0.6821211576, alpha: 1)
-        tabFont = UIFont.systemFont(ofSize: 17, weight: .bold)
+        settings.tabBackgroundColor = #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)
+        settings.tabButtonColor = #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)
+        settings.tabHeight = 100
         isTabButtonShouldFit = true
+        tabFont = UIFont.systemFont(ofSize: 17, weight: .bold)
         self.viewControllers = getTabs()
         
-        if Auth.auth().currentUser != nil{
-            //サインイン
-            performSegue(withIdentifier: "CreateVC", sender: nil)
-            
-        }else{
-            //新規会員登録
-            performSegue(withIdentifier: "CreateVC", sender: nil)
-        }
-        
+//        if Auth.auth().currentUser != nil{
+//            let signinVC = self.storyboard?.instantiateViewController(withIdentifier: "signinVC") as! SignInViewController
+//            self.navigationController?.pushViewController(signinVC, animated: true)
+//        }else{
+//            
+//            //新規会員登録
+//        let createVC = self.storyboard?.instantiateViewController(withIdentifier: "createVC") as! CreateUserViewController
+//        self.navigationController?.pushViewController(createVC, animated: true)
+//        }
+   
         
     }
     
@@ -40,21 +41,23 @@ class TrendViewController: AMPagerTabsViewController {
         
         super.viewWillAppear(animated)
         self.navigationController?.isNavigationBarHidden = true
-    }
-   
-    func getTabs() -> [UIViewController]{
-        var vcArray = [UIViewController]()
-        for i in 0..<5{
-            
-            let trendViewController = self.storyboard?.instantiateViewController(withIdentifier: "Trend") as! TrendViewController
-            trendViewController.title = ""
-            trendViewController.index = i
-            vcArray.append(trendViewController)
-        }
-        
-        return vcArray
-        
+
+
     }
     
-
+    func getTabs() -> [UIViewController]{
+        
+        var vcArray = [UIViewController]()
+        for i in 0..<3{
+            
+            let ps5ViewController = self.storyboard?.instantiateViewController(withIdentifier: "ps5") as! PS5ViewController
+            ps5ViewController.title = "\(Constants.menuArray[i])"
+            ps5ViewController.index = i
+            vcArray.append(ps5ViewController)
+            
+            
+        }
+        return vcArray
+    }
 }
+

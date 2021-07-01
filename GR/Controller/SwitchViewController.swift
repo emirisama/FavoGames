@@ -1,16 +1,14 @@
 //
-//  CameraViewController.swift
+//  SwitchViewController.swift
 //  GR
 //
-//  Created by 中森えみり on 2021/03/31.
+//  Created by 中森えみり on 2021/04/25.
 //
 
 import UIKit
 
-class CameraViewController: UIViewController {
+class SwitchViewController: UIViewController {
 
-    var index = Int()
-    
     override func viewDidLoad() {
         super.viewDidLoad()
 
