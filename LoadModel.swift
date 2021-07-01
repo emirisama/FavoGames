@@ -64,7 +64,7 @@ class LoadModel{
                     //if letでもし空じゃなかったらの意味（!= nilと同じ)
                     print("コンテントモデル受信7")
                     if let review = data["review"] as? String,let rate = data["rate"] as? Double,let sender = data["sender"] as? [String],let date = data["date"] as? Double,let rateAverage = data["rateAverage"] as? Double{
-                        
+                        //rateAverageがnanになる
                         if rateAverage == Double("nan"){
                             rateAverage == 0.0
                         }else{
