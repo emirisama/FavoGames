@@ -18,26 +18,13 @@ protocol SendProfileDone{
     
 }
 
-protocol SendProfileImageDone{
-    
-    func checkDoneProfileImage()
-    
-}
+
 
 //レビューを投稿し終えたら画面遷移
 protocol DoneSendReviewContents{
     
     func checkDoneReview()
 }
-
-
-protocol DoneSendContents{
-    
-    func checkDone(flag:Bool)
-    
-}
-
-
 
 
 
@@ -49,8 +36,6 @@ class SendDBModel {
     var imageDatauser = Data()
     var myProfile = [String]()
     var doneSendReviewContents:DoneSendReviewContents?
-    var doneSendContents:DoneSendContents?
-    var sendProfileImageDone:SendProfileImageDone?
     var rateAverageModelArray = [RateAverageModel]()
     
     var userID = String()
@@ -139,67 +124,8 @@ class SendDBModel {
         }
     }
     
-    
-    func sendProfileImage(userName:String, email:String, id:String,profileText:String, imageData: Data){
-        
-        let imageRef = Storage.storage().reference().child("ProfielImage").child("\(UUID().uuidString + String(Date().timeIntervalSince1970)).jpg")
-        
-        imageRef.putData(imageData, metadata: nil) { (metaData, error ) in
-            
-            if error != nil{
-                return
-            }
-            
-            
-            imageRef.downloadURL { [self] (url, error) in
-                
-                if url != nil{
-                    
-                    let profileModel = ProfileModel(userName: userName, id: id, email: email, profileText: profileText, imageURLString: url?.absoluteString, userID: Auth.auth().currentUser!.uid)
-                    //アプリ内に自分のProfileを保存しておく
-                    self.userDefaultsEX.set(value: profileModel, forKey: "profile")
-                    
-                    //送信
-                    imageRef.child("Users").setValue("image", forKey:url!.absoluteString)
-                    print("保存する")
-                    
-                    //画面遷移
-                    
-                    self.sendProfileImageDone?.checkDoneProfileImage()
-                }
-            }
-        }
-    }
 
 
-
-    
-    
-    
-    //フォローに関するアクション
-    func followAction(id:String,followOrNot:Bool,contentModel:ContentModel){
-        
-        
-        let profile:ProfileModel? = userDefaultsEX.codable(forKey: "profile")
-        
-        //もしidが自分であれば
-        if id != Auth.auth().currentUser!.uid{
-            
-            //フォロワーの数(自分のデータを入れる）
-            self.db.collection("Users!").document(id).collection("follower").document(Auth.auth().currentUser!.uid).setData(
-                ["follower":Auth.auth().currentUser!.uid,"followOrNot":followOrNot,"userID":profile?.userID,"userName":profile?.userName,"image":profile?.imageURLString,"profileText":profile?.profileText]
-            )
-            
-        }
-        
-        self.db.collection("Users").document(Auth.auth().currentUser!.uid).collection("follow").document(id).setData(
-            ["follower":id,"followOrNot":followOrNot,"userID":contentModel.sender![2],"userName":contentModel.sender![3],"image":contentModel.sender![0],"profileText":contentModel.sender![1]]
-        )
-        
-        self.doneSendContents?.checkDone(flag: followOrNot)
-        
-        
-    }
     
     //ゲームタイトルに紐づくデータを送信
     func sendGameTitle(title:String,sender:ProfileModel,review:String,rate:Double,rateAverage:Double){

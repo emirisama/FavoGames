@@ -12,9 +12,7 @@ import PKHUD
 
     
 class CreateUserViewController: UIViewController,UITextFieldDelegate,SendProfileDone{
-
-    
-        
+  
         @IBOutlet weak var signupButton: UIButton!
         
         @IBOutlet weak var nameTextField: UITextField!
@@ -26,25 +24,18 @@ class CreateUserViewController: UIViewController,UITextFieldDelegate,SendProfile
         
         var sendDBModel = SendDBModel()
         var profileImage = UIImage()
-            
-        
-        
+ 
         override func viewDidLoad() {
             super.viewDidLoad()
             
             sendDBModel.sendProfileDone = self
-            
             nameTextField.delegate = self
             idTextField.delegate = self
             emailTextField.delegate = self
             passwordTextField.delegate = self
-            
 
         }
-        
 
-        
-        
         //他のところをタップするとキーボードが下がる
         override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
             self.view.endEditing(true)
@@ -54,8 +45,6 @@ class CreateUserViewController: UIViewController,UITextFieldDelegate,SendProfile
         
 
     @IBAction func registerButton(_ sender: Any) {
-    
-    
             //アカウントを作成する
             if nameTextField.text?.isEmpty != true || idTextField.text?.isEmpty != true || emailTextField.text?.isEmpty != true || passwordTextField.text?.isEmpty != true{
                 
@@ -71,23 +60,15 @@ class CreateUserViewController: UIViewController,UITextFieldDelegate,SendProfile
                         print("データをSendDBModelへ")
                     }
                 }
-                
-                
             }
-            
             
         }
         
 
     
     func checkOK() {
-        
-        //sendDB内で呼ばれたcheckOKが呼ばれるタイミングで呼ばれる
-        //画面遷移
-        
+
         HUD.hide()
-        
-   
         //Trendの画面遷移
         let tabVC = self.storyboard?.instantiateViewController(withIdentifier: "tab") as! TabBarController
         self.navigationController?.pushViewController(tabVC, animated: true)
@@ -96,14 +77,10 @@ class CreateUserViewController: UIViewController,UITextFieldDelegate,SendProfile
     
     
     @IBAction func signinButton(_ sender: Any) {
-        
         let signinVC = self.storyboard?.instantiateViewController(withIdentifier: "signinVC") as! SignInViewController
         self.navigationController?.pushViewController(signinVC, animated: true)
     }
-    
 
-    
-    
         
 }
 

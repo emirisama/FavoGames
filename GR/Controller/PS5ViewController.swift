@@ -10,43 +10,21 @@ import FirebaseAuth
 import FirebaseFirestore
 
 class PS5ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,DoneCatchDataProtocol,GetDataProtocol{
-
-
-    
-
-    
-    
- 
-    
-
-    
-
-    
-
-
-
     
     @IBOutlet weak var rankingLabel: UILabel!
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var tableView: UITableView!
-
     
     var index = Int()
     var dataSetsArray = [DataSets]()
     var db = Firestore.firestore()
     var idString = String()
     var contentModelArray = [ContentModel]()
-
     var loadModel = LoadModel()
-
     var rateArray = [RateModel]()
     var rateAverage = Double()
     var gameTitle = String()
-    
-
     var sendDBModel = SendDBModel()
-
- 
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -75,63 +53,56 @@ class PS5ViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
             searchModel.search()
         }
         
-
         loadModel.getDataProtocol = self
         
- 
-
-
-      
     }
-  
-
-        
-        
-        // Do any additional setup after loading the view.
+    
+    
+    
+    
+    // Do any additional setup after loading the view.
     
     //高さを揃える
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-
+        
         return 350
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
-
+        
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-
-            return dataSetsArray.count
-
+        
+        return dataSetsArray.count
+        
     }
     
-
+    
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "ContentsCell", for: indexPath) as! ContentsCell
-
+        
         cell.contentImageView.sd_setImage(with: URL(string: dataSetsArray[indexPath.row].mediumImageUrl!), completed: nil)
         cell.gameTitleLabel.text = dataSetsArray[indexPath.row].title
-
+        
         cell.rankLabel.text = String(indexPath.row + 1)
- 
+        
         //レビュー平均値をDBに送信したものを受信して表示
         print("レビューの平均の数")
         print(self.contentModelArray.count)
         print(self.contentModelArray.debugDescription)
         print("dataSetsaArrayの数")
         print(dataSetsArray.count)
-//        cell.reviewCountLabel.text = String(self.contentModelArray[indexPath.row].rate!)
-
-
+        //        cell.reviewCountLabel.text = String(self.contentModelArray[indexPath.row].rate!)
+        
         return cell
         
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
         
         let DetailVC = storyboard?.instantiateViewController(identifier: "detailVC") as! DetailViewController
         DetailVC.gameTitle = dataSetsArray[indexPath.row].title!
@@ -139,54 +110,44 @@ class PS5ViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
         DetailVC.salesDate = dataSetsArray[indexPath.row].salesDate!
         DetailVC.mediumImageUrl = dataSetsArray[indexPath.row].mediumImageUrl!
         DetailVC.itemPrice = dataSetsArray[indexPath.row].itemPrice!
-
         self.navigationController?.pushViewController(DetailVC, animated: true)
-
-
+        
     }
     
     
-    
-    
     func doneCatchData(array: [DataSets]) {
-  
+        
         self.dataSetsArray = []
         self.dataSetsArray = array
-
         
         gameTitle = dataSetsArray[index].title!
-//        rateAverage = contentModelArray[index].rateAverage!
+        //        rateAverage = contentModelArray[index].rateAverage!
         print("rateAverageの中身")
         print(rateAverage.debugDescription)
         loadModel.loadContents(title: self.dataSetsArray[index].title!)
         tableView.reloadData()
-
+        
     }
-
+    
     func getData(dataArray: [ContentModel]) {
-
+        
         self.contentModelArray = []
         self.contentModelArray = dataArray
-
         print("contentModelArrayの中身")
         print(self.contentModelArray.debugDescription)
         tableView.reloadData()
     }
     
     
-
-
- 
-    
     
     /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+     // Get the new view controller using segue.destination.
+     // Pass the selected object to the new view controller.
+     }
+     */
+    
 }

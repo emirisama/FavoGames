@@ -17,14 +17,8 @@ import FirebaseFirestore
 import PKHUD
 
 
-class ProfileViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,GetDataProtocol,GetProfileDataProtocol,DoneSendContents,GetFollows,GetFollowers{
-
+class ProfileViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,GetDataProtocol,GetProfileDataProtocol{
  
-    
- 
-
-    
-    
     
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
@@ -38,17 +32,11 @@ class ProfileViewController: UIViewController,UITableViewDelegate,UITableViewDat
     
     var loadModel = LoadModel()
     var sendDBModel = SendDBModel()
-    
     var contentModel:ContentModel?
     var contentModelArray = [ContentModel]()
-    
-    var followersArray = [FollowerModel]()
-    var followArray = [FollowModel]()
-    
     var userID = String()
     var userName = String()
     var email = String()
-    
     var dataArray = [ProfileModel]()
     let db = Firestore.firestore()
     var profileModel = ProfileModel()
@@ -60,32 +48,21 @@ class ProfileViewController: UIViewController,UITableViewDelegate,UITableViewDat
         tableView.dataSource = self
         imageView.layer.cornerRadius = imageView.frame.width/2
         imageView.clipsToBounds = true
-
-
-        
         tableView.register(UINib(nibName: "ContentsCell", bundle: nil), forCellReuseIdentifier: "Cell")
-        sendDBModel.doneSendContents = self
-
-
-        
-        
+  
         //自分のプロフィールを表示する→タブが２の場合
         
-        if self.tabBarController!.selectedIndex == 3{
-            
-            followButton.isHidden = true
-            
+        if self.tabBarController!.selectedIndex == 2{
+    
             //setUP
             setUp(id: Auth.auth().currentUser!.uid)
             
         }else{
             
             if contentModel?.sender![2] == Auth.auth().currentUser!.uid{
-                
-                followButton.isHidden = true
- 
+    
             }
-
+            
             //setUp（自分かどうかわからない場合）
             setUp(id: (contentModel?.sender![2])!)
             imageView.sd_setImage(with: URL(string: (contentModel?.sender![0])!), completed: nil)
@@ -93,8 +70,8 @@ class ProfileViewController: UIViewController,UITableViewDelegate,UITableViewDat
             nameLabel.text = contentModel?.sender![3]
             profileTextField.text = contentModel?.sender![1]
             idLabel.text = contentModel?.sender![4]
-
-
+            
+            
         }
         
     }
@@ -106,18 +83,10 @@ class ProfileViewController: UIViewController,UITableViewDelegate,UITableViewDat
         
         loadModel.getDataProtocol = self
         loadModel.getProfileDataProtocol = self
-        loadModel.getFollows = self
-        loadModel.getFollowers = self
 
-        
         //プロフィールを受信する(idにAuth.auth().currentUserが入る
         loadModel.loadProfile(id: id)
-        
-        //フォロワーデータの受信機能
-        loadModel.getFollowerData(id: id)
-        //フォローデータの受信機能
-        loadModel.getFollowData(id: id)
-        
+  
         //コンテンツデータの受信機能
         loadModel.loadContents(title: id)
         
@@ -139,8 +108,8 @@ class ProfileViewController: UIViewController,UITableViewDelegate,UITableViewDat
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! ContentsCell
         //自分が投稿したレビューのゲームソフトのタイトル画像(動画：コンテンツを受信しよう）
-//        cell.contentImageView.sd_setImage(with: URL(string: contentModelArray[indexPath.row].imageURLSting!), completed: nil)
-//        cell.reviewView.rating = contentModelArray[indexPath.row].rate!
+        //        cell.contentImageView.sd_setImage(with: URL(string: contentModelArray[indexPath.row].imageURLSting!), completed: nil)
+        //        cell.reviewView.rating = contentModelArray[indexPath.row].rate!
         
         return cell
     }
@@ -160,77 +129,11 @@ class ProfileViewController: UIViewController,UITableViewDelegate,UITableViewDat
     }
     
     
-    @IBAction func follow(_ sender: Any) {
-        
-        followButton.startAnimate(spinnerType: .ballClipRotate, spinnercolor: .red, spinnerSize: 20) {
-            
-            if self.followButton.titleLabel?.text == "フォローをする"{
-                
-                self.sendDBModel.followAction(id: (self.contentModel?.sender![2])!, followOrNot: true, contentModel: self.contentModel!)
-            }else if self.followButton.titleLabel?.text == "フォローをやめる"{
-                
-                self.sendDBModel.followAction(id: (self.contentModel?.sender![2])!, followOrNot: false, contentModel: self.contentModel!)
-                
-            }
-
-        }
-        
-    }
-    
-    
-    @IBAction func fwVC(_ sender: UIButton) {
-        
-        let followVC = storyboard?.instantiateViewController(identifier: "followVC") as! FollowAndFollowerViewController
-        
-        followVC.followersArray = followersArray
-        followVC.followArray = followArray
-        //tagのどっちがかがよばれる
-        followVC.tag = sender.tag
-        self.navigationController?.pushViewController(followVC, animated: true)
-
-    }
     
     
     
-    func checkDone(flag: Bool) {
-        
-        if flag == true{
-            
-            self.followButton.stopAnimatingWithCompletionType(completionType: .none) {
-                self.followButton.setTitle("フォローをやめる", for: .normal)
-            }
-            
-        }else{
-            
-            self.followButton.stopAnimatingWithCompletionType(completionType: .none) {
-                self.followButton.setTitle("フォローをする", for: .normal)
-            }
-
-        }
-    }
     
     
-    func getFollows(followArray: [FollowModel], exist: Bool) {
-        
-        self.followArray = []
-        self.followArray = followArray
-        followLabel.text = String(self.followersArray.count)
-        
-    }
-    
-    func getFollowers(followersArray: [FollowerModel], exist: Bool) {
-        
-        self.followersArray = []
-        self.followersArray = followersArray
-        followerLabel.text = String(self.followersArray.count)
-        if exist == true{
-            
-            self.followButton.setTitle("フォローをやめる", for: .normal)
-        }else{
-            self.followButton.setTitle("フォローをする", for: .normal)
-        }
-    }
-  
     //プロフィールが入ったdataArray
     func getProfileData(dataArray: [ProfileModel]) {
         
@@ -240,49 +143,30 @@ class ProfileViewController: UIViewController,UITableViewDelegate,UITableViewDat
         nameLabel.text = dataArray[0].userName
         profileTextField.text = dataArray[0].profileText
         idLabel.text = dataArray[0].id
-
         
         
-    }
-    
-    
-    @IBAction func niceList(_ sender: Any) {
-        
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let listVC = storyboard.instantiateViewController(withIdentifier: "listVC") as! ListViewController
-        
-        if userID == Auth.auth().currentUser?.uid{
-            
-            //自分のリスト
-            listVC.userName = userName
-            
-        }else{
-            
-            //みんなのリスト
-            listVC.dataArray = self.dataArray
-            
-            
-        }
-        self.navigationController?.pushViewController(listVC, animated: true)
         
     }
     
-
+    
+    
+    
+    
     @IBAction func tapEdit(_ sender: Any) {
         performSegue(withIdentifier: "profileEdit", sender: nil)
-//        let profileEditVC = storyboard?.instantiateViewController(identifier: "profileEdit") as! ProfileEditViewController
-//        self.navigationController?.pushViewController(profileEditVC, animated: true)
+        //        let profileEditVC = storyboard?.instantiateViewController(identifier: "profileEdit") as! ProfileEditViewController
+        //        self.navigationController?.pushViewController(profileEditVC, animated: true)
     }
     
-
     
     
-
-
     
     
-
- 
+    
+    
+    
+    
+    
     /*
      // MARK: - Navigation
      
