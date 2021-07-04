@@ -51,7 +51,7 @@ class CreateUserViewController: UIViewController,UITextFieldDelegate,SendProfile
                 Auth.auth().signInAnonymously { [self] (result, error) in
                     
                     let usernoimage = UIImage(named: "userimage")
-                    let usernoimagedata = usernoimage!.jpegData(compressionQuality: 1)
+                    let usernoimagedata = usernoimage?.jpegData(compressionQuality: 1)
                     if error != nil{
                         print("エラーです")
                     }else{

@@ -96,8 +96,12 @@ class PS5ViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
         print(self.contentModelArray.debugDescription)
         print("dataSetsaArrayの数")
         print(dataSetsArray.count)
-        //        cell.reviewCountLabel.text = String(self.contentModelArray[indexPath.row].rate!)
-        
+//        if contentModelArray[indexPath.row].rate != nil{
+//            cell.reviewCountLabel.text = String(self.contentModelArray[indexPath.row].rate!)
+//        }else{
+//            cell.reviewCountLabel.text = String("0.0")
+//        }
+       
         return cell
         
     }
@@ -121,10 +125,7 @@ class PS5ViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
         self.dataSetsArray = array
         
         gameTitle = dataSetsArray[index].title!
-        //        rateAverage = contentModelArray[index].rateAverage!
-        print("rateAverageの中身")
-        print(rateAverage.debugDescription)
-        loadModel.loadContents(title: self.dataSetsArray[index].title!)
+        loadModel.loadContents(title: self.dataSetsArray[index].title!,rateAverage: rateAverage)
         tableView.reloadData()
         
     }

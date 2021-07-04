@@ -38,50 +38,59 @@ class LoadModel{
     //プロフィール
     var profileModelArray:[ProfileModel] = []
     var getProfileDataProtocol:GetProfileDataProtocol?
-
+    
     //レビューの平均値に関する記述
     var rateModelArray:[RateModel] = []
     var getRateAverageCountProtocol:GetRateAverageCountProtocol?
     var rateAverageModelArray:[RateAverageModel] = []
-
+    var sendDBModel = SendDBModel()
+    var profileModel = ProfileModel()
+    var userDefaultsEX = UserDefaultsEX()
+    
+    
     //コンテンツを受信するメソッド(ゲームタイトルに紐づくレビューや名前などのデータを受信する）
-    func loadContents(title:String){
-        print("コンテントモデル受信1")
-        db.collection(title).order(by: "date").addSnapshotListener { (snapShot, error) in
-            print("コンテントモデル受信2")
+    func loadContents(title:String,rateAverage:Double){
+        db.collection(title).order(by: "date").addSnapshotListener { [self] (snapShot, error) in
             self.contentModelArray = []
-            print("コンテントモデル受信3")
             if error != nil{
                 return
             }
             if let snapShotDoc = snapShot?.documents{
-                print("コンテントモデル受信4")
                 //ドキュメントの数だけcontentModelの値を入れる
                 for doc in snapShotDoc{
-                    print("コンテントモデル受信5")
                     let data = doc.data()
-                    print("コンテントモデル受信6")
                     //if letでもし空じゃなかったらの意味（!= nilと同じ)
-                    print("コンテントモデル受信7")
                     if let review = data["review"] as? String,let rate = data["rate"] as? Double,let sender = data["sender"] as? [String],let date = data["date"] as? Double,let rateAverage = data["rateAverage"] as? Double{
-                        //rateAverageがnanになる
-                        if rateAverage == Double("nan"){
-                            rateAverage == 0.0
+                        print("rateAverageの値が入っていたら")
+                        print(rateAverage.debugDescription)
+                        if rateAverage.isNaN == true{
+                            print("もしrateAverageがnanだったらrateを入れる")
+                            let contentModel = ContentModel(review: review, sender: sender, rate: rate, rateAverage: 0.0)
+                            self.contentModelArray.append(contentModel)
+                            print(self.contentModelArray.debugDescription)
                         }else{
+                            print("そうでなければそのまま進める")
+                            let contentModel = ContentModel(review: review, sender: sender, rate: rate, rateAverage: rateAverage)
+                            self.contentModelArray.append(contentModel)
                         }
-                        let contentModel = ContentModel(review: review, sender: sender, rate: rate, rateAverage: rateAverage)
-                        self.contentModelArray.append(contentModel)
-                        
-                        self.getDataProtocol?.getData(dataArray: self.contentModelArray)
-                    }else{
-                        
                     }
+                    self.getDataProtocol?.getData(dataArray: self.contentModelArray)
+                    print("全てのcontentModelArray")
+                    print(self.contentModelArray.debugDescription)
                 }
-                
             }
+            print("snapShotDocが空だったら")
+            print(self.contentModelArray.debugDescription)
+            //                let profile:ProfileModel? = userDefaultsEX.codable(forKey: "profile")
+            //                sendDBModel.sendGameTitle(title: title, sender: profile!, review: "", rate: 0.0, rateAverage: 0.0)
         }
-        
     }
+    
+        
+    
+    
+    
+
 
 
     

@@ -53,7 +53,7 @@ class DetailViewController: UIViewController,UITableViewDelegate,UITableViewData
         case index:
             //皆のレビューを見れるようにさせる(ロードさせる）
             loadModel.getDataProtocol = self
-            loadModel.loadContents(title: gameTitle)
+            loadModel.loadContents(title: gameTitle,rateAverage: rateAverage)
 
             //レビュー平均値を表示させる
             loadModel.getRateAverageCountProtocol = self

@@ -87,9 +87,7 @@ class ProfileViewController: UIViewController,UITableViewDelegate,UITableViewDat
         //プロフィールを受信する(idにAuth.auth().currentUserが入る
         loadModel.loadProfile(id: id)
   
-        //コンテンツデータの受信機能
-        loadModel.loadContents(title: id)
-        
+
     }
     
     

@@ -81,7 +81,7 @@ class ReviewViewController: UIViewController,DoneSendReviewContents,GetRateAvera
 
         HUD.hide()
         //受信
-        loadModel.loadContents(title: gameTitle)
+        loadModel.loadContents(title: gameTitle,rateAverage: rateAverage)
         self.navigationController?.popViewController(animated: true)
         print("レビュー受信")
     }
