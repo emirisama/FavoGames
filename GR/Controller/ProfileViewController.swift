@@ -40,6 +40,8 @@ class ProfileViewController: UIViewController,UITableViewDelegate,UITableViewDat
     var dataArray = [ProfileModel]()
     let db = Firestore.firestore()
     var profileModel = ProfileModel()
+    var userDefaultsEX = UserDefaultsEX()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -90,6 +92,18 @@ class ProfileViewController: UIViewController,UITableViewDelegate,UITableViewDat
 
     }
     
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        if Auth.auth().currentUser?.uid != nil{
+            
+        }else{
+            print("新規会員登録")
+            let createVC = self.storyboard?.instantiateViewController(withIdentifier: "createVC") as! CreateUserViewController
+            createVC.modalPresentationStyle = .fullScreen
+            self.present(createVC, animated: true, completion: nil)
+        }
+    }
     
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -157,11 +171,17 @@ class ProfileViewController: UIViewController,UITableViewDelegate,UITableViewDat
     }
     
     
+    //ログアウト処理
+    @IBAction func tapLogout(_ sender: Any) {
+        userDefaultsEX.removeObject(forKey: "isLogin")
+        var appDelegate:AppDelegate = UIApplication.shared.delegate as! AppDelegate
+        appDelegate.window = UIWindow(frame: UIScreen.main.bounds)
+        appDelegate.window?.rootViewController = SignInViewController()
+        appDelegate.window?.makeKeyAndVisible()
     
+    }
     
-    
-    
-    
+        
     
     
     

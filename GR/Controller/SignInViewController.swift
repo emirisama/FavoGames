@@ -8,15 +8,21 @@
 import UIKit
 import FirebaseAuth
 
-class SignInViewController: UIViewController {
+class SignInViewController: UIViewController, GetProfileDataProtocol{
+
+    
 
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
-
+    var loadModel = LoadModel()
+    var profileModelArray = [ProfileModel]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        loadModel.getProfileDataProtocol = self
+        var id = Auth.auth().currentUser!.uid
+        loadModel.loadProfile(id: id)
         
-
 
         // Do any additional setup after loading the view.
     }
@@ -41,6 +47,19 @@ class SignInViewController: UIViewController {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         
         emailTextField.resignFirstResponder()
+        
+    }
+    
+    
+    func getProfileData(dataArray: [ProfileModel]) {
+        self.profileModelArray = dataArray
+        
+        if Auth.auth().currentUser?.uid != nil{
+           
+        }else{
+            emailTextField.text = profileModelArray[0].userName
+        }
+        
         
     }
     

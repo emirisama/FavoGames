@@ -71,7 +71,7 @@ class CreateUserViewController: UIViewController,UITextFieldDelegate,SendProfile
         HUD.hide()
         //Trendの画面遷移
         let tabVC = self.storyboard?.instantiateViewController(withIdentifier: "tab") as! TabBarController
-        self.navigationController?.pushViewController(tabVC, animated: true)
+        performSegue(withIdentifier: "tab", sender: nil)
 
     }
     

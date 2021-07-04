@@ -12,39 +12,47 @@ import IQKeyboardManagerSwift
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
+    var window: UIWindow?
+    var navigationController: UINavigationController?
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         FirebaseApp.configure()
         
         IQKeyboardManager.shared.enable = true
-        var window: UIWindow?
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let launchedBefore = UserDefaults.standard.bool(forKey: "launchedBefore")
-        if(launchedBefore == true) {
-            print("初回時")
-            UserDefaults.standard.set(false, forKey: "launchedBefore")
+        
+        var userDefaultsEX = UserDefaultsEX()
+        var isLogin: Bool? = userDefaultsEX.object(forKey: "isLogin") as? Bool
+
+        if isLogin != nil{
+            //ログインしていない場合
+            var createUserViewController: CreateUserViewController = CreateUserViewController()
+            navigationController = UINavigationController(rootViewController: createUserViewController)
+            self.window = UIWindow(frame: UIScreen.main.bounds)
+            self.window?.rootViewController = navigationController
+            self.window?.makeKeyAndVisible()
+            
         }else{
-            print("２回目以降")
-            UserDefaults.standard.set(true, forKey: "launchedBefore")
-            let signinVC = storyboard.instantiateViewController(withIdentifier: "signinVC") as! SignInViewController
-            window = UIWindow(frame: UIScreen.main.bounds)
-            window?.rootViewController = signinVC
-            window?.makeKeyAndVisible()
-            print("2回目です")
+            //ログイン中
+            var signInViewController: SignInViewController = SignInViewController()
+            navigationController = UINavigationController(rootViewController: signInViewController)
+            self.window = UIWindow(frame: UIScreen.main.bounds)
+            self.window?.rootViewController = navigationController
+            self.window?.makeKeyAndVisible()
             
         }
         
-        
         //ログアウト
-//        let firebaseAuth = Auth.auth()
-//        do {
-//            try firebaseAuth.signOut()
-//        } catch let signOutError as NSError {
-//            print ("Error signing out: %@", signOutError)
-//        }
-
-        
+        let firebaseAuth = Auth.auth()
+        do {
+            try firebaseAuth.signOut()
+        } catch {
+            print ("Error")
+        }
+  
         return true
     }
+    
+    
 
     // MARK: UISceneSession Lifecycle
 
