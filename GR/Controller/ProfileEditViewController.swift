@@ -32,6 +32,8 @@ class ProfileEditViewController: UIViewController,SendProfileDone, UIImagePicker
         
         imageView.layer.cornerRadius = imageView.frame.width/2
         imageView.clipsToBounds = true
+        profileTextField.layer.borderColor = UIColor.gray.cgColor
+        profileTextField.layer.borderWidth = 0.5
         sendDBModel.sendProfileDone = self
         setUp(id: Auth.auth().currentUser!.uid)
     
@@ -49,7 +51,7 @@ class ProfileEditViewController: UIViewController,SendProfileDone, UIImagePicker
     func getProfileData(dataArray: [ProfileModel]) {
         self.profileModelArray = dataArray
         imageView.sd_setImage(with: URL(string: dataArray[0].imageURLString!), completed: nil)
-        nameTextField   .text = dataArray[0].userName
+        nameTextField.text = dataArray[0].userName
         profileTextField.text = dataArray[0].profileText
         idLabel.text = dataArray[0].id
         

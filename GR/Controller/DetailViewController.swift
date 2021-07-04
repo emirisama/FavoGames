@@ -59,14 +59,12 @@ class DetailViewController: UIViewController,UITableViewDelegate,UITableViewData
             loadModel.getRateAverageCountProtocol = self
             loadModel.loadRateAverageCount(title: gameTitle, rateAverage: rateAverage)
 
-
-
                 tableView.delegate = self
                 tableView.dataSource = self
                 
                 tableView.register(UINib(nibName: "ContentDetailCell", bundle: nil), forCellReuseIdentifier: "ContentDetailCell")
                 tableView.register(UINib(nibName: "ReviewViewCell", bundle: nil), forCellReuseIdentifier: "ReviewViewCell")
-
+            tableView.reloadData()
 
                 break
                 

@@ -12,21 +12,35 @@ import IQKeyboardManagerSwift
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         FirebaseApp.configure()
         
         IQKeyboardManager.shared.enable = true
+        var window: UIWindow?
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let launchedBefore = UserDefaults.standard.bool(forKey: "launchedBefore")
+        if(launchedBefore == true) {
+            print("初回時")
+            UserDefaults.standard.set(false, forKey: "launchedBefore")
+        }else{
+            print("２回目以降")
+            UserDefaults.standard.set(true, forKey: "launchedBefore")
+            let signinVC = storyboard.instantiateViewController(withIdentifier: "signinVC") as! SignInViewController
+            window = UIWindow(frame: UIScreen.main.bounds)
+            window?.rootViewController = signinVC
+            window?.makeKeyAndVisible()
+            print("2回目です")
+            
+        }
         
         
         //ログアウト
-        let firebaseAuth = Auth.auth()
-        do {
-            try firebaseAuth.signOut()
-        } catch let signOutError as NSError {
-            print ("Error signing out: %@", signOutError)
-        }
+//        let firebaseAuth = Auth.auth()
+//        do {
+//            try firebaseAuth.signOut()
+//        } catch let signOutError as NSError {
+//            print ("Error signing out: %@", signOutError)
+//        }
 
         
         return true
