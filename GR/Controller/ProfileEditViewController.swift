@@ -7,19 +7,25 @@
 
 import UIKit
 import PKHUD
+import FirebaseAuth
 
-class ProfileEditViewController: UIViewController,SendProfileDone, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class ProfileEditViewController: UIViewController,SendProfileDone, UIImagePickerControllerDelegate, UINavigationControllerDelegate,GetProfileDataProtocol{
+
+
+    
 
     @IBOutlet weak var imageView: UIImageView!
-    @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var idLabel: UILabel!
     @IBOutlet weak var profileTextField: UITextView!
+    
     
     var loadModel = LoadModel()
     var sendDBModel = SendDBModel()
     var id = String()
     var userName = String()
     var email = String()
+    var profileModelArray = [ProfileModel]()
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -27,7 +33,26 @@ class ProfileEditViewController: UIViewController,SendProfileDone, UIImagePicker
         imageView.layer.cornerRadius = imageView.frame.width/2
         imageView.clipsToBounds = true
         sendDBModel.sendProfileDone = self
+        setUp(id: Auth.auth().currentUser!.uid)
+    
         // Do any additional setup after loading the view.
+    }
+    
+    func setUp(id:String){
+
+        loadModel.getProfileDataProtocol = self
+        //プロフィールを受信する(idにAuth.auth().currentUserが入る
+        loadModel.loadProfile(id: id)
+
+    }
+    
+    func getProfileData(dataArray: [ProfileModel]) {
+        self.profileModelArray = dataArray
+        imageView.sd_setImage(with: URL(string: dataArray[0].imageURLString!), completed: nil)
+        nameTextField   .text = dataArray[0].userName
+        profileTextField.text = dataArray[0].profileText
+        idLabel.text = dataArray[0].id
+        
     }
     
     
@@ -81,7 +106,7 @@ class ProfileEditViewController: UIViewController,SendProfileDone, UIImagePicker
     
     @IBAction func done(_ sender: Any) {
         
-        sendDBModel.sendProfileDB(userName: nameLabel.text!, email: email, id: idLabel.text!, profileText: profileTextField.text!, imageData: (self.imageView.image?.jpegData(compressionQuality: 0.4))!)
+        sendDBModel.sendProfileDB(userName: nameTextField.text!, email: email, id: idLabel.text!, profileText: profileTextField.text!, imageData: (self.imageView.image?.jpegData(compressionQuality: 0.4))!)
         
     }
     
