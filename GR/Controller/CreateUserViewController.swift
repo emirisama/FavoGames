@@ -33,7 +33,8 @@ class CreateUserViewController: UIViewController,UITextFieldDelegate,SendProfile
             idTextField.delegate = self
             emailTextField.delegate = self
             passwordTextField.delegate = self
-
+            print("サインアウトしてるかどうか")
+            print(Auth.auth().currentUser?.uid.debugDescription)
         }
 
         //他のところをタップするとキーボードが下がる
@@ -67,20 +68,22 @@ class CreateUserViewController: UIViewController,UITextFieldDelegate,SendProfile
 
     
     func checkOK() {
-
+        
         HUD.hide()
         //Trendの画面遷移
         let tabVC = self.storyboard?.instantiateViewController(withIdentifier: "tab") as! TabBarController
         performSegue(withIdentifier: "tab", sender: nil)
-
+        
     }
     
     
     @IBAction func signinButton(_ sender: Any) {
-        let signinVC = self.storyboard?.instantiateViewController(withIdentifier: "signinVC") as! SignInViewController
-        self.navigationController?.pushViewController(signinVC, animated: true)
-    }
-
+        print("メールアドレスでログインをたっぷ")
+            let signinVC = self.storyboard?.instantiateViewController(withIdentifier: "signinVC") as! SignInViewController
+            self.navigationController?.pushViewController(signinVC, animated: true)
         
+    }
+    
+    
 }
 

@@ -17,7 +17,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
+        tabBarController?.tabBar.isHidden = true
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -26,8 +26,10 @@ class ViewController: UIViewController {
     }
     
     @IBAction func start(_ sender: Any) {
-        
-        performSegue(withIdentifier: "next",sender: nil)
+        print("新規会員登録")
+        let createVC = self.storyboard?.instantiateViewController(withIdentifier: "createVC") as! CreateUserViewController
+        createVC.modalPresentationStyle = .fullScreen
+        self.present(createVC, animated: true, completion: nil)
     }
     
     

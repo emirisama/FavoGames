@@ -12,42 +12,21 @@ import IQKeyboardManagerSwift
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-    var window: UIWindow?
-    var navigationController: UINavigationController?
-    
+ 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         FirebaseApp.configure()
         
         IQKeyboardManager.shared.enable = true
         
-        var userDefaultsEX = UserDefaultsEX()
-        var isLogin: Bool? = userDefaultsEX.object(forKey: "isLogin") as? Bool
 
-        if isLogin != nil{
-            //ログインしていない場合
-            var createUserViewController: CreateUserViewController = CreateUserViewController()
-            navigationController = UINavigationController(rootViewController: createUserViewController)
-            self.window = UIWindow(frame: UIScreen.main.bounds)
-            self.window?.rootViewController = navigationController
-            self.window?.makeKeyAndVisible()
-            
-        }else{
-            //ログイン中
-            var signInViewController: SignInViewController = SignInViewController()
-            navigationController = UINavigationController(rootViewController: signInViewController)
-            self.window = UIWindow(frame: UIScreen.main.bounds)
-            self.window?.rootViewController = navigationController
-            self.window?.makeKeyAndVisible()
-            
-        }
         
         //ログアウト
-        let firebaseAuth = Auth.auth()
-        do {
-            try firebaseAuth.signOut()
-        } catch {
-            print ("Error")
-        }
+//        let firebaseAuth = Auth.auth()
+//        do {
+//            try firebaseAuth.signOut()
+//        } catch {
+//            print ("Error")
+//        }
   
         return true
     }

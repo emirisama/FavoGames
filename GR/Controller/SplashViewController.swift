@@ -22,19 +22,21 @@ class SplashViewController: UIViewController {
         }
     
     func chooseShouldLaunchViewController() {
-        if Auth.auth().currentUser?.uid != nil {
+        if Auth.auth().currentUser?.uid != nil{
             //サインイン
-            print("サインイン")
-            let signinVC = self.storyboard?.instantiateViewController(withIdentifier: "signinVC") as! SignInViewController
-            signinVC.modalPresentationStyle = .fullScreen
-            self.present(signinVC, animated: true, completion: nil)
-        } else {
+            print("ログイン後、TabBarVCへ遷移")
+            let tabVC = self.storyboard?.instantiateViewController(withIdentifier: "tab") as! TabBarController
+            tabVC.modalPresentationStyle = .fullScreen
+            self.present(tabVC, animated: true, completion: nil)
+        }else{
             // 新規会員登録
             print("新規会員登録")
-            let createVC = self.storyboard?.instantiateViewController(withIdentifier: "createVC") as! CreateUserViewController
-            createVC.modalPresentationStyle = .fullScreen
-            self.present(createVC, animated: true, completion: nil)
+            let tutorialVC = self.storyboard?.instantiateViewController(withIdentifier: "tutorial") as! ViewController
+            tutorialVC.modalPresentationStyle = .fullScreen
+            self.present(tutorialVC, animated: true, completion: nil)
+            
         }
+        
     }
     
 

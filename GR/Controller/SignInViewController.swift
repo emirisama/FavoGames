@@ -19,9 +19,14 @@ class SignInViewController: UIViewController, GetProfileDataProtocol{
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        loadModel.getProfileDataProtocol = self
-        var id = Auth.auth().currentUser!.uid
-        loadModel.loadProfile(id: id)
+        if Auth.auth().currentUser?.uid != nil{
+            loadModel.getProfileDataProtocol = self
+            let id = Auth.auth().currentUser!.uid
+            loadModel.loadProfile(id: id)
+        }else{
+            
+        }
+        
         
 
         // Do any additional setup after loading the view.
@@ -31,7 +36,7 @@ class SignInViewController: UIViewController, GetProfileDataProtocol{
  
         if let email = emailTextField.text,let password = passwordTextField.text{
             Auth.auth().signIn(withEmail: email, password: password) { (result, error) in
-                guard let user = result?.user,error == nil else{
+                guard let user = result?.user,error != nil else{
                     print("サインインに失敗しました")
                     
                     return

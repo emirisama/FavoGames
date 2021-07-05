@@ -23,11 +23,7 @@ class ProfileViewController: UIViewController,UITableViewDelegate,UITableViewDat
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var idLabel: UILabel!
-    @IBOutlet weak var followLabel: UILabel!
-    @IBOutlet weak var followerLabel: UILabel!
-    @IBOutlet weak var followButton: SSSpinnerButton!
     @IBOutlet weak var profileTextField: UITextView!
-    
     @IBOutlet weak var tableView: UITableView!
     
     var loadModel = LoadModel()
@@ -51,30 +47,29 @@ class ProfileViewController: UIViewController,UITableViewDelegate,UITableViewDat
         imageView.layer.cornerRadius = imageView.frame.width/2
         imageView.clipsToBounds = true
         tableView.register(UINib(nibName: "ContentsCell", bundle: nil), forCellReuseIdentifier: "Cell")
-  
+        print("ログインしてる？")
+        print(Auth.auth().currentUser?.uid.debugDescription)
         //自分のプロフィールを表示する→タブが２の場合
         
         if self.tabBarController!.selectedIndex == 2{
-    
-            //setUP
-            setUp(id: Auth.auth().currentUser!.uid)
-            
+            if Auth.auth().currentUser?.uid != nil{
+                //setUP
+                setUp(id: Auth.auth().currentUser!.uid)
+            }else{
+                if contentModel?.sender![2] == Auth.auth().currentUser!.uid{
+                }
+                //setUp（自分かどうかわからない場合）
+                setUp(id: (contentModel?.sender![2])!)
+                imageView.sd_setImage(with: URL(string: (contentModel?.sender![0])!), completed: nil)
+                imageView.clipsToBounds = true
+                nameLabel.text = contentModel?.sender![3]
+                profileTextField.text = contentModel?.sender![1]
+                idLabel.text = contentModel?.sender![4]
+            }
         }else{
             
-            if contentModel?.sender![2] == Auth.auth().currentUser!.uid{
-    
-            }
-            
-            //setUp（自分かどうかわからない場合）
-            setUp(id: (contentModel?.sender![2])!)
-            imageView.sd_setImage(with: URL(string: (contentModel?.sender![0])!), completed: nil)
-            imageView.clipsToBounds = true
-            nameLabel.text = contentModel?.sender![3]
-            profileTextField.text = contentModel?.sender![1]
-            idLabel.text = contentModel?.sender![4]
-            
-            
         }
+        
         
     }
     
@@ -173,11 +168,22 @@ class ProfileViewController: UIViewController,UITableViewDelegate,UITableViewDat
     
     //ログアウト処理
     @IBAction func tapLogout(_ sender: Any) {
-        userDefaultsEX.removeObject(forKey: "isLogin")
-        var appDelegate:AppDelegate = UIApplication.shared.delegate as! AppDelegate
-        appDelegate.window = UIWindow(frame: UIScreen.main.bounds)
-        appDelegate.window?.rootViewController = SignInViewController()
-        appDelegate.window?.makeKeyAndVisible()
+//        userDefaultsEX.removeObject(forKey: "isLogin")
+//        var appDelegate:AppDelegate = UIApplication.shared.delegate as! AppDelegate
+//        appDelegate.window = UIWindow(frame: UIScreen.main.bounds)
+//        appDelegate.window?.rootViewController = SignInViewController()
+//        appDelegate.window?.makeKeyAndVisible()
+
+        let firebaseAuth = Auth.auth()
+        do {
+            try firebaseAuth.signOut()
+            let tutorialVC = self.storyboard?.instantiateViewController(withIdentifier: "tutorial") as! ViewController
+            self.navigationController?.pushViewController(tutorialVC, animated: true)
+            print("ログアウトしました")
+        } catch {
+            print ("Error")
+        }
+        
     
     }
     

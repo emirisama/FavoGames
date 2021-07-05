@@ -57,7 +57,7 @@
                                 <color key="currentPageIndicatorTintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </pageControl>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dcf-T1-OSx">
-                                <rect key="frame" x="191" y="766" width="34" height="30"/>
+                                <rect key="frame" x="121" y="771" width="147" height="47"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Start"/>
                                 <connections>
@@ -82,13 +82,12 @@
                     <connections>
                         <outlet property="pageControl" destination="ALa-Xe-Y5G" id="6nM-ah-04S"/>
                         <outlet property="scroll" destination="ODx-zz-juC" id="OEk-4C-7pC"/>
-                        <segue destination="fBl-XV-G7T" kind="show" identifier="next" id="1g9-Aj-rpv"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
                 <exit id="CS6-cF-acy" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="974" y="96"/>
+            <point key="canvasLocation" x="973.91304347826099" y="95.758928571428569"/>
         </scene>
         <!--新規会員登録・ログイン-->
         <scene sceneID="1dK-Us-ZvR">
@@ -203,6 +202,7 @@
                                 </state>
                                 <connections>
                                     <action selector="signinButton:" destination="fBl-XV-G7T" eventType="touchUpInside" id="FDJ-48-lyq"/>
+                                    <segue destination="hr9-Ui-kYQ" kind="show" id="r1S-tE-FZD"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -218,7 +218,9 @@
                             <constraint firstItem="UQR-VH-Ro0" firstAttribute="top" secondItem="MJd-cP-yzd" secondAttribute="top" constant="40" id="swv-08-XSW"/>
                         </constraints>
                     </view>
+                    <toolbarItems/>
                     <navigationItem key="navigationItem" title="新規会員登録・ログイン" id="SLc-LE-QHV"/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="emailTextField" destination="zL2-mN-90G" id="Gb1-Ra-kmO"/>
                         <outlet property="idTextField" destination="8Xc-C8-1oT" id="brR-xi-kmM"/>
@@ -508,7 +510,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="7cL-JQ-VpW">
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="感想" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="7cL-JQ-VpW">
                                 <rect key="frame" x="30" y="194" width="354" height="34"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -563,17 +565,24 @@
                     <view key="view" contentMode="scaleToFill" id="2yY-0r-IAb">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="splash.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="iLb-Iz-JUx">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="Y9C-cZ-DtG"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sfJ-HG-D7F" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-775" y="131"/>
+            <point key="canvasLocation" x="-775.36231884057975" y="130.58035714285714"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="FrQ-7J-ZR7">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fko-T0-z6G" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="Pwn-Ff-Omf" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="RbC-Nn-b81">
@@ -584,7 +593,6 @@
                         <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="qcx-Lr-6L4"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="fko-T0-z6G" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="19" y="115"/>
         </scene>
@@ -842,7 +850,7 @@
         <!--ログイン-->
         <scene sceneID="Uwh-xT-fYo">
             <objects>
-                <viewController storyboardIdentifier="signinVC" modalPresentationStyle="fullScreen" useStoryboardIdentifierAsRestorationIdentifier="YES" id="hr9-Ui-kYQ" customClass="SignInViewController" customModule="GR" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="signinVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="hr9-Ui-kYQ" customClass="SignInViewController" customModule="GR" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="HmG-of-lcr">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -925,10 +933,16 @@
             <point key="canvasLocation" x="1661" y="321"/>
         </scene>
     </scenes>
+    <designables>
+        <designable name="Wj9-BC-CyQ">
+            <size key="intrinsicContentSize" width="270" height="50"/>
+        </designable>
+    </designables>
     <inferredMetricsTieBreakers>
         <segue reference="VtS-18-EqZ"/>
     </inferredMetricsTieBreakers>
     <resources>
+        <image name="splash.jpg" width="640" height="960"/>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
