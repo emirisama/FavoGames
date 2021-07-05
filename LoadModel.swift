@@ -25,6 +25,10 @@ protocol GetRateAverageCountProtocol{
     func getRateAverageCount(rateAverage: Double)
 }
 
+protocol GetGameTitleProtocol{
+    func getGameTitle(dataArray:[GameTitleModel])
+}
+
 
 
 class LoadModel{
@@ -47,18 +51,26 @@ class LoadModel{
     var profileModel = ProfileModel()
     var userDefaultsEX = UserDefaultsEX()
     
+    //ゲームタイトル取得
+    var gameTitleModelArray:[GameTitleModel] = []
+    var getGameTitleProtocol:GetGameTitleProtocol?
     
     //コンテンツを受信するメソッド(ゲームタイトルに紐づくレビューや名前などのデータを受信する）
     func loadContents(title:String,rateAverage:Double){
-        db.collection(title).order(by: "date").addSnapshotListener { [self] (snapShot, error) in
+        db.collection("title").addSnapshotListener { [self] (snapShot, error) in
             self.contentModelArray = []
             if error != nil{
                 return
             }
+            print("コンテントモデル受信1")
             if let snapShotDoc = snapShot?.documents{
+                print("コンテントモデル受信2")
+                print(snapShotDoc.debugDescription)
                 //ドキュメントの数だけcontentModelの値を入れる
                 for doc in snapShotDoc{
+                    print("コンテントモデル受信3")
                     let data = doc.data()
+                    print("コンテントモデル受信4")
                     //if letでもし空じゃなかったらの意味（!= nilと同じ)
                     if let review = data["review"] as? String,let rate = data["rate"] as? Double,let sender = data["sender"] as? [String],let date = data["date"] as? Double,let rateAverage = data["rateAverage"] as? Double{
                         print("rateAverageの値が入っていたら")
@@ -73,28 +85,23 @@ class LoadModel{
                             let contentModel = ContentModel(review: review, sender: sender, rate: rate, rateAverage: rateAverage)
                             self.contentModelArray.append(contentModel)
                         }
+                        print("コンテントモデル受信5")
+                    }else if let title = data["title"] as? String{
+                        let contentModel = ContentModel(review: review, sender: sender, rate: rate, rateAverage: rateAverage)
+                        self.contentModelArray.append(contentModel)
+                        print("コンテントモデル受信6")
+                        print("全てのcontentModelArray")
+                        print(self.contentModelArray.debugDescription)
                     }
+                    
                     self.getDataProtocol?.getData(dataArray: self.contentModelArray)
-                    print("全てのcontentModelArray")
-                    print(self.contentModelArray.debugDescription)
                 }
             }
             print("snapShotDocが空だったら")
             print(self.contentModelArray.debugDescription)
-            //                let profile:ProfileModel? = userDefaultsEX.codable(forKey: "profile")
-            //                sendDBModel.sendGameTitle(title: title, sender: profile!, review: "", rate: 0.0, rateAverage: 0.0)
+            
         }
     }
-    
-        
-    
-    
-    
-
-
-
-    
-
     
     //プロフィールの受信
     func loadProfile(id:String){
@@ -141,9 +148,7 @@ class LoadModel{
                             let rateArray = RateModel(rate: rate)
  
                             self.rateModelArray.append(rateArray)
-                            
                         }
-                    
                 }
                 
                 var totalCount = 0.0
@@ -165,11 +170,34 @@ class LoadModel{
                 self.getRateAverageCountProtocol?.getRateAverageCount(rateAverage: rateAverageScore)
                 
             }
-            
-            
         }
     }
     
+    func loadGameTitle(title:String){
+        
+        db.collection("title").addSnapshotListener { snapShot, error in
+            self.gameTitleModelArray = []
+            if error != nil{
+                error
+            }
+            if let snapShotDoc = snapShot?.documents{
+                for doc in snapShotDoc{
+                    let data = doc.data()
+                    if let title = data["title"] as? String{
+                        let gameTitle = GameTitleModel(title: title)
+                        self.gameTitleModelArray.append(gameTitle)
+                        
+                    }
+                }
+                
+                
+            }
+            self.getGameTitleProtocol?.getGameTitle(dataArray: self.gameTitleModelArray)
+            
+            
+        }
+        
+    }
     
     
     

@@ -9,7 +9,11 @@ import UIKit
 import FirebaseAuth
 import FirebaseFirestore
 
-class PS5ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,DoneCatchDataProtocol,GetDataProtocol{
+class PS5ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,DoneCatchDataProtocol,GetDataProtocol,SendGameTitleDone,GetGameTitleProtocol{
+ 
+    
+ 
+    
     
     @IBOutlet weak var rankingLabel: UILabel!
     @IBOutlet weak var timeLabel: UILabel!
@@ -25,6 +29,7 @@ class PS5ViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
     var rateAverage = Double()
     var gameTitle = String()
     var sendDBModel = SendDBModel()
+    var gameTitleModelArray = [GameTitleModel]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,7 +59,9 @@ class PS5ViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
         }
         
         loadModel.getDataProtocol = self
-        
+        sendDBModel.sendGameTitleDone = self
+        loadModel.getGameTitleProtocol = self
+
     }
     
     
@@ -123,9 +130,26 @@ class PS5ViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
         
         self.dataSetsArray = []
         self.dataSetsArray = array
-        
-        gameTitle = dataSetsArray[index].title!
-        loadModel.loadContents(title: self.dataSetsArray[index].title!,rateAverage: rateAverage)
+        let visit = UserDefaults.standard.bool(forKey: "visit")
+        if visit {
+            //二回目以降
+            print("二回目以降")
+        } else {
+            //初回アクセス
+            var i = 0
+            for i in 0..<dataSetsArray.count {
+                print("countの中身")
+                print(i)
+                gameTitle = dataSetsArray[i].title!
+                print("ゲームタイトルのなかみは")
+                print(dataSetsArray[i].title!.debugDescription)
+                sendDBModel.sendGameTitle(title: gameTitle)
+            }
+            print("初回起動")
+            UserDefaults.standard.set(true, forKey: "visit")
+        }
+        loadModel.loadContents(title: gameTitle,rateAverage: rateAverage)
+        loadModel.loadGameTitle(title: gameTitle)
         tableView.reloadData()
         
     }
@@ -138,7 +162,17 @@ class PS5ViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
         print(self.contentModelArray.debugDescription)
         tableView.reloadData()
     }
+ 
+    func checkDoneGameTitle() {
+        print("GameTitle送信完了")
+    }
     
+    func getGameTitle(dataArray: [GameTitleModel]) {
+        self.gameTitleModelArray = []
+        self.gameTitleModelArray = dataArray
+        print("ゲームタイトルの数")
+        print(gameTitleModelArray.count)
+    }
     
     
     /*

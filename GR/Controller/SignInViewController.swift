@@ -42,7 +42,9 @@ class SignInViewController: UIViewController, GetProfileDataProtocol{
                     return
                 }
                 print("サインインに成功しました")
-                self.performSegue(withIdentifier: "tab", sender: nil)
+                let tabVC = self.storyboard?.instantiateViewController(withIdentifier: "tab") as! TabBarController
+                tabVC.modalPresentationStyle = .fullScreen
+                self.present(tabVC, animated: true, completion: nil)
             }
         }
         

@@ -908,7 +908,6 @@
                                 </state>
                                 <connections>
                                     <action selector="signIn:" destination="hr9-Ui-kYQ" eventType="touchUpInside" id="U1J-tD-T8c"/>
-                                    <segue destination="fVx-7x-oq4" kind="show" id="Wif-S4-f2c"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -938,9 +937,6 @@
             <size key="intrinsicContentSize" width="270" height="50"/>
         </designable>
     </designables>
-    <inferredMetricsTieBreakers>
-        <segue reference="VtS-18-EqZ"/>
-    </inferredMetricsTieBreakers>
     <resources>
         <image name="splash.jpg" width="640" height="960"/>
         <systemColor name="labelColor">

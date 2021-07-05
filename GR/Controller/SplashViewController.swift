@@ -10,6 +10,8 @@ import FirebaseAuth
 
 class SplashViewController: UIViewController {
 
+    let userDefaultsEX = UserDefaultsEX()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -22,7 +24,8 @@ class SplashViewController: UIViewController {
         }
     
     func chooseShouldLaunchViewController() {
-        if Auth.auth().currentUser?.uid != nil{
+        let profile:ProfileModel? = userDefaultsEX.codable(forKey: "profile")
+        if Auth.auth().currentUser?.uid != nil && profile != nil{
             //サインイン
             print("ログイン後、TabBarVCへ遷移")
             let tabVC = self.storyboard?.instantiateViewController(withIdentifier: "tab") as! TabBarController

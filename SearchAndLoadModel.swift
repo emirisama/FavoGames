@@ -56,10 +56,7 @@ class SearchAndLoadModel {
     func search(){
         
         let encodeUrlString = self.urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
-        
         AF.request(encodeUrlString as! URLConvertible, method: .get, parameters: nil, encoding: JSONEncoding.default).responseJSON { [self] (response) in
-            
-            
             print("サーチ")
             
             switch response.result{
@@ -79,11 +76,9 @@ class SearchAndLoadModel {
                         for i in 0...self.count{
                             if let title = json["Items"][i]["Item"]["title"].string,let hardware = json["Items"][i]["Item"]["hardware"].string,let mediumImageUrl = json["Items"][i]["Item"]["mediumImageUrl"].string,let salesDate = json["Items"][i]["Item"]["salesDate"].string,let itemPrice = json["Items"][i]["Item"]["itemPrice"].int,let booksGenreId = json["Items"][i]["Item"]["booksGenreId"].string{
                                 
-                                //タイトル名の重複をさける（if)
-                                
                                 let dataSets = DataSets(title: title, hardware: hardware, salesDate: salesDate, mediumImageUrl: mediumImageUrl, itemPrice: itemPrice, booksGenreId: booksGenreId)
-                                
-                                if dataSets.title!.contains("コントローラー") == false && dataSets.title!.contains("//") == false{
+                                //タイトル名に該当のものと一致していたら排除
+                                if dataSets.title!.contains("コントローラー") == false && dataSets.title!.contains("//") == false && dataSets.title!.contains("FINAL FANTASY X/X-2 HD Remaster PS4版") == false{
                                 self.dataSetsArray.append(dataSets)
                                 }
 
@@ -93,10 +88,11 @@ class SearchAndLoadModel {
                             
                         }
                     
-                    //抽出（コントローラーが表示されてしまう）
+                    //抽出（ゲームタイトルのみ表示）
                     self.dataSetsArray = dataSetsArray.filter{ ($0.booksGenreId!.contains("006513") || $0.booksGenreId!.contains("006514") || $0.booksGenreId!.contains("006515")) && !$0.booksGenreId!.contains("006513001") && !$0.booksGenreId!.contains("006513002") && !$0.booksGenreId!.contains("006514001") && !$0.booksGenreId!.contains("006514002") && !$0.booksGenreId!.contains("006515001") && !$0.booksGenreId!.contains("006515002") }
-                    
-                    print("dataSetsArrayの中身")
+                    let orderedSet = NSOrderedSet(array: self.dataSetsArray)
+                    self.dataSetsArray = orderedSet.array as! [DataSets]
+                    print("self.dataSetsArrayの中身")
                     print(self.dataSetsArray.debugDescription)
                     
                     //コントローラー値に値を渡す必要がある

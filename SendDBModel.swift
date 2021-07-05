@@ -18,12 +18,16 @@ protocol SendProfileDone{
     
 }
 
-
-
 //レビューを投稿し終えたら画面遷移
 protocol DoneSendReviewContents{
     
     func checkDoneReview()
+}
+
+protocol SendGameTitleDone{
+    
+    func checkDoneGameTitle()
+    
 }
 
 
@@ -45,8 +49,9 @@ class SendDBModel {
     var salesDate = String()
     var mediumImageUrl = String()
     var itemPrice = Int()
+    var booksGenreId = String()
     
-    var Game = [String]()
+    var sendGameTitleDone:SendGameTitleDone?
 
     
     
@@ -128,7 +133,7 @@ class SendDBModel {
 
     
     //ゲームタイトルに紐づくデータを送信
-    func sendGameTitle(title:String,sender:ProfileModel,review:String,rate:Double,rateAverage:Double){
+    func sendContents(title:String,sender:ProfileModel,review:String,rate:Double,rateAverage:Double){
  
         self.myProfile.append(sender.imageURLString!)
         self.myProfile.append(sender.profileText!)
@@ -153,7 +158,15 @@ class SendDBModel {
 
     }
     
-    
+    func sendGameTitle(title:String){
+        
+        self.db.collection("title").document().setData(
+            ["title":title]
+        )
+        
+        self.sendGameTitleDone?.checkDoneGameTitle()
+        
+    }
 
     
     

@@ -61,7 +61,7 @@ class ReviewViewController: UIViewController,DoneSendReviewContents,GetRateAvera
         if reviewTextField.text?.isEmpty != true {
 
 
-            sendDBModel.sendGameTitle(title: gameTitle,sender: profile!,review: reviewTextField.text!, rate: self.reviewScore.rating,rateAverage: self.rateAverage)
+            sendDBModel.sendContents(title: gameTitle,sender: profile!,review: reviewTextField.text!, rate: self.reviewScore.rating,rateAverage: self.rateAverage)
             print("ゲームタイトルに紐づくレビューをSendDBModelへ")
   
             print("レビュー平均値をDBへ")
