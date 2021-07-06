@@ -143,11 +143,11 @@ class SendDBModel {
 
         
         
-        self.db.collection("Users").document(Auth.auth().currentUser!.uid).collection("reviewContents").document(title).setData(
+        self.db.collection("Users").document(Auth.auth().currentUser!.uid).collection("title").document(title).setData(
             ["review":review,"rate":rate,"sender":self.myProfile,"date":Date().timeIntervalSince1970,"rateAverage":rateAverage])
         
-        self.db.collection(title).document(Auth.auth().currentUser!.uid).setData(
-            ["review":review,"rate":rate,"sender":self.myProfile,"date":Date().timeIntervalSince1970,"rateAverage":rateAverage])
+//        self.db.collection(title).document(Auth.auth().currentUser!.uid).setData(
+//            ["review":review,"rate":rate,"sender":self.myProfile,"date":Date().timeIntervalSince1970,"rateAverage":rateAverage])
         
         self.db.collection("Score").document(title).collection("review").document().setData(
             ["rate":rate])
@@ -158,10 +158,10 @@ class SendDBModel {
 
     }
     
-    func sendGameTitle(title:String){
+    func sendGameTitle(title:String,hardware:String,salesDate:String,mediumImageUrl:String,itemPrice:Int,booksGenreId:String){
+        self.db.collection("Users").document(Auth.auth().currentUser!.uid).collection("title").document(title).setData(
+            ["title":title,"hardware":hardware,"salesDate":salesDate,"mediumImageUrl":mediumImageUrl,"itemPrice":itemPrice,"booksGenreId":booksGenreId]
         
-        self.db.collection("title").document().setData(
-            ["title":title]
         )
         
         self.sendGameTitleDone?.checkDoneGameTitle()

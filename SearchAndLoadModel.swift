@@ -40,7 +40,10 @@ class SearchAndLoadModel {
     var db = Firestore.firestore()
     var userNameArray = [String]()
     var doneLoadUserNameProtocol:DoneLoadUserNameProtocol?
+    var gameTitle = String()
+
     
+    var sendDBModel = SendDBModel()
     
     init(urlString:String){
         
@@ -92,9 +95,9 @@ class SearchAndLoadModel {
                     self.dataSetsArray = dataSetsArray.filter{ ($0.booksGenreId!.contains("006513") || $0.booksGenreId!.contains("006514") || $0.booksGenreId!.contains("006515")) && !$0.booksGenreId!.contains("006513001") && !$0.booksGenreId!.contains("006513002") && !$0.booksGenreId!.contains("006514001") && !$0.booksGenreId!.contains("006514002") && !$0.booksGenreId!.contains("006515001") && !$0.booksGenreId!.contains("006515002") }
                     let orderedSet = NSOrderedSet(array: self.dataSetsArray)
                     self.dataSetsArray = orderedSet.array as! [DataSets]
-                    print("self.dataSetsArrayの中身")
-                    print(self.dataSetsArray.debugDescription)
-                    
+                    print("self.dataSetsArrayの数")
+                    print(self.dataSetsArray.count)
+            
                     //コントローラー値に値を渡す必要がある
                     self.doneCatchDataProtocol?.doneCatchData(array: self.dataSetsArray)
                     

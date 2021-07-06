@@ -15,6 +15,10 @@ protocol GetDataProtocol{
     
 }
 
+protocol GetGameDataProtocol{
+    func getGameData(dataArray:[GameTitleModel])
+}
+
 protocol GetProfileDataProtocol{
     
     func getProfileData(dataArray:[ProfileModel])
@@ -25,9 +29,6 @@ protocol GetRateAverageCountProtocol{
     func getRateAverageCount(rateAverage: Double)
 }
 
-protocol GetGameTitleProtocol{
-    func getGameTitle(dataArray:[GameTitleModel])
-}
 
 
 
@@ -53,12 +54,13 @@ class LoadModel{
     
     //ゲームタイトル取得
     var gameTitleModelArray:[GameTitleModel] = []
-    var getGameTitleProtocol:GetGameTitleProtocol?
+    var getGameDataProtocol:GetGameDataProtocol?
     
     //コンテンツを受信するメソッド(ゲームタイトルに紐づくレビューや名前などのデータを受信する）
     func loadContents(title:String,rateAverage:Double){
-        db.collection("title").addSnapshotListener { [self] (snapShot, error) in
+        db.collection("Users").document(Auth.auth().currentUser!.uid).collection("title").addSnapshotListener { [self] (snapShot, error) in
             self.contentModelArray = []
+            
             if error != nil{
                 return
             }
@@ -86,26 +88,54 @@ class LoadModel{
                             self.contentModelArray.append(contentModel)
                         }
                         print("コンテントモデル受信5")
-                    }else if let title = data["title"] as? String{
-                        let contentModel = ContentModel(review: review, sender: sender, rate: rate, rateAverage: rateAverage)
+                    }else if let title = data["title"] as? String,let hardware = data["hardware"] as? String,let salesDate = data["salesDate"] as? String,let mediumImageUrl = data["mediumImageUrl"] as? String,let itemPrice = data["itemPrice"] as? Int,let booksGenreId = data["booksGenreId"] as? String{
+                        let contentModel = ContentModel(review: "", sender: nil, rate: 0.0, rateAverage: 0.0)
                         self.contentModelArray.append(contentModel)
                         print("コンテントモデル受信6")
                         print("全てのcontentModelArray")
                         print(self.contentModelArray.debugDescription)
                     }
-                    
-                    self.getDataProtocol?.getData(dataArray: self.contentModelArray)
                 }
+                self.getDataProtocol?.getData(dataArray: self.contentModelArray)
+
             }
             print("snapShotDocが空だったら")
-            print(self.contentModelArray.debugDescription)
-            
+            print(self.contentModelArray.debugDescription)      
+        }
+    }
+    
+    func loadGameContents(title:String,hardware:String,salesDate:String,mediumImageUrl:String,itemPrice:Int,booksGenreId:String){
+        db.collection("Users").document(Auth.auth().currentUser!.uid).collection("title").addSnapshotListener { [self] (snapShot, error) in
+            self.gameTitleModelArray = []
+            if error != nil{
+                return
+            }
+            print("ゲーム受信1")
+            if let snapShotDoc = snapShot?.documents{
+                print("ゲーム受信2")
+                print(snapShotDoc.debugDescription)
+                //ドキュメントの数だけcontentModelの値を入れる
+                for doc in snapShotDoc{
+                    print("ゲーム受信3")
+                    let data = doc.data()
+                    print("ゲーム受信4")
+                    //if letでもし空じゃなかったらの意味（!= nilと同じ)
+                    if let title = data["title"] as? String,let hardware = data["hardware"] as? String,let salesDate = data["salesDate"] as? String,let mediumImageUrl = data["mediumImageUrl"] as? String,let itemPrice = data["itemPrice"] as? Int,let booksGenreId = data["booksGenreId"] as? String{
+                        let gameTitleModel = GameTitleModel(title: title, hardware: hardware, salesDate: salesDate, mediumImageUrl: mediumImageUrl, itemPrice: itemPrice, booksGenreId: booksGenreId)
+                       self.gameTitleModelArray.append(gameTitleModel)
+                        print("ゲームタイトルモデルの中身")
+                        print(self.gameTitleModelArray.debugDescription)
+                    }
+                    
+                }
+                self.getGameDataProtocol?.getGameData(dataArray: self.gameTitleModelArray)
+            }
+
         }
     }
     
     //プロフィールの受信
     func loadProfile(id:String){
-        
         db.collection("Users").document(id).addSnapshotListener { (snapShot, error) in
             
             self.profileModelArray = []
@@ -134,7 +164,6 @@ class LoadModel{
     
     //rateの平均値を出す
     func loadRateAverageCount(title:String,rateAverage:Double){
-  
         db.collection("Score").document(title).collection("review").addSnapshotListener { snapShot, error in
             self.rateModelArray = []
             if error != nil{
@@ -150,7 +179,6 @@ class LoadModel{
                             self.rateModelArray.append(rateArray)
                         }
                 }
-                
                 var totalCount = 0.0
                 var rateAverage = 0.0
                 for (index, value) in self.rateModelArray.enumerated(){
@@ -160,8 +188,6 @@ class LoadModel{
 
                 rateAverage = Double(totalCount) / Double(snapShotDoc.count)
                 var rateAverageScore = (round(10*rateAverage)/10)
-
- 
                 print("rateArrayの中身")
                 print(rateAverageScore.debugDescription)
                 print("snapShotDocの中身")
@@ -173,31 +199,7 @@ class LoadModel{
         }
     }
     
-    func loadGameTitle(title:String){
-        
-        db.collection("title").addSnapshotListener { snapShot, error in
-            self.gameTitleModelArray = []
-            if error != nil{
-                error
-            }
-            if let snapShotDoc = snapShot?.documents{
-                for doc in snapShotDoc{
-                    let data = doc.data()
-                    if let title = data["title"] as? String{
-                        let gameTitle = GameTitleModel(title: title)
-                        self.gameTitleModelArray.append(gameTitle)
-                        
-                    }
-                }
-                
-                
-            }
-            self.getGameTitleProtocol?.getGameTitle(dataArray: self.gameTitleModelArray)
-            
-            
-        }
-        
-    }
+
     
     
     

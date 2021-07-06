@@ -9,7 +9,9 @@ import UIKit
 import FirebaseAuth
 import FirebaseFirestore
 
-class PS5ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,DoneCatchDataProtocol,GetDataProtocol,SendGameTitleDone,GetGameTitleProtocol{
+class PS5ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,DoneCatchDataProtocol,GetDataProtocol,SendGameTitleDone,GetGameDataProtocol{
+ 
+    
  
     
  
@@ -27,9 +29,14 @@ class PS5ViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
     var loadModel = LoadModel()
     var rateArray = [RateModel]()
     var rateAverage = Double()
-    var gameTitle = String()
     var sendDBModel = SendDBModel()
     var gameTitleModelArray = [GameTitleModel]()
+    var gameTitle = String()
+    var hardware = String()
+    var salesDate = String()
+    var mediumImageUrl = String()
+    var itemPrice = Int()
+    var booksGenreId = String()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,20 +54,22 @@ class PS5ViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
             let searchModel = SearchAndLoadModel(urlString: urlStringPs5)
             searchModel.doneCatchDataProtocol = self
             searchModel.search()
-            
+
         }else if index == 1{
             let searchModel = SearchAndLoadModel(urlString: urlStringPs4)
             searchModel.doneCatchDataProtocol = self
             searchModel.search()
+
         }else if index == 2{
             let searchModel = SearchAndLoadModel(urlString: urlStringSwitch)
             searchModel.doneCatchDataProtocol = self
             searchModel.search()
+            
         }
         
         loadModel.getDataProtocol = self
         sendDBModel.sendGameTitleDone = self
-        loadModel.getGameTitleProtocol = self
+        loadModel.getGameDataProtocol = self
 
     }
     
@@ -82,7 +91,7 @@ class PS5ViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return dataSetsArray.count
+        return contentModelArray.count
         
     }
     
@@ -101,14 +110,10 @@ class PS5ViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
         print("レビューの平均の数")
         print(self.contentModelArray.count)
         print(self.contentModelArray.debugDescription)
-        print("dataSetsaArrayの数")
-        print(dataSetsArray.count)
-//        if contentModelArray[indexPath.row].rate != nil{
-//            cell.reviewCountLabel.text = String(self.contentModelArray[indexPath.row].rate!)
-//        }else{
-//            cell.reviewCountLabel.text = String("0.0")
-//        }
-       
+        print("gameTitleModelArrayの数")
+        print(gameTitleModelArray.count)
+        cell.reviewCountLabel.text = String(self.contentModelArray[indexPath.row].rateAverage!)
+  
         return cell
         
     }
@@ -130,26 +135,24 @@ class PS5ViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
         
         self.dataSetsArray = []
         self.dataSetsArray = array
-        let visit = UserDefaults.standard.bool(forKey: "visit")
-        if visit {
-            //二回目以降
-            print("二回目以降")
-        } else {
-            //初回アクセス
-            var i = 0
-            for i in 0..<dataSetsArray.count {
-                print("countの中身")
-                print(i)
-                gameTitle = dataSetsArray[i].title!
-                print("ゲームタイトルのなかみは")
-                print(dataSetsArray[i].title!.debugDescription)
-                sendDBModel.sendGameTitle(title: gameTitle)
-            }
-            print("初回起動")
-            UserDefaults.standard.set(true, forKey: "visit")
+        
+        for i in 0..<self.dataSetsArray.count {
+            print("countの中身")
+            print(i)
+            gameTitle = dataSetsArray[i].title!
+            hardware = dataSetsArray[i].hardware!
+            salesDate = dataSetsArray[i].salesDate!
+            mediumImageUrl = dataSetsArray[i].mediumImageUrl!
+            itemPrice = dataSetsArray[i].itemPrice!
+            booksGenreId = dataSetsArray[i].booksGenreId!
+            print("ゲームタイトルのなかみは")
+            print(dataSetsArray[i].title!.debugDescription)
+
         }
+        sendDBModel.sendGameTitle(title: gameTitle, hardware: hardware, salesDate: salesDate, mediumImageUrl: mediumImageUrl, itemPrice: itemPrice, booksGenreId: booksGenreId)
         loadModel.loadContents(title: gameTitle,rateAverage: rateAverage)
-        loadModel.loadGameTitle(title: gameTitle)
+        loadModel.loadGameContents(title: gameTitle, hardware: hardware, salesDate: salesDate, mediumImageUrl: mediumImageUrl, itemPrice: itemPrice, booksGenreId: booksGenreId)
+
         tableView.reloadData()
         
     }
@@ -167,13 +170,14 @@ class PS5ViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
         print("GameTitle送信完了")
     }
     
-    func getGameTitle(dataArray: [GameTitleModel]) {
+
+    
+    func getGameData(dataArray: [GameTitleModel]) {
         self.gameTitleModelArray = []
         self.gameTitleModelArray = dataArray
-        print("ゲームタイトルの数")
-        print(gameTitleModelArray.count)
+        print("gameTitleModelArrayの中身(PS5）")
+        print(gameTitleModelArray.debugDescription)
     }
-    
     
     /*
      // MARK: - Navigation
