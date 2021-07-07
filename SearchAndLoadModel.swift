@@ -40,7 +40,13 @@ class SearchAndLoadModel {
     var db = Firestore.firestore()
     var userNameArray = [String]()
     var doneLoadUserNameProtocol:DoneLoadUserNameProtocol?
-    var gameTitle = String()
+    var title = String()
+    var hardware = String()
+    var salesDate = String()
+    var mediumImageUrl = String()
+    var itemPrice = Int()
+    var booksGenreId = String()
+    
 
     
     var sendDBModel = SendDBModel()
@@ -97,6 +103,21 @@ class SearchAndLoadModel {
                     self.dataSetsArray = orderedSet.array as! [DataSets]
                     print("self.dataSetsArrayの数")
                     print(self.dataSetsArray.count)
+                    
+                    for i in 0..<self.dataSetsArray.count {
+                        print("countの中身")
+                        print(i)
+                        title = dataSetsArray[i].title!
+                        hardware = dataSetsArray[i].hardware!
+                        salesDate = dataSetsArray[i].salesDate!
+                        mediumImageUrl = dataSetsArray[i].mediumImageUrl!
+                        itemPrice = dataSetsArray[i].itemPrice!
+                        booksGenreId = dataSetsArray[i].booksGenreId!
+                        print("ゲームタイトルのなかみは")
+                        print(dataSetsArray[i].title!.debugDescription)
+                        sendDBModel.sendGameTitle(title: title, hardware: hardware, salesDate: salesDate, mediumImageUrl: mediumImageUrl, itemPrice: itemPrice, booksGenreId: booksGenreId)
+                    }
+
             
                     //コントローラー値に値を渡す必要がある
                     self.doneCatchDataProtocol?.doneCatchData(array: self.dataSetsArray)

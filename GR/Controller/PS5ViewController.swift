@@ -70,6 +70,8 @@ class PS5ViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
         loadModel.getDataProtocol = self
         sendDBModel.sendGameTitleDone = self
         loadModel.getGameDataProtocol = self
+        loadModel.loadGameContents(title: gameTitle, hardware: hardware, salesDate: salesDate, mediumImageUrl: mediumImageUrl, itemPrice: itemPrice, booksGenreId: booksGenreId)
+        loadModel.loadContents(title: gameTitle,rateAverage: rateAverage)
 
     }
     
@@ -99,6 +101,7 @@ class PS5ViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
+
         let cell = tableView.dequeueReusableCell(withIdentifier: "ContentsCell", for: indexPath) as! ContentsCell
         
         cell.contentImageView.sd_setImage(with: URL(string: dataSetsArray[indexPath.row].mediumImageUrl!), completed: nil)
@@ -135,32 +138,16 @@ class PS5ViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
         
         self.dataSetsArray = []
         self.dataSetsArray = array
-        
-        for i in 0..<self.dataSetsArray.count {
-            print("countの中身")
-            print(i)
-            gameTitle = dataSetsArray[i].title!
-            hardware = dataSetsArray[i].hardware!
-            salesDate = dataSetsArray[i].salesDate!
-            mediumImageUrl = dataSetsArray[i].mediumImageUrl!
-            itemPrice = dataSetsArray[i].itemPrice!
-            booksGenreId = dataSetsArray[i].booksGenreId!
-            print("ゲームタイトルのなかみは")
-            print(dataSetsArray[i].title!.debugDescription)
-
-        }
-        sendDBModel.sendGameTitle(title: gameTitle, hardware: hardware, salesDate: salesDate, mediumImageUrl: mediumImageUrl, itemPrice: itemPrice, booksGenreId: booksGenreId)
-        loadModel.loadContents(title: gameTitle,rateAverage: rateAverage)
-        loadModel.loadGameContents(title: gameTitle, hardware: hardware, salesDate: salesDate, mediumImageUrl: mediumImageUrl, itemPrice: itemPrice, booksGenreId: booksGenreId)
 
         tableView.reloadData()
-        
+
     }
     
     func getData(dataArray: [ContentModel]) {
         
         self.contentModelArray = []
         self.contentModelArray = dataArray
+  
         print("contentModelArrayの中身")
         print(self.contentModelArray.debugDescription)
         tableView.reloadData()
@@ -168,6 +155,7 @@ class PS5ViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
  
     func checkDoneGameTitle() {
         print("GameTitle送信完了")
+
     }
     
 
@@ -178,6 +166,7 @@ class PS5ViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
         print("gameTitleModelArrayの中身(PS5）")
         print(gameTitleModelArray.debugDescription)
     }
+    
     
     /*
      // MARK: - Navigation

@@ -128,10 +128,7 @@ class SendDBModel {
             }
         }
     }
-    
-
-
-    
+ 
     //ゲームタイトルに紐づくデータを送信
     func sendContents(title:String,sender:ProfileModel,review:String,rate:Double,rateAverage:Double){
  
@@ -158,12 +155,11 @@ class SendDBModel {
 
     }
     
+    //ゲームタイトル送信
     func sendGameTitle(title:String,hardware:String,salesDate:String,mediumImageUrl:String,itemPrice:Int,booksGenreId:String){
         self.db.collection("Users").document(Auth.auth().currentUser!.uid).collection("title").document(title).setData(
             ["title":title,"hardware":hardware,"salesDate":salesDate,"mediumImageUrl":mediumImageUrl,"itemPrice":itemPrice,"booksGenreId":booksGenreId]
-        
         )
-        
         self.sendGameTitleDone?.checkDoneGameTitle()
         
     }

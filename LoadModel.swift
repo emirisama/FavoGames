@@ -104,6 +104,8 @@ class LoadModel{
         }
     }
     
+    
+    //ゲームタイトル受信
     func loadGameContents(title:String,hardware:String,salesDate:String,mediumImageUrl:String,itemPrice:Int,booksGenreId:String){
         db.collection("Users").document(Auth.auth().currentUser!.uid).collection("title").addSnapshotListener { [self] (snapShot, error) in
             self.gameTitleModelArray = []
@@ -122,7 +124,7 @@ class LoadModel{
                     //if letでもし空じゃなかったらの意味（!= nilと同じ)
                     if let title = data["title"] as? String,let hardware = data["hardware"] as? String,let salesDate = data["salesDate"] as? String,let mediumImageUrl = data["mediumImageUrl"] as? String,let itemPrice = data["itemPrice"] as? Int,let booksGenreId = data["booksGenreId"] as? String{
                         let gameTitleModel = GameTitleModel(title: title, hardware: hardware, salesDate: salesDate, mediumImageUrl: mediumImageUrl, itemPrice: itemPrice, booksGenreId: booksGenreId)
-                       self.gameTitleModelArray.append(gameTitleModel)
+                        self.gameTitleModelArray.append(gameTitleModel)
                         print("ゲームタイトルモデルの中身")
                         print(self.gameTitleModelArray.debugDescription)
                     }

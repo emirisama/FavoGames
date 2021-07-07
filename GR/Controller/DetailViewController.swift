@@ -137,8 +137,8 @@ class DetailViewController: UIViewController,UITableViewDelegate,UITableViewData
 
             let cell2 = tableView.dequeueReusableCell(withIdentifier: "ReviewViewCell", for: indexPath) as! ReviewViewCell
             cell2.selectionStyle = .none
-            cell2.userNameLabel.text = self.contentModelArray[indexPath.row].sender![3]
-            cell2.userIDLabel.text = self.contentModelArray[indexPath.row].sender![4]
+            cell2.userNameLabel.text = self.contentModelArray[indexPath.row].sender?[3]
+            cell2.userIDLabel.text = self.contentModelArray[indexPath.row].sender?[4]
             cell2.reviewViewLabel.text = self.contentModelArray[indexPath.row].review
             cell2.scoreCountLabel.text = String(self.contentModelArray[indexPath.row].rate!)
             cell2.scoreView.rating = self.contentModelArray[indexPath.row].rate!
