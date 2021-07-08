@@ -17,7 +17,9 @@ import FirebaseFirestore
 import PKHUD
 
 
-class ProfileViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,GetDataProtocol,GetProfileDataProtocol{
+class ProfileViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,GetGameDataPS5Protocol,GetGameDataPS4Protocol,GetGameDataSwitchProtocol,GetProfileDataProtocol{
+
+    
  
     
     @IBOutlet weak var imageView: UIImageView!
@@ -37,6 +39,10 @@ class ProfileViewController: UIViewController,UITableViewDelegate,UITableViewDat
     let db = Firestore.firestore()
     var profileModel = ProfileModel()
     var userDefaultsEX = UserDefaultsEX()
+    
+    var gameTitleModelPS5Array = [GameTitleModel]()
+    var gameTitleModelPS4Array = [GameTitleModel]()
+    var gameTitleModelSwitchArray = [GameTitleModel]()
     
     
     override func viewDidLoad() {
@@ -78,7 +84,9 @@ class ProfileViewController: UIViewController,UITableViewDelegate,UITableViewDat
     
     func setUp(id:String){
         
-        loadModel.getDataProtocol = self
+        loadModel.getGameDataPS5Protocol = self
+        loadModel.getGameDataPS4Protocol = self
+        loadModel.getGameDataSwitchProtocol = self
         loadModel.getProfileDataProtocol = self
 
         //プロフィールを受信する(idにAuth.auth().currentUserが入る
@@ -126,21 +134,22 @@ class ProfileViewController: UIViewController,UITableViewDelegate,UITableViewDat
     }
     
     
-    func getData(dataArray: [ContentModel]) {
-        
-        contentModelArray = []
-        
-        contentModelArray = dataArray
-        
-        tableView.reloadData()
+    func getGameDataPS5(dataArray: [GameTitleModel]) {
+        self.gameTitleModelPS5Array = []
+        self.gameTitleModelPS5Array = dataArray
     }
     
+    func getGameDataPS4(dataArray: [GameTitleModel]) {
+        self.gameTitleModelPS4Array = []
+        self.gameTitleModelPS4Array = dataArray
+    }
     
+    func getGameDataSwitch(dataArray: [GameTitleModel]) {
+        self.gameTitleModelSwitchArray = []
+        self.gameTitleModelSwitchArray = dataArray
+    }
     
-    
-    
-    
-    
+
     //プロフィールが入ったdataArray
     func getProfileData(dataArray: [ProfileModel]) {
         
@@ -150,9 +159,6 @@ class ProfileViewController: UIViewController,UITableViewDelegate,UITableViewDat
         nameLabel.text = dataArray[0].userName
         profileTextField.text = dataArray[0].profileText
         idLabel.text = dataArray[0].id
-        
-        
-        
     }
     
     

@@ -104,19 +104,7 @@ class SearchAndLoadModel {
                     print("self.dataSetsArrayの数")
                     print(self.dataSetsArray.count)
                     
-                    for i in 0..<self.dataSetsArray.count {
-                        print("countの中身")
-                        print(i)
-                        title = dataSetsArray[i].title!
-                        hardware = dataSetsArray[i].hardware!
-                        salesDate = dataSetsArray[i].salesDate!
-                        mediumImageUrl = dataSetsArray[i].mediumImageUrl!
-                        itemPrice = dataSetsArray[i].itemPrice!
-                        booksGenreId = dataSetsArray[i].booksGenreId!
-                        print("ゲームタイトルのなかみは")
-                        print(dataSetsArray[i].title!.debugDescription)
-                        sendDBModel.sendGameTitle(title: title, hardware: hardware, salesDate: salesDate, mediumImageUrl: mediumImageUrl, itemPrice: itemPrice, booksGenreId: booksGenreId)
-                    }
+
 
             
                     //コントローラー値に値を渡す必要がある

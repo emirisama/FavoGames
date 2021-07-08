@@ -19,15 +19,34 @@ protocol SendProfileDone{
 }
 
 //レビューを投稿し終えたら画面遷移
-protocol DoneSendReviewContents{
+protocol DoneSendReviewContentsPS5{
     
-    func checkDoneReview()
+    func checkDoneReviewPS5()
 }
 
-protocol SendGameTitleDone{
+protocol DoneSendReviewContentsPS4{
     
-    func checkDoneGameTitle()
+    func checkDoneReviewPS4()
+}
+
+protocol DoneSendReviewContentsSwitch{
     
+    func checkDoneReviewSwitch()
+}
+
+
+protocol SendGameTitlePS5Done{
+    
+    func checkDoneGameTitlePS5()
+    
+}
+
+protocol SendGameTitlePS4Done{
+    func checkDoneGameTitlePS4()
+}
+
+protocol SendGameTitleSwitchDone{
+    func checkDoneGameTitleSwitch()
 }
 
 
@@ -39,7 +58,7 @@ class SendDBModel {
     var userDefaultsEX = UserDefaultsEX()
     var imageDatauser = Data()
     var myProfile = [String]()
-    var doneSendReviewContents:DoneSendReviewContents?
+
     var rateAverageModelArray = [RateAverageModel]()
     
     var userID = String()
@@ -51,8 +70,12 @@ class SendDBModel {
     var itemPrice = Int()
     var booksGenreId = String()
     
-    var sendGameTitleDone:SendGameTitleDone?
-
+    var sendGameTitlePS5Done:SendGameTitlePS5Done?
+    var sendGameTitlePS4Done:SendGameTitlePS4Done?
+    var sendGameTitleSwitchDone:SendGameTitleSwitchDone?
+    var doneSendReviewContentsPS5:DoneSendReviewContentsPS5?
+    var doneSendReviewContentsPS4:DoneSendReviewContentsPS4?
+    var doneSendReviewContentsSwitch:DoneSendReviewContentsSwitch?
     
     
     init(){
@@ -130,38 +153,83 @@ class SendDBModel {
     }
  
     //ゲームタイトルに紐づくデータを送信
-    func sendContents(title:String,sender:ProfileModel,review:String,rate:Double,rateAverage:Double){
+    func sendContentsPS5(title:String,sender:ProfileModel,review:String,rate:Double,rateAverage:Double){
  
         self.myProfile.append(sender.imageURLString!)
         self.myProfile.append(sender.profileText!)
         self.myProfile.append(sender.userID!)
         self.myProfile.append(sender.userName!)
         self.myProfile.append(sender.id!)
-
-        
-        
-        self.db.collection("Users").document(Auth.auth().currentUser!.uid).collection("title").document(title).setData(
+  
+        self.db.collection("Users").document(Auth.auth().currentUser!.uid).collection("PS5").document(title).setData(
             ["review":review,"rate":rate,"sender":self.myProfile,"date":Date().timeIntervalSince1970,"rateAverage":rateAverage])
-        
-//        self.db.collection(title).document(Auth.auth().currentUser!.uid).setData(
-//            ["review":review,"rate":rate,"sender":self.myProfile,"date":Date().timeIntervalSince1970,"rateAverage":rateAverage])
         
         self.db.collection("Score").document(title).collection("review").document().setData(
             ["rate":rate])
         print("レビュー送信")
         
-
-        self.doneSendReviewContents?.checkDoneReview()
+        self.doneSendReviewContentsPS5?.checkDoneReviewPS5()
 
     }
     
-    //ゲームタイトル送信
-    func sendGameTitle(title:String,hardware:String,salesDate:String,mediumImageUrl:String,itemPrice:Int,booksGenreId:String){
-        self.db.collection("Users").document(Auth.auth().currentUser!.uid).collection("title").document(title).setData(
+    func sendContentsPS4(title:String,sender:ProfileModel,review:String,rate:Double,rateAverage:Double){
+ 
+        self.myProfile.append(sender.imageURLString!)
+        self.myProfile.append(sender.profileText!)
+        self.myProfile.append(sender.userID!)
+        self.myProfile.append(sender.userName!)
+        self.myProfile.append(sender.id!)
+  
+        self.db.collection("Users").document(Auth.auth().currentUser!.uid).collection("PS4").document(title).setData(
+            ["review":review,"rate":rate,"sender":self.myProfile,"date":Date().timeIntervalSince1970,"rateAverage":rateAverage])
+        
+        self.db.collection("Score").document(title).collection("review").document().setData(
+            ["rate":rate])
+        print("レビュー送信")
+        
+        self.doneSendReviewContentsPS4?.checkDoneReviewPS4()
+
+    }
+    
+    func sendContentsSwitch(title:String,sender:ProfileModel,review:String,rate:Double,rateAverage:Double){
+ 
+        self.myProfile.append(sender.imageURLString!)
+        self.myProfile.append(sender.profileText!)
+        self.myProfile.append(sender.userID!)
+        self.myProfile.append(sender.userName!)
+        self.myProfile.append(sender.id!)
+  
+        self.db.collection("Users").document(Auth.auth().currentUser!.uid).collection("Switch").document(title).setData(
+            ["review":review,"rate":rate,"sender":self.myProfile,"date":Date().timeIntervalSince1970,"rateAverage":rateAverage])
+        
+        self.db.collection("Score").document(title).collection("review").document().setData(
+            ["rate":rate])
+        print("レビュー送信")
+        
+        self.doneSendReviewContentsSwitch?.checkDoneReviewSwitch()
+
+    }
+    
+    //ゲームタイトル送信PS5
+    func sendGameTitlePS5(title:String,hardware:String,salesDate:String,mediumImageUrl:String,itemPrice:Int,booksGenreId:String){
+        self.db.collection("Users").document(Auth.auth().currentUser!.uid).collection("PS5").document(title).setData(
             ["title":title,"hardware":hardware,"salesDate":salesDate,"mediumImageUrl":mediumImageUrl,"itemPrice":itemPrice,"booksGenreId":booksGenreId]
         )
-        self.sendGameTitleDone?.checkDoneGameTitle()
-        
+        self.sendGameTitlePS5Done?.checkDoneGameTitlePS5()
+    }
+    
+    func sendGameTitlePS4(title:String,hardware:String,salesDate:String,mediumImageUrl:String,itemPrice:Int,booksGenreId:String){
+        self.db.collection("Users").document(Auth.auth().currentUser!.uid).collection("PS4").document(title).setData(
+            ["title":title,"hardware":hardware,"salesDate":salesDate,"mediumImageUrl":mediumImageUrl,"itemPrice":itemPrice,"booksGenreId":booksGenreId]
+        )
+        self.sendGameTitlePS4Done?.checkDoneGameTitlePS4()
+    }
+    
+    func sendGameTitleSwitch(title:String,hardware:String,salesDate:String,mediumImageUrl:String,itemPrice:Int,booksGenreId:String){
+        self.db.collection("Users").document(Auth.auth().currentUser!.uid).collection("Switch").document(title).setData(
+            ["title":title,"hardware":hardware,"salesDate":salesDate,"mediumImageUrl":mediumImageUrl,"itemPrice":itemPrice,"booksGenreId":booksGenreId]
+        )
+        self.sendGameTitleSwitchDone?.checkDoneGameTitleSwitch()
     }
 
     
