@@ -24,7 +24,6 @@ class ProfileEditViewController: UIViewController,SendProfileDone, UIImagePicker
     var sendDBModel = SendDBModel()
     var id = String()
     var userName = String()
-    var email = String()
     var profileModelArray = [ProfileModel]()
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -108,7 +107,7 @@ class ProfileEditViewController: UIViewController,SendProfileDone, UIImagePicker
     
     @IBAction func done(_ sender: Any) {
         
-        sendDBModel.sendProfileDB(userName: nameTextField.text!, email: email, id: idLabel.text!, profileText: profileTextField.text!, imageData: (self.imageView.image?.jpegData(compressionQuality: 0.4))!)
+        sendDBModel.sendProfileDB(userName: nameTextField.text!, id: idLabel.text!, profileText: profileTextField.text!, imageData: (self.imageView.image?.jpegData(compressionQuality: 0.4))!)
         
     }
     

@@ -21,6 +21,8 @@ class SearchResultsViewController: UIViewController,UITableViewDelegate,UITableV
     var idString = String()
     var loadModel = LoadModel()
     var imageView = String()
+    var sendDBModel = SendDBModel()
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,6 +37,8 @@ class SearchResultsViewController: UIViewController,UITableViewDelegate,UITableV
             idString = UserDefaults.standard.object(forKey: "documentID") as! String
         }
         
+        
+
         tableView.reloadData()
         // Do any additional setup after loading the view.
     }
@@ -91,6 +95,14 @@ class SearchResultsViewController: UIViewController,UITableViewDelegate,UITableV
         DetailVC.salesDate = array[indexPath.row].salesDate!
         DetailVC.mediumImageUrl = array[indexPath.row].mediumImageUrl!
         DetailVC.itemPrice = array[indexPath.row].itemPrice!
+        DetailVC.booksGenreId = array[indexPath.row].booksGenreId!
+        if DetailVC.hardware == "PS5"{
+            sendDBModel.sendGameTitlePS5(title: DetailVC.gameTitle, hardware: DetailVC.hardware, salesDate: DetailVC.salesDate, mediumImageUrl: DetailVC.mediumImageUrl, itemPrice: DetailVC.itemPrice, booksGenreId: DetailVC.booksGenreId)
+        }else if DetailVC.hardware == "PS4"{
+            sendDBModel.sendGameTitlePS4(title: DetailVC.gameTitle, hardware: DetailVC.hardware, salesDate: DetailVC.salesDate, mediumImageUrl: DetailVC.mediumImageUrl, itemPrice: DetailVC.itemPrice, booksGenreId: DetailVC.booksGenreId)
+        }else if DetailVC.hardware == "Switch"{
+            sendDBModel.sendGameTitleSwitch(title: DetailVC.gameTitle, hardware: DetailVC.hardware, salesDate: DetailVC.salesDate, mediumImageUrl: DetailVC.mediumImageUrl, itemPrice: DetailVC.itemPrice, booksGenreId: DetailVC.booksGenreId)
+        }
         self.navigationController?.pushViewController(DetailVC, animated: true)
     }
 

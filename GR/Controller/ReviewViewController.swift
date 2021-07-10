@@ -20,17 +20,17 @@ class ReviewViewController: UIViewController,DoneSendReviewContentsPS5,DoneSendR
 
     var index = Int()
 
-    @IBOutlet weak var reviewTextField: UITextField!
-    
+   
     var contentModel:ContentModel?
     @IBOutlet weak var reviewScore: CosmosView!
+    @IBOutlet weak var reviewTextField: UITextView!
     
-
     var userDefaultsEX = UserDefaultsEX()
     var sendDBModel = SendDBModel()
     var loadModel = LoadModel()
     var array = [DataSets]()
     var gameTitle = String()
+    var hardware = String()
     var rateAverage = Double()
 
     
@@ -63,11 +63,11 @@ class ReviewViewController: UIViewController,DoneSendReviewContentsPS5,DoneSendR
         //コンテンツとともに送信（動画：受信クラスを作成しよう）
         if reviewTextField.text?.isEmpty != true {
 
-            if index == 0{
+            if hardware == "PS5"{
                 sendDBModel.sendContentsPS5(title: gameTitle,sender: profile!,review: reviewTextField.text!, rate: self.reviewScore.rating,rateAverage: self.rateAverage)
-            }else if index == 1{
+            }else if hardware == "PS4"{
                 sendDBModel.sendContentsPS4(title: gameTitle,sender: profile!,review: reviewTextField.text!, rate: self.reviewScore.rating,rateAverage: self.rateAverage)
-            }else if index == 2{
+            }else if hardware == "Switch"{
                 sendDBModel.sendContentsSwitch(title: gameTitle,sender: profile!,review: reviewTextField.text!, rate: self.reviewScore.rating,rateAverage: self.rateAverage)
             }
             

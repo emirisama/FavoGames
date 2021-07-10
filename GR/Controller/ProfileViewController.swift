@@ -34,7 +34,6 @@ class ProfileViewController: UIViewController,UITableViewDelegate,UITableViewDat
     var contentModelArray = [ContentModel]()
     var userID = String()
     var userName = String()
-    var email = String()
     var dataArray = [ProfileModel]()
     let db = Firestore.firestore()
     var profileModel = ProfileModel()

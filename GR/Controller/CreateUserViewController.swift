@@ -17,11 +17,7 @@ class CreateUserViewController: UIViewController,UITextFieldDelegate,SendProfile
         
         @IBOutlet weak var nameTextField: UITextField!
         @IBOutlet weak var idTextField: UITextField!
-        
-        @IBOutlet weak var passwordTextField: UITextField!
-        
-        @IBOutlet weak var emailTextField: UITextField!
-        
+         
         var sendDBModel = SendDBModel()
         var profileImage = UIImage()
  
@@ -31,8 +27,7 @@ class CreateUserViewController: UIViewController,UITextFieldDelegate,SendProfile
             sendDBModel.sendProfileDone = self
             nameTextField.delegate = self
             idTextField.delegate = self
-            emailTextField.delegate = self
-            passwordTextField.delegate = self
+
             print("サインアウトしてるかどうか")
             print(Auth.auth().currentUser?.uid.debugDescription)
         }
@@ -47,7 +42,7 @@ class CreateUserViewController: UIViewController,UITextFieldDelegate,SendProfile
 
     @IBAction func registerButton(_ sender: Any) {
             //アカウントを作成する
-            if nameTextField.text?.isEmpty != true || idTextField.text?.isEmpty != true || emailTextField.text?.isEmpty != true || passwordTextField.text?.isEmpty != true{
+            if nameTextField.text?.isEmpty != true || idTextField.text?.isEmpty != true{
                 
                 Auth.auth().signInAnonymously { [self] (result, error) in
                     
@@ -57,14 +52,17 @@ class CreateUserViewController: UIViewController,UITextFieldDelegate,SendProfile
                         print("エラーです")
                     }else{
                         
-                        sendDBModel.sendProfileDB(userName: nameTextField.text!, email: emailTextField.text!, id: idTextField.text!, profileText: "", imageData: usernoimagedata!)
+                        sendDBModel.sendProfileDB(userName: nameTextField.text!, id: idTextField.text!, profileText: "", imageData: usernoimagedata!)
                         print("データをSendDBModelへ")
                     }
                 }
             }
             
         }
-        
+    
+    
+
+    
 
     
     func checkOK() {

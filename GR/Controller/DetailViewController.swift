@@ -12,6 +12,7 @@ import PKHUD
 
 class DetailViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,GetGameDataPS5Protocol,GetGameDataPS4Protocol,GetGameDataSwitchProtocol,GetContentsDataPS5Protocol,GetContentsDataPS4Protocol,GetContentsDataSwitchProtocol,GetRateAverageCountProtocol{
 
+
     
 
     
@@ -52,9 +53,11 @@ class DetailViewController: UIViewController,UITableViewDelegate,UITableViewData
     var contentModelPS5Array = [ContentModel]()
     var contentModelPS4Array = [ContentModel]()
     var contentModelSwitchArray = [ContentModel]()
+    var contentModelSearchArray = [ContentModel]()
     var gameTitleModelPS5Array = [GameTitleModel]()
     var gameTitleModelPS4Array = [GameTitleModel]()
     var gameTitleModelSwitchArray = [GameTitleModel]()
+    var gameTitleModelSearchArray = [GameTitleModel]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -77,20 +80,21 @@ class DetailViewController: UIViewController,UITableViewDelegate,UITableViewData
             loadModel.getContentsDataPS4Protocol = self
             loadModel.getContentsDataSwitchProtocol = self
             loadModel.getRateAverageCountProtocol = self
+            
 
             if index == 0{
                 loadModel.loadGameContentsPS5(title: gameTitle, hardware: hardware, salesDate: salesDate, mediumImageUrl: mediumImageUrl, itemPrice: itemPrice, booksGenreId: booksGenreId)
+                loadModel.loadContentsPS5(title: gameTitle,rateAverage: rateAverage)
             }else if index == 1{
                 loadModel.loadGameContentsPS4(title: gameTitle, hardware: hardware, salesDate: salesDate, mediumImageUrl: mediumImageUrl, itemPrice: itemPrice, booksGenreId: booksGenreId)
+                loadModel.loadContentsPS4(title: gameTitle,rateAverage: rateAverage)
             }else if index == 2{
                 loadModel.loadGameContentsSwitch(title: gameTitle, hardware: hardware, salesDate: salesDate, mediumImageUrl: mediumImageUrl, itemPrice: itemPrice, booksGenreId: booksGenreId)
+                loadModel.loadContentsSwitch(title: gameTitle,rateAverage: rateAverage)
+           
             }
-
-            loadModel.loadContentsPS5(title: gameTitle,rateAverage: rateAverage)
-            loadModel.loadContentsPS4(title: gameTitle,rateAverage: rateAverage)
-            loadModel.loadContentsSwitch(title: gameTitle,rateAverage: rateAverage)
+            
             loadModel.loadRateAverageCount(title: gameTitle, rateAverage: rateAverage)
-
 
             tableView.reloadData()
 
@@ -171,22 +175,25 @@ class DetailViewController: UIViewController,UITableViewDelegate,UITableViewData
                 print("gameTitleModelPS5Arrayの数")
                 print(gameTitleModelPS5Array.count)
                 cell.gameTitleLabel.text = gameTitle
+            print("PS5→Detail")
+            print(gameTitle.debugDescription)
                 cell.ImageView.sd_setImage(with: URL(string: mediumImageUrl), completed: nil)
                 cell.salesDate.text = salesDate
                 cell.hardware.text = hardware
                 cell.price.text = String(itemPrice)
                 cell.rateAverageLabel.text = String(rateAverage)
                 cell.reviewButton.addTarget(self, action: #selector(reviewButtonTap(_:)), for: .touchUpInside)
-
+        
             return cell
 
         }else{
 
             let cell2 = tableView.dequeueReusableCell(withIdentifier: "ReviewViewCell", for: indexPath) as! ReviewViewCell
             cell2.selectionStyle = .none
-            if index == 0{
-                print("content")
+            if hardware == "PS5"{
+                print("コンテントPS5")
                 print(contentModelPS5Array.debugDescription)
+                print(self.contentModelPS5Array[indexPath.row].sender?[3].debugDescription)
 
                     cell2.userNameLabel.text = self.contentModelPS5Array[indexPath.row].sender?[3]
                     cell2.userIDLabel.text = self.contentModelPS5Array[indexPath.row].sender?[4]
@@ -197,7 +204,7 @@ class DetailViewController: UIViewController,UITableViewDelegate,UITableViewData
 //                    cell2.profileImage.sd_setImage(with: URL(string: (contentModelPS5Array[indexPath.row].sender[0])), completed: nil)
                 
                 
-            }else if index == 1{
+            }else if hardware == "PS4"{
                 cell2.userNameLabel.text = contentModelPS4Array[indexPath.row].sender?[3]
                 cell2.userIDLabel.text = contentModelPS4Array[indexPath.row].sender?[4]
                 cell2.reviewViewLabel.text = contentModelPS4Array[indexPath.row].review
@@ -205,7 +212,7 @@ class DetailViewController: UIViewController,UITableViewDelegate,UITableViewData
                 cell2.scoreView.rating = contentModelPS4Array[indexPath.row].rate!
                 cell2.scoreView.settings.fillMode = .half
                 cell2.profileImage.sd_setImage(with: URL(string: contentModelPS4Array[indexPath.row].sender![0]), completed: nil)
-            }else if index == 2{
+            }else if hardware == "Switch"{
                 cell2.userNameLabel.text = contentModelSwitchArray[indexPath.row].sender?[3]
                 cell2.userIDLabel.text = contentModelSwitchArray[indexPath.row].sender?[4]
                 cell2.reviewViewLabel.text = contentModelSwitchArray[indexPath.row].review
@@ -213,16 +220,15 @@ class DetailViewController: UIViewController,UITableViewDelegate,UITableViewData
                 cell2.scoreView.rating = contentModelSwitchArray[indexPath.row].rate!
                 cell2.scoreView.settings.fillMode = .half
                 cell2.profileImage.sd_setImage(with: URL(string:contentModelSwitchArray[indexPath.row].sender![0]), completed: nil)
+            }else{
+                cell2.userNameLabel.text = contentModelSearchArray[indexPath.row].sender?[3]
+                cell2.userIDLabel.text = contentModelSearchArray[indexPath.row].sender?[4]
+                cell2.reviewViewLabel.text = contentModelSearchArray[indexPath.row].review
+                cell2.scoreCountLabel.text = String(contentModelSearchArray[indexPath.row].rate!)
+                cell2.scoreView.rating = contentModelSearchArray[indexPath.row].rate!
+                cell2.scoreView.settings.fillMode = .half
+                cell2.profileImage.sd_setImage(with: URL(string:contentModelSearchArray[indexPath.row].sender![0]), completed: nil)
             }
-            
-            
-            
-//            let ScoreLabel.text = String(cell2.scoreCountLabel.text! + cell2.scoreCountLabel.text!)
-
-//            cell2.userIDLabel.text = contentModel.sender[]
-
-//            cell2.scoreCountLabel.text = String(((contentModel?.rate)!))
-
             return cell2
         }
     }
@@ -233,6 +239,7 @@ class DetailViewController: UIViewController,UITableViewDelegate,UITableViewData
         
         reviewVC.array = dataSetsArray
         reviewVC.gameTitle = gameTitle
+        reviewVC.hardware = hardware
         self.navigationController?.pushViewController(reviewVC, animated: true)
         
     }
@@ -294,6 +301,7 @@ class DetailViewController: UIViewController,UITableViewDelegate,UITableViewData
         self.gameTitleModelSwitchArray = []
         self.gameTitleModelSwitchArray = dataArray
     }
+    
     func getContentsDataPS5(dataArray: [ContentModel]) {
         self.contentModelPS5Array = []
         self.contentModelPS5Array = dataArray
@@ -321,6 +329,12 @@ class DetailViewController: UIViewController,UITableViewDelegate,UITableViewData
         print(self.rateAverage.debugDescription)
         tableView.reloadData()
     }
+   
+
+
+    
+    
+
     
     
     
