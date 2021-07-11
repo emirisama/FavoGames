@@ -214,7 +214,7 @@ class LoadModel{
     
     //コンテンツを受信するメソッド(ゲームタイトルに紐づくレビューや名前などのデータを受信する）
     func loadContentsPS5(title:String,rateAverage:Double){
-        db.collection("Users").document(Auth.auth().currentUser!.uid).collection("PS5").addSnapshotListener { [self] (snapShot, error) in
+        db.collection("Users").document(Auth.auth().currentUser!.uid).collection("PS5").document(title).collection("reviewContents").addSnapshotListener { [self] (snapShot, error) in
             self.contentModelPS5Array = []
             
             if error != nil{

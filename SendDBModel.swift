@@ -218,7 +218,7 @@ class SendDBModel {
         self.myProfile.append(sender.userName!)
         self.myProfile.append(sender.id!)
   
-        self.db.collection("Users").document(Auth.auth().currentUser!.uid).collection("PS4").document(title).collection("reviewContents").document().setData(
+        self.db.collection("Users").document(Auth.auth().currentUser!.uid).collection("PS4").document(title).setData(
             ["review":review,"rate":rate,"sender":self.myProfile,"date":Date().timeIntervalSince1970,"rateAverage":rateAverage])
         
         self.db.collection("Score").document(title).collection("review").document().setData(
@@ -237,7 +237,7 @@ class SendDBModel {
         self.myProfile.append(sender.userName!)
         self.myProfile.append(sender.id!)
   
-        self.db.collection("Users").document(Auth.auth().currentUser!.uid).collection("Switch").document(title).collection("reviewContents").document().setData(
+        self.db.collection("Users").document(Auth.auth().currentUser!.uid).collection("Switch").document(title).setData(
             ["review":review,"rate":rate,"sender":self.myProfile,"date":Date().timeIntervalSince1970,"rateAverage":rateAverage])
         
         self.db.collection("Score").document(title).collection("review").document().setData(

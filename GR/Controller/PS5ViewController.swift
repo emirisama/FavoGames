@@ -58,11 +58,7 @@ class PS5ViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
         sendDBModel.sendGameTitlePS5Done = self
         sendDBModel.sendGameTitlePS4Done = self
         sendDBModel.sendGameTitleSwitchDone = self
-
-
-        
-        
-        
+   
         if index == 0{
             let searchModel = SearchAndLoadModel(urlString: urlStringPs5)
             searchModel.doneCatchDataProtocol = self
@@ -91,7 +87,7 @@ class PS5ViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
             loadModel.getContentsDataSwitchProtocol = self
             loadModel.loadContentsSwitch(title: gameTitle,rateAverage: rateAverage)
         }
-  
+        
         
     }
     
@@ -252,16 +248,19 @@ class PS5ViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
         self.gameTitleModelPS5Array = dataArray
         print("self.gameTitleModelPS5Array (PS5)")
         print(self.gameTitleModelPS5Array.debugDescription)
+        tableView.reloadData()
     }
     
     func getGameDataPS4(dataArray: [GameTitleModel]) {
         self.gameTitleModelPS4Array = []
         self.gameTitleModelPS4Array = dataArray
+        tableView.reloadData()
     }
     
     func getGameDataSwitch(dataArray: [GameTitleModel]) {
         self.gameTitleModelSwitchArray = []
         self.gameTitleModelSwitchArray = dataArray
+        tableView.reloadData()
     }
     
     func getContentsDataPS5(dataArray: [ContentModel]) {
@@ -269,17 +268,20 @@ class PS5ViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
         self.contentModelPS5Array = dataArray
         print("PS５平均値controllerに値がわたっているか？")
         print(self.contentModelPS5Array.debugDescription)
+        tableView.reloadData()
     }
 
     
     func getContentsDataPS4(dataArray: [ContentModel]) {
         self.contentModelPS4Array = []
         self.contentModelPS4Array = dataArray
+        tableView.reloadData()
     }
     
     func getContentsDataSwitch(dataArray: [ContentModel]) {
         self.contentModelSwitchArray = []
         self.contentModelSwitchArray = dataArray
+        tableView.reloadData()
     }
     
 
