@@ -136,13 +136,15 @@ class LoadModel{
                     if let title = data["title"] as? String,let hardware = data["hardware"] as? String,let salesDate = data["salesDate"] as? String,let mediumImageUrl = data["mediumImageUrl"] as? String,let itemPrice = data["itemPrice"] as? Int,let booksGenreId = data["booksGenreId"] as? String{
                         let gameTitleModel = GameTitleModel(title: title, hardware: hardware, salesDate: salesDate, mediumImageUrl: mediumImageUrl, itemPrice: itemPrice, booksGenreId: booksGenreId)
                         self.gameTitleModelPS5Array.append(gameTitleModel)
-                        print("ゲームタイトルモデルの中身PS5")
-                        print(self.gameTitleModelPS5Array.debugDescription)
+                        let contentModel = ContentModel(review: "", sender: nil, rate: 0.0, rateAverage: 0.0)
+                        self.contentModelPS5Array.append(contentModel)
+ 
                     }
                     
                 }
                 
                 self.getGameDataPS5Protocol?.getGameDataPS5(dataArray: self.gameTitleModelPS5Array)
+                self.getContentsDataPS5Protocol?.getContentsDataPS5(dataArray: self.contentModelPS5Array)
             }
 
         }
@@ -170,12 +172,14 @@ class LoadModel{
                     if let title = data["title"] as? String,let hardware = data["hardware"] as? String,let salesDate = data["salesDate"] as? String,let mediumImageUrl = data["mediumImageUrl"] as? String,let itemPrice = data["itemPrice"] as? Int,let booksGenreId = data["booksGenreId"] as? String{
                         let gameTitleModel = GameTitleModel(title: title, hardware: hardware, salesDate: salesDate, mediumImageUrl: mediumImageUrl, itemPrice: itemPrice, booksGenreId: booksGenreId)
                         self.gameTitleModelPS4Array.append(gameTitleModel)
-                        print("ゲームタイトルモデルの中身PS4")
-                        print(self.gameTitleModelPS4Array.debugDescription)
+                        let contentModel = ContentModel(review: "", sender: nil, rate: 0.0, rateAverage: 0.0)
+                        self.contentModelPS4Array.append(contentModel)
+      
                     }
                     
                 }
                 self.getGameDataPS4Protocol?.getGameDataPS4(dataArray: self.gameTitleModelPS4Array)
+                self.getContentsDataPS4Protocol?.getContentsDataPS4(dataArray: self.contentModelPS4Array)
             }
 
         }
@@ -201,12 +205,14 @@ class LoadModel{
                     if let title = data["title"] as? String,let hardware = data["hardware"] as? String,let salesDate = data["salesDate"] as? String,let mediumImageUrl = data["mediumImageUrl"] as? String,let itemPrice = data["itemPrice"] as? Int,let booksGenreId = data["booksGenreId"] as? String{
                         let gameTitleModel = GameTitleModel(title: title, hardware: hardware, salesDate: salesDate, mediumImageUrl: mediumImageUrl, itemPrice: itemPrice, booksGenreId: booksGenreId)
                         self.gameTitleModelSwitchArray.append(gameTitleModel)
-                        print("ゲームタイトルモデルの中身Switch")
-                        print(self.gameTitleModelSwitchArray.debugDescription)
+                        let contentModel = ContentModel(review: "", sender: nil, rate: 0.0, rateAverage: 0.0)
+                        self.contentModelSwitchArray.append(contentModel)
+ 
                     }
                     
                 }
                 self.getGameDataSwitchProtocol?.getGameDataSwitch(dataArray: self.gameTitleModelSwitchArray)
+                self.getContentsDataSwitchProtocol?.getContentsDataSwitch(dataArray: self.contentModelSwitchArray)
             }
 
         }
@@ -214,7 +220,7 @@ class LoadModel{
     
     //コンテンツを受信するメソッド(ゲームタイトルに紐づくレビューや名前などのデータを受信する）
     func loadContentsPS5(title:String,rateAverage:Double){
-        db.collection("Users").document(Auth.auth().currentUser!.uid).collection("PS5").document(title).collection("reviewContents").addSnapshotListener { [self] (snapShot, error) in
+        db.collection("Users").document(Auth.auth().currentUser!.uid).collection("PS5").addSnapshotListener { [self] (snapShot, error) in
             self.contentModelPS5Array = []
             
             if error != nil{
@@ -261,7 +267,7 @@ class LoadModel{
     }
     
     func loadContentsPS4(title:String,rateAverage:Double){
-        db.collection("Users").document(Auth.auth().currentUser!.uid).collection("PS4").document(title).collection("reviewContents").addSnapshotListener { [self] (snapShot, error) in
+        db.collection("Users").document(Auth.auth().currentUser!.uid).collection("PS4").addSnapshotListener { [self] (snapShot, error) in
             self.contentModelPS4Array = []
             
             if error != nil{
@@ -309,7 +315,7 @@ class LoadModel{
 
     
     func loadContentsSwitch(title:String,rateAverage:Double){
-        db.collection("Users").document(Auth.auth().currentUser!.uid).collection("Switch").document(title).collection("reviewContents").addSnapshotListener { [self] (snapShot, error) in
+        db.collection("Users").document(Auth.auth().currentUser!.uid).collection("Switch").addSnapshotListener { [self] (snapShot, error) in
             self.contentModelSwitchArray = []
             
             if error != nil{

@@ -65,8 +65,8 @@ class PS5ViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
             searchModel.search()
             loadModel.getGameDataPS5Protocol = self
             loadModel.loadGameContentsPS5(title: gameTitle, hardware: hardware, salesDate: salesDate, mediumImageUrl: mediumImageUrl, itemPrice: itemPrice, booksGenreId: booksGenreId)
-//            loadModel.getContentsDataPS5Protocol = self
-//            loadModel.loadContentsPS5(title: gameTitle,rateAverage: rateAverage)
+            loadModel.getContentsDataPS5Protocol = self
+            loadModel.loadContentsPS5(title: gameTitle,rateAverage: rateAverage)
             print("せんどげーむこんてんつ")
 
         }else if index == 1{
@@ -75,8 +75,8 @@ class PS5ViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
             searchModel.search()
             loadModel.getGameDataPS4Protocol = self
             loadModel.loadGameContentsPS4(title: gameTitle, hardware: hardware, salesDate: salesDate, mediumImageUrl: mediumImageUrl, itemPrice: itemPrice, booksGenreId: booksGenreId)
-//            loadModel.getContentsDataPS4Protocol = self
-//            loadModel.loadContentsPS4(title: gameTitle,rateAverage: rateAverage)
+            loadModel.getContentsDataPS4Protocol = self
+            loadModel.loadContentsPS4(title: gameTitle,rateAverage: rateAverage)
 
         }else if index == 2{
             let searchModel = SearchAndLoadModel(urlString: urlStringSwitch)
@@ -84,11 +84,10 @@ class PS5ViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
             searchModel.search()
             loadModel.getGameDataSwitchProtocol = self
             loadModel.loadGameContentsSwitch(title: gameTitle, hardware: hardware, salesDate: salesDate, mediumImageUrl: mediumImageUrl, itemPrice: itemPrice, booksGenreId: booksGenreId)
-//            loadModel.getContentsDataSwitchProtocol = self
-//            loadModel.loadContentsSwitch(title: gameTitle,rateAverage: rateAverage)
+            loadModel.getContentsDataSwitchProtocol = self
+            loadModel.loadContentsSwitch(title: gameTitle,rateAverage: rateAverage)
         }
-        
-        
+
     }
     
     
@@ -153,22 +152,22 @@ class PS5ViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
             cell.contentImageView.sd_setImage(with: URL(string: gameTitleModelPS5Array[indexPath.row].mediumImageUrl!), completed: nil)
             cell.gameTitleLabel.text = gameTitleModelPS5Array[indexPath.row].title
             cell.rankLabel.text = String(indexPath.row + 1)
-//            cell.reviewCountLabel.text = String(self.contentModelPS5Array[indexPath.row].rateAverage!)
-//            print("PS5レビュー平均値")
-//            print(self.contentModelPS5Array[indexPath.row].rateAverage!.debugDescription)
-//
+            cell.reviewCountLabel.text = String(self.contentModelPS5Array[indexPath.row].rateAverage!)
+            //            print("PS5レビュー平均値")
+            //            print(self.contentModelPS5Array[indexPath.row].rateAverage!.debugDescription)
+            //
         }else if index == 1{
             cell.contentImageView.sd_setImage(with: URL(string: gameTitleModelPS4Array[indexPath.row].mediumImageUrl!), completed: nil)
             cell.gameTitleLabel.text = gameTitleModelPS4Array[indexPath.row].title
             cell.rankLabel.text = String(indexPath.row + 1)
-//            cell.reviewCountLabel.text = String(self.contentModelPS4Array[indexPath.row].rateAverage!)
-//
+            cell.reviewCountLabel.text = String(self.contentModelPS4Array[indexPath.row].rateAverage!)
+            
         }else if index == 2{
             cell.contentImageView.sd_setImage(with: URL(string: gameTitleModelSwitchArray[indexPath.row].mediumImageUrl!), completed: nil)
             cell.gameTitleLabel.text = gameTitleModelSwitchArray[indexPath.row].title
             cell.rankLabel.text = String(indexPath.row + 1)
-//            cell.reviewCountLabel.text = String(self.contentModelSwitchArray[indexPath.row].rateAverage!)
-//      
+            cell.reviewCountLabel.text = String(self.contentModelSwitchArray[indexPath.row].rateAverage!)
+            
             
         }
         
@@ -246,8 +245,7 @@ class PS5ViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
     func getGameDataPS5(dataArray: [GameTitleModel]) {
         self.gameTitleModelPS5Array = []
         self.gameTitleModelPS5Array = dataArray
-        print("self.gameTitleModelPS5Array (PS5)")
-        print(self.gameTitleModelPS5Array.debugDescription)
+
         tableView.reloadData()
     }
     
@@ -266,8 +264,7 @@ class PS5ViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
     func getContentsDataPS5(dataArray: [ContentModel]) {
         self.contentModelPS5Array = []
         self.contentModelPS5Array = dataArray
-        print("PS５平均値controllerに値がわたっているか？")
-        print(self.contentModelPS5Array.debugDescription)
+
         tableView.reloadData()
     }
 
@@ -275,6 +272,7 @@ class PS5ViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
     func getContentsDataPS4(dataArray: [ContentModel]) {
         self.contentModelPS4Array = []
         self.contentModelPS4Array = dataArray
+
         tableView.reloadData()
     }
     
