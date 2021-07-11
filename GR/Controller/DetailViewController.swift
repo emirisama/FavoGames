@@ -201,7 +201,7 @@ class DetailViewController: UIViewController,UITableViewDelegate,UITableViewData
                     cell2.scoreCountLabel.text = String(self.contentModelPS5Array[indexPath.row].rate!)
                     cell2.scoreView.rating = self.contentModelPS5Array[indexPath.row].rate!
                     cell2.scoreView.settings.fillMode = .half
-//                    cell2.profileImage.sd_setImage(with: URL(string: (contentModelPS5Array[indexPath.row].sender[0])), completed: nil)
+                cell2.profileImage.sd_setImage(with: URL(string: (contentModelPS5Array[indexPath.row].sender![0])), completed: nil)
                 
                 
             }else if hardware == "PS4"{

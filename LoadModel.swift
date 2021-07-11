@@ -261,7 +261,7 @@ class LoadModel{
     }
     
     func loadContentsPS4(title:String,rateAverage:Double){
-        db.collection("Users").document(Auth.auth().currentUser!.uid).collection("PS4").addSnapshotListener { [self] (snapShot, error) in
+        db.collection("Users").document(Auth.auth().currentUser!.uid).collection("PS4").document(title).collection("reviewContents").addSnapshotListener { [self] (snapShot, error) in
             self.contentModelPS4Array = []
             
             if error != nil{
@@ -309,7 +309,7 @@ class LoadModel{
 
     
     func loadContentsSwitch(title:String,rateAverage:Double){
-        db.collection("Users").document(Auth.auth().currentUser!.uid).collection("Switch").addSnapshotListener { [self] (snapShot, error) in
+        db.collection("Users").document(Auth.auth().currentUser!.uid).collection("Switch").document(title).collection("reviewContents").addSnapshotListener { [self] (snapShot, error) in
             self.contentModelSwitchArray = []
             
             if error != nil{
