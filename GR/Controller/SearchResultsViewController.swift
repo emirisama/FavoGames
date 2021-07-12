@@ -12,7 +12,7 @@ import FirebaseFirestore
 class SearchResultsViewController: UIViewController,UITableViewDelegate,UITableViewDataSource{
 
     @IBOutlet weak var tableView: UITableView!
-    var array = [DataSets]()
+    var dataSetsArray = [DataSets]()
     var profileModelArray = [ProfileModel]()
     var contentModelArray = [ContentModel]()
     var userName = String()
@@ -73,15 +73,15 @@ class SearchResultsViewController: UIViewController,UITableViewDelegate,UITableV
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return array.count
+        return dataSetsArray.count
     }
     
     
     //Cellを作る
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ContentsCell", for: indexPath) as! ContentsCell
-        cell.contentImageView.sd_setImage(with: URL(string: array[indexPath.row].mediumImageUrl!), completed: nil)
-        cell.gameTitleLabel.text = array[indexPath.row].title
+        cell.contentImageView.sd_setImage(with: URL(string: dataSetsArray[indexPath.row].mediumImageUrl!), completed: nil)
+        cell.gameTitleLabel.text = dataSetsArray[indexPath.row].title
         cell.rankLabel.isHidden = true
         return cell
     }
@@ -90,19 +90,8 @@ class SearchResultsViewController: UIViewController,UITableViewDelegate,UITableV
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let DetailVC = storyboard?.instantiateViewController(identifier: "detailVC") as! DetailViewController
-        DetailVC.gameTitle = array[indexPath.row].title!
-        DetailVC.hardware = array[indexPath.row].hardware!
-        DetailVC.salesDate = array[indexPath.row].salesDate!
-        DetailVC.mediumImageUrl = array[indexPath.row].mediumImageUrl!
-        DetailVC.itemPrice = array[indexPath.row].itemPrice!
-        DetailVC.booksGenreId = array[indexPath.row].booksGenreId!
-        if DetailVC.hardware == "PS5"{
-            sendDBModel.sendGameTitlePS5(title: DetailVC.gameTitle, hardware: DetailVC.hardware, salesDate: DetailVC.salesDate, mediumImageUrl: DetailVC.mediumImageUrl, itemPrice: DetailVC.itemPrice, booksGenreId: DetailVC.booksGenreId)
-        }else if DetailVC.hardware == "PS4"{
-            sendDBModel.sendGameTitlePS4(title: DetailVC.gameTitle, hardware: DetailVC.hardware, salesDate: DetailVC.salesDate, mediumImageUrl: DetailVC.mediumImageUrl, itemPrice: DetailVC.itemPrice, booksGenreId: DetailVC.booksGenreId)
-        }else if DetailVC.hardware == "Switch"{
-            sendDBModel.sendGameTitleSwitch(title: DetailVC.gameTitle, hardware: DetailVC.hardware, salesDate: DetailVC.salesDate, mediumImageUrl: DetailVC.mediumImageUrl, itemPrice: DetailVC.itemPrice, booksGenreId: DetailVC.booksGenreId)
-        }
+        DetailVC.dataSetsArray = dataSetsArray
+        
         self.navigationController?.pushViewController(DetailVC, animated: true)
     }
 

@@ -9,7 +9,7 @@ import UIKit
 import PKHUD
 import Cosmos
 
-class ReviewViewController: UIViewController,DoneSendReviewContentsPS5,DoneSendReviewContentsPS4,DoneSendReviewContentsSwitch,GetRateAverageCountProtocol{
+class ReviewViewController: UIViewController,DoneSendReviewContents,GetRateAverageCountProtocol{
  
  
  
@@ -32,15 +32,15 @@ class ReviewViewController: UIViewController,DoneSendReviewContentsPS5,DoneSendR
     var gameTitle = String()
     var hardware = String()
     var rateAverage = Double()
+    var totalCount = Double()
 
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        sendDBModel.doneSendReviewContentsPS5 = self
-        sendDBModel.doneSendReviewContentsPS4 = self
-        sendDBModel.doneSendReviewContentsSwitch = self
+        sendDBModel.doneSendReviewContents = self
+
         reviewScore.settings.fillMode = .half
         reviewScore.rating = 3.0
         loadModel.getRateAverageCountProtocol = self
@@ -63,13 +63,9 @@ class ReviewViewController: UIViewController,DoneSendReviewContentsPS5,DoneSendR
         //コンテンツとともに送信（動画：受信クラスを作成しよう）
         if reviewTextField.text?.isEmpty != true {
 
-            if hardware == "PS5"{
-                sendDBModel.sendContentsPS5(title: gameTitle,sender: profile!,review: reviewTextField.text!, rate: self.reviewScore.rating,rateAverage: self.rateAverage)
-            }else if hardware == "PS4"{
-                sendDBModel.sendContentsPS4(title: gameTitle,sender: profile!,review: reviewTextField.text!, rate: self.reviewScore.rating,rateAverage: self.rateAverage)
-            }else if hardware == "Switch"{
-                sendDBModel.sendContentsSwitch(title: gameTitle,sender: profile!,review: reviewTextField.text!, rate: self.reviewScore.rating,rateAverage: self.rateAverage)
-            }
+            sendDBModel.sendContents(title: gameTitle,sender: profile!,review: reviewTextField.text!, rate: self.reviewScore.rating,rateAverage: totalCount)
+            print("totalCountの中身")
+            print(totalCount.debugDescription)
             
             print("ゲームタイトルに紐づくレビューをSendDBModelへ")
   
@@ -94,27 +90,13 @@ class ReviewViewController: UIViewController,DoneSendReviewContentsPS5,DoneSendR
         print(self.rateAverage.debugDescription)
     }
     
-    func checkDoneReviewPS5() {
+    func checkDoneReview() {
         HUD.hide()
-        loadModel.loadContentsPS5(title: gameTitle,rateAverage: rateAverage)
+        loadModel.loadContents(title: gameTitle,rateAverage: rateAverage)
         self.navigationController?.popViewController(animated: true)
         print("レビュー受信PS5")
     }
-    
-    func checkDoneReviewPS4() {
-        HUD.hide()
-        loadModel.loadContentsPS4(title: gameTitle,rateAverage: rateAverage)
-        self.navigationController?.popViewController(animated: true)
-        print("レビュー受信PS4")
-    }
-    
-    func checkDoneReviewSwitch() {
-        HUD.hide()
-        loadModel.loadContentsSwitch(title: gameTitle,rateAverage: rateAverage)
-        self.navigationController?.popViewController(animated: true)
-        print("レビュー受信Switch")
-    }
-    
+
     
     
     

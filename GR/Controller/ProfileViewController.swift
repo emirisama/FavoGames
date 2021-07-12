@@ -17,7 +17,7 @@ import FirebaseFirestore
 import PKHUD
 
 
-class ProfileViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,GetGameDataPS5Protocol,GetGameDataPS4Protocol,GetGameDataSwitchProtocol,GetProfileDataProtocol{
+class ProfileViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,GetProfileDataProtocol{
 
     
  
@@ -38,11 +38,7 @@ class ProfileViewController: UIViewController,UITableViewDelegate,UITableViewDat
     let db = Firestore.firestore()
     var profileModel = ProfileModel()
     var userDefaultsEX = UserDefaultsEX()
-    
-    var gameTitleModelPS5Array = [GameTitleModel]()
-    var gameTitleModelPS4Array = [GameTitleModel]()
-    var gameTitleModelSwitchArray = [GameTitleModel]()
-    
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -83,9 +79,7 @@ class ProfileViewController: UIViewController,UITableViewDelegate,UITableViewDat
     
     func setUp(id:String){
         
-        loadModel.getGameDataPS5Protocol = self
-        loadModel.getGameDataPS4Protocol = self
-        loadModel.getGameDataSwitchProtocol = self
+
         loadModel.getProfileDataProtocol = self
 
         //プロフィールを受信する(idにAuth.auth().currentUserが入る
@@ -133,21 +127,9 @@ class ProfileViewController: UIViewController,UITableViewDelegate,UITableViewDat
     }
     
     
-    func getGameDataPS5(dataArray: [GameTitleModel]) {
-        self.gameTitleModelPS5Array = []
-        self.gameTitleModelPS5Array = dataArray
-    }
+
     
-    func getGameDataPS4(dataArray: [GameTitleModel]) {
-        self.gameTitleModelPS4Array = []
-        self.gameTitleModelPS4Array = dataArray
-    }
-    
-    func getGameDataSwitch(dataArray: [GameTitleModel]) {
-        self.gameTitleModelSwitchArray = []
-        self.gameTitleModelSwitchArray = dataArray
-    }
-    
+
 
     //プロフィールが入ったdataArray
     func getProfileData(dataArray: [ProfileModel]) {
@@ -173,11 +155,7 @@ class ProfileViewController: UIViewController,UITableViewDelegate,UITableViewDat
     
     //ログアウト処理
     @IBAction func tapLogout(_ sender: Any) {
-//        userDefaultsEX.removeObject(forKey: "isLogin")
-//        var appDelegate:AppDelegate = UIApplication.shared.delegate as! AppDelegate
-//        appDelegate.window = UIWindow(frame: UIScreen.main.bounds)
-//        appDelegate.window?.rootViewController = SignInViewController()
-//        appDelegate.window?.makeKeyAndVisible()
+
 
         let firebaseAuth = Auth.auth()
         do {
