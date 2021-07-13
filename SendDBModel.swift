@@ -38,7 +38,7 @@ class SendDBModel {
     var imageDatauser = Data()
     var myProfile = [String]()
 
-    var rateAverageModelArray = [RateAverageModel]()
+    var totalCountModelArray = [TotalCountModel]()
     
     var userID = String()
     var userName = String()
@@ -127,7 +127,7 @@ class SendDBModel {
 
  
     //ゲームタイトルに紐づくデータを送信
-    func sendContents(title:String,sender:ProfileModel,review:String,rate:Double,rateAverage:Double){
+    func sendContents(title:String,sender:ProfileModel,comment:String,totalCount:Int){
  
         self.myProfile.append(sender.imageURLString!)
         self.myProfile.append(sender.profileText!)
@@ -135,14 +135,14 @@ class SendDBModel {
         self.myProfile.append(sender.userName!)
         self.myProfile.append(sender.id!)
   
-        self.db.collection("Users").document(Auth.auth().currentUser!.uid).collection("reviewContents").document(title).setData(
-            ["review":review,"rate":rate,"sender":self.myProfile,"date":Date().timeIntervalSince1970,"rateAverage":rateAverage])
+        self.db.collection("Users").document(Auth.auth().currentUser!.uid).collection("Contents").document(title).setData(
+            ["date":Date().timeIntervalSince1970,"comment":comment,"totalCount":totalCount,"sender":self.myProfile,])
         
-        self.db.collection("title").document(title).collection("Contents").document().setData(
-            ["review":review,"rate":rate,"sender":self.myProfile,"date":Date().timeIntervalSince1970,"rateAverage":rateAverage])
+        self.db.collection("title").document(title).collection("Contents").document(Auth.auth().currentUser!.uid).setData(
+            ["date":Date().timeIntervalSince1970,"comment":comment,"totalCount":totalCount,"sender":self.myProfile])
         
-        self.db.collection("Score").document(title).collection("review").document().setData(
-            ["rate":rate])
+        self.db.collection("Total").document(title).collection("Contents").document().setData(
+            ["totalCount":totalCount])
 
         print("レビュー送信")
         self.doneSendReviewContents?.checkDoneReview()

@@ -10,10 +10,8 @@ import Foundation
 struct ContentModel{
 
 
-    let review:String?
+    let comment:String?
+    let totalCount:Int?
     var sender:[String]?
-    let rate:Double?
-    let rateAverage:Double?
-
     
 }

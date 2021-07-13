@@ -10,7 +10,10 @@ import SDWebImage
 import Cosmos
 import PKHUD
 
-class DetailViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,GetContentsDataProtocol,GetRateAverageCountProtocol{
+class DetailViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,GetContentsDataProtocol, GetTotalCountProtocol{
+
+
+    
 
 
     
@@ -41,17 +44,16 @@ class DetailViewController: UIViewController,UITableViewDelegate,UITableViewData
     var booksGenreId = String()
 
 
-    let sectionTitle = ["","スコア・レビュー"]
+    let sectionTitle = ["","掲示板"]
 
     var contentDetailCell = ContentDetailCell()
    
-    var rateArray = [RateModel]()
 
     var rateAverage = Double()
     var dataSetsArray = [DataSets]()
     var searchAndLoadModel = SearchAndLoadModel()
-
-
+    var totalCountModelArray = [TotalCountModel]()
+    var totalCuntModel:TotalCountModel?
 
     
     override func viewDidLoad() {
@@ -67,14 +69,15 @@ class DetailViewController: UIViewController,UITableViewDelegate,UITableViewData
             
             tableView.register(UINib(nibName: "ContentDetailCell", bundle: nil), forCellReuseIdentifier: "ContentDetailCell")
             tableView.register(UINib(nibName: "ReviewViewCell", bundle: nil), forCellReuseIdentifier: "ReviewViewCell")
+     
+            
             
             loadModel.getContentsDataProtocol = self
-            loadModel.getRateAverageCountProtocol = self
+            loadModel.getTotalCountProtocol = self
             
-            loadModel.loadContents(title: gameTitle,rateAverage: rateAverage)
-            
-            
-            loadModel.loadRateAverageCount(title: gameTitle, rateAverage: rateAverage)
+
+            loadModel.loadContents(title: gameTitle, totalCount: contentModelArray.count)
+            loadModel.loadTotalCount(title: gameTitle, totalCount: contentModelArray.count)
             
             tableView.reloadData()
             
@@ -140,13 +143,11 @@ class DetailViewController: UIViewController,UITableViewDelegate,UITableViewData
             let cell = tableView.dequeueReusableCell(withIdentifier: "ContentDetailCell", for: indexPath) as! ContentDetailCell
             cell.selectionStyle = .none
             cell.gameTitleLabel.text = gameTitle
-            print("PS5→Detail")
-            print(gameTitle.debugDescription)
             cell.ImageView.sd_setImage(with: URL(string: mediumImageUrl), completed: nil)
             cell.salesDate.text = salesDate
             cell.hardware.text = hardware
             cell.price.text = String(itemPrice)
-            cell.rateAverageLabel.text = String(contentModelArray.count)
+            cell.rateAverageLabel.text = String(self.totalCountModelArray.count)
             cell.reviewButton.addTarget(self, action: #selector(reviewButtonTap(_:)), for: .touchUpInside)
             return cell
             
@@ -154,17 +155,10 @@ class DetailViewController: UIViewController,UITableViewDelegate,UITableViewData
             
             let cell2 = tableView.dequeueReusableCell(withIdentifier: "ReviewViewCell", for: indexPath) as! ReviewViewCell
             cell2.selectionStyle = .none
-  
-                print("コンテントPS5")
-                print(contentModelArray.debugDescription)
-                print(self.contentModelArray[indexPath.row].sender?[3].debugDescription)
-                
+ 
                 cell2.userNameLabel.text = self.contentModelArray[indexPath.row].sender?[3]
                 cell2.userIDLabel.text = self.contentModelArray[indexPath.row].sender?[4]
-                cell2.reviewViewLabel.text = self.contentModelArray[indexPath.row].review
-                cell2.scoreCountLabel.text = String(self.contentModelArray[indexPath.row].rate!)
-                cell2.scoreView.rating = self.contentModelArray[indexPath.row].rate!
-                cell2.scoreView.settings.fillMode = .half
+                cell2.reviewViewLabel.text = self.contentModelArray[indexPath.row].comment
                 cell2.profileImage.sd_setImage(with: URL(string: (contentModelArray[indexPath.row].sender![0])), completed: nil)
                 return cell2
         }
@@ -177,24 +171,11 @@ class DetailViewController: UIViewController,UITableViewDelegate,UITableViewData
         
         reviewVC.array = dataSetsArray
         reviewVC.gameTitle = gameTitle
-        reviewVC.totalCount = Double(contentModelArray.count)
+        reviewVC.totalCount = Int(contentModelArray.count)
         self.navigationController?.pushViewController(reviewVC, animated: true)
         
     }
-        
-    
-    
-
-
-//        cell..text = self.dataArray[indexPath.row].userID
-        
-//        let reviewView = cell.contentView.viewWithTag(4) as! CosmosView
-//        reviewView.rating = self.dataArray[indexPath.row].rate!
-//        
-//        let reViewTextView = cell.contentView.viewWithTag(5) as! UITextView
-//        reviewView.text = self.dataArray[indexPath.row].review
-//        
-        
+             
     
     func getContentsData(dataArray: [ContentModel]) {
         self.contentModelArray = []
@@ -203,23 +184,14 @@ class DetailViewController: UIViewController,UITableViewDelegate,UITableViewData
         print(self.contentModelArray.debugDescription)
     }
 
+
+
     
-
-    
-
-
-    func getRateAverageCount(rateAverage: Double) {
-
-        self.rateAverage = rateAverage
-        print("レイト平均")
-        print(self.rateAverage.debugDescription)
+    func getTotalCount(totalCount: [TotalCountModel]) {
+        self.totalCountModelArray = totalCount
         tableView.reloadData()
+        
     }
-   
-
-
-    
-    
 
     
     

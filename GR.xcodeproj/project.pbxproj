@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		3579223637281EFA54B2D515 /* Pods_GR.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F90BE2B6597AA0DD3A514DC /* Pods_GR.framework */; };
 		50318457262BC9880005D9BF /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50318456262BC9880005D9BF /* SignInViewController.swift */; };
-		50430506267D906A006452E9 /* RateModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50430505267D906A006452E9 /* RateModel.swift */; };
+		50430506267D906A006452E9 /* TotalCountModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50430505267D906A006452E9 /* TotalCountModel.swift */; };
 		5046C4D7261DD7B5006939C7 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5046C4D6261DD7B5006939C7 /* Constants.swift */; };
 		504C276C260CB0E600179AF9 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 504C276B260CB0E600179AF9 /* GoogleService-Info.plist */; };
 		504C30D7265BC30300C520B0 /* ContentDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 504C30D5265BC30300C520B0 /* ContentDetailCell.swift */; };
@@ -17,7 +17,6 @@
 		504E35522625982D00A119D1 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 504E35512625982D00A119D1 /* ProfileViewController.swift */; };
 		504E35562625C68700A119D1 /* ContentsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 504E35542625C68700A119D1 /* ContentsCell.swift */; };
 		504E35572625C68700A119D1 /* ContentsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 504E35552625C68700A119D1 /* ContentsCell.xib */; };
-		50545C65267F189D0062AE1D /* RateAverageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50545C64267F189D0062AE1D /* RateAverageModel.swift */; };
 		505854552635081B00182CFD /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 505854542635081B00182CFD /* SearchViewController.swift */; };
 		507375C3261F43A400D8E6D6 /* LoadModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 507375C2261F43A400D8E6D6 /* LoadModel.swift */; };
 		507375C626217F5200D8E6D6 /* ContentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 507375C526217F5200D8E6D6 /* ContentModel.swift */; };
@@ -34,7 +33,6 @@
 		50A8D81F2645310C008B5CEA /* SearchResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50A8D81E2645310C008B5CEA /* SearchResultsViewController.swift */; };
 		50A8D8222645336D008B5CEA /* DataSets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50A8D8212645336D008B5CEA /* DataSets.swift */; };
 		50CF1B9D263525DA00ECF7E4 /* PS5ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50CF1B9C263525DA00ECF7E4 /* PS5ViewController.swift */; };
-		50D54104269C748800FD51A5 /* TotalModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50D54103269C748800FD51A5 /* TotalModel.swift */; };
 		50D9222B26078EB5009A7BB0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50D9222A26078EB5009A7BB0 /* AppDelegate.swift */; };
 		50D9222D26078EB5009A7BB0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50D9222C26078EB5009A7BB0 /* SceneDelegate.swift */; };
 		50D9222F26078EB5009A7BB0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50D9222E26078EB5009A7BB0 /* ViewController.swift */; };
@@ -52,7 +50,7 @@
 		1F90BE2B6597AA0DD3A514DC /* Pods_GR.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GR.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		238CD4109F23D90CA702E0C8 /* Pods-GR.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GR.debug.xcconfig"; path = "Target Support Files/Pods-GR/Pods-GR.debug.xcconfig"; sourceTree = "<group>"; };
 		50318456262BC9880005D9BF /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
-		50430505267D906A006452E9 /* RateModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RateModel.swift; sourceTree = "<group>"; };
+		50430505267D906A006452E9 /* TotalCountModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TotalCountModel.swift; sourceTree = "<group>"; };
 		5046C4D6261DD7B5006939C7 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		504C276B260CB0E600179AF9 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		504C30D5265BC30300C520B0 /* ContentDetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentDetailCell.swift; sourceTree = "<group>"; };
@@ -60,7 +58,6 @@
 		504E35512625982D00A119D1 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		504E35542625C68700A119D1 /* ContentsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentsCell.swift; sourceTree = "<group>"; };
 		504E35552625C68700A119D1 /* ContentsCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ContentsCell.xib; sourceTree = "<group>"; };
-		50545C64267F189D0062AE1D /* RateAverageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RateAverageModel.swift; sourceTree = "<group>"; };
 		505854542635081B00182CFD /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		507375C2261F43A400D8E6D6 /* LoadModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadModel.swift; sourceTree = "<group>"; };
 		507375C526217F5200D8E6D6 /* ContentModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentModel.swift; sourceTree = "<group>"; };
@@ -77,7 +74,6 @@
 		50A8D81E2645310C008B5CEA /* SearchResultsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultsViewController.swift; sourceTree = "<group>"; };
 		50A8D8212645336D008B5CEA /* DataSets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataSets.swift; sourceTree = "<group>"; };
 		50CF1B9C263525DA00ECF7E4 /* PS5ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PS5ViewController.swift; sourceTree = "<group>"; };
-		50D54103269C748800FD51A5 /* TotalModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TotalModel.swift; sourceTree = "<group>"; };
 		50D9222726078EB5009A7BB0 /* GR.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GR.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		50D9222A26078EB5009A7BB0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		50D9222C26078EB5009A7BB0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -166,9 +162,7 @@
 				507375C526217F5200D8E6D6 /* ContentModel.swift */,
 				50A8D81B26452B1C008B5CEA /* SearchAndLoadModel.swift */,
 				50A8D8212645336D008B5CEA /* DataSets.swift */,
-				50430505267D906A006452E9 /* RateModel.swift */,
-				50545C64267F189D0062AE1D /* RateAverageModel.swift */,
-				50D54103269C748800FD51A5 /* TotalModel.swift */,
+				50430505267D906A006452E9 /* TotalCountModel.swift */,
 			);
 			name = Model;
 			path = ..;
@@ -341,16 +335,14 @@
 			files = (
 				50F5585F2691F885004A73AE /* SplashViewController.swift in Sources */,
 				508C95DB2622D6FC0077F3A6 /* DetailViewController.swift in Sources */,
-				50D54104269C748800FD51A5 /* TotalModel.swift in Sources */,
 				50D9222F26078EB5009A7BB0 /* ViewController.swift in Sources */,
-				50545C65267F189D0062AE1D /* RateAverageModel.swift in Sources */,
 				50F33D1A268783C7001A358D /* ProfileEditViewController.swift in Sources */,
 				505854552635081B00182CFD /* SearchViewController.swift in Sources */,
 				50CF1B9D263525DA00ECF7E4 /* PS5ViewController.swift in Sources */,
 				507B8DFD266266770001B8DC /* ReviewViewCell.swift in Sources */,
 				50318457262BC9880005D9BF /* SignInViewController.swift in Sources */,
 				50777FA1261CAB58005314BF /* ReviewViewController.swift in Sources */,
-				50430506267D906A006452E9 /* RateModel.swift in Sources */,
+				50430506267D906A006452E9 /* TotalCountModel.swift in Sources */,
 				50A8D81C26452B1C008B5CEA /* SearchAndLoadModel.swift in Sources */,
 				5046C4D7261DD7B5006939C7 /* Constants.swift in Sources */,
 				508B0B4F260B762A00FBA8C5 /* UIColor-Extension.swift in Sources */,

@@ -476,25 +476,14 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="感想" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="7cL-JQ-VpW">
-                                <rect key="frame" x="30" y="194" width="354" height="34"/>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="5HI-N7-3XM">
+                                <rect key="frame" x="0.0" y="141" width="414" height="461"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <color key="textColor" systemColor="labelColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Wj9-BC-CyQ" customClass="CosmosView" customModule="Cosmos">
-                                <rect key="frame" x="65" y="115" width="285" height="57"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="starSize">
-                                        <real key="value" value="50"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="totalStars">
-                                        <integer key="value" value="5"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                            </view>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Y54-SH-SXa"/>
                         <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -516,8 +505,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="reviewScore" destination="Wj9-BC-CyQ" id="1OL-9D-pRi"/>
-                        <outlet property="reviewTextField" destination="7cL-JQ-VpW" id="0US-DF-DnD"/>
+                        <outlet property="commentTextField" destination="5HI-N7-3XM" id="obC-15-obJ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DUS-7p-7zG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -898,11 +886,6 @@
             <point key="canvasLocation" x="1661" y="321"/>
         </scene>
     </scenes>
-    <designables>
-        <designable name="Wj9-BC-CyQ">
-            <size key="intrinsicContentSize" width="270" height="50"/>
-        </designable>
-    </designables>
     <resources>
         <image name="splash.jpg" width="640" height="960"/>
         <systemColor name="labelColor">

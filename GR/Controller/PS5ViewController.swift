@@ -10,7 +10,7 @@ import FirebaseAuth
 import FirebaseFirestore
 import PKHUD
 
-class PS5ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,DoneCatchDataProtocol,GetContentsDataProtocol,GetTotalCountProtocol{
+class PS5ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,DoneCatchDataProtocol,GetContentsDataProtocol{
 
     
  
@@ -27,7 +27,6 @@ class PS5ViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
     var idString = String()
     
     var loadModel = LoadModel()
-    var rateArray = [RateModel]()
     var rateAverage = Double()
     var sendDBModel = SendDBModel()
     var contentModelArray = [ContentModel]()
@@ -39,7 +38,8 @@ class PS5ViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
     var mediumImageUrl = String()
     var itemPrice = Int()
     var booksGenreId = String()
-    var totalArray = [TotalModel]()
+    var totalCountModelArray = [TotalCountModel]()
+    var dataSets:DataSets?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -69,6 +69,8 @@ class PS5ViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
             searchModel.search()
         }
         
+
+
         print("せんどげーむこんてんつ")
         
 
@@ -106,14 +108,11 @@ class PS5ViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
         cell.contentImageView.sd_setImage(with: URL(string: dataSetsArray[indexPath.row].mediumImageUrl!), completed: nil)
         cell.gameTitleLabel.text = dataSetsArray[indexPath.row].title
         cell.rankLabel.text = String(indexPath.row + 1)
-//        cell.reviewCountLabel.text = String(contentModelArray[indexPath.row].rateAverage!)
-//        //            print("PS5レビュー平均値")
-        //            print(self.contentModelPS5Array[indexPath.row].rateAverage!.debugDescription)
-        //
+
         
         
-        //レビュー平均値をDBに送信したものを受信して表示
-        print("レビューの平均の数")
+
+        print("コメントの総数")
         print(self.contentModelArray.count)
         
         print("dataSetsArrayの数")
@@ -136,20 +135,25 @@ class PS5ViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
         DetailVC.itemPrice = dataSetsArray[indexPath.row].itemPrice!
         
         self.navigationController?.pushViewController(DetailVC, animated: true)
-        
-        
-        
+  
     }
     
+
     
     func doneCatchData(array: [DataSets]) {
         
         self.dataSetsArray = []
         self.dataSetsArray = array
-        tableView.reloadData()
-        print("dataSetsArrayの中身")
-        print(self.dataSetsArray.debugDescription)
         
+
+        for i in 0..<dataSetsArray.count{
+            print("i")
+            print(i)
+            gameTitle = self.dataSetsArray[i].title!
+        }
+        loadModel.getContentsDataProtocol = self
+        loadModel.loadContents(title: gameTitle, totalCount: contentModelArray.count)
+        tableView.reloadData()
         
     }
     
@@ -161,13 +165,7 @@ class PS5ViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
         tableView.reloadData()
     }
     
-    func getTotalCount(total: [TotalModel]) {
-        self.totalArray = []
-        self.totalArray = total
-        print("totalの中身")
-        print(self.totalArray.debugDescription)
-    }
-    
+
 
     
     

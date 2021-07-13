@@ -74,6 +74,7 @@ class SearchResultsViewController: UIViewController,UITableViewDelegate,UITableV
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return dataSetsArray.count
+
     }
     
     
@@ -81,6 +82,7 @@ class SearchResultsViewController: UIViewController,UITableViewDelegate,UITableV
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ContentsCell", for: indexPath) as! ContentsCell
         cell.contentImageView.sd_setImage(with: URL(string: dataSetsArray[indexPath.row].mediumImageUrl!), completed: nil)
+
         cell.gameTitleLabel.text = dataSetsArray[indexPath.row].title
         cell.rankLabel.isHidden = true
         return cell
@@ -91,7 +93,12 @@ class SearchResultsViewController: UIViewController,UITableViewDelegate,UITableV
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let DetailVC = storyboard?.instantiateViewController(identifier: "detailVC") as! DetailViewController
         DetailVC.dataSetsArray = dataSetsArray
-        
+        DetailVC.gameTitle = dataSetsArray[indexPath.row].title!
+        DetailVC.hardware = dataSetsArray[indexPath.row].hardware!
+        DetailVC.salesDate = dataSetsArray[indexPath.row].salesDate!
+        DetailVC.mediumImageUrl = dataSetsArray[indexPath.row].mediumImageUrl!
+        DetailVC.itemPrice = dataSetsArray[indexPath.row].itemPrice!
+        DetailVC.booksGenreId = dataSetsArray[indexPath.row].title!
         self.navigationController?.pushViewController(DetailVC, animated: true)
     }
 

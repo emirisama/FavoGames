@@ -7,10 +7,10 @@
 
 import Foundation
 
-struct RateModel{
+struct TotalCountModel{
     
 
-    let rate:Double?
+    let totalCount:Int?
     
 
 }

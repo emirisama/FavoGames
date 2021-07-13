@@ -26,13 +26,10 @@ protocol GetContentsDataProtocol{
 
 
 
-protocol GetRateAverageCountProtocol{
-    func getRateAverageCount(rateAverage: Double)
+protocol GetTotalCountProtocol{
+    func getTotalCount(totalCount: [TotalCountModel])
 }
 
-protocol GetTotalCountProtocol{
-    func getTotalCount(total: [TotalModel])
-}
 
 
 class LoadModel{
@@ -49,15 +46,13 @@ class LoadModel{
     var getProfileDataProtocol:GetProfileDataProtocol?
     
     //レビューの平均値に関する記述
-    var rateModelArray:[RateModel] = []
-    var getRateAverageCountProtocol:GetRateAverageCountProtocol?
-    var rateAverageModelArray:[RateAverageModel] = []
+    var totalCountModelArray:[TotalCountModel] = []
+    var getTotalCountProtocol:GetTotalCountProtocol?
     var sendDBModel = SendDBModel()
     var profileModel = ProfileModel()
     var userDefaultsEX = UserDefaultsEX()
     
-    var getTotalCountProtocol:GetTotalCountProtocol?
-    var totalArray:[TotalModel] = []
+
     
     //プロフィールの受信
     func loadProfile(id:String){
@@ -92,7 +87,7 @@ class LoadModel{
 
     
     //コンテンツを受信するメソッド(ゲームタイトルに紐づくレビューや名前などのデータを受信する）
-    func loadContents(title:String,rateAverage:Double){
+    func loadContents(title:String,totalCount:Int){
         db.collection("title").document(title).collection("Contents").order(by: "date").addSnapshotListener { (snapShot, error) in
             self.contentModelArray = []
             if error != nil{
@@ -108,17 +103,14 @@ class LoadModel{
                     let data = doc.data()
                     print("コンテントモデル受信4PS5")
                     //if letでもし空じゃなかったらの意味（!= nilと同じ)
-                    if let review = data["review"] as? String,let rate = data["rate"] as? Double,let sender = data["sender"] as? [String],let date = data["date"] as? Double,let rateAverage = data["rateAverage"] as? Double{
-                        if rateAverage == Double("nan"){
-                            rateAverage == 0.0
-                        }else{
-                        }
-                        let contentModel = ContentModel(review: review, sender: sender, rate: rate, rateAverage: rateAverage)
-                        self.contentModelArray.append(contentModel)
+                    if let comment = data["comment"] as? String,let totalCount = data["totalCount"] as? Int,let sender = data["sender"] as? [String],let date = data["date"] as? Double{
+                        let totalCount = snapShotDoc.count
                         
-                    
+                        let contentModel = ContentModel(comment: comment, totalCount: totalCount, sender: sender)
+                        self.contentModelArray.append(contentModel)
+        
                     }else{
-                        let contentModel = ContentModel(review: "", sender: nil, rate: 0.0, rateAverage: 0.0)
+                        let contentModel = ContentModel(comment: "", totalCount: 0, sender: nil)
                         self.contentModelArray.append(contentModel)
                     }
                 }
@@ -138,9 +130,9 @@ class LoadModel{
     
     
     //rateの平均値を出す
-    func loadRateAverageCount(title:String,rateAverage:Double){
-        db.collection("Score").document(title).collection("review").addSnapshotListener { snapShot, error in
-            self.rateModelArray = []
+    func loadTotalCount(title:String,totalCount:Int){
+        db.collection("Total").document(title).collection("Contents").addSnapshotListener { snapShot, error in
+            self.totalCountModelArray = []
             if error != nil{
                 return
             }
@@ -148,55 +140,23 @@ class LoadModel{
  
                 for doc in snapShotDoc{
                     let data = doc.data()
-                        if let rate = data["rate"] as? Double{
-                            let rateArray = RateModel(rate: rate)
+                    let total = snapShotDoc.count
+                        
+                            let totalCountArray = TotalCountModel(totalCount: total)
  
-                            self.rateModelArray.append(rateArray)
-                        }
+                            self.totalCountModelArray.append(totalCountArray)
+                        print("totalCountModelArrayの中身")
+                    print(self.totalCountModelArray.debugDescription)
                 }
-                var totalCount = 0.0
-                var rateAverage = 0.0
-                for (index, value) in self.rateModelArray.enumerated(){
-       
-                    totalCount = totalCount + self.rateModelArray[index].rate!
-                }
+            
 
-                rateAverage = Double(totalCount) / Double(snapShotDoc.count)
-                var rateAverageScore = (round(10*rateAverage)/10)
-                print("rateArrayの中身")
-                print(rateAverageScore.debugDescription)
-                print("snapShotDocの中身")
-                print(snapShotDoc.debugDescription)
-
-                self.getRateAverageCountProtocol?.getRateAverageCount(rateAverage: rateAverageScore)
+                self.getTotalCountProtocol?.getTotalCount(totalCount: self.totalCountModelArray)
                 
             }
         }
     }
     
-    func loadTotalCount(title:String,total:Double){
-        db.collection("Score").document(title).collection("review").addSnapshotListener { snapShot, error in
-            self.totalArray = []
-            if error != nil{
-                return
-            }
-            if let snapShotDoc = snapShot?.documents{
- 
-                for doc in snapShotDoc{
-                    let data = doc.data()
-                        if let total = data["total"] as? Double{
-                            let totalArray = TotalModel(total: total)
- 
-                            self.totalArray.append(totalArray)
-                        }
-                }
- 
 
-                self.getTotalCountProtocol?.getTotalCount(total: self.totalArray)
-                
-            }
-        }
-    }
     
     
     
