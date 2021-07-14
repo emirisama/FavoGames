@@ -10,11 +10,10 @@ import FirebaseAuth
 import FirebaseFirestore
 import PKHUD
 
-class PS5ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,DoneCatchDataProtocol,GetContentsDataProtocol{
-
-    
+class PS5ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,DoneCatchDataProtocol,GetContentsDataProtocol,GetTitlesDataProtocol{
  
     
+  
 
     
     @IBOutlet weak var rankingLabel: UILabel!
@@ -40,6 +39,10 @@ class PS5ViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
     var booksGenreId = String()
     var totalCountModelArray = [TotalCountModel]()
     var dataSets:DataSets?
+    var contentModel:ContentModel?
+    var totalCount = Int()
+    var titleDocumentModelArray = [TitleDocumentIDModel]()
+    var documentID = String()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -59,17 +62,20 @@ class PS5ViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
             searchModel.doneCatchDataProtocol = self
             searchModel.search()
 
+
         }else if index == 1{
             let searchModel = SearchAndLoadModel(urlString: urlStringPs4)
             searchModel.doneCatchDataProtocol = self
             searchModel.search()
+
         }else if index == 2{
-            let searchModel = SearchAndLoadModel(urlString: urlStringPs4)
+            let searchModel = SearchAndLoadModel(urlString: urlStringSwitch)
             searchModel.doneCatchDataProtocol = self
             searchModel.search()
         }
         
-
+//        loadModel.getTitlesDataProtocol = self
+//        loadModel.loadTitles()
 
         print("せんどげーむこんてんつ")
         
@@ -109,9 +115,8 @@ class PS5ViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
         cell.gameTitleLabel.text = dataSetsArray[indexPath.row].title
         cell.rankLabel.text = String(indexPath.row + 1)
 
-        
-        
-
+        //dataSetsArray[indexPath.row].titleとFirebaseのタイトルが一致するものを探す
+        //commentCountをコメント数に入れる
         print("コメントの総数")
         print(self.contentModelArray.count)
         
@@ -133,26 +138,27 @@ class PS5ViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
         DetailVC.salesDate = dataSetsArray[indexPath.row].salesDate!
         DetailVC.mediumImageUrl = dataSetsArray[indexPath.row].mediumImageUrl!
         DetailVC.itemPrice = dataSetsArray[indexPath.row].itemPrice!
-        
+        //LoadModel.loadTitleのdocumentIDの値を持ってくる
+        DetailVC.documentID = self.titleDocumentModelArray[indexPath.row].documentID!
         self.navigationController?.pushViewController(DetailVC, animated: true)
   
     }
     
+
 
     
     func doneCatchData(array: [DataSets]) {
         
         self.dataSetsArray = []
         self.dataSetsArray = array
-        
+        //1 FireBaseからデータを持ってくる
+        //colleciton("title")取得する
+        sendDBModel.sendTitle(documentID: documentID, totalCount: totalCount)
 
-        for i in 0..<dataSetsArray.count{
-            print("i")
-            print(i)
-            gameTitle = self.dataSetsArray[i].title!
-        }
+        print("contentModelのtotalCount")
+        print(contentModel.debugDescription)
         loadModel.getContentsDataProtocol = self
-        loadModel.loadContents(title: gameTitle, totalCount: contentModelArray.count)
+        loadModel.loadContents(title: gameTitle, totalCount: totalCount,documentID: documentID)
         tableView.reloadData()
         
     }
@@ -162,12 +168,31 @@ class PS5ViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
     func getContentsData(dataArray: [ContentModel]) {
         self.contentModelArray = []
         self.contentModelArray = dataArray
+        for i in 0..<contentModelArray.count{
+            print("i")
+            print(i)
+            totalCount = self.contentModelArray[i].totalCount!
+            
+        }
+        print("contentModelArrayの中身")
+        print(self.contentModelArray.debugDescription)
         tableView.reloadData()
     }
     
 
 
+    func checkDoneGames() {
+        print("dataSetsをDBへ送信完了")
+    }
     
+    func getTitlesData(dataArray: [TitleDocumentIDModel]) {
+        self.titleDocumentModelArray = []
+        self.titleDocumentModelArray = dataArray
+        for i in 0..<titleDocumentModelArray.count{
+            documentID = self.titleDocumentModelArray[i].documentID!
+        }
+    }
+  
     
     /*
      // MARK: - Navigation

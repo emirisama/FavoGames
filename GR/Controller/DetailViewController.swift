@@ -42,6 +42,7 @@ class DetailViewController: UIViewController,UITableViewDelegate,UITableViewData
     var mediumImageUrl = String()
     var itemPrice = Int()
     var booksGenreId = String()
+    var documentID = String()
 
 
     let sectionTitle = ["","掲示板"]
@@ -76,6 +77,7 @@ class DetailViewController: UIViewController,UITableViewDelegate,UITableViewData
             loadModel.getTotalCountProtocol = self
             
 
+//            loadModel.loadContents(title: gameTitle, totalCount: contentModelArray.count,documentID: documentID)
             loadModel.loadContents(title: gameTitle, totalCount: contentModelArray.count)
             loadModel.loadTotalCount(title: gameTitle, totalCount: contentModelArray.count)
             
@@ -91,7 +93,7 @@ class DetailViewController: UIViewController,UITableViewDelegate,UITableViewData
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if  indexPath.section == 0 {
-            return 400
+            return 350
             
         }else if indexPath.section == 1{
             if contentModelArray[indexPath.row].sender == nil{

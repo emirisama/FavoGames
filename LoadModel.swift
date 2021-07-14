@@ -30,6 +30,10 @@ protocol GetTotalCountProtocol{
     func getTotalCount(totalCount: [TotalCountModel])
 }
 
+protocol GetTitlesDataProtocol{
+    func getTitlesData(dataArray: [TitleDocumentIDModel])
+}
+
 
 
 class LoadModel{
@@ -45,12 +49,15 @@ class LoadModel{
     var profileModelArray:[ProfileModel] = []
     var getProfileDataProtocol:GetProfileDataProtocol?
     
-    //レビューの平均値に関する記述
+    //コメントに関する記述
     var totalCountModelArray:[TotalCountModel] = []
     var getTotalCountProtocol:GetTotalCountProtocol?
     var sendDBModel = SendDBModel()
     var profileModel = ProfileModel()
     var userDefaultsEX = UserDefaultsEX()
+    //ドキュメントID取得
+    var titleDocumentModelArray:[TitleDocumentIDModel] = []
+    var getTitlesDataProtocol:GetTitlesDataProtocol?
     
 
     
@@ -87,18 +94,20 @@ class LoadModel{
 
     
     //コンテンツを受信するメソッド(ゲームタイトルに紐づくレビューや名前などのデータを受信する）
-    func loadContents(title:String,totalCount:Int){
-        db.collection("title").document(title).collection("Contents").order(by: "date").addSnapshotListener { (snapShot, error) in
+    func loadContents(title:String,totalCount:Int,documentID:String){
+        db.collection("title").document(documentID).collection("Contents").order(by: "date").addSnapshotListener { (snapShot, error) in
             self.contentModelArray = []
             if error != nil{
                 return
             }
             print("コンテントモデル受信1PS5")
             if let snapShotDoc = snapShot?.documents{
+                
                 print("コンテントモデル受信2PS5")
                 print(snapShotDoc.debugDescription)
                 //ドキュメントの数だけcontentModelの値を入れる
                 for doc in snapShotDoc{
+//                    doc.documentID
                     print("コンテントモデル受信3PS5")
                     let data = doc.data()
                     print("コンテントモデル受信4PS5")
@@ -112,10 +121,11 @@ class LoadModel{
                     }else{
                         let contentModel = ContentModel(comment: "", totalCount: 0, sender: nil)
                         self.contentModelArray.append(contentModel)
+                        print("contentModelArrayの中身")
+                        print(self.contentModelArray)
                     }
                 }
                 self.getContentsDataProtocol?.getContentsData(dataArray: self.contentModelArray)
-
             }
             print("snapShotDocが空だったらPS5")
             print(self.contentModelArray.debugDescription)
@@ -156,11 +166,34 @@ class LoadModel{
         }
     }
     
-
-    
-    
-    
-
-    
-    
+    func loadTitles(){
+        db.collection("title").getDocuments(completion: { (snapShot, error) in
+            self.titleDocumentModelArray = []
+            if error != nil{
+                return
+            }
+            print("ゲームタイトル受信1")
+            if let snapShotDoc = snapShot?.documents{
+                
+                print("ゲームタイトル受信2")
+                print(snapShotDoc.debugDescription)
+                //ドキュメントの数だけcontentModelの値を入れる
+                for doc in snapShotDoc{
+                    let data = doc.data()
+                    if let titleDocumentID =  data[doc.documentID] as? String{
+                        let titleDocumentIDModel = TitleDocumentIDModel(documentID: titleDocumentID)
+                        self.titleDocumentModelArray.append(titleDocumentIDModel)
+                        
+                    }
+                    
+                }
+                self.getTitlesDataProtocol?.getTitlesData(dataArray: self.titleDocumentModelArray)
+            }
+            print("snapShotDocが空だったらPS5")
+            print(self.contentModelArray.debugDescription)
+        }
+        )
+    }
 }
+        
+    

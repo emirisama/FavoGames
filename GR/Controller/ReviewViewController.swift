@@ -9,7 +9,8 @@ import UIKit
 import PKHUD
 import Cosmos
 
-class ReviewViewController: UIViewController,DoneSendReviewContents,GetTotalCountProtocol,GetContentsDataProtocol{
+class ReviewViewController: UIViewController,DoneSendReviewContents,GetTotalCountProtocol,GetContentsDataProtocol,GetTitlesDataProtocol{
+ 
 
     
 
@@ -32,6 +33,9 @@ class ReviewViewController: UIViewController,DoneSendReviewContents,GetTotalCoun
     var totalCountModelArray = [TotalCountModel]()
     var contentModelArray = [ContentModel]()
     var totalCountModel:TotalCountModel?
+    var titleDocumentModelArray = [TitleDocumentIDModel]()
+    var documentID = String()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,8 +43,10 @@ class ReviewViewController: UIViewController,DoneSendReviewContents,GetTotalCoun
         sendDBModel.doneSendReviewContents = self
         loadModel.getTotalCountProtocol = self
         loadModel.getContentsDataProtocol = self
-        loadModel.loadTotalCount(title: gameTitle, totalCount: totalCount)
-        loadModel.loadContents(title: gameTitle, totalCount: totalCount)
+        loadModel.getTitlesDataProtocol = self
+//        loadModel.loadTotalCount(title: gameTitle, totalCount: totalCount)
+//        loadModel.loadTitles()
+//        loadModel.loadContents(title: gameTitle, totalCount: totalCount,documentID: documentID)
     }
     
 
@@ -58,7 +64,9 @@ class ReviewViewController: UIViewController,DoneSendReviewContents,GetTotalCoun
         //コンテンツとともに送信（動画：受信クラスを作成しよう）
         if commentTextField.text?.isEmpty != true {
 
-            sendDBModel.sendContents(title: gameTitle, sender: profile!, comment: commentTextField.text, totalCount: totalCount)
+            sendDBModel.sendContents(documentID: gameTitle, sender: profile!, comment: commentTextField.text, totalCount: 0)
+            //commentCountを１上げる
+//            sendDBModel.sendTitle(documentID: documentID, totalCount: totalCount)
 
             
             print("ゲームタイトルに紐づくレビューをSendDBModelへ")
@@ -86,7 +94,7 @@ class ReviewViewController: UIViewController,DoneSendReviewContents,GetTotalCoun
     
     func checkDoneReview() {
         HUD.hide()
-        loadModel.loadContents(title: gameTitle, totalCount: totalCount)
+        loadModel.loadContents(title: gameTitle, totalCount: totalCount, documentID: documentID)
         self.navigationController?.popViewController(animated: true)
         print("レビュー受信PS5")
     }
@@ -98,6 +106,14 @@ class ReviewViewController: UIViewController,DoneSendReviewContents,GetTotalCoun
         print(self.contentModelArray)
     }
 
+    
+    func getTitlesData(dataArray: [TitleDocumentIDModel]) {
+        self.titleDocumentModelArray = []
+        self.titleDocumentModelArray = dataArray
+        for i in 0..<titleDocumentModelArray.count{
+            documentID = titleDocumentModelArray[i].documentID!
+        }
+    }
     
     
 

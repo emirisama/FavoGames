@@ -25,7 +25,11 @@ protocol DoneSendReviewContents{
 }
 
 
-
+protocol SendGamesDone{
+    
+    func checkDoneGames()
+    
+}
 
 
 
@@ -51,7 +55,7 @@ class SendDBModel {
     
 
     var doneSendReviewContents:DoneSendReviewContents?
-
+    var sendGamesDone:SendGamesDone?
     
     init(){
         
@@ -122,12 +126,8 @@ class SendDBModel {
     }
     
 
-
-    
-
- 
     //ゲームタイトルに紐づくデータを送信
-    func sendContents(title:String,sender:ProfileModel,comment:String,totalCount:Int){
+    func sendContents(documentID:String,sender:ProfileModel,comment:String,totalCount:Int){
  
         self.myProfile.append(sender.imageURLString!)
         self.myProfile.append(sender.profileText!)
@@ -138,15 +138,28 @@ class SendDBModel {
         self.db.collection("Users").document(Auth.auth().currentUser!.uid).collection("Contents").document(title).setData(
             ["date":Date().timeIntervalSince1970,"comment":comment,"totalCount":totalCount,"sender":self.myProfile,])
         
-        self.db.collection("title").document(title).collection("Contents").document(Auth.auth().currentUser!.uid).setData(
+        self.db.collection("title").document(documentID).collection("Contents").document(Auth.auth().currentUser!.uid).setData(
             ["date":Date().timeIntervalSince1970,"comment":comment,"totalCount":totalCount,"sender":self.myProfile])
         
-        self.db.collection("Total").document(title).collection("Contents").document().setData(
-            ["totalCount":totalCount])
+        self.db.collection("title").document().setData(
+            ["totalCount":totalCount,"title":title])
 
         print("レビュー送信")
         self.doneSendReviewContents?.checkDoneReview()
     
     }
+    
+    
+
+    
+    func sendTitle(documentID: String, totalCount: Int){
+        self.db.collection("title").document(documentID).updateData(
+            ["totalCount":totalCount]
+        )
+        self.sendGamesDone?.checkDoneGames()
+        print("ゲーム送信PS5")
+    }
+    
+    
     
 }
