@@ -25,9 +25,14 @@ protocol DoneSendReviewContents{
 }
 
 
-protocol SendGamesDone{
+protocol DoneSendGames{
     
     func checkDoneGames()
+    
+}
+
+protocol DoneSendCommentCounts{
+    func checkDoneCommentCounts()
     
 }
 
@@ -41,9 +46,6 @@ class SendDBModel {
     var userDefaultsEX = UserDefaultsEX()
     var imageDatauser = Data()
     var myProfile = [String]()
-
-    var totalCountModelArray = [TotalCountModel]()
-    
     var userID = String()
     var userName = String()
     var title = String()
@@ -55,7 +57,8 @@ class SendDBModel {
     
 
     var doneSendReviewContents:DoneSendReviewContents?
-    var sendGamesDone:SendGamesDone?
+    var doneSendGames:DoneSendGames?
+    var doneSendCommentCounts:DoneSendCommentCounts?
     
     init(){
         
@@ -127,7 +130,7 @@ class SendDBModel {
     
 
     //ゲームタイトルに紐づくデータを送信
-    func sendContents(documentID:String,sender:ProfileModel,comment:String,totalCount:Int){
+    func sendContents(documentID:String,sender:ProfileModel,comment:String){
  
         self.myProfile.append(sender.imageURLString!)
         self.myProfile.append(sender.profileText!)
@@ -135,28 +138,33 @@ class SendDBModel {
         self.myProfile.append(sender.userName!)
         self.myProfile.append(sender.id!)
   
-        self.db.collection("Users").document(Auth.auth().currentUser!.uid).collection("Contents").document(title).setData(
-            ["date":Date().timeIntervalSince1970,"comment":comment,"totalCount":totalCount,"sender":self.myProfile,])
+        self.db.collection("Users").document(Auth.auth().currentUser!.uid).collection("Contents").document().setData(
+            ["date":Date().timeIntervalSince1970,"comment":comment,"sender":self.myProfile,])
         
-        self.db.collection("title").document(documentID).collection("Contents").document(Auth.auth().currentUser!.uid).setData(
-            ["date":Date().timeIntervalSince1970,"comment":comment,"totalCount":totalCount,"sender":self.myProfile])
+        self.db.collection("Games").document(documentID).collection("Contents").document(Auth.auth().currentUser!.uid).setData(
+            ["date":Date().timeIntervalSince1970,"comment":comment,"sender":self.myProfile])
         
-        self.db.collection("title").document().setData(
-            ["totalCount":totalCount,"title":title])
-
+ 
         print("レビュー送信")
         self.doneSendReviewContents?.checkDoneReview()
     
     }
     
     
-
-    
-    func sendTitle(documentID: String, totalCount: Int){
-        self.db.collection("title").document(documentID).updateData(
-            ["totalCount":totalCount]
+    func sendGames(title: String,hardware:String){
+        self.db.collection("Games").document().setData(
+            ["title":title,"hardware":hardware]
         )
-        self.sendGamesDone?.checkDoneGames()
+        self.doneSendGames?.checkDoneGames()
+    }
+    
+    
+    func sendCommentCount(documentID: String, CommentCount: Int,title:String,hardware:String){
+        self.db.collection("Games").document(documentID).setData(
+            ["CommentCount":CommentCount,"title":title,"hardware":hardware]
+            
+        )
+        self.doneSendCommentCounts?.checkDoneCommentCounts()
         print("ゲーム送信PS5")
     }
     

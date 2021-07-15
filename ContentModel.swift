@@ -11,7 +11,6 @@ struct ContentModel{
 
 
     let comment:String?
-    let totalCount:Int?
     var sender:[String]?
     
 }

@@ -10,7 +10,11 @@ import FirebaseAuth
 import FirebaseFirestore
 import PKHUD
 
-class PS5ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,DoneCatchDataProtocol,GetContentsDataProtocol,GetTitlesDataProtocol{
+class PS5ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,DoneCatchDataProtocol,GetContentsDataProtocol,GetTitlesDataProtocol,DoneSendGames,GetCommentCountDataProtocol,GetContentsDocumentIDDataProtocol{
+ 
+    
+
+    
  
     
   
@@ -37,12 +41,14 @@ class PS5ViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
     var mediumImageUrl = String()
     var itemPrice = Int()
     var booksGenreId = String()
-    var totalCountModelArray = [TotalCountModel]()
     var dataSets:DataSets?
     var contentModel:ContentModel?
     var totalCount = Int()
     var titleDocumentModelArray = [TitleDocumentIDModel]()
     var documentID = String()
+    var commentCountModelArray = [CommentCountModel]()
+    var contentsDocumentModelArray = [ContentsDocumentIDModel]()
+    var contentDocumentID = String()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -73,12 +79,7 @@ class PS5ViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
             searchModel.doneCatchDataProtocol = self
             searchModel.search()
         }
-        
-//        loadModel.getTitlesDataProtocol = self
-//        loadModel.loadTitles()
 
-        print("せんどげーむこんてんつ")
-        
 
     }
     
@@ -144,52 +145,69 @@ class PS5ViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
   
     }
     
-
+    func GetGames(){
+        for i in 0..<dataSetsArray.count{
+            gameTitle = dataSetsArray[i].title!
+            hardware = dataSetsArray[i].hardware!
+            sendDBModel.doneSendGames = self
+            sendDBModel.sendGames(title: gameTitle, hardware: hardware)
+        }
+    }
 
     
     func doneCatchData(array: [DataSets]) {
         
         self.dataSetsArray = []
         self.dataSetsArray = array
-        //1 FireBaseからデータを持ってくる
-        //colleciton("title")取得する
-        sendDBModel.sendTitle(documentID: documentID, totalCount: totalCount)
-
-        print("contentModelのtotalCount")
-        print(contentModel.debugDescription)
-        loadModel.getContentsDataProtocol = self
-        loadModel.loadContents(title: gameTitle, totalCount: totalCount,documentID: documentID)
+        //APIで取得したゲームタイトルと機種をDBに送信
+        GetGames()
+        //DBからゲームタイトルのIDを受信
+        loadModel.getTitlesDataProtocol = self
+        loadModel.loadTitlesID()
         tableView.reloadData()
         
     }
     
-
-    
-    func getContentsData(dataArray: [ContentModel]) {
-        self.contentModelArray = []
-        self.contentModelArray = dataArray
-        for i in 0..<contentModelArray.count{
-            print("i")
-            print(i)
-            totalCount = self.contentModelArray[i].totalCount!
-            
-        }
-        print("contentModelArrayの中身")
-        print(self.contentModelArray.debugDescription)
-        tableView.reloadData()
-    }
-    
-
-
     func checkDoneGames() {
         print("dataSetsをDBへ送信完了")
     }
     
+    //ゲームタイトルのdocumentIDを取得
     func getTitlesData(dataArray: [TitleDocumentIDModel]) {
         self.titleDocumentModelArray = []
         self.titleDocumentModelArray = dataArray
         for i in 0..<titleDocumentModelArray.count{
             documentID = self.titleDocumentModelArray[i].documentID!
+            print("documentID１")
+            print(documentID.debugDescription)
+        }
+        //コメントのIDを受信
+        loadModel.loadContentsID(documentID: documentID)
+    }
+
+    //コメントの配列を受信(loadContents)
+    func getContentsData(dataArray: [ContentModel]) {
+        self.contentModelArray = []
+        self.contentModelArray = dataArray
+        loadModel.getCommentCountDataProtocol = self
+        loadModel.getContentsDocumentIDDataProtocol = self
+        //コメントのdocumentIDを取得
+        loadModel.loadCommentCount(documentID: contentDocumentID)
+        tableView.reloadData()
+    }
+    
+    //コメント総数を受信
+    func getCommentCountData(dataArray: [CommentCountModel]) {
+        self.commentCountModelArray = []
+        self.commentCountModelArray = dataArray
+    }
+    
+    //コメントのdocumentIDを受信
+    func getContensDocumentIDData(dataArray: [ContentsDocumentIDModel]) {
+        self.contentsDocumentModelArray = []
+        self.contentsDocumentModelArray = dataArray
+        for i in 0..<contentsDocumentModelArray.count{
+            contentDocumentID = self.contentsDocumentModelArray[i].documentID!
         }
     }
   

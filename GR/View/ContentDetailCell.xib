@@ -88,10 +88,10 @@
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <connections>
                 <outlet property="ImageView" destination="n09-CQ-Sir" id="eXN-H9-9nq"/>
+                <outlet property="commentCountLabel" destination="Ndg-yB-mFe" id="3Mv-ja-j18"/>
                 <outlet property="gameTitleLabel" destination="oqn-SX-caS" id="rs4-Ek-zCE"/>
                 <outlet property="hardware" destination="46L-3H-Ym1" id="vrB-jW-nyg"/>
                 <outlet property="price" destination="s1n-Hr-nWK" id="wHb-v7-Gdr"/>
-                <outlet property="rateAverageLabel" destination="Ndg-yB-mFe" id="KFA-eB-tNx"/>
                 <outlet property="reviewButton" destination="5aD-5u-YPj" id="q9m-02-SdC"/>
                 <outlet property="salesDate" destination="zwp-wg-ge4" id="XGb-jq-svH"/>
             </connections>

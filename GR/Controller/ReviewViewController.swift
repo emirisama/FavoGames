@@ -9,7 +9,10 @@ import UIKit
 import PKHUD
 import Cosmos
 
-class ReviewViewController: UIViewController,DoneSendReviewContents,GetTotalCountProtocol,GetContentsDataProtocol,GetTitlesDataProtocol{
+class ReviewViewController: UIViewController,DoneSendReviewContents,GetContentsDataProtocol,GetTitlesDataProtocol,DoneSendCommentCounts,GetContentsDocumentIDDataProtocol{
+
+  
+    
  
 
     
@@ -29,24 +32,25 @@ class ReviewViewController: UIViewController,DoneSendReviewContents,GetTotalCoun
     var array = [DataSets]()
     var gameTitle = String()
     var hardware = String()
-    var totalCount = Int()
-    var totalCountModelArray = [TotalCountModel]()
     var contentModelArray = [ContentModel]()
-    var totalCountModel:TotalCountModel?
+
     var titleDocumentModelArray = [TitleDocumentIDModel]()
     var documentID = String()
-    
+    var commentCountModelArray = [CommentCountModel]()
+    var CommentDocumentID = String()
+    var contentsDocumentModelArray = [ContentsDocumentIDModel]()
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         sendDBModel.doneSendReviewContents = self
-        loadModel.getTotalCountProtocol = self
         loadModel.getContentsDataProtocol = self
         loadModel.getTitlesDataProtocol = self
-//        loadModel.loadTotalCount(title: gameTitle, totalCount: totalCount)
-//        loadModel.loadTitles()
-//        loadModel.loadContents(title: gameTitle, totalCount: totalCount,documentID: documentID)
+        loadModel.getContentsDocumentIDDataProtocol = self
+        //ゲームのタイトルのdocumentIDを受信
+        loadModel.loadTitlesID()
+
     }
     
 
@@ -64,57 +68,70 @@ class ReviewViewController: UIViewController,DoneSendReviewContents,GetTotalCoun
         //コンテンツとともに送信（動画：受信クラスを作成しよう）
         if commentTextField.text?.isEmpty != true {
 
-            sendDBModel.sendContents(documentID: gameTitle, sender: profile!, comment: commentTextField.text, totalCount: 0)
-            //commentCountを１上げる
-//            sendDBModel.sendTitle(documentID: documentID, totalCount: totalCount)
-
-            
+            sendDBModel.sendContents(documentID: documentID, sender: profile!, comment: commentTextField.text)
+            print("commentDocumentIDの数")
+            print(CommentDocumentID.count)
+            sendDBModel.doneSendCommentCounts = self
+            sendDBModel.sendCommentCount(documentID: documentID, CommentCount: self.contentsDocumentModelArray.count, title: gameTitle,hardware: hardware)
             print("ゲームタイトルに紐づくレビューをSendDBModelへ")
-  
-            print("レビュー平均値をDBへ")
-            print(self.totalCountModelArray.debugDescription)
             
             }else{
 
                 print("エラーです")
                 HUD.hide()
-            
         }
-    
-
     }
 
     
-    func getTotalCount(totalCount: [TotalCountModel]) {
-        self.totalCountModelArray = totalCount
-        print("とーたるかうんと")
-        print(totalCountModel?.totalCount.debugDescription)
-        
-    }
     
     func checkDoneReview() {
         HUD.hide()
-        loadModel.loadContents(title: gameTitle, totalCount: totalCount, documentID: documentID)
+        loadModel.loadContents(title: gameTitle, documentID: documentID)
         self.navigationController?.popViewController(animated: true)
-        print("レビュー受信PS5")
+        print("レビュー受信")
     }
     
+    //コメントの受信
     func getContentsData(dataArray: [ContentModel]) {
-        
+        self.contentModelArray = []
         self.contentModelArray = dataArray
-        print("totalCountの中身")
-        print(self.contentModelArray)
+
     }
 
-    
+    //ゲームタイトルのdocumentIDを受信
     func getTitlesData(dataArray: [TitleDocumentIDModel]) {
         self.titleDocumentModelArray = []
         self.titleDocumentModelArray = dataArray
         for i in 0..<titleDocumentModelArray.count{
             documentID = titleDocumentModelArray[i].documentID!
         }
+        //コメントのdocumentIDを受信
+        loadModel.loadContentsID(documentID: documentID)
+        print("documentIDの中身")
+        print(documentID.debugDescription)
     }
     
+    func checkDoneCommentCounts() {
+        print("CommentCounts送信完了")
+
+    }
+    
+    //コメントのdocumentIDを受信
+    func getContensDocumentIDData(dataArray: [ContentsDocumentIDModel]) {
+        self.contentsDocumentModelArray = []
+        self.contentsDocumentModelArray = dataArray
+        for i in 0..<contentsDocumentModelArray.count{
+            CommentDocumentID = contentsDocumentModelArray[i].documentID!
+            print("commentドキュメントIDは？")
+            print(CommentDocumentID.debugDescription)
+        }
+    }
+    
+    //コメント総数を受信
+    func getCommentCountData(dataArray: [CommentCountModel]) {
+        self.commentCountModelArray = []
+        self.commentCountModelArray = dataArray
+    }
     
 
 }

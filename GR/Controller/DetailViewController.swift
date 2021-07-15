@@ -10,7 +10,7 @@ import SDWebImage
 import Cosmos
 import PKHUD
 
-class DetailViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,GetContentsDataProtocol, GetTotalCountProtocol{
+class DetailViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,GetContentsDataProtocol{
 
 
     
@@ -53,8 +53,7 @@ class DetailViewController: UIViewController,UITableViewDelegate,UITableViewData
     var rateAverage = Double()
     var dataSetsArray = [DataSets]()
     var searchAndLoadModel = SearchAndLoadModel()
-    var totalCountModelArray = [TotalCountModel]()
-    var totalCuntModel:TotalCountModel?
+
 
     
     override func viewDidLoad() {
@@ -74,13 +73,9 @@ class DetailViewController: UIViewController,UITableViewDelegate,UITableViewData
             
             
             loadModel.getContentsDataProtocol = self
-            loadModel.getTotalCountProtocol = self
             
 
-//            loadModel.loadContents(title: gameTitle, totalCount: contentModelArray.count,documentID: documentID)
-            loadModel.loadContents(title: gameTitle, totalCount: contentModelArray.count)
-            loadModel.loadTotalCount(title: gameTitle, totalCount: contentModelArray.count)
-            
+            loadModel.loadContents(title: gameTitle,documentID: documentID)
             tableView.reloadData()
             
             break
@@ -149,7 +144,7 @@ class DetailViewController: UIViewController,UITableViewDelegate,UITableViewData
             cell.salesDate.text = salesDate
             cell.hardware.text = hardware
             cell.price.text = String(itemPrice)
-            cell.rateAverageLabel.text = String(self.totalCountModelArray.count)
+//            cell.commentCountLabel.text = String(self.totalCountModelArray.count)
             cell.reviewButton.addTarget(self, action: #selector(reviewButtonTap(_:)), for: .touchUpInside)
             return cell
             
@@ -173,7 +168,7 @@ class DetailViewController: UIViewController,UITableViewDelegate,UITableViewData
         
         reviewVC.array = dataSetsArray
         reviewVC.gameTitle = gameTitle
-        reviewVC.totalCount = Int(contentModelArray.count)
+        reviewVC.hardware = hardware
         self.navigationController?.pushViewController(reviewVC, animated: true)
         
     }
@@ -187,13 +182,6 @@ class DetailViewController: UIViewController,UITableViewDelegate,UITableViewData
     }
 
 
-
-    
-    func getTotalCount(totalCount: [TotalCountModel]) {
-        self.totalCountModelArray = totalCount
-        tableView.reloadData()
-        
-    }
 
     
     

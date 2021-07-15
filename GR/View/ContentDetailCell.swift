@@ -20,7 +20,7 @@ class ContentDetailCell: UITableViewCell {
     @IBOutlet weak var hardware: UILabel!
     @IBOutlet weak var price: UILabel!
     @IBOutlet weak var reviewButton: UIButton!
-    @IBOutlet weak var rateAverageLabel: UILabel!
+    @IBOutlet weak var commentCountLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()

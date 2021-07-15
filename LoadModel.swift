@@ -25,15 +25,17 @@ protocol GetContentsDataProtocol{
 
 
 
-
-protocol GetTotalCountProtocol{
-    func getTotalCount(totalCount: [TotalCountModel])
-}
-
 protocol GetTitlesDataProtocol{
     func getTitlesData(dataArray: [TitleDocumentIDModel])
 }
 
+protocol GetContentsDocumentIDDataProtocol{
+    func getContensDocumentIDData(dataArray: [ContentsDocumentIDModel])
+}
+
+protocol GetCommentCountDataProtocol{
+    func getCommentCountData(dataArray: [CommentCountModel])
+}
 
 
 class LoadModel{
@@ -42,24 +44,26 @@ class LoadModel{
     
     //受信された値のかたまりが入る配列
     var contentModelArray:[ContentModel] = []
-
+    
     var getContentsDataProtocol:GetContentsDataProtocol?
-
+    
     //プロフィール
     var profileModelArray:[ProfileModel] = []
     var getProfileDataProtocol:GetProfileDataProtocol?
     
     //コメントに関する記述
-    var totalCountModelArray:[TotalCountModel] = []
-    var getTotalCountProtocol:GetTotalCountProtocol?
     var sendDBModel = SendDBModel()
     var profileModel = ProfileModel()
     var userDefaultsEX = UserDefaultsEX()
     //ドキュメントID取得
     var titleDocumentModelArray:[TitleDocumentIDModel] = []
     var getTitlesDataProtocol:GetTitlesDataProtocol?
+    var contentsDocumentModelArray:[ContentsDocumentIDModel] = []
+    var getContentsDocumentIDDataProtocol:GetContentsDocumentIDDataProtocol?
     
-
+    //コメント総数取得
+    var commentCountModelArray:[CommentCountModel] = []
+    var getCommentCountDataProtocol:GetCommentCountDataProtocol?
     
     //プロフィールの受信
     func loadProfile(id:String){
@@ -86,16 +90,10 @@ class LoadModel{
             
         }
     }
- 
     
-    
-  
-    
-
-    
-    //コンテンツを受信するメソッド(ゲームタイトルに紐づくレビューや名前などのデータを受信する）
-    func loadContents(title:String,totalCount:Int,documentID:String){
-        db.collection("title").document(documentID).collection("Contents").order(by: "date").addSnapshotListener { (snapShot, error) in
+    //コメントを受信(ゲームタイトルに紐づくコメントや名前などのデータを受信）
+    func loadContents(title:String,documentID:String){
+        db.collection("Games").document(documentID).collection("Contents").order(by: "date").addSnapshotListener { (snapShot, error) in
             self.contentModelArray = []
             if error != nil{
                 return
@@ -107,22 +105,20 @@ class LoadModel{
                 print(snapShotDoc.debugDescription)
                 //ドキュメントの数だけcontentModelの値を入れる
                 for doc in snapShotDoc{
-//                    doc.documentID
+                    //                    doc.documentID
                     print("コンテントモデル受信3PS5")
                     let data = doc.data()
                     print("コンテントモデル受信4PS5")
                     //if letでもし空じゃなかったらの意味（!= nilと同じ)
-                    if let comment = data["comment"] as? String,let totalCount = data["totalCount"] as? Int,let sender = data["sender"] as? [String],let date = data["date"] as? Double{
-                        let totalCount = snapShotDoc.count
+                    if let comment = data["comment"] as? String,let sender = data["sender"] as? [String],let date = data["date"] as? Double{
                         
-                        let contentModel = ContentModel(comment: comment, totalCount: totalCount, sender: sender)
+                        let contentModel = ContentModel(comment: comment, sender: sender)
                         self.contentModelArray.append(contentModel)
-        
+                        
                     }else{
-                        let contentModel = ContentModel(comment: "", totalCount: 0, sender: nil)
+                        let contentModel = ContentModel(comment: "", sender: nil)
                         self.contentModelArray.append(contentModel)
-                        print("contentModelArrayの中身")
-                        print(self.contentModelArray)
+                        
                     }
                 }
                 self.getContentsDataProtocol?.getContentsData(dataArray: self.contentModelArray)
@@ -131,69 +127,84 @@ class LoadModel{
             print(self.contentModelArray.debugDescription)
         }
     }
-
-
-    
-
-
-
     
     
-    //rateの平均値を出す
-    func loadTotalCount(title:String,totalCount:Int){
-        db.collection("Total").document(title).collection("Contents").addSnapshotListener { snapShot, error in
-            self.totalCountModelArray = []
-            if error != nil{
-                return
-            }
-            if let snapShotDoc = snapShot?.documents{
- 
-                for doc in snapShotDoc{
-                    let data = doc.data()
-                    let total = snapShotDoc.count
-                        
-                            let totalCountArray = TotalCountModel(totalCount: total)
- 
-                            self.totalCountModelArray.append(totalCountArray)
-                        print("totalCountModelArrayの中身")
-                    print(self.totalCountModelArray.debugDescription)
-                }
-            
-
-                self.getTotalCountProtocol?.getTotalCount(totalCount: self.totalCountModelArray)
-                
-            }
-        }
-    }
-    
-    func loadTitles(){
-        db.collection("title").getDocuments(completion: { (snapShot, error) in
+    //ゲームタイトルのdocumentIDを取得
+    func loadTitlesID(){
+        db.collection("Games").getDocuments { snapShot, error in
             self.titleDocumentModelArray = []
             if error != nil{
                 return
             }
-            print("ゲームタイトル受信1")
+            
             if let snapShotDoc = snapShot?.documents{
                 
-                print("ゲームタイトル受信2")
-                print(snapShotDoc.debugDescription)
                 //ドキュメントの数だけcontentModelの値を入れる
                 for doc in snapShotDoc{
-                    let data = doc.data()
-                    if let titleDocumentID =  data[doc.documentID] as? String{
-                        let titleDocumentIDModel = TitleDocumentIDModel(documentID: titleDocumentID)
-                        self.titleDocumentModelArray.append(titleDocumentIDModel)
-                        
-                    }
+                    
+                    let titleDocumentIDModel = TitleDocumentIDModel(documentID: doc.documentID)
+                    self.titleDocumentModelArray.append(titleDocumentIDModel)
                     
                 }
                 self.getTitlesDataProtocol?.getTitlesData(dataArray: self.titleDocumentModelArray)
             }
-            print("snapShotDocが空だったらPS5")
-            print(self.contentModelArray.debugDescription)
         }
-        )
     }
+    
+    //コメントのdocumentIDを取得
+    func loadContentsID(documentID:String){
+        db.collection("Games").document(documentID).collection("Contents").getDocuments { snapShot, error in
+            self.contentsDocumentModelArray = []
+            if error != nil{
+                return
+            }
+            print("ContentsID受信1")
+            if let snapShotDoc = snapShot?.documents{
+                print("ContentsID受信2")
+                print(snapShotDoc.debugDescription)
+                //ドキュメントの数だけcontentModelの値を入れる
+                for doc in snapShotDoc{
+                    print("ContentsID受信3")
+                    print(doc.documentID.debugDescription)
+                    let contentsDocumentIDModel = ContentsDocumentIDModel(documentID: doc.documentID)
+                    self.contentsDocumentModelArray.append(contentsDocumentIDModel)
+                    print("コメントのdocumentは？")
+                    print(self.contentsDocumentModelArray.debugDescription)
+                    
+                }
+                self.getContentsDocumentIDDataProtocol?.getContensDocumentIDData(dataArray: self.contentsDocumentModelArray)
+            }
+        }
+    }
+    
+    //コメント総数を取得
+    func loadCommentCount(documentID:String){
+        db.collection("Games").document(documentID).addSnapshotListener { snapShot, error in
+            self.commentCountModelArray = []
+            if error != nil{
+                return
+            }
+            if let snapShotDoc = snapShot?.data(){
+                for doc in snapShotDoc{
+                    if let commentCount = snapShotDoc["commentCunt"] as? Int{
+                        let commentCountModel = CommentCountModel(commentCount: commentCount)
+                        self.commentCountModelArray.append(commentCountModel)
+                    }
+                }
+                self.getCommentCountDataProtocol?.getCommentCountData(dataArray: self.commentCountModelArray)
+            }
+        }
+    }
+    
+    
 }
+
+    
+    
+    
+    
+    
+    
+
         
     
