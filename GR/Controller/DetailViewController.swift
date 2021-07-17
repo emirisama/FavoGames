@@ -10,15 +10,7 @@ import SDWebImage
 import Cosmos
 import PKHUD
 
-class DetailViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,GetContentsDataProtocol{
-
-
-    
-
-
-    
-
-    
+class DetailViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,GetContentsDataProtocol,GetCommentCountDataProtocol{
 
  
     @IBOutlet weak var tableView: UITableView!
@@ -53,7 +45,7 @@ class DetailViewController: UIViewController,UITableViewDelegate,UITableViewData
     var rateAverage = Double()
     var dataSetsArray = [DataSets]()
     var searchAndLoadModel = SearchAndLoadModel()
-
+    var commentCountModelArray = [CommentCountModel]()
 
     
     override func viewDidLoad() {
@@ -73,9 +65,11 @@ class DetailViewController: UIViewController,UITableViewDelegate,UITableViewData
             
             
             loadModel.getContentsDataProtocol = self
-            
-
-            loadModel.loadContents(title: gameTitle,documentID: documentID)
+            print("DetailVCのdocumentID")
+            print(documentID.debugDescription)
+            loadModel.loadContents(title: gameTitle)
+            loadModel.getCommentCountDataProtocol = self
+            loadModel.loadCommentCount(title:gameTitle)
             tableView.reloadData()
             
             break
@@ -91,11 +85,9 @@ class DetailViewController: UIViewController,UITableViewDelegate,UITableViewData
             return 350
             
         }else if indexPath.section == 1{
-            if contentModelArray[indexPath.row].sender == nil{
-                return 0
-            }else{
+            
                 return 300
-            }
+            
             
         }
         return 0
@@ -144,7 +136,8 @@ class DetailViewController: UIViewController,UITableViewDelegate,UITableViewData
             cell.salesDate.text = salesDate
             cell.hardware.text = hardware
             cell.price.text = String(itemPrice)
-//            cell.commentCountLabel.text = String(self.totalCountModelArray.count)
+//            cell.commentCountLabel.text = String(self.commentCountModelArray[indexPath.row].commentCount!)
+
             cell.reviewButton.addTarget(self, action: #selector(reviewButtonTap(_:)), for: .touchUpInside)
             return cell
             
@@ -152,7 +145,6 @@ class DetailViewController: UIViewController,UITableViewDelegate,UITableViewData
             
             let cell2 = tableView.dequeueReusableCell(withIdentifier: "ReviewViewCell", for: indexPath) as! ReviewViewCell
             cell2.selectionStyle = .none
- 
                 cell2.userNameLabel.text = self.contentModelArray[indexPath.row].sender?[3]
                 cell2.userIDLabel.text = self.contentModelArray[indexPath.row].sender?[4]
                 cell2.reviewViewLabel.text = self.contentModelArray[indexPath.row].comment
@@ -177,13 +169,20 @@ class DetailViewController: UIViewController,UITableViewDelegate,UITableViewData
     func getContentsData(dataArray: [ContentModel]) {
         self.contentModelArray = []
         self.contentModelArray = dataArray
-        print("self.contentModelArray")
+        print("DetailVCにself.contentModelArrayの値を持ってくる")
         print(self.contentModelArray.debugDescription)
+        print(contentModelArray.count)
+        tableView.reloadData()
+    }
+
+    func getCommentCountData(dataArray: [CommentCountModel]) {
+        self.commentCountModelArray = []
+        self.commentCountModelArray = dataArray
+        print("DetailVCにコメント総数を持ってくる")
+        print(self.commentCountModelArray)
+        tableView.reloadData()
     }
 
 
-
-    
-    
     
 }

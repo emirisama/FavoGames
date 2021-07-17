@@ -9,7 +9,7 @@ import UIKit
 import PKHUD
 import Cosmos
 
-class ReviewViewController: UIViewController,DoneSendReviewContents,GetContentsDataProtocol,GetTitlesDataProtocol,DoneSendCommentCounts,GetContentsDocumentIDDataProtocol{
+class ReviewViewController: UIViewController,DoneSendReviewContents,GetTitlesDataProtocol{
 
   
     
@@ -45,9 +45,8 @@ class ReviewViewController: UIViewController,DoneSendReviewContents,GetContentsD
         super.viewDidLoad()
 
         sendDBModel.doneSendReviewContents = self
-        loadModel.getContentsDataProtocol = self
         loadModel.getTitlesDataProtocol = self
-        loadModel.getContentsDocumentIDDataProtocol = self
+
         //ゲームのタイトルのdocumentIDを受信
         loadModel.loadTitlesID()
 
@@ -68,11 +67,9 @@ class ReviewViewController: UIViewController,DoneSendReviewContents,GetContentsD
         //コンテンツとともに送信（動画：受信クラスを作成しよう）
         if commentTextField.text?.isEmpty != true {
 
-            sendDBModel.sendContents(documentID: documentID, sender: profile!, comment: commentTextField.text)
-            print("commentDocumentIDの数")
-            print(CommentDocumentID.count)
-            sendDBModel.doneSendCommentCounts = self
-            sendDBModel.sendCommentCount(documentID: documentID, CommentCount: self.contentsDocumentModelArray.count, title: gameTitle,hardware: hardware)
+            sendDBModel.sendContents(title: gameTitle, sender: profile!, comment: commentTextField.text)
+//            sendDBModel.doneSendCommentCounts = self
+//            sendDBModel.sendCommentCount(documentID: documentID, CommentCount: self.contentsDocumentModelArray.count, title: gameTitle,hardware: hardware)
             print("ゲームタイトルに紐づくレビューをSendDBModelへ")
             
             }else{
@@ -86,17 +83,12 @@ class ReviewViewController: UIViewController,DoneSendReviewContents,GetContentsD
     
     func checkDoneReview() {
         HUD.hide()
-        loadModel.loadContents(title: gameTitle, documentID: documentID)
+
         self.navigationController?.popViewController(animated: true)
         print("レビュー受信")
     }
     
-    //コメントの受信
-    func getContentsData(dataArray: [ContentModel]) {
-        self.contentModelArray = []
-        self.contentModelArray = dataArray
 
-    }
 
     //ゲームタイトルのdocumentIDを受信
     func getTitlesData(dataArray: [TitleDocumentIDModel]) {
@@ -106,9 +98,8 @@ class ReviewViewController: UIViewController,DoneSendReviewContents,GetContentsD
             documentID = titleDocumentModelArray[i].documentID!
         }
         //コメントのdocumentIDを受信
-        loadModel.loadContentsID(documentID: documentID)
-        print("documentIDの中身")
-        print(documentID.debugDescription)
+//        loadModel.loadContentsID(documentID: documentID)
+
     }
     
     func checkDoneCommentCounts() {
@@ -116,22 +107,22 @@ class ReviewViewController: UIViewController,DoneSendReviewContents,GetContentsD
 
     }
     
-    //コメントのdocumentIDを受信
-    func getContensDocumentIDData(dataArray: [ContentsDocumentIDModel]) {
-        self.contentsDocumentModelArray = []
-        self.contentsDocumentModelArray = dataArray
-        for i in 0..<contentsDocumentModelArray.count{
-            CommentDocumentID = contentsDocumentModelArray[i].documentID!
-            print("commentドキュメントIDは？")
-            print(CommentDocumentID.debugDescription)
-        }
-    }
+//    //コメントのdocumentIDを受信
+//    func getContensDocumentIDData(dataArray: [ContentsDocumentIDModel]) {
+//        self.contentsDocumentModelArray = []
+//        self.contentsDocumentModelArray = dataArray
+//        for i in 0..<contentsDocumentModelArray.count{
+//            CommentDocumentID = contentsDocumentModelArray[i].documentID!
+//            print("commentドキュメントIDは？")
+//            print(CommentDocumentID.debugDescription)
+//        }
+//    }
     
-    //コメント総数を受信
-    func getCommentCountData(dataArray: [CommentCountModel]) {
-        self.commentCountModelArray = []
-        self.commentCountModelArray = dataArray
-    }
+//    //コメント総数を受信
+//    func getCommentCountData(dataArray: [CommentCountModel]) {
+//        self.commentCountModelArray = []
+//        self.commentCountModelArray = dataArray
+//    }
     
 
 }

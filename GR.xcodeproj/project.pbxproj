@@ -34,6 +34,7 @@
 		50A8D81C26452B1C008B5CEA /* SearchAndLoadModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50A8D81B26452B1C008B5CEA /* SearchAndLoadModel.swift */; };
 		50A8D81F2645310C008B5CEA /* SearchResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50A8D81E2645310C008B5CEA /* SearchResultsViewController.swift */; };
 		50A8D8222645336D008B5CEA /* DataSets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50A8D8212645336D008B5CEA /* DataSets.swift */; };
+		50B21B4226A2B0B500BFE3F9 /* TitleAndCommentCountModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50B21B4126A2B0B500BFE3F9 /* TitleAndCommentCountModel.swift */; };
 		50CF1B9D263525DA00ECF7E4 /* PS5ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50CF1B9C263525DA00ECF7E4 /* PS5ViewController.swift */; };
 		50D9222B26078EB5009A7BB0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50D9222A26078EB5009A7BB0 /* AppDelegate.swift */; };
 		50D9222D26078EB5009A7BB0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50D9222C26078EB5009A7BB0 /* SceneDelegate.swift */; };
@@ -77,6 +78,7 @@
 		50A8D81B26452B1C008B5CEA /* SearchAndLoadModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchAndLoadModel.swift; sourceTree = "<group>"; };
 		50A8D81E2645310C008B5CEA /* SearchResultsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultsViewController.swift; sourceTree = "<group>"; };
 		50A8D8212645336D008B5CEA /* DataSets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataSets.swift; sourceTree = "<group>"; };
+		50B21B4126A2B0B500BFE3F9 /* TitleAndCommentCountModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleAndCommentCountModel.swift; sourceTree = "<group>"; };
 		50CF1B9C263525DA00ECF7E4 /* PS5ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PS5ViewController.swift; sourceTree = "<group>"; };
 		50D9222726078EB5009A7BB0 /* GR.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GR.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		50D9222A26078EB5009A7BB0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -169,6 +171,7 @@
 				50978D94269F149C00975B61 /* TitleDocumentIDModel.swift */,
 				507ECC5226A049D2005845AD /* ContentsDocumentIDModel.swift */,
 				507ECC5526A04FE2005845AD /* CommentCountModel.swift */,
+				50B21B4126A2B0B500BFE3F9 /* TitleAndCommentCountModel.swift */,
 			);
 			name = Model;
 			path = ..;
@@ -361,6 +364,7 @@
 				50763BEF261057210071941E /* TrendViewController.swift in Sources */,
 				50F6F3212612207400B65E21 /* ProfileModel.swift in Sources */,
 				50A8D81F2645310C008B5CEA /* SearchResultsViewController.swift in Sources */,
+				50B21B4226A2B0B500BFE3F9 /* TitleAndCommentCountModel.swift in Sources */,
 				50F6F31E26121FC200B65E21 /* UserDefaultsEX.swift in Sources */,
 				50763BF5261068D00071941E /* SendDBModel.swift in Sources */,
 				50978D95269F149C00975B61 /* TitleDocumentIDModel.swift in Sources */,

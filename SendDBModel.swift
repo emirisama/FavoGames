@@ -130,7 +130,7 @@ class SendDBModel {
     
 
     //ゲームタイトルに紐づくデータを送信
-    func sendContents(documentID:String,sender:ProfileModel,comment:String){
+    func sendContents(title:String,sender:ProfileModel,comment:String){
  
         self.myProfile.append(sender.imageURLString!)
         self.myProfile.append(sender.profileText!)
@@ -141,8 +141,8 @@ class SendDBModel {
         self.db.collection("Users").document(Auth.auth().currentUser!.uid).collection("Contents").document().setData(
             ["date":Date().timeIntervalSince1970,"comment":comment,"sender":self.myProfile,])
         
-        self.db.collection("Games").document(documentID).collection("Contents").document(Auth.auth().currentUser!.uid).setData(
-            ["date":Date().timeIntervalSince1970,"comment":comment,"sender":self.myProfile])
+        self.db.collection(title).document(Auth.auth().currentUser!.uid).setData(
+            ["date":Date().timeIntervalSince1970,"comment":comment,"sender":self.myProfile,"title":title])
         
  
         print("レビュー送信")
@@ -159,14 +159,14 @@ class SendDBModel {
     }
     
     
-    func sendCommentCount(documentID: String, CommentCount: Int,title:String,hardware:String){
-        self.db.collection("Games").document(documentID).setData(
-            ["CommentCount":CommentCount,"title":title,"hardware":hardware]
-            
-        )
-        self.doneSendCommentCounts?.checkDoneCommentCounts()
-        print("ゲーム送信PS5")
-    }
+//    func sendCommentCount(documentID: String, CommentCount: Int,title:String,hardware:String){
+//        self.db.collection("Games").document(documentID).setData(
+//            ["CommentCount":CommentCount,"title":title,"hardware":hardware]
+//
+//        )
+//        self.doneSendCommentCounts?.checkDoneCommentCounts()
+//        print("ゲーム送信PS5")
+//    }
     
     
     
