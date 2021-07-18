@@ -122,9 +122,9 @@ class LoadModel{
                     let data = doc.data()
                     print("コンテントモデル受信4PS5")
                     //if letでもし空じゃなかったらの意味（!= nilと同じ)
-                    if let comment = data["comment"] as? String,let sender = data["sender"] as? [String],let date = data["date"] as? Date,let title = data["title"] as? String{
+                    if let comment = data["comment"] as? String,let sender = data["sender"] as? [String],let date = data["date"] as? Double{
                         
-                        let contentModel = ContentModel(comment: comment, sender: sender,title: title, date: date)
+                        let contentModel = ContentModel(comment: comment, sender: sender,title: title)
                         self.contentModelArray.append(contentModel)
                         print("コメントのデータが入っている場合、コメントを入れる")
                         

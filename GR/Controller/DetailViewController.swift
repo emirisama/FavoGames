@@ -172,6 +172,7 @@ class DetailViewController: UIViewController,UITableViewDelegate,UITableViewData
         print("DetailVCにself.contentModelArrayの値を持ってくる")
         print(self.contentModelArray.debugDescription)
         print(contentModelArray.count)
+        tableView.reloadData()
 //        sortNewComment(commentArray: self.contentModelArray)
 
     }

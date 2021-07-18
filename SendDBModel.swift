@@ -147,7 +147,7 @@ class SendDBModel {
             ["date":Date().timeIntervalSince1970,"comment":comment,"sender":self.myProfile,])
         
         self.db.collection(title).document().setData(
-            ["date":Date().timeIntervalSince1970,"comment":comment,"sender":self.myProfile,"title":title])
+            ["comment":comment,"sender":self.myProfile,"date":Date().timeIntervalSince1970])
         
         self.db.collection(title).document().collection("GameTitleWithCommentCount").document().setData(
             ["title":title,"commentCount":commentCount])
