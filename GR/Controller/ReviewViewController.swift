@@ -9,7 +9,13 @@ import UIKit
 import PKHUD
 import Cosmos
 
-class ReviewViewController: UIViewController,DoneSendReviewContents,GetTitlesDataProtocol{
+class ReviewViewController: UIViewController,DoneSendReviewContents,GetTitlesDataProtocol,GetContentsDataProtocol,GetCommentCountDataProtocol{
+ 
+    
+
+    
+
+    
 
   
     
@@ -39,16 +45,20 @@ class ReviewViewController: UIViewController,DoneSendReviewContents,GetTitlesDat
     var commentCountModelArray = [CommentCountModel]()
     var CommentDocumentID = String()
     var contentsDocumentModelArray = [ContentsDocumentIDModel]()
-
+    var commentCount = Int()
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         sendDBModel.doneSendReviewContents = self
-        loadModel.getTitlesDataProtocol = self
 
+//        loadModel.getTitlesDataProtocol = self
+        loadModel.getContentsDataProtocol = self
+        loadModel.loadContents(title: gameTitle)
+        loadModel.getCommentCountDataProtocol = self
+        loadModel.loadCommentCount(title: gameTitle)
         //ゲームのタイトルのdocumentIDを受信
-        loadModel.loadTitlesID()
+//        loadModel.loadTitlesID()
 
     }
     
@@ -67,7 +77,8 @@ class ReviewViewController: UIViewController,DoneSendReviewContents,GetTitlesDat
         //コンテンツとともに送信（動画：受信クラスを作成しよう）
         if commentTextField.text?.isEmpty != true {
 
-            sendDBModel.sendContents(title: gameTitle, sender: profile!, comment: commentTextField.text)
+            sendDBModel.sendContents(title: gameTitle, sender: profile!, comment: commentTextField.text,commentCount: commentCount)
+
 //            sendDBModel.doneSendCommentCounts = self
 //            sendDBModel.sendCommentCount(documentID: documentID, CommentCount: self.contentsDocumentModelArray.count, title: gameTitle,hardware: hardware)
             print("ゲームタイトルに紐づくレビューをSendDBModelへ")
@@ -105,6 +116,23 @@ class ReviewViewController: UIViewController,DoneSendReviewContents,GetTitlesDat
     func checkDoneCommentCounts() {
         print("CommentCounts送信完了")
 
+
+    }
+    
+    func getContentsData(dataArray: [ContentModel]) {
+        self.contentModelArray = []
+        self.contentModelArray = dataArray
+
+    }
+    
+    func checkDoneGameTitleWithCommentCount() {
+        print("GameTitleWithCommentCount送信完了")
+    }
+    
+    func getCommentCountData(dataArray: Int) {
+        commentCount = dataArray
+        print("contentCountとは")
+        print(commentCount)
     }
     
 //    //コメントのdocumentIDを受信

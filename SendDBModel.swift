@@ -36,6 +36,10 @@ protocol DoneSendCommentCounts{
     
 }
 
+protocol DoneSendGameTitleWithCommentCount{
+    func checkDoneGameTitleWithCommentCount()
+}
+
 
 
 
@@ -59,6 +63,7 @@ class SendDBModel {
     var doneSendReviewContents:DoneSendReviewContents?
     var doneSendGames:DoneSendGames?
     var doneSendCommentCounts:DoneSendCommentCounts?
+    var doneSendGameTitleWithCommentCount:DoneSendGameTitleWithCommentCount?
     
     init(){
         
@@ -130,7 +135,7 @@ class SendDBModel {
     
 
     //ゲームタイトルに紐づくデータを送信
-    func sendContents(title:String,sender:ProfileModel,comment:String){
+    func sendContents(title:String,sender:ProfileModel,comment:String,commentCount:Int){
  
         self.myProfile.append(sender.imageURLString!)
         self.myProfile.append(sender.profileText!)
@@ -141,13 +146,15 @@ class SendDBModel {
         self.db.collection("Users").document(Auth.auth().currentUser!.uid).collection("Contents").document().setData(
             ["date":Date().timeIntervalSince1970,"comment":comment,"sender":self.myProfile,])
         
-        self.db.collection(title).document(Auth.auth().currentUser!.uid).setData(
+        self.db.collection(title).document().setData(
             ["date":Date().timeIntervalSince1970,"comment":comment,"sender":self.myProfile,"title":title])
         
- 
+        self.db.collection(title).document().collection("GameTitleWithCommentCount").document().setData(
+            ["title":title,"commentCount":commentCount])
+        
         print("レビュー送信")
         self.doneSendReviewContents?.checkDoneReview()
-    
+        
     }
     
     
@@ -157,6 +164,11 @@ class SendDBModel {
         )
         self.doneSendGames?.checkDoneGames()
     }
+    
+    
+ 
+    
+}
     
     
 //    func sendCommentCount(documentID: String, CommentCount: Int,title:String,hardware:String){
@@ -169,5 +181,4 @@ class SendDBModel {
 //    }
     
     
-    
-}
+

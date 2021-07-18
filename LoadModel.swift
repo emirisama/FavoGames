@@ -34,9 +34,16 @@ protocol GetTitlesDataProtocol{
 //}
 
 protocol GetCommentCountDataProtocol{
-    func getCommentCountData(dataArray: [CommentCountModel])
+    func getCommentCountData(dataArray: Int)
 }
 
+protocol GetGameTitleWithCommentCountProtocol{
+    func getGameTitleWithCommentCountData(dataArray: [TitleAndCommentCountModel])
+}
+
+protocol GetTitleProtocol{
+    func getTitleData(dataArray: [TitleModel])
+}
 
 class LoadModel{
     
@@ -64,6 +71,12 @@ class LoadModel{
     //コメント総数取得
     var commentCountModelArray:[CommentCountModel] = []
     var getCommentCountDataProtocol:GetCommentCountDataProtocol?
+    var getGameTitleWithCommentCountProtocol:GetGameTitleWithCommentCountProtocol?
+    var gameTitleWithCommentCountArray:[TitleAndCommentCountModel] = []
+    
+    //ゲームタイトル取得
+    var titleModelArray:[TitleModel] = []
+    var getTitleProtocol:GetTitleProtocol?
     
     //プロフィールの受信
     func loadProfile(id:String){
@@ -92,7 +105,7 @@ class LoadModel{
     
     //コメントを受信(ゲームタイトルに紐づくコメントや名前などのデータを受信）
     func loadContents(title:String){
-        db.collection(title).addSnapshotListener { (snapShot, error) in
+        db.collection(title).order(by:"date").addSnapshotListener { (snapShot, error) in
             self.contentModelArray = []
             if error != nil{
                 return
@@ -109,9 +122,9 @@ class LoadModel{
                     let data = doc.data()
                     print("コンテントモデル受信4PS5")
                     //if letでもし空じゃなかったらの意味（!= nilと同じ)
-                    if let comment = data["comment"] as? String,let sender = data["sender"] as? [String],let date = data["date"] as? Double,let title = data["title"] as? String{
+                    if let comment = data["comment"] as? String,let sender = data["sender"] as? [String],let date = data["date"] as? Date,let title = data["title"] as? String{
                         
-                        let contentModel = ContentModel(comment: comment, sender: sender,title: title)
+                        let contentModel = ContentModel(comment: comment, sender: sender,title: title, date: date)
                         self.contentModelArray.append(contentModel)
                         print("コメントのデータが入っている場合、コメントを入れる")
                         
@@ -123,30 +136,52 @@ class LoadModel{
                 }
                 self.getContentsDataProtocol?.getContentsData(dataArray: self.contentModelArray)
             }
-
+            
         }
     }
     
-    
+    //コメント総数(ゲームタイトルに紐づくコメントのドキュメントの数）を受信する
     func loadCommentCount(title:String){
-        db.collection(title).addSnapshotListener { snapShot, error in
-            self.commentCountModelArray = []
+        db.collection(title).addSnapshotListener { [self] snapShot, error in
             if error != nil{
                 return
             }
-            if let snapShotDoc = snapShot?.documents{
-                for doc in snapShotDoc{
-                    let commentCount = snapShotDoc.count
-                    let commentCountModel = CommentCountModel(commentCount: commentCount)
-                    self.commentCountModelArray.append(commentCountModel)
-                    
-                }
-            }
-            self.getCommentCountDataProtocol?.getCommentCountData(dataArray: self.commentCountModelArray)
+            let commentCount = snapShot?.documents.count
+            self.getCommentCountDataProtocol?.getCommentCountData(dataArray: commentCount!)
+            
         }
         
     }
     
+    
+    
+    
+    
+    func loadGameTitleWithCommentCount(title:String){
+        
+        db.collection(title).document().collection("GameTitleWithCommentCount").addSnapshotListener { snapShot, error in
+            self.gameTitleWithCommentCountArray = []
+            if error != nil{
+                return
+            }
+            if let snapShotDoc = snapShot?.documents{
+                print("loadModelのゲームタイトルとコメント受信1")
+                print(snapShotDoc.count)
+                for doc in snapShotDoc{
+                    let data = doc.data()
+                    if let commentCount = data["commentCount"] as? Int,let title = data["title"] as? String{
+                        let titleAndCommentCountModel = TitleAndCommentCountModel(commentCount: commentCount, title: title)
+                        self.gameTitleWithCommentCountArray.append(titleAndCommentCountModel)
+                        print("gameTitleWithCommentCountArray受信")
+                        print(self.gameTitleWithCommentCountArray.debugDescription)
+                    }
+                }
+                self.getGameTitleWithCommentCountProtocol?.getGameTitleWithCommentCountData(dataArray: self.gameTitleWithCommentCountArray)
+            }
+        }
+        
+    }
+
     
     //ゲームタイトルのdocumentIDを取得
     func loadTitlesID(){
@@ -169,7 +204,28 @@ class LoadModel{
             }
         }
     }
-    
+}
+
+
+//    func loadTitle(title:String){
+//        db.collection(title).getDocuments { snapShot, error in
+//            self.titleModelArray = []
+//            if error != nil{
+//                return
+//            }
+//            if let snapShotDoc = snapShot?.documents{
+//                for doc in snapShotDoc{
+//
+//                    let titleModel = TitleModel(title: doc.documentID)
+//                    self.titleModelArray.append(titleModel)
+//                    }
+//                }
+//            self.getTitleProtocol?.getTitleData(dataArray: self.titleModelArray)
+//            }
+//
+//    }
+
+
 //    //コメントのdocumentIDを取得
 //    func loadContentsID(documentID:String){
 //        db.collection("Games").document(documentID).collection("Contents").getDocuments { snapShot, error in
@@ -217,16 +273,10 @@ class LoadModel{
 //    }
     
 
-    
-    
-}
 
     
     
     
     
     
-    
-
-        
     

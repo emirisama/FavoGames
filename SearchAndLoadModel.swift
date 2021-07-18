@@ -86,7 +86,7 @@ class SearchAndLoadModel {
                                 
                                 let dataSets = DataSets(title: title, hardware: hardware, salesDate: salesDate, mediumImageUrl: mediumImageUrl, itemPrice: itemPrice, booksGenreId: booksGenreId)
                                 //タイトル名に該当のものと一致していたら排除
-                                if dataSets.title!.contains("コントローラー") == false && dataSets.title!.contains("//") == false && dataSets.title!.contains("FINAL FANTASY X/X-2 HD Remaster PS4版") == false{
+                                if dataSets.title!.contains("コントローラー") == false && dataSets.title!.contains("/") == false && dataSets.title!.contains("FINAL FANTASY X/X-2 HD Remaster PS4版") == false{
                                 self.dataSetsArray.append(dataSets)
                                 }
 

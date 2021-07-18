@@ -10,7 +10,7 @@ import SDWebImage
 import Cosmos
 import PKHUD
 
-class DetailViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,GetContentsDataProtocol,GetCommentCountDataProtocol{
+class DetailViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,GetContentsDataProtocol{
 
  
     @IBOutlet weak var tableView: UITableView!
@@ -46,7 +46,7 @@ class DetailViewController: UIViewController,UITableViewDelegate,UITableViewData
     var dataSetsArray = [DataSets]()
     var searchAndLoadModel = SearchAndLoadModel()
     var commentCountModelArray = [CommentCountModel]()
-
+    var commentCount = Int()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -56,6 +56,13 @@ class DetailViewController: UIViewController,UITableViewDelegate,UITableViewData
         
         case index:
             
+            
+            loadModel.getContentsDataProtocol = self
+            print("DetailVCのdocumentID")
+            print(documentID.debugDescription)
+            loadModel.loadContents(title: gameTitle)
+
+            
             tableView.delegate = self
             tableView.dataSource = self
             
@@ -63,13 +70,7 @@ class DetailViewController: UIViewController,UITableViewDelegate,UITableViewData
             tableView.register(UINib(nibName: "ReviewViewCell", bundle: nil), forCellReuseIdentifier: "ReviewViewCell")
      
             
-            
-            loadModel.getContentsDataProtocol = self
-            print("DetailVCのdocumentID")
-            print(documentID.debugDescription)
-            loadModel.loadContents(title: gameTitle)
-            loadModel.getCommentCountDataProtocol = self
-            loadModel.loadCommentCount(title:gameTitle)
+
             tableView.reloadData()
             
             break
@@ -86,7 +87,7 @@ class DetailViewController: UIViewController,UITableViewDelegate,UITableViewData
             
         }else if indexPath.section == 1{
             
-                return 300
+                return 200
             
             
         }
@@ -136,8 +137,7 @@ class DetailViewController: UIViewController,UITableViewDelegate,UITableViewData
             cell.salesDate.text = salesDate
             cell.hardware.text = hardware
             cell.price.text = String(itemPrice)
-//            cell.commentCountLabel.text = String(self.commentCountModelArray[indexPath.row].commentCount!)
-
+            cell.commentCountLabel.text = String(self.contentModelArray.count)
             cell.reviewButton.addTarget(self, action: #selector(reviewButtonTap(_:)), for: .touchUpInside)
             return cell
             
@@ -172,16 +172,28 @@ class DetailViewController: UIViewController,UITableViewDelegate,UITableViewData
         print("DetailVCにself.contentModelArrayの値を持ってくる")
         print(self.contentModelArray.debugDescription)
         print(contentModelArray.count)
-        tableView.reloadData()
-    }
+//        sortNewComment(commentArray: self.contentModelArray)
 
-    func getCommentCountData(dataArray: [CommentCountModel]) {
-        self.commentCountModelArray = []
-        self.commentCountModelArray = dataArray
-        print("DetailVCにコメント総数を持ってくる")
-        print(self.commentCountModelArray)
-        tableView.reloadData()
     }
+    
+    
+//    func sortNewComment(commentArray: [ContentModel]){
+//        
+//        let sortedComment = commentArray.sorted { (a, b) -> Bool in
+//            return a.date > b.date
+//        }
+//        self.contentModelArray = sortedComment
+//    }
+
+//    func getCommentCountData(dataArray: [CommentCountModel]) {
+//        self.commentCountModelArray = []
+//        self.commentCountModelArray = dataArray 
+//        print("DetailVCにコメント総数を持ってくる")
+//        print(self.commentCountModelArray)
+//
+//        tableView.reloadData()
+//    }
+
 
 
     

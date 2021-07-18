@@ -1,5 +1,5 @@
 //
-//  TitleAndCommentCountModel.swift
+//  TitleModel.swift
 //  GR
 //
 //  Created by 中森えみり on 2021/07/17.
@@ -8,10 +8,8 @@
 import Foundation
 
 
-struct TitleAndCommentCountModel{
+struct TitleModel{
     
-
-    let commentCount:Int?
     let title:String?
 
 }

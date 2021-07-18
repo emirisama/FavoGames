@@ -10,8 +10,7 @@ import FirebaseAuth
 import FirebaseFirestore
 import PKHUD
 
-class PS5ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,DoneCatchDataProtocol,GetContentsDataProtocol,GetTitlesDataProtocol,DoneSendGames{
- 
+class PS5ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,DoneCatchDataProtocol,DoneSendGames,GetGameTitleWithCommentCountProtocol{
 
     
     @IBOutlet weak var rankingLabel: UILabel!
@@ -43,6 +42,8 @@ class PS5ViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
     var commentCountModelArray = [CommentCountModel]()
     var contentsDocumentModelArray = [ContentsDocumentIDModel]()
     var contentDocumentID = String()
+    var gameTitleWithCommentCountArray = [TitleAndCommentCountModel]()
+    var titleModelArray = [TitleModel]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -73,10 +74,30 @@ class PS5ViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
             searchModel.doneCatchDataProtocol = self
             searchModel.search()
         }
-
+        
+        
+        setUp()
+        
+        for i in 0..<dataSetsArray.count{
+        gameTitle = dataSetsArray[i].title!
+        loadModel.getGameTitleWithCommentCountProtocol = self
+        loadModel.loadGameTitleWithCommentCount(title: gameTitle)
+        }
 
     }
     
+    func setUp(){
+        let visit = UserDefaults.standard.bool(forKey: "visit")
+            if visit {
+                //二回目以降
+                print("二回目以降")
+            } else {
+                //初回アクセス
+                print("初回起動")
+                UserDefaults.standard.set(true, forKey: "visit")
+                GetGames()
+            }
+    }
     
 
     
@@ -109,11 +130,11 @@ class PS5ViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
         cell.contentImageView.sd_setImage(with: URL(string: dataSetsArray[indexPath.row].mediumImageUrl!), completed: nil)
         cell.gameTitleLabel.text = dataSetsArray[indexPath.row].title
         cell.rankLabel.text = String(indexPath.row + 1)
-
+        cell.reviewCountLabel.text = String(commentCountModelArray.count)
         //dataSetsArray[indexPath.row].titleとFirebaseのタイトルが一致するものを探す
         //commentCountをコメント数に入れる
         print("コメントの総数")
-        print(self.contentModelArray.count)
+        print(commentCountModelArray.count)
         
         print("dataSetsArrayの数")
         print(dataSetsArray.count)
@@ -133,8 +154,8 @@ class PS5ViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
         DetailVC.itemPrice = dataSetsArray[indexPath.row].itemPrice!
         //LoadModel.loadTitleのdocumentIDの値を持ってくる
         print("DetailVCへdocumentIDを渡す")
-        print(documentID.debugDescription)
-        DetailVC.documentID = self.titleDocumentModelArray[indexPath.row].documentID!
+//        print(documentID.debugDescription)
+//        DetailVC.documentID = self.titleDocumentModelArray[indexPath.row].documentID!
         self.navigationController?.pushViewController(DetailVC, animated: true)
   
     }
@@ -145,7 +166,10 @@ class PS5ViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
             hardware = dataSetsArray[i].hardware!
             sendDBModel.doneSendGames = self
             sendDBModel.sendGames(title: gameTitle, hardware: hardware)
-            
+//            loadModel.getTitlesDataProtocol = self
+//            loadModel.loadTitlesID()
+
+
         }
     }
 
@@ -156,11 +180,13 @@ class PS5ViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
         self.dataSetsArray = array
         //APIで取得したゲームタイトルと機種をDBに送信
         GetGames()
+        
+
         //DBからゲームタイトルのIDを受信
-        loadModel.getTitlesDataProtocol = self
-        loadModel.loadTitlesID()
-        loadModel.getContentsDataProtocol = self
-        loadModel.loadContents(title: gameTitle)
+
+//
+//        loadModel.getCommentCountDataProtocol = self
+//        loadModel.loadCommentCount(title: gameTitle)
         tableView.reloadData()
         
     }
@@ -168,6 +194,9 @@ class PS5ViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
     func checkDoneGames() {
         print("dataSetsをDBへ送信完了")
     }
+    
+    //ゲームタイトルのdocumentを取得
+
     
     //ゲームタイトルのdocumentIDを取得
     func getTitlesData(dataArray: [TitleDocumentIDModel]) {
@@ -189,12 +218,33 @@ class PS5ViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
         self.contentModelArray = dataArray
         print("PS5コメント文の中身")
         print(contentModelArray.debugDescription)
-//        loadModel.getCommentCountDataProtocol = self
-//        loadModel.getContentsDocumentIDDataProtocol = self
-        //コメントのdocumentIDを取得
-//        loadModel.loadCommentCount(documentID: contentDocumentID)
         tableView.reloadData()
     }
+    
+    func getGameTitleWithCommentCountData(dataArray: [TitleAndCommentCountModel]) {
+        self.gameTitleWithCommentCountArray = []
+        self.gameTitleWithCommentCountArray = dataArray
+        print("PS5gameTitlewithCommentCountArrayの中身")
+        print(self.gameTitleWithCommentCountArray.debugDescription)
+        tableView.reloadData()
+        
+    }
+    
+}
+//    func getCommentCountData(dataArray: [CommentCountModel]) {
+//        self.commentCountModelArray = []
+//        self.commentCountModelArray = dataArray
+//        print("PS5commentCountModelArrayの値")
+//        print(self.commentCountModelArray.debugDescription)
+//    }
+    
+
+    
+//    func getTitleData(dataArray: [TitleModel]) {
+//        self.titleModelArray = []
+//        self.titleModelArray = dataArray
+//        tableView.reloadData()
+//    }
     
 //    //コメント総数を受信
 //    func getCommentCountData(dataArray: [CommentCountModel]) {
@@ -223,4 +273,4 @@ class PS5ViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
      */
     
     
-}
+
