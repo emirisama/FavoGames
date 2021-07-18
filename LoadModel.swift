@@ -152,11 +152,7 @@ class LoadModel{
         }
         
     }
-    
-    
-    
-    
-    
+ 
     func loadGameTitleWithCommentCount(title:String){
         
         db.collection(title).document().collection("GameTitleWithCommentCount").addSnapshotListener { snapShot, error in
@@ -204,28 +200,30 @@ class LoadModel{
             }
         }
     }
-}
+
 
 
 //    func loadTitle(title:String){
-//        db.collection(title).getDocuments { snapShot, error in
+//        db.collection("Games").document().collection(title).addSnapshotListener { snapShot, error in
 //            self.titleModelArray = []
 //            if error != nil{
 //                return
 //            }
 //            if let snapShotDoc = snapShot?.documents{
 //                for doc in snapShotDoc{
-//
-//                    let titleModel = TitleModel(title: doc.documentID)
-//                    self.titleModelArray.append(titleModel)
+//                    let data = doc.data()
+//                    if let title = data["title"] as? String{
+//                        let titleModel = TitleModel(title: title)
+//                        self.titleModelArray.append(titleModel)
 //                    }
+//                    
 //                }
-//            self.getTitleProtocol?.getTitleData(dataArray: self.titleModelArray)
+//                self.getTitleProtocol?.getTitleData(dataArray: self.titleModelArray)
 //            }
-//
+//            
+//        }
 //    }
-
-
+}
 //    //コメントのdocumentIDを取得
 //    func loadContentsID(documentID:String){
 //        db.collection("Games").document(documentID).collection("Contents").getDocuments { snapShot, error in

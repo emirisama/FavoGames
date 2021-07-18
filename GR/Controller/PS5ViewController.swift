@@ -44,6 +44,8 @@ class PS5ViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
     var contentDocumentID = String()
     var gameTitleWithCommentCountArray = [TitleAndCommentCountModel]()
     var titleModelArray = [TitleModel]()
+    var commentTitle = String()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -74,34 +76,9 @@ class PS5ViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
             searchModel.doneCatchDataProtocol = self
             searchModel.search()
         }
-        
-        
-        setUp()
-        
-        for i in 0..<dataSetsArray.count{
-        gameTitle = dataSetsArray[i].title!
-        loadModel.getGameTitleWithCommentCountProtocol = self
-        loadModel.loadGameTitleWithCommentCount(title: gameTitle)
-        }
 
     }
-    
-    func setUp(){
-        let visit = UserDefaults.standard.bool(forKey: "visit")
-            if visit {
-                //二回目以降
-                print("二回目以降")
-            } else {
-                //初回アクセス
-                print("初回起動")
-                UserDefaults.standard.set(true, forKey: "visit")
-                GetGames()
-            }
-    }
-    
 
-    
-    // Do any additional setup after loading the view.
     
     //高さを揃える
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -133,8 +110,8 @@ class PS5ViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
         cell.reviewCountLabel.text = String(commentCountModelArray.count)
         //dataSetsArray[indexPath.row].titleとFirebaseのタイトルが一致するものを探す
         //commentCountをコメント数に入れる
-        print("コメントの総数")
-        print(commentCountModelArray.count)
+//        print("コメントの総数")
+//        print(commentCountModelArray.count)
         
         print("dataSetsArrayの数")
         print(dataSetsArray.count)
@@ -153,7 +130,7 @@ class PS5ViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
         DetailVC.mediumImageUrl = dataSetsArray[indexPath.row].mediumImageUrl!
         DetailVC.itemPrice = dataSetsArray[indexPath.row].itemPrice!
         //LoadModel.loadTitleのdocumentIDの値を持ってくる
-        print("DetailVCへdocumentIDを渡す")
+//        print("DetailVCへdocumentIDを渡す")
 //        print(documentID.debugDescription)
 //        DetailVC.documentID = self.titleDocumentModelArray[indexPath.row].documentID!
         self.navigationController?.pushViewController(DetailVC, animated: true)
@@ -166,11 +143,19 @@ class PS5ViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
             hardware = dataSetsArray[i].hardware!
             sendDBModel.doneSendGames = self
             sendDBModel.sendGames(title: gameTitle, hardware: hardware)
+            loadModel.getGameTitleWithCommentCountProtocol = self
+            loadModel.loadGameTitleWithCommentCount(title: gameTitle)
+            print("gameTitleの中身")
+            print(gameTitle.debugDescription)
+            
+//            loadModel.getTitleProtocol = self
+//            loadModel.loadTitle(title: gameTitle)
+            }
 //            loadModel.getTitlesDataProtocol = self
 //            loadModel.loadTitlesID()
 
 
-        }
+        
     }
 
     
@@ -180,45 +165,17 @@ class PS5ViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
         self.dataSetsArray = array
         //APIで取得したゲームタイトルと機種をDBに送信
         GetGames()
-        
-
+        tableView.reloadData()
+    }
         //DBからゲームタイトルのIDを受信
 
 //
 //        loadModel.getCommentCountDataProtocol = self
 //        loadModel.loadCommentCount(title: gameTitle)
-        tableView.reloadData()
         
-    }
     
     func checkDoneGames() {
         print("dataSetsをDBへ送信完了")
-    }
-    
-    //ゲームタイトルのdocumentを取得
-
-    
-    //ゲームタイトルのdocumentIDを取得
-    func getTitlesData(dataArray: [TitleDocumentIDModel]) {
-        self.titleDocumentModelArray = []
-        self.titleDocumentModelArray = dataArray
-        for i in 0..<titleDocumentModelArray.count{
-            documentID = self.titleDocumentModelArray[i].documentID!
-            print("PS5のゲームのドキュメントの値が渡っているか")
-            print(documentID.debugDescription)
-
-        }
-        //コメントのIDを受信
-//        loadModel.loadContentsID(documentID: documentID)
-    }
-
-    //コメントの配列を受信(loadContents)
-    func getContentsData(dataArray: [ContentModel]) {
-        self.contentModelArray = []
-        self.contentModelArray = dataArray
-        print("PS5コメント文の中身")
-        print(contentModelArray.debugDescription)
-        tableView.reloadData()
     }
     
     func getGameTitleWithCommentCountData(dataArray: [TitleAndCommentCountModel]) {
@@ -229,8 +186,45 @@ class PS5ViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
         tableView.reloadData()
         
     }
-    
 }
+    
+    //ゲームタイトルのdocumentを取得
+
+    
+//    //ゲームタイトルのdocumentIDを取得
+//    func getTitlesData(dataArray: [TitleDocumentIDModel]) {
+//        self.titleDocumentModelArray = []
+//        self.titleDocumentModelArray = dataArray
+//        for i in 0..<titleDocumentModelArray.count{
+//            documentID = self.titleDocumentModelArray[i].documentID!
+//            print("PS5のゲームのドキュメントの値が渡っているか")
+//            print(documentID.debugDescription)
+//
+//        }
+//        //コメントのIDを受信
+////        loadModel.loadContentsID(documentID: documentID)
+//    }
+
+//    //コメントの配列を受信(loadContents)
+//    func getContentsData(dataArray: [ContentModel]) {
+//        self.contentModelArray = []
+//        self.contentModelArray = dataArray
+//        print("PS5コメント文の中身")
+//        print(contentModelArray.debugDescription)
+//        tableView.reloadData()
+//    }
+    
+
+    
+//    func getTitleData(dataArray: [TitleModel]) {
+//        self.titleModelArray = []
+//        self.titleModelArray = dataArray
+//        print("titleModelArrayの中身")
+//        print(titleModelArray.debugDescription)
+//        tableView.reloadData()
+//    }
+    
+
 //    func getCommentCountData(dataArray: [CommentCountModel]) {
 //        self.commentCountModelArray = []
 //        self.commentCountModelArray = dataArray
@@ -240,11 +234,7 @@ class PS5ViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
     
 
     
-//    func getTitleData(dataArray: [TitleModel]) {
-//        self.titleModelArray = []
-//        self.titleModelArray = dataArray
-//        tableView.reloadData()
-//    }
+ 
     
 //    //コメント総数を受信
 //    func getCommentCountData(dataArray: [CommentCountModel]) {

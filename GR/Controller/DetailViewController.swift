@@ -88,8 +88,7 @@ class DetailViewController: UIViewController,UITableViewDelegate,UITableViewData
         }else if indexPath.section == 1{
             
                 return 200
-            
-            
+   
         }
         return 0
     }

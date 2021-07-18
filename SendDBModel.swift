@@ -135,7 +135,7 @@ class SendDBModel {
     
 
     //ゲームタイトルに紐づくデータを送信
-    func sendContents(title:String,sender:ProfileModel,comment:String,commentCount:Int){
+    func sendContents(title:String,sender:ProfileModel,comment:String){
  
         self.myProfile.append(sender.imageURLString!)
         self.myProfile.append(sender.profileText!)
@@ -148,13 +148,16 @@ class SendDBModel {
         
         self.db.collection(title).document().setData(
             ["comment":comment,"sender":self.myProfile,"date":Date().timeIntervalSince1970])
-        
-        self.db.collection(title).document().collection("GameTitleWithCommentCount").document().setData(
-            ["title":title,"commentCount":commentCount])
-        
+ 
         print("レビュー送信")
         self.doneSendReviewContents?.checkDoneReview()
         
+    }
+    
+    func sendGametTitleWithCommentCount(title:String,commentCount:Int){
+        self.db.collection(title).document().collection("GameTitleWithCommentCount").document().setData(
+            ["title":title,"commentCount":commentCount])
+        self.doneSendGameTitleWithCommentCount?.checkDoneGameTitleWithCommentCount()
     }
     
     

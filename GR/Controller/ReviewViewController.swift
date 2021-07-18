@@ -9,21 +9,9 @@ import UIKit
 import PKHUD
 import Cosmos
 
-class ReviewViewController: UIViewController,DoneSendReviewContents,GetTitlesDataProtocol,GetContentsDataProtocol,GetCommentCountDataProtocol{
+class ReviewViewController: UIViewController,DoneSendReviewContents,GetTitlesDataProtocol,GetCommentCountDataProtocol,DoneSendGameTitleWithCommentCount{
  
-    
-
-    
-
-    
-
-  
-    
  
-
-    
-
-    
 
  
     @IBOutlet weak var commentTextField: UITextView!
@@ -38,7 +26,7 @@ class ReviewViewController: UIViewController,DoneSendReviewContents,GetTitlesDat
     var array = [DataSets]()
     var gameTitle = String()
     var hardware = String()
-    var contentModelArray = [ContentModel]()
+
 
     var titleDocumentModelArray = [TitleDocumentIDModel]()
     var documentID = String()
@@ -51,13 +39,11 @@ class ReviewViewController: UIViewController,DoneSendReviewContents,GetTitlesDat
         super.viewDidLoad()
 
         sendDBModel.doneSendReviewContents = self
-
-//        loadModel.getTitlesDataProtocol = self
-        loadModel.getContentsDataProtocol = self
-        loadModel.loadContents(title: gameTitle)
         loadModel.getCommentCountDataProtocol = self
         loadModel.loadCommentCount(title: gameTitle)
+        sendDBModel.doneSendGameTitleWithCommentCount = self
         //ゲームのタイトルのdocumentIDを受信
+//        loadModel.getTitlesDataProtocol = self
 //        loadModel.loadTitlesID()
 
     }
@@ -77,8 +63,9 @@ class ReviewViewController: UIViewController,DoneSendReviewContents,GetTitlesDat
         //コンテンツとともに送信（動画：受信クラスを作成しよう）
         if commentTextField.text?.isEmpty != true {
 
-            sendDBModel.sendContents(title: gameTitle, sender: profile!, comment: commentTextField.text,commentCount: commentCount)
-
+            sendDBModel.sendContents(title: gameTitle, sender: profile!, comment: commentTextField.text)
+        
+            
 //            sendDBModel.doneSendCommentCounts = self
 //            sendDBModel.sendCommentCount(documentID: documentID, CommentCount: self.contentsDocumentModelArray.count, title: gameTitle,hardware: hardware)
             print("ゲームタイトルに紐づくレビューをSendDBModelへ")
@@ -115,15 +102,10 @@ class ReviewViewController: UIViewController,DoneSendReviewContents,GetTitlesDat
     
     func checkDoneCommentCounts() {
         print("CommentCounts送信完了")
-
-
+        
     }
     
-    func getContentsData(dataArray: [ContentModel]) {
-        self.contentModelArray = []
-        self.contentModelArray = dataArray
 
-    }
     
     func checkDoneGameTitleWithCommentCount() {
         print("GameTitleWithCommentCount送信完了")
@@ -133,6 +115,8 @@ class ReviewViewController: UIViewController,DoneSendReviewContents,GetTitlesDat
         commentCount = dataArray
         print("contentCountとは")
         print(commentCount)
+        sendDBModel.sendGametTitleWithCommentCount(title: gameTitle, commentCount: commentCount)
+        
     }
     
 //    //コメントのdocumentIDを受信
