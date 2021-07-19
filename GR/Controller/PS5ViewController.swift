@@ -31,7 +31,7 @@ class PS5ViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
     var gameTitle = String()
     var hardware = String()
     var salesDate = String()
-    var mediumImageUrl = String()
+    var largeImageUrl = String()
     var itemPrice = Int()
     var booksGenreId = String()
     var dataSets:DataSets?
@@ -96,7 +96,7 @@ class PS5ViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "ContentsCell", for: indexPath) as! ContentsCell
 
-        cell.contentImageView.sd_setImage(with: URL(string: dataSetsArray[indexPath.row].mediumImageUrl!), completed: nil)
+        cell.contentImageView.sd_setImage(with: URL(string: dataSetsArray[indexPath.row].largeImageUrl!), completed: nil)
         cell.gameTitleLabel.text = dataSetsArray[indexPath.row].title
         cell.rankLabel.text = String(indexPath.row + 1)
 
@@ -119,9 +119,10 @@ class PS5ViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
         detailVC.gameTitle = dataSetsArray[indexPath.row].title!
         detailVC.hardware = dataSetsArray[indexPath.row].hardware!
         detailVC.salesDate = dataSetsArray[indexPath.row].salesDate!
-        detailVC.mediumImageUrl = dataSetsArray[indexPath.row].mediumImageUrl!
+        detailVC.largeImageUrl = dataSetsArray[indexPath.row].largeImageUrl!
         detailVC.itemPrice = dataSetsArray[indexPath.row].itemPrice!
         detailVC.booksGenreId = dataSetsArray[indexPath.row].booksGenreId!
+        detailVC.itemUrl = dataSetsArray[indexPath.row].itemUrl
         self.navigationController?.pushViewController(detailVC, animated: true)
   
     }

@@ -12,7 +12,9 @@ import PKHUD
 import FirebaseAuth
 import FirebaseFirestore
 
-class DetailViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,GetContentsDataProtocol,DoneSendLikeData,GetLikeFlagProtocol, GetLikeDataProtocol{
+class DetailViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,GetContentsDataProtocol,DoneSendLikeData,GetLikeFlagProtocol, GetLikeDataProtocol,DoneDeleteToContents{
+ 
+    
 
     
   
@@ -38,11 +40,12 @@ class DetailViewController: UIViewController,UITableViewDelegate,UITableViewData
     var gameTitle = String()
     var hardware = String()
     var salesDate = String()
-    var mediumImageUrl = String()
+    var largeImageUrl = String()
     var itemPrice = Int()
     var booksGenreId = String()
     var documentID = String()
     var memo = String()
+    var itemUrl = String()
 
     let sectionTitle = ["","Memo"]
 
@@ -54,6 +57,7 @@ class DetailViewController: UIViewController,UITableViewDelegate,UITableViewData
     var searchAndLoadModel = SearchAndLoadModel()
     
     var likeFlag = Bool()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -76,6 +80,7 @@ class DetailViewController: UIViewController,UITableViewDelegate,UITableViewData
             loadModel.loadLikeData(userID: Auth.auth().currentUser!.uid)
             loadModel.getLikeFlagProtocol = self
             loadModel.loadLikeFlag(title: gameTitle)
+            sendDBModel.doneDeleteToContents = self
             tableView.reloadData()
             
             break
@@ -88,7 +93,7 @@ class DetailViewController: UIViewController,UITableViewDelegate,UITableViewData
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if  indexPath.section == 0 {
-            return 350
+            return 550
             
         }else if indexPath.section == 1{
             
@@ -137,25 +142,35 @@ class DetailViewController: UIViewController,UITableViewDelegate,UITableViewData
             let cell = tableView.dequeueReusableCell(withIdentifier: "ContentDetailCell", for: indexPath) as! ContentDetailCell
             cell.selectionStyle = .none
             cell.gameTitleLabel.text = gameTitle
-            cell.ImageView.sd_setImage(with: URL(string: mediumImageUrl), completed: nil)
+            cell.ImageView.sd_setImage(with: URL(string: largeImageUrl), completed: nil)
             cell.salesDate.text = salesDate
             cell.hardware.text = hardware
             cell.price.text = String(itemPrice)
             cell.memoButton.addTarget(self, action: #selector(memoButtonTap(_:)), for: .touchUpInside)
             cell.likeButton.addTarget(self, action: #selector(likeButtonTap(_:)), for: .touchUpInside)
-            cell.likeButton.tag = indexPath.row
+            cell.videoButton.addTarget(self, action: #selector(videoButtonTap(_ :)), for: .touchUpInside)
+            cell.itemButton.addTarget(self, action: #selector(itemButtonTap(_ :)), for: .touchUpInside)
             return cell
             
         }else{
             
             let cell2 = tableView.dequeueReusableCell(withIdentifier: "MemoViewCell", for: indexPath) as! MemoViewCell
             cell2.selectionStyle = .none
-                cell2.userNameLabel.text = self.contentModelArray[indexPath.row].sender?[3]
-                cell2.userIDLabel.text = self.contentModelArray[indexPath.row].sender?[4]
             cell2.memoLabel.text = self.contentModelArray[indexPath.row].comment
             memo = self.contentModelArray[indexPath.row].comment!
-                cell2.profileImage.sd_setImage(with: URL(string: (contentModelArray[indexPath.row].sender![0])), completed: nil)
-                return cell2
+            return cell2
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool{
+        return true
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == UITableViewCell.EditingStyle.delete {
+            contentModelArray.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath as IndexPath], with: UITableView.RowAnimation.automatic)
+            sendDBModel.deleteToContents(title: gameTitle)
         }
     }
 
@@ -175,15 +190,26 @@ class DetailViewController: UIViewController,UITableViewDelegate,UITableViewData
     @objc func likeButtonTap(_ sender:UIButton){
 
         if self.likeFlag == false{
-            sendDBModel.sendLikeData(userID: Auth.auth().currentUser!.uid, mediumImageUrl: mediumImageUrl, title: gameTitle, hardware: hardware, salesDate: salesDate, itemPrice: itemPrice, booksGenreId: booksGenreId, likeFlag: true)
+            sendDBModel.sendLikeData(userID: Auth.auth().currentUser!.uid, largeImageUrl: largeImageUrl, title: gameTitle, hardware: hardware, salesDate: salesDate, itemPrice: itemPrice, booksGenreId: booksGenreId, likeFlag: true)
             print("likeをtrueに")
         }else{
-            sendDBModel.sendLikeData(userID: Auth.auth().currentUser!.uid, mediumImageUrl: mediumImageUrl, title: gameTitle, hardware: hardware, salesDate: salesDate, itemPrice: itemPrice, booksGenreId: booksGenreId, likeFlag: false)
+            sendDBModel.sendLikeData(userID: Auth.auth().currentUser!.uid, largeImageUrl: largeImageUrl, title: gameTitle, hardware: hardware, salesDate: salesDate, itemPrice: itemPrice, booksGenreId: booksGenreId, likeFlag: false)
             print("likeを消す")
         }
-        
-
         print("likeButtonタップしました")
+    }
+    
+    @objc func videoButtonTap(_ sender:UIButton){
+        let videoVC = self.storyboard?.instantiateViewController(withIdentifier: "videoVC") as! VideoViewController
+        videoVC.gameTitle = gameTitle
+        self.present(videoVC, animated: true)
+  
+    }
+    
+    @objc func itemButtonTap(_ sender:UIButton){
+        let itemVC = self.storyboard?.instantiateViewController(withIdentifier: "itemVC") as! ItemViewController
+        itemVC.itemUrl = itemUrl
+        self.present(itemVC, animated: true)
     }
              
     
@@ -215,6 +241,10 @@ class DetailViewController: UIViewController,UITableViewDelegate,UITableViewData
     
     func getLikeData(dataArray: [LikeModel]) {
         print("いいねしました")
+    }
+    
+    func checkDeleteToContentsDone() {
+        print("メモ削除しました")
     }
     
 }

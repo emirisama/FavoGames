@@ -54,9 +54,9 @@ class LoadModel{
     var getLikeFlagProtocol:GetLikeFlagProtocol?
     
     //プロフィールの受信
-    func loadProfile(id:String){
-        db.collection("Users").document(id).addSnapshotListener { (snapShot, error) in
-            
+    func loadProfile(){
+        db.collection("Users").document(Auth.auth().currentUser!.uid).addSnapshotListener { (snapShot, error) in
+            print("プロフィールの受信")
             self.profileModelArray = []
             
             //!=nilはエラーがあったら、これ以上処理は進めない
@@ -66,11 +66,13 @@ class LoadModel{
             
             //スナップショットがnilでなければ{}の処理を進めてください
             if let snapShotDoc = snapShot?.data(){
-     
+                print("ぷろふぃーるのsnapSHot")
+                print(snapShotDoc.count)
                 if let userID = snapShotDoc["userID"] as? String,let userName = snapShotDoc["userName"] as? String,let image = snapShotDoc["image"] as? String,let profileText = snapShotDoc["profileText"] as? String,let id = snapShotDoc["id"] as? String{
                     let profileModel = ProfileModel(userName: userName, id: id,profileText: profileText, imageURLString: image, userID: userID)
                     self.profileModelArray.append(profileModel)
-                    
+                    print("profileModelArrayの中身")
+                    print(self.profileModelArray.debugDescription)
                 }
             }
             self.getProfileDataProtocol?.getProfileData(dataArray: self.profileModelArray)
@@ -97,16 +99,10 @@ class LoadModel{
                     let data = doc.data()
                     print("コンテントモデル受信4PS5")
                     //if letでもし空じゃなかったらの意味（!= nilと同じ)
-                    if let comment = data["comment"] as? String,let sender = data["sender"] as? [String],let date = data["date"] as? Double{
-                        
-                        let contentModel = ContentModel(comment: comment, sender: sender,title: title)
+                    if let comment = data["comment"] as? String,let date = data["date"] as? Double,let date = data["title"] as? String{
+                        let contentModel = ContentModel(comment: comment,title: title)
                         self.contentModelArray.append(contentModel)
                         print("コメントのデータが入っている場合、コメントを入れる")
-                        
-                    }else{
-                        let contentModel = ContentModel(comment: "", sender: nil,title: "")
-                        self.contentModelArray.append(contentModel)
-                        print("コメントのデータが入ってない場合、コメントに空を入れる")
                     }
                 }
                 self.getContentsDataProtocol?.getContentsData(dataArray: self.contentModelArray)
@@ -128,8 +124,8 @@ class LoadModel{
                 print(snapShotDoc.count)
                 for doc in snapShotDoc{
                     let data = doc.data()
-                    if let title = data["title"] as? String, let hardware = data["hardware"] as? String,let salesDate = data["salesDate"] as? String,let mediumImageUrl = data["mediumImageUrl"] as? String,let itemPrice = data["itemPrice"] as? Int,let booksGenreId = data["booksGenreId"] as? String{
-                        let likeModel = LikeModel(title: title, hardware: hardware, salesDate: salesDate, mediumImageUrl: mediumImageUrl, itemPrice: itemPrice, booksGenreId: booksGenreId)
+                    if let title = data["title"] as? String, let hardware = data["hardware"] as? String,let salesDate = data["salesDate"] as? String,let largeImageUrl = data["largeImageUrl"] as? String,let itemPrice = data["itemPrice"] as? Int,let booksGenreId = data["booksGenreId"] as? String{
+                        let likeModel = LikeModel(title: title, hardware: hardware, salesDate: salesDate, largeImageUrl: largeImageUrl, itemPrice: itemPrice, booksGenreId: booksGenreId)
                         self.likeModelArray.append(likeModel)
                         print("いいねのライクモデルのなか")
                         print(self.likeModelArray.debugDescription)

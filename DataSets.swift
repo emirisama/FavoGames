@@ -12,10 +12,10 @@ struct DataSets{
     let title:String?
     let hardware:String?
     let salesDate:String?
-    let mediumImageUrl:String?
+    let largeImageUrl:String?
     let itemPrice:Int?
     let booksGenreId:String?
-    
+    let itemUrl:String
 
 }
 

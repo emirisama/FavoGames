@@ -21,8 +21,8 @@ class SignInViewController: UIViewController, GetProfileDataProtocol{
         super.viewDidLoad()
         if Auth.auth().currentUser?.uid != nil{
             loadModel.getProfileDataProtocol = self
-            let id = Auth.auth().currentUser!.uid
-            loadModel.loadProfile(id: id)
+
+            loadModel.loadProfile()
         }else{
             
         }

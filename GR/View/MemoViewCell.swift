@@ -11,19 +11,13 @@ import Cosmos
 class MemoViewCell: UITableViewCell {
 
 
-
-    @IBOutlet weak var profileImage: UIImageView!
-    @IBOutlet weak var userNameLabel: UILabel!
-    @IBOutlet weak var userIDLabel: UILabel!
     @IBOutlet weak var memoLabel: UITextView!
     
     
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
-        profileImage.layer.cornerRadius = profileImage.frame.width/2
-        profileImage.clipsToBounds = true
+
         
     }
 

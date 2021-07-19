@@ -43,7 +43,7 @@ class ProfileEditViewController: UIViewController,SendProfileDone, UIImagePicker
 
         loadModel.getProfileDataProtocol = self
         //プロフィールを受信する(idにAuth.auth().currentUserが入る
-        loadModel.loadProfile(id: id)
+        loadModel.loadProfile()
 
     }
     

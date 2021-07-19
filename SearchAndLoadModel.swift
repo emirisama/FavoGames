@@ -43,7 +43,7 @@ class SearchAndLoadModel {
     var title = String()
     var hardware = String()
     var salesDate = String()
-    var mediumImageUrl = String()
+    var largeImageUrl = String()
     var itemPrice = Int()
     var booksGenreId = String()
     
@@ -82,9 +82,9 @@ class SearchAndLoadModel {
                    //     self.count = totalHitCount!
                         
                         for i in 0...self.count{
-                            if let title = json["Items"][i]["Item"]["title"].string,let hardware = json["Items"][i]["Item"]["hardware"].string,let mediumImageUrl = json["Items"][i]["Item"]["mediumImageUrl"].string,let salesDate = json["Items"][i]["Item"]["salesDate"].string,let itemPrice = json["Items"][i]["Item"]["itemPrice"].int,let booksGenreId = json["Items"][i]["Item"]["booksGenreId"].string{
+                            if let title = json["Items"][i]["Item"]["title"].string,let hardware = json["Items"][i]["Item"]["hardware"].string,let largeImageUrl = json["Items"][i]["Item"]["largeImageUrl"].string,let salesDate = json["Items"][i]["Item"]["salesDate"].string,let itemPrice = json["Items"][i]["Item"]["itemPrice"].int,let booksGenreId = json["Items"][i]["Item"]["booksGenreId"].string,let itemUrl = json["Items"][i]["Item"]["itemUrl"].string{
                                 
-                                let dataSets = DataSets(title: title, hardware: hardware, salesDate: salesDate, mediumImageUrl: mediumImageUrl, itemPrice: itemPrice, booksGenreId: booksGenreId)
+                                let dataSets = DataSets(title: title, hardware: hardware, salesDate: salesDate, largeImageUrl: largeImageUrl, itemPrice: itemPrice, booksGenreId: booksGenreId,itemUrl: itemUrl)
                                 //タイトル名に該当のものと一致していたら排除
                                 if dataSets.title!.contains("コントローラー") == false && dataSets.title!.contains("/") == false && dataSets.title!.contains("FINAL FANTASY X/X-2 HD Remaster PS4版") == false{
                                 self.dataSetsArray.append(dataSets)

@@ -21,10 +21,13 @@ class ContentDetailCell: UITableViewCell {
     @IBOutlet weak var price: UILabel!
     @IBOutlet weak var likeButton: UIButton!
     @IBOutlet weak var memoButton: UIButton!
+    @IBOutlet weak var videoButton: UIButton!
+    @IBOutlet weak var itemButton: UIButton!
     
     
     override func awakeFromNib() {
         super.awakeFromNib()
+
         // Initialization code
     }
 

@@ -54,7 +54,7 @@ class MemoViewController: UIViewController,DoneSendReviewContents,GetContentsDat
         //コンテンツとともに送信（動画：受信クラスを作成しよう）
         if commentTextField.text?.isEmpty != true {
 
-            sendDBModel.sendContents(title: gameTitle, sender: profile!, comment: commentTextField.text)
+            sendDBModel.sendContents(title: gameTitle, comment: commentTextField.text)
 
             print("ゲームタイトルに紐づくレビューをSendDBModelへ")
             

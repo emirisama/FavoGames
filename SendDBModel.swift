@@ -44,6 +44,10 @@ protocol DoneSendLikeData{
     func checkSendLikeData()
 }
 
+protocol DoneDeleteToContents{
+    func checkDeleteToContentsDone()
+}
+
 
 
 class SendDBModel {
@@ -58,7 +62,7 @@ class SendDBModel {
     var title = String()
     var hardware = String()
     var salesDate = String()
-    var mediumImageUrl = String()
+    var largeImageUrl = String()
     var itemPrice = Int()
     var booksGenreId = String()
     
@@ -68,15 +72,16 @@ class SendDBModel {
     var doneSendCommentCounts:DoneSendCommentCounts?
     var doneSendGameTitleWithCommentCount:DoneSendGameTitleWithCommentCount?
     var doneSendLikeData:DoneSendLikeData?
+    var doneDeleteToContents:DoneDeleteToContents?
     
     init(){
         
     }
     
-    init(userID:String,mediumImageUrl:String,title:String,hardware:String,salesDate:String,itemPrice:Int,booksGenreId:String){
+    init(userID:String,largeImageUrl:String,title:String,hardware:String,salesDate:String,itemPrice:Int,booksGenreId:String){
         
         self.userID = userID
-        self.mediumImageUrl = mediumImageUrl
+        self.largeImageUrl = largeImageUrl
         self.title = title
         self.hardware = hardware
         self.salesDate = salesDate
@@ -84,14 +89,14 @@ class SendDBModel {
         
     }
     
-    func sendLikeData(userID:String,mediumImageUrl:String,title:String,hardware:String,salesDate:String,itemPrice:Int,booksGenreId:String,likeFlag:Bool){
+    func sendLikeData(userID:String,largeImageUrl:String,title:String,hardware:String,salesDate:String,itemPrice:Int,booksGenreId:String,likeFlag:Bool){
 
         //まだlikeをしていないとき
         if likeFlag == false{
             
 
             self.db.collection("Users").document(userID).collection("like").document(title).setData(
-                ["userID":userID,"title":title,"hardware":hardware,"mediumImageUrl":mediumImageUrl,"salesDate":salesDate,"itemPrice":itemPrice,"booksGenreId":booksGenreId,"date":Date().timeIntervalSince1970,"like":false])
+                ["userID":userID,"title":title,"hardware":hardware,"largeImageUrl":largeImageUrl,"salesDate":salesDate,"itemPrice":itemPrice,"booksGenreId":booksGenreId,"date":Date().timeIntervalSince1970,"like":false])
             print("titleのなかみ")
             print(title)
             //消す
@@ -99,7 +104,7 @@ class SendDBModel {
         }else if likeFlag == true{
  
             self.db.collection("Users").document(userID).collection("like").document(title).setData(
-                ["userID":userID,"title":title,"hardware":hardware,"mediumImageUrl":mediumImageUrl,"salesDate":salesDate,"itemPrice":itemPrice,"booksGenreId":booksGenreId,"date":Date().timeIntervalSince1970,"like":true])
+                ["userID":userID,"title":title,"hardware":hardware,"largeImageUrl":largeImageUrl,"salesDate":salesDate,"itemPrice":itemPrice,"booksGenreId":booksGenreId,"date":Date().timeIntervalSince1970,"like":true])
             self.doneSendLikeData?.checkSendLikeData()
         }
         
@@ -163,26 +168,22 @@ class SendDBModel {
     
 
     //ゲームタイトルに紐づくデータを送信
-    func sendContents(title:String,sender:ProfileModel,comment:String){
+    func sendContents(title:String,comment:String){
  
-        self.myProfile.append(sender.imageURLString!)
-        self.myProfile.append(sender.profileText!)
-        self.myProfile.append(sender.userID!)
-        self.myProfile.append(sender.userName!)
-        self.myProfile.append(sender.id!)
-  
-        self.db.collection("Users").document(Auth.auth().currentUser!.uid).collection("Contents").document().setData(
-            ["date":Date().timeIntervalSince1970,"comment":comment,"sender":self.myProfile,])
-        
+
         self.db.collection(title).document(Auth.auth().currentUser!.uid).collection("Contents").document(Auth.auth().currentUser!.uid).setData(
-            ["comment":comment,"sender":self.myProfile,"date":Date().timeIntervalSince1970])
+            ["comment":comment,"date":Date().timeIntervalSince1970,"title":title])
  
         print("レビュー送信")
         self.doneSendReviewContents?.checkDoneReview()
         
     }
     
-
+    func deleteToContents(title:String){
+        print("deleteToContentsが呼ばれているか")
+        self.db.collection(title).document(Auth.auth().currentUser!.uid).collection("Contents").document(Auth.auth().currentUser!.uid).delete()
+        self.doneDeleteToContents?.checkDeleteToContentsDone()
+    }
   
     
     

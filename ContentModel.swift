@@ -11,7 +11,6 @@ struct ContentModel{
 
 
     let comment:String?
-    let sender:[String]?
     let title:String?
 
 }

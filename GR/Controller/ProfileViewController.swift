@@ -33,8 +33,6 @@ class ProfileViewController: UIViewController,UICollectionViewDataSource,UIColle
     var sendDBModel = SendDBModel()
     var contentModel:ContentModel?
     var contentModelArray = [ContentModel]()
-    var userID = String()
-    var userName = String()
     var dataArray = [ProfileModel]()
     let db = Firestore.firestore()
     var profileModel = ProfileModel()
@@ -50,49 +48,21 @@ class ProfileViewController: UIViewController,UICollectionViewDataSource,UIColle
         imageView.clipsToBounds = true
         collectionView.register(UINib(nibName: "LikeCell", bundle: nil), forCellWithReuseIdentifier: "cell")
         let layout = UICollectionViewFlowLayout()
-                layout.sectionInset = UIEdgeInsets(top: 15, left: 15, bottom: 15, right: 15)
-                collectionView.collectionViewLayout = layout
+        layout.sectionInset = UIEdgeInsets(top: 15, left: 15, bottom: 15, right: 15)
+        collectionView.collectionViewLayout = layout
         
         loadModel.getLikeDataProtocol = self
         loadModel.loadLikeData(userID: Auth.auth().currentUser!.uid)
         
         //自分のプロフィールを表示する→タブが２の場合
-        
-        if self.tabBarController!.selectedIndex == 2{
-            if Auth.auth().currentUser?.uid != nil{
-                //setUP
-                setUp(id: Auth.auth().currentUser!.uid)
-            }else{
-                if contentModel?.sender![2] == Auth.auth().currentUser!.uid{
-                }
-                //setUp（自分かどうかわからない場合）
-                setUp(id: (contentModel?.sender![2])!)
-                imageView.sd_setImage(with: URL(string: (contentModel?.sender![0])!), completed: nil)
-                imageView.clipsToBounds = true
-                nameLabel.text = contentModel?.sender![3]
-                profileTextView.text = contentModel?.sender![1]
-                idLabel.text = contentModel?.sender![4]
-            }
-        }else{
-            
-        }
-        
-        
-    }
-    
-    
-    
-    
-    func setUp(id:String){
-        
-
         loadModel.getProfileDataProtocol = self
+        loadModel.loadProfile()
+        imageView.clipsToBounds = true
 
-        //プロフィールを受信する(idにAuth.auth().currentUserが入る
-        loadModel.loadProfile(id: id)
-  
 
+        
     }
+
     
     
     override func viewWillAppear(_ animated: Bool) {
@@ -126,7 +96,7 @@ class ProfileViewController: UIViewController,UICollectionViewDataSource,UIColle
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! LikeCell
-        cell.imageView.sd_setImage(with: URL(string: likeModelArray[indexPath.row].mediumImageUrl!), completed: nil)
+        cell.imageView.sd_setImage(with: URL(string: likeModelArray[indexPath.row].largeImageUrl!), completed: nil)
         //自分が投稿したレビューのゲームソフトのタイトル画像(動画：コンテンツを受信しよう）
         //        cell.contentImageView.sd_setImage(with: URL(string: contentModelArray[indexPath.row].imageURLSting!), completed: nil)
         //        cell.reviewView.rating = contentModelArray[indexPath.row].rate!
@@ -141,7 +111,7 @@ class ProfileViewController: UIViewController,UICollectionViewDataSource,UIColle
         detailVC.itemPrice = likeModelArray[indexPath.row].itemPrice!
         detailVC.booksGenreId = likeModelArray[indexPath.row].booksGenreId!
         detailVC.salesDate = likeModelArray[indexPath.row].salesDate!
-        detailVC.mediumImageUrl = likeModelArray[indexPath.row].mediumImageUrl!
+        detailVC.largeImageUrl = likeModelArray[indexPath.row].largeImageUrl!
         self.navigationController?.pushViewController(detailVC, animated: true)
         
     }
@@ -158,13 +128,14 @@ class ProfileViewController: UIViewController,UICollectionViewDataSource,UIColle
 
     //プロフィールが入ったdataArray
     func getProfileData(dataArray: [ProfileModel]) {
-        
+        print("dataArrayが渡っているか")
+        print(dataArray.debugDescription)
         self.dataArray = dataArray
+        nameLabel.text = self.dataArray[0].userName
+        imageView.sd_setImage(with: URL(string: self.dataArray[0].imageURLString!), completed: nil)
+        profileTextView.text = self.dataArray[0].profileText
+        idLabel.text = self.dataArray[0].id
         
-        imageView.sd_setImage(with: URL(string: dataArray[0].imageURLString!), completed: nil)
-        nameLabel.text = dataArray[0].userName
-        profileTextView.text = dataArray[0].profileText
-        idLabel.text = dataArray[0].id
     }
     
     
