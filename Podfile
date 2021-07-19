@@ -18,6 +18,7 @@ pod 'SSSpinnerButton'
 pod 'SwiftyJSON'
 pod 'lottie-ios'
 pod 'Alamofire'
+pod 'GoogleSignIn'
 
 
 target 'GR' do

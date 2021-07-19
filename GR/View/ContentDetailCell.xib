@@ -48,13 +48,6 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="3.9" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ndg-yB-mFe">
-                        <rect key="frame" x="26" y="281" width="31" height="21"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                        <nil key="textColor"/>
-                        <nil key="highlightedColor"/>
-                    </label>
                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5aD-5u-YPj">
                         <rect key="frame" x="16" y="256" width="50" height="29"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -81,6 +74,21 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dlu-K7-38M">
+                        <rect key="frame" x="115" y="258" width="30" height="30"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <state key="normal" title="❤︎"/>
+                    </button>
+                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="T91-uR-VMU">
+                        <rect key="frame" x="226" y="255" width="31" height="30"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <state key="normal" title="動画"/>
+                    </button>
+                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5H6-NZ-LQ5">
+                        <rect key="frame" x="338" y="255" width="31" height="30"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <state key="normal" title="商品"/>
+                    </button>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             </tableViewCellContentView>
@@ -88,11 +96,11 @@
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <connections>
                 <outlet property="ImageView" destination="n09-CQ-Sir" id="eXN-H9-9nq"/>
-                <outlet property="commentCountLabel" destination="Ndg-yB-mFe" id="3Mv-ja-j18"/>
                 <outlet property="gameTitleLabel" destination="oqn-SX-caS" id="rs4-Ek-zCE"/>
                 <outlet property="hardware" destination="46L-3H-Ym1" id="vrB-jW-nyg"/>
+                <outlet property="likeButton" destination="Dlu-K7-38M" id="Kgv-bZ-Kho"/>
+                <outlet property="memoButton" destination="5aD-5u-YPj" id="TjQ-97-Vfp"/>
                 <outlet property="price" destination="s1n-Hr-nWK" id="wHb-v7-Gdr"/>
-                <outlet property="reviewButton" destination="5aD-5u-YPj" id="q9m-02-SdC"/>
                 <outlet property="salesDate" destination="zwp-wg-ge4" id="XGb-jq-svH"/>
             </connections>
             <point key="canvasLocation" x="189.85507246376812" y="156.36160714285714"/>

@@ -2,14 +2,19 @@
 //  LikeModel.swift
 //  GR
 //
-//  Created by 中森えみり on 2021/05/18.
+//  Created by 中森えみり on 2021/07/19.
 //
 
 import Foundation
 
+
 struct LikeModel{
     
-    var likeCount:Int
-    var likeFlagDic:Dictionary<String, Any>
-    
+    let title:String?
+    let hardware:String?
+    let salesDate:String?
+    let mediumImageUrl:String?
+    let itemPrice:Int?
+    let booksGenreId:String?
+
 }

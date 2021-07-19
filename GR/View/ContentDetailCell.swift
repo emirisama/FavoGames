@@ -19,8 +19,9 @@ class ContentDetailCell: UITableViewCell {
     @IBOutlet weak var salesDate: UILabel!
     @IBOutlet weak var hardware: UILabel!
     @IBOutlet weak var price: UILabel!
-    @IBOutlet weak var reviewButton: UIButton!
-    @IBOutlet weak var commentCountLabel: UILabel!
+    @IBOutlet weak var likeButton: UIButton!
+    @IBOutlet weak var memoButton: UIButton!
+    
     
     override func awakeFromNib() {
         super.awakeFromNib()

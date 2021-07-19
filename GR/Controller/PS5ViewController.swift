@@ -10,7 +10,7 @@ import FirebaseAuth
 import FirebaseFirestore
 import PKHUD
 
-class PS5ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,DoneCatchDataProtocol,DoneSendGames,GetGameTitleWithCommentCountProtocol{
+class PS5ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,DoneCatchDataProtocol{
 
     
     @IBOutlet weak var rankingLabel: UILabel!
@@ -36,15 +36,7 @@ class PS5ViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
     var booksGenreId = String()
     var dataSets:DataSets?
     var contentModel:ContentModel?
-    var totalCount = Int()
-    var titleDocumentModelArray = [TitleDocumentIDModel]()
-    var documentID = String()
-    var commentCountModelArray = [CommentCountModel]()
-    var contentsDocumentModelArray = [ContentsDocumentIDModel]()
-    var contentDocumentID = String()
-    var gameTitleWithCommentCountArray = [TitleAndCommentCountModel]()
-    var titleModelArray = [TitleModel]()
-    var commentTitle = String()
+
     
     
     override func viewDidLoad() {
@@ -107,7 +99,7 @@ class PS5ViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
         cell.contentImageView.sd_setImage(with: URL(string: dataSetsArray[indexPath.row].mediumImageUrl!), completed: nil)
         cell.gameTitleLabel.text = dataSetsArray[indexPath.row].title
         cell.rankLabel.text = String(indexPath.row + 1)
-        cell.reviewCountLabel.text = String(commentCountModelArray.count)
+
         //dataSetsArray[indexPath.row].titleとFirebaseのタイトルが一致するものを探す
         //commentCountをコメント数に入れる
 //        print("コメントの総数")
@@ -123,133 +115,31 @@ class PS5ViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 
-        let DetailVC = storyboard?.instantiateViewController(identifier: "detailVC") as! DetailViewController
-        DetailVC.gameTitle = dataSetsArray[indexPath.row].title!
-        DetailVC.hardware = dataSetsArray[indexPath.row].hardware!
-        DetailVC.salesDate = dataSetsArray[indexPath.row].salesDate!
-        DetailVC.mediumImageUrl = dataSetsArray[indexPath.row].mediumImageUrl!
-        DetailVC.itemPrice = dataSetsArray[indexPath.row].itemPrice!
-        //LoadModel.loadTitleのdocumentIDの値を持ってくる
-//        print("DetailVCへdocumentIDを渡す")
-//        print(documentID.debugDescription)
-//        DetailVC.documentID = self.titleDocumentModelArray[indexPath.row].documentID!
-        self.navigationController?.pushViewController(DetailVC, animated: true)
+        let detailVC = storyboard?.instantiateViewController(identifier: "detailVC") as! DetailViewController
+        detailVC.gameTitle = dataSetsArray[indexPath.row].title!
+        detailVC.hardware = dataSetsArray[indexPath.row].hardware!
+        detailVC.salesDate = dataSetsArray[indexPath.row].salesDate!
+        detailVC.mediumImageUrl = dataSetsArray[indexPath.row].mediumImageUrl!
+        detailVC.itemPrice = dataSetsArray[indexPath.row].itemPrice!
+        detailVC.booksGenreId = dataSetsArray[indexPath.row].booksGenreId!
+        self.navigationController?.pushViewController(detailVC, animated: true)
   
     }
-    
-    func GetGames(){
-        for i in 0..<dataSetsArray.count{
-            gameTitle = dataSetsArray[i].title!
-            hardware = dataSetsArray[i].hardware!
-            sendDBModel.doneSendGames = self
-            sendDBModel.sendGames(title: gameTitle, hardware: hardware)
-            loadModel.getGameTitleWithCommentCountProtocol = self
-            loadModel.loadGameTitleWithCommentCount(title: gameTitle)
-            print("gameTitleの中身")
-            print(gameTitle.debugDescription)
-            
-//            loadModel.getTitleProtocol = self
-//            loadModel.loadTitle(title: gameTitle)
-            }
-//            loadModel.getTitlesDataProtocol = self
-//            loadModel.loadTitlesID()
 
-
-        
-    }
 
     
     func doneCatchData(array: [DataSets]) {
         
         self.dataSetsArray = []
         self.dataSetsArray = array
-        //APIで取得したゲームタイトルと機種をDBに送信
-        GetGames()
         tableView.reloadData()
     }
-        //DBからゲームタイトルのIDを受信
+   
+    
 
-//
-//        loadModel.getCommentCountDataProtocol = self
-//        loadModel.loadCommentCount(title: gameTitle)
-        
-    
-    func checkDoneGames() {
-        print("dataSetsをDBへ送信完了")
-    }
-    
-    func getGameTitleWithCommentCountData(dataArray: [TitleAndCommentCountModel]) {
-        self.gameTitleWithCommentCountArray = []
-        self.gameTitleWithCommentCountArray = dataArray
-        print("PS5gameTitlewithCommentCountArrayの中身")
-        print(self.gameTitleWithCommentCountArray.debugDescription)
-        tableView.reloadData()
-        
-    }
 }
     
-    //ゲームタイトルのdocumentを取得
 
-    
-//    //ゲームタイトルのdocumentIDを取得
-//    func getTitlesData(dataArray: [TitleDocumentIDModel]) {
-//        self.titleDocumentModelArray = []
-//        self.titleDocumentModelArray = dataArray
-//        for i in 0..<titleDocumentModelArray.count{
-//            documentID = self.titleDocumentModelArray[i].documentID!
-//            print("PS5のゲームのドキュメントの値が渡っているか")
-//            print(documentID.debugDescription)
-//
-//        }
-//        //コメントのIDを受信
-////        loadModel.loadContentsID(documentID: documentID)
-//    }
-
-//    //コメントの配列を受信(loadContents)
-//    func getContentsData(dataArray: [ContentModel]) {
-//        self.contentModelArray = []
-//        self.contentModelArray = dataArray
-//        print("PS5コメント文の中身")
-//        print(contentModelArray.debugDescription)
-//        tableView.reloadData()
-//    }
-    
-
-    
-//    func getTitleData(dataArray: [TitleModel]) {
-//        self.titleModelArray = []
-//        self.titleModelArray = dataArray
-//        print("titleModelArrayの中身")
-//        print(titleModelArray.debugDescription)
-//        tableView.reloadData()
-//    }
-    
-
-//    func getCommentCountData(dataArray: [CommentCountModel]) {
-//        self.commentCountModelArray = []
-//        self.commentCountModelArray = dataArray
-//        print("PS5commentCountModelArrayの値")
-//        print(self.commentCountModelArray.debugDescription)
-//    }
-    
-
-    
- 
-    
-//    //コメント総数を受信
-//    func getCommentCountData(dataArray: [CommentCountModel]) {
-//        self.commentCountModelArray = []
-//        self.commentCountModelArray = dataArray
-//    }
-//
-//    //コメントのdocumentIDを受信
-//    func getContensDocumentIDData(dataArray: [ContentsDocumentIDModel]) {
-//        self.contentsDocumentModelArray = []
-//        self.contentsDocumentModelArray = dataArray
-//        for i in 0..<contentsDocumentModelArray.count{
-//            contentDocumentID = self.contentsDocumentModelArray[i].documentID!
-//        }
-//    }
   
     
     /*

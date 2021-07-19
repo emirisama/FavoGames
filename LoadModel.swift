@@ -17,32 +17,16 @@ protocol GetProfileDataProtocol{
     
 }
 
-
-
 protocol GetContentsDataProtocol{
     func getContentsData(dataArray:[ContentModel])
 }
 
-
-
-protocol GetTitlesDataProtocol{
-    func getTitlesData(dataArray: [TitleDocumentIDModel])
+protocol GetLikeDataProtocol{
+    func getLikeData(dataArray: [LikeModel])
 }
 
-//protocol GetContentsDocumentIDDataProtocol{
-//    func getContensDocumentIDData(dataArray: [ContentsDocumentIDModel])
-//}
-
-protocol GetCommentCountDataProtocol{
-    func getCommentCountData(dataArray: Int)
-}
-
-protocol GetGameTitleWithCommentCountProtocol{
-    func getGameTitleWithCommentCountData(dataArray: [TitleAndCommentCountModel])
-}
-
-protocol GetTitleProtocol{
-    func getTitleData(dataArray: [TitleModel])
+protocol GetLikeFlagProtocol{
+    func getLikeFlagData(likeFlag:Bool)
 }
 
 class LoadModel{
@@ -62,21 +46,12 @@ class LoadModel{
     var sendDBModel = SendDBModel()
     var profileModel = ProfileModel()
     var userDefaultsEX = UserDefaultsEX()
-    //ドキュメントID取得
-    var titleDocumentModelArray:[TitleDocumentIDModel] = []
-    var getTitlesDataProtocol:GetTitlesDataProtocol?
-//    var contentsDocumentModelArray:[ContentsDocumentIDModel] = []
-//    var getContentsDocumentIDDataProtocol:GetContentsDocumentIDDataProtocol?
-    
-    //コメント総数取得
-    var commentCountModelArray:[CommentCountModel] = []
-    var getCommentCountDataProtocol:GetCommentCountDataProtocol?
-    var getGameTitleWithCommentCountProtocol:GetGameTitleWithCommentCountProtocol?
-    var gameTitleWithCommentCountArray:[TitleAndCommentCountModel] = []
-    
-    //ゲームタイトル取得
-    var titleModelArray:[TitleModel] = []
-    var getTitleProtocol:GetTitleProtocol?
+ 
+
+    //いいね取得
+    var getLikeDataProtocol:GetLikeDataProtocol?
+    var likeModelArray:[LikeModel] = []
+    var getLikeFlagProtocol:GetLikeFlagProtocol?
     
     //プロフィールの受信
     func loadProfile(id:String){
@@ -105,7 +80,7 @@ class LoadModel{
     
     //コメントを受信(ゲームタイトルに紐づくコメントや名前などのデータを受信）
     func loadContents(title:String){
-        db.collection(title).order(by:"date").addSnapshotListener { (snapShot, error) in
+        db.collection(title).document(Auth.auth().currentUser!.uid).collection("Contents").order(by:"date").addSnapshotListener { (snapShot, error) in
             self.contentModelArray = []
             if error != nil{
                 return
@@ -139,137 +114,70 @@ class LoadModel{
             
         }
     }
+
     
-    //コメント総数(ゲームタイトルに紐づくコメントのドキュメントの数）を受信する
-    func loadCommentCount(title:String){
-        db.collection(title).addSnapshotListener { [self] snapShot, error in
-            if error != nil{
-                return
-            }
-            let commentCount = snapShot?.documents.count
-            self.getCommentCountDataProtocol?.getCommentCountData(dataArray: commentCount!)
-            
-        }
-        
-    }
- 
-    func loadGameTitleWithCommentCount(title:String){
-        
-        db.collection(title).document().collection("GameTitleWithCommentCount").addSnapshotListener { snapShot, error in
-            self.gameTitleWithCommentCountArray = []
+    func loadLikeData(userID:String){
+        db.collection("Users").document(Auth.auth().currentUser!.uid).collection("like").order(by: "date").addSnapshotListener { snapShot, error in
+            print("ああ")
+            self.likeModelArray = []
             if error != nil{
                 return
             }
             if let snapShotDoc = snapShot?.documents{
-                print("loadModelのゲームタイトルとコメント受信1")
+                print("いいねのスナップショット")
                 print(snapShotDoc.count)
                 for doc in snapShotDoc{
                     let data = doc.data()
-                    if let commentCount = data["commentCount"] as? Int,let title = data["title"] as? String{
-                        let titleAndCommentCountModel = TitleAndCommentCountModel(commentCount: commentCount, title: title)
-                        self.gameTitleWithCommentCountArray.append(titleAndCommentCountModel)
-                        print("gameTitleWithCommentCountArray受信")
-                        print(self.gameTitleWithCommentCountArray.debugDescription)
+                    if let title = data["title"] as? String, let hardware = data["hardware"] as? String,let salesDate = data["salesDate"] as? String,let mediumImageUrl = data["mediumImageUrl"] as? String,let itemPrice = data["itemPrice"] as? Int,let booksGenreId = data["booksGenreId"] as? String{
+                        let likeModel = LikeModel(title: title, hardware: hardware, salesDate: salesDate, mediumImageUrl: mediumImageUrl, itemPrice: itemPrice, booksGenreId: booksGenreId)
+                        self.likeModelArray.append(likeModel)
+                        print("いいねのライクモデルのなか")
+                        print(self.likeModelArray.debugDescription)
                     }
                 }
-                self.getGameTitleWithCommentCountProtocol?.getGameTitleWithCommentCountData(dataArray: self.gameTitleWithCommentCountArray)
+                self.getLikeDataProtocol?.getLikeData(dataArray: self.likeModelArray)
+                  
             }
         }
         
     }
-
     
-    //ゲームタイトルのdocumentIDを取得
-    func loadTitlesID(){
-        db.collection("Games").getDocuments { snapShot, error in
-            self.titleDocumentModelArray = []
+    
+    func loadLikeFlag(title:String){
+        var likeFlag = Bool()
+        db.collection("Users").document(Auth.auth().currentUser!.uid).collection("like").document(title).addSnapshotListener { snapShot, error in
+            
             if error != nil{
                 return
             }
             
-            if let snapShotDoc = snapShot?.documents{
+            if let snapShotDoc = snapShot?.data(){
                 
-                //ドキュメントの数だけcontentModelの値を入れる
                 for doc in snapShotDoc{
-                    
-                    let titleDocumentIDModel = TitleDocumentIDModel(documentID: doc.documentID)
-                    self.titleDocumentModelArray.append(titleDocumentIDModel)
+                    print("likeFlagのsnapShotの数")
+                    print(snapShotDoc.count)
+                    if let like = snapShotDoc["like"] as? Bool{
+                        likeFlag = like
+                        print("likeFlagの中身受信")
+                        print(likeFlag)
+                    }
                     
                 }
-                self.getTitlesDataProtocol?.getTitlesData(dataArray: self.titleDocumentModelArray)
+                
             }
+            self.getLikeFlagProtocol?.getLikeFlagData(likeFlag: likeFlag)
         }
+        
+        
     }
-
-
-
-//    func loadTitle(title:String){
-//        db.collection("Games").document().collection(title).addSnapshotListener { snapShot, error in
-//            self.titleModelArray = []
-//            if error != nil{
-//                return
-//            }
-//            if let snapShotDoc = snapShot?.documents{
-//                for doc in snapShotDoc{
-//                    let data = doc.data()
-//                    if let title = data["title"] as? String{
-//                        let titleModel = TitleModel(title: title)
-//                        self.titleModelArray.append(titleModel)
-//                    }
-//                    
-//                }
-//                self.getTitleProtocol?.getTitleData(dataArray: self.titleModelArray)
-//            }
-//            
-//        }
+    
+//    func loadLikeDocumentID(){
+//        db.collction("Users").
+//        
 //    }
 }
-//    //コメントのdocumentIDを取得
-//    func loadContentsID(documentID:String){
-//        db.collection("Games").document(documentID).collection("Contents").getDocuments { snapShot, error in
-//            self.contentsDocumentModelArray = []
-//            if error != nil{
-//                return
-//            }
-//
-//            if let snapShotDoc = snapShot?.documents{
-//
-//                //ドキュメントの数だけcontentModelの値を入れる
-//                for doc in snapShotDoc{
-//
-//                    let contentsDocumentIDModel = ContentsDocumentIDModel(documentID: doc.documentID)
-//                    self.contentsDocumentModelArray.append(contentsDocumentIDModel)
-//
-//                    
-//                }
-//                self.getContentsDocumentIDDataProtocol?.getContensDocumentIDData(dataArray: self.contentsDocumentModelArray)
-//            }
-//        }
-//    }
-    
-//    //コメント総数を取得
-//    func loadCommentCount(documentID:String){
-//        db.collection("Games").document(documentID).collection("Contents").addSnapshotListener { snapShot, error in
-//            self.commentCountModelArray = []
-//            if error != nil{
-//                return
-//            }
-//            if let snapShotDoc = snapShot?.documents{
-//
-//                for doc in snapShotDoc{
-//                    let data = doc.data()
-//
-//                        if let comment = data["comment"] as? String{
-//
-//                        let commentCountModel = CommentCountModel(commentCount: comment)
-//                        self.commentCountModelArray.append(commentCountModel)
-//                    }
-//                }
-//                self.getCommentCountDataProtocol?.getCommentCountData(dataArray: self.commentCountModelArray)
-//            }
-//        }
-//    }
-    
+
+
 
 
     

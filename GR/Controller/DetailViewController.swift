@@ -9,8 +9,15 @@ import UIKit
 import SDWebImage
 import Cosmos
 import PKHUD
+import FirebaseAuth
+import FirebaseFirestore
 
-class DetailViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,GetContentsDataProtocol{
+class DetailViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,GetContentsDataProtocol,DoneSendLikeData,GetLikeFlagProtocol, GetLikeDataProtocol{
+
+    
+  
+    
+
 
  
     @IBOutlet weak var tableView: UITableView!
@@ -35,9 +42,9 @@ class DetailViewController: UIViewController,UITableViewDelegate,UITableViewData
     var itemPrice = Int()
     var booksGenreId = String()
     var documentID = String()
+    var memo = String()
 
-
-    let sectionTitle = ["","掲示板"]
+    let sectionTitle = ["","Memo"]
 
     var contentDetailCell = ContentDetailCell()
    
@@ -45,8 +52,8 @@ class DetailViewController: UIViewController,UITableViewDelegate,UITableViewData
     var rateAverage = Double()
     var dataSetsArray = [DataSets]()
     var searchAndLoadModel = SearchAndLoadModel()
-    var commentCountModelArray = [CommentCountModel]()
-    var commentCount = Int()
+    
+    var likeFlag = Bool()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -55,22 +62,20 @@ class DetailViewController: UIViewController,UITableViewDelegate,UITableViewData
         switch index{
         
         case index:
-            
-            
-            loadModel.getContentsDataProtocol = self
-            print("DetailVCのdocumentID")
-            print(documentID.debugDescription)
-            loadModel.loadContents(title: gameTitle)
-
-            
+    
             tableView.delegate = self
             tableView.dataSource = self
             
             tableView.register(UINib(nibName: "ContentDetailCell", bundle: nil), forCellReuseIdentifier: "ContentDetailCell")
-            tableView.register(UINib(nibName: "ReviewViewCell", bundle: nil), forCellReuseIdentifier: "ReviewViewCell")
-     
+            tableView.register(UINib(nibName: "MemoViewCell", bundle: nil), forCellReuseIdentifier: "MemoViewCell")
             
-
+            loadModel.getContentsDataProtocol = self
+            loadModel.loadContents(title: gameTitle)
+            sendDBModel.doneSendLikeData = self
+            loadModel.getLikeDataProtocol = self
+            loadModel.loadLikeData(userID: Auth.auth().currentUser!.uid)
+            loadModel.getLikeFlagProtocol = self
+            loadModel.loadLikeFlag(title: gameTitle)
             tableView.reloadData()
             
             break
@@ -136,32 +141,49 @@ class DetailViewController: UIViewController,UITableViewDelegate,UITableViewData
             cell.salesDate.text = salesDate
             cell.hardware.text = hardware
             cell.price.text = String(itemPrice)
-            cell.commentCountLabel.text = String(self.contentModelArray.count)
-            cell.reviewButton.addTarget(self, action: #selector(reviewButtonTap(_:)), for: .touchUpInside)
+            cell.memoButton.addTarget(self, action: #selector(memoButtonTap(_:)), for: .touchUpInside)
+            cell.likeButton.addTarget(self, action: #selector(likeButtonTap(_:)), for: .touchUpInside)
+            cell.likeButton.tag = indexPath.row
             return cell
             
         }else{
             
-            let cell2 = tableView.dequeueReusableCell(withIdentifier: "ReviewViewCell", for: indexPath) as! ReviewViewCell
+            let cell2 = tableView.dequeueReusableCell(withIdentifier: "MemoViewCell", for: indexPath) as! MemoViewCell
             cell2.selectionStyle = .none
                 cell2.userNameLabel.text = self.contentModelArray[indexPath.row].sender?[3]
                 cell2.userIDLabel.text = self.contentModelArray[indexPath.row].sender?[4]
-                cell2.reviewViewLabel.text = self.contentModelArray[indexPath.row].comment
+            cell2.memoLabel.text = self.contentModelArray[indexPath.row].comment
+            memo = self.contentModelArray[indexPath.row].comment!
                 cell2.profileImage.sd_setImage(with: URL(string: (contentModelArray[indexPath.row].sender![0])), completed: nil)
                 return cell2
         }
     }
 
 
-    @objc func reviewButtonTap(_ sender:UIButton){
+    @objc func memoButtonTap(_ sender:UIButton){
         
-        let reviewVC = self.storyboard?.instantiateViewController(withIdentifier: "reviewVC") as! ReviewViewController
+        let memoVC = self.storyboard?.instantiateViewController(withIdentifier: "memoVC") as! MemoViewController
         
-        reviewVC.array = dataSetsArray
-        reviewVC.gameTitle = gameTitle
-        reviewVC.hardware = hardware
-        self.navigationController?.pushViewController(reviewVC, animated: true)
+        memoVC.array = dataSetsArray
+        memoVC.gameTitle = gameTitle
+        memoVC.hardware = hardware
+        memoVC.memo = memo
+        self.navigationController?.pushViewController(memoVC, animated: true)
         
+    }
+    
+    @objc func likeButtonTap(_ sender:UIButton){
+
+        if self.likeFlag == false{
+            sendDBModel.sendLikeData(userID: Auth.auth().currentUser!.uid, mediumImageUrl: mediumImageUrl, title: gameTitle, hardware: hardware, salesDate: salesDate, itemPrice: itemPrice, booksGenreId: booksGenreId, likeFlag: true)
+            print("likeをtrueに")
+        }else{
+            sendDBModel.sendLikeData(userID: Auth.auth().currentUser!.uid, mediumImageUrl: mediumImageUrl, title: gameTitle, hardware: hardware, salesDate: salesDate, itemPrice: itemPrice, booksGenreId: booksGenreId, likeFlag: false)
+            print("likeを消す")
+        }
+        
+
+        print("likeButtonタップしました")
     }
              
     
@@ -176,25 +198,30 @@ class DetailViewController: UIViewController,UITableViewDelegate,UITableViewData
 
     }
     
+
+    func checkSendLikeData() {
+        print("いいねしました")
+    }
     
-//    func sortNewComment(commentArray: [ContentModel]){
-//        
-//        let sortedComment = commentArray.sorted { (a, b) -> Bool in
-//            return a.date > b.date
-//        }
-//        self.contentModelArray = sortedComment
-//    }
-
-//    func getCommentCountData(dataArray: [CommentCountModel]) {
-//        self.commentCountModelArray = []
-//        self.commentCountModelArray = dataArray 
-//        print("DetailVCにコメント総数を持ってくる")
-//        print(self.commentCountModelArray)
-//
-//        tableView.reloadData()
-//    }
-
-
-
+    func like(){
+        Util.startAnimation(name: "heart", view: self.view)
+    }
+    
+    func getLikeFlagData(likeFlag: Bool) {
+        self.likeFlag = likeFlag
+        print("likeflagの中身")
+        print(self.likeFlag)
+    }
+    
+    func getLikeData(dataArray: [LikeModel]) {
+        print("いいねしました")
+    }
     
 }
+    
+
+
+
+
+    
+

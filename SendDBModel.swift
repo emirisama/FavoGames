@@ -40,6 +40,9 @@ protocol DoneSendGameTitleWithCommentCount{
     func checkDoneGameTitleWithCommentCount()
 }
 
+protocol DoneSendLikeData{
+    func checkSendLikeData()
+}
 
 
 
@@ -64,15 +67,15 @@ class SendDBModel {
     var doneSendGames:DoneSendGames?
     var doneSendCommentCounts:DoneSendCommentCounts?
     var doneSendGameTitleWithCommentCount:DoneSendGameTitleWithCommentCount?
+    var doneSendLikeData:DoneSendLikeData?
     
     init(){
         
     }
     
-    init(userID:String,userName:String,mediumImageUrl:String,title:String,hardware:String,salesDate:String,itemPrice:Int){
+    init(userID:String,mediumImageUrl:String,title:String,hardware:String,salesDate:String,itemPrice:Int,booksGenreId:String){
         
         self.userID = userID
-        self.userName = userName
         self.mediumImageUrl = mediumImageUrl
         self.title = title
         self.hardware = hardware
@@ -81,6 +84,31 @@ class SendDBModel {
         
     }
     
+    func sendLikeData(userID:String,mediumImageUrl:String,title:String,hardware:String,salesDate:String,itemPrice:Int,booksGenreId:String,likeFlag:Bool){
+
+        //まだlikeをしていないとき
+        if likeFlag == false{
+            
+
+            self.db.collection("Users").document(userID).collection("like").document(title).setData(
+                ["userID":userID,"title":title,"hardware":hardware,"mediumImageUrl":mediumImageUrl,"salesDate":salesDate,"itemPrice":itemPrice,"booksGenreId":booksGenreId,"date":Date().timeIntervalSince1970,"like":false])
+            print("titleのなかみ")
+            print(title)
+            //消す
+            deleteToLike(title:title)
+        }else if likeFlag == true{
+ 
+            self.db.collection("Users").document(userID).collection("like").document(title).setData(
+                ["userID":userID,"title":title,"hardware":hardware,"mediumImageUrl":mediumImageUrl,"salesDate":salesDate,"itemPrice":itemPrice,"booksGenreId":booksGenreId,"date":Date().timeIntervalSince1970,"like":true])
+            self.doneSendLikeData?.checkSendLikeData()
+        }
+        
+    }
+    
+    func deleteToLike(title:String){
+        print("deleteTolikeが呼ばれているか")
+        self.db.collection("Users").document(Auth.auth().currentUser!.uid).collection("like").document(title).delete()
+    }
 
     
     //プロフィールをDBへ送信する
@@ -146,7 +174,7 @@ class SendDBModel {
         self.db.collection("Users").document(Auth.auth().currentUser!.uid).collection("Contents").document().setData(
             ["date":Date().timeIntervalSince1970,"comment":comment,"sender":self.myProfile,])
         
-        self.db.collection(title).document().setData(
+        self.db.collection(title).document(Auth.auth().currentUser!.uid).collection("Contents").document(Auth.auth().currentUser!.uid).setData(
             ["comment":comment,"sender":self.myProfile,"date":Date().timeIntervalSince1970])
  
         print("レビュー送信")
@@ -154,34 +182,13 @@ class SendDBModel {
         
     }
     
-    func sendGametTitleWithCommentCount(title:String,commentCount:Int){
-        self.db.collection(title).document().collection("GameTitleWithCommentCount").document().setData(
-            ["title":title,"commentCount":commentCount])
-        self.doneSendGameTitleWithCommentCount?.checkDoneGameTitleWithCommentCount()
-    }
-    
-    
-    func sendGames(title: String,hardware:String){
-        self.db.collection("Games").document().setData(
-            ["title":title,"hardware":hardware]
-        )
-        self.doneSendGames?.checkDoneGames()
-    }
+
+  
     
     
  
     
 }
     
-    
-//    func sendCommentCount(documentID: String, CommentCount: Int,title:String,hardware:String){
-//        self.db.collection("Games").document(documentID).setData(
-//            ["CommentCount":CommentCount,"title":title,"hardware":hardware]
-//
-//        )
-//        self.doneSendCommentCounts?.checkDoneCommentCounts()
-//        print("ゲーム送信PS5")
-//    }
-    
-    
+   
 
