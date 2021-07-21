@@ -114,7 +114,6 @@ class LoadModel{
     
     func loadLikeData(userID:String){
         db.collection("Users").document(Auth.auth().currentUser!.uid).collection("like").order(by: "date").addSnapshotListener { snapShot, error in
-            print("ああ")
             self.likeModelArray = []
             if error != nil{
                 return
@@ -127,8 +126,6 @@ class LoadModel{
                     if let title = data["title"] as? String, let hardware = data["hardware"] as? String,let salesDate = data["salesDate"] as? String,let largeImageUrl = data["largeImageUrl"] as? String,let itemPrice = data["itemPrice"] as? Int,let booksGenreId = data["booksGenreId"] as? String{
                         let likeModel = LikeModel(title: title, hardware: hardware, salesDate: salesDate, largeImageUrl: largeImageUrl, itemPrice: itemPrice, booksGenreId: booksGenreId)
                         self.likeModelArray.append(likeModel)
-                        print("いいねのライクモデルのなか")
-                        print(self.likeModelArray.debugDescription)
                     }
                 }
                 self.getLikeDataProtocol?.getLikeData(dataArray: self.likeModelArray)

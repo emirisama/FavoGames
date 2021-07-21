@@ -12,14 +12,10 @@ import PKHUD
 import FirebaseAuth
 import FirebaseFirestore
 
+
+
 class DetailViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,GetContentsDataProtocol,DoneSendLikeData,GetLikeFlagProtocol, GetLikeDataProtocol,DoneDeleteToContents,ContentDetaileCellDelegate{
 
-    
- 
-    
-
-    
-  
     
 
 
@@ -60,6 +56,7 @@ class DetailViewController: UIViewController,UITableViewDelegate,UITableViewData
     
     var likeFlag = Bool()
 
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -83,7 +80,9 @@ class DetailViewController: UIViewController,UITableViewDelegate,UITableViewData
             loadModel.getLikeFlagProtocol = self
             loadModel.loadLikeFlag(title: gameTitle)
             sendDBModel.doneDeleteToContents = self
+            
             contentDetailCell.contentDetaileCellDelegate = self
+
             
             tableView.reloadData()
             
@@ -204,8 +203,7 @@ class DetailViewController: UIViewController,UITableViewDelegate,UITableViewData
             
             print("likeを消す")
         }
-        didTapLike(likeFlag: self.likeFlag)
-        print("didTaplikeへ")
+ 
     }
     
     @objc func videoButtonTap(_ sender:UIButton){
@@ -227,8 +225,6 @@ class DetailViewController: UIViewController,UITableViewDelegate,UITableViewData
         self.contentModelArray = dataArray
         print(contentModelArray.count)
         tableView.reloadData()
-//        sortNewComment(commentArray: self.contentModelArray)
-
     }
     
 
@@ -250,12 +246,12 @@ class DetailViewController: UIViewController,UITableViewDelegate,UITableViewData
     func checkDeleteToContentsDone() {
         print("メモ削除しました")
     }
-    
-    func didTapLike(likeFlag: Bool) {
-        print("didtaplikeのlikeFlagの中身")
-        print(self.likeFlag)
-        self.likeFlag = likeFlag
+    func didTapLike(isLike: Bool) {
+        self.likeFlag = isLike
+        
     }
+
+
     
 }
     
