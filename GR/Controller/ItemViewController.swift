@@ -13,7 +13,7 @@ class ItemViewController: UIViewController,WKNavigationDelegate {
 
     @IBOutlet weak var webView: WKWebView!
 
-    var itemUrl = String()
+    var gameTitle = String()
 
     
     override func viewDidLoad() {
@@ -21,7 +21,7 @@ class ItemViewController: UIViewController,WKNavigationDelegate {
         webView.navigationDelegate = self
         webView = WKWebView(frame: view.frame)
         view.addSubview(webView)
-        let url = URL(string: "\(itemUrl)".addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!)
+        let url = URL(string: "https://books.rakuten.co.jp/search?sitem=\(gameTitle)&g=006&l-id=pc-search-box".addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!)
         if url != nil{
 
             let request = URLRequest(url: url!)
@@ -29,20 +29,11 @@ class ItemViewController: UIViewController,WKNavigationDelegate {
         }else{
             
         }
-        
-        
-        
-        
-        // Do any additional setup after loading the view.
+
+       
     }
     
-//    func alert(title:String,message:String) {
-//        alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
-//        alertController.addAction(UIAlertAction(title: "OK",
-//                                                style: .default,
-//                                                handler: nil))
-//        present(alertController, animated: true)
-//    }
+
     
     @IBAction func go(_ sender: Any) {
         webView.goForward()
@@ -61,6 +52,8 @@ class ItemViewController: UIViewController,WKNavigationDelegate {
         HUD.hide()
     }
     
+    
+
 
     /*
     // MARK: - Navigation

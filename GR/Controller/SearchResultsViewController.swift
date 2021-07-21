@@ -82,9 +82,8 @@ class SearchResultsViewController: UIViewController,UITableViewDelegate,UITableV
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ContentsCell", for: indexPath) as! ContentsCell
         cell.contentImageView.sd_setImage(with: URL(string: dataSetsArray[indexPath.row].largeImageUrl!), completed: nil)
-
         cell.gameTitleLabel.text = dataSetsArray[indexPath.row].title
-        cell.rankLabel.isHidden = true
+        cell.itemPriceLabel.text = String(dataSetsArray[indexPath.row].itemPrice!)
         return cell
     }
     

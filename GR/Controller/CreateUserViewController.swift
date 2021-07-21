@@ -36,6 +36,38 @@ class CreateUserViewController: UIViewController,UITextFieldDelegate,SendProfile
         override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
             self.view.endEditing(true)
         }
+    
+
+    
+
+    func textField(_ textField: UITextField,shouldChangeCharactersIn range: NSRange,replacementString string: String) -> Bool{
+
+        var maxLength: Int = 0
+        switch (textField.tag){
+        case 1:
+            maxLength = 20
+        case 2:
+            maxLength = 15
+        default:
+            break
+        }
+        let nameTextFieldCount = textField.text?.count ?? 0
+        let stringCount = string.count
+        return nameTextFieldCount + stringCount <= maxLength
+        
+        
+//        let nameTextField: String = (nameTextField.text! as NSString).replacingCharacters(in: range, with: string)
+//        let idTextField: String = (idTextField.text! as NSString).replacingCharacters(in: range, with: string)
+//        if nameTextField.count <= 20{
+//
+//            return true
+//        }
+//
+//        return false
+        
+    }
+    
+
         
     
         

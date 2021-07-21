@@ -76,11 +76,8 @@ class SearchAndLoadModel {
                     
                     let totalHitCount = json["count"].int
 
-                    
+                    if totalHitCount != nil{
                         self.count = totalHitCount!
-                   // }else{
-                   //     self.count = totalHitCount!
-                        
                         for i in 0...self.count{
                             if let title = json["Items"][i]["Item"]["title"].string,let hardware = json["Items"][i]["Item"]["hardware"].string,let largeImageUrl = json["Items"][i]["Item"]["largeImageUrl"].string,let salesDate = json["Items"][i]["Item"]["salesDate"].string,let itemPrice = json["Items"][i]["Item"]["itemPrice"].int,let booksGenreId = json["Items"][i]["Item"]["booksGenreId"].string,let itemUrl = json["Items"][i]["Item"]["itemUrl"].string{
                                 
@@ -104,6 +101,9 @@ class SearchAndLoadModel {
                     print(self.dataSetsArray.count)
                     //コントローラー値に値を渡す必要がある
                     self.doneCatchDataProtocol?.doneCatchData(array: self.dataSetsArray)
+                    }else{
+                        
+                    }
                     
                 }catch{
                     

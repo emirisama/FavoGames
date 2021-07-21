@@ -19,12 +19,14 @@ import PKHUD
 
 class ProfileViewController: UIViewController,UICollectionViewDataSource,UICollectionViewDelegate,GetProfileDataProtocol,GetLikeDataProtocol,UICollectionViewDelegateFlowLayout{
 
+    
+
  
     
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var idLabel: UILabel!
-    @IBOutlet weak var profileTextView: UITextView!
+    @IBOutlet weak var profileTextLabel: UILabel!
     @IBOutlet weak var collectionView: UICollectionView!
     
     
@@ -38,6 +40,7 @@ class ProfileViewController: UIViewController,UICollectionViewDataSource,UIColle
     var profileModel = ProfileModel()
     var userDefaultsEX = UserDefaultsEX()
     var likeModelArray = [LikeModel]()
+    var likeFlag = Bool()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -133,7 +136,7 @@ class ProfileViewController: UIViewController,UICollectionViewDataSource,UIColle
         self.dataArray = dataArray
         nameLabel.text = self.dataArray[0].userName
         imageView.sd_setImage(with: URL(string: self.dataArray[0].imageURLString!), completed: nil)
-        profileTextView.text = self.dataArray[0].profileText
+        profileTextLabel.text = self.dataArray[0].profileText
         idLabel.text = self.dataArray[0].id
         
     }
@@ -149,22 +152,7 @@ class ProfileViewController: UIViewController,UICollectionViewDataSource,UIColle
     }
     
     
-    //ログアウト処理
-    @IBAction func tapLogout(_ sender: Any) {
-
-
-        let firebaseAuth = Auth.auth()
-        do {
-            try firebaseAuth.signOut()
-            let tutorialVC = self.storyboard?.instantiateViewController(withIdentifier: "tutorial") as! ViewController
-            self.navigationController?.pushViewController(tutorialVC, animated: true)
-            print("ログアウトしました")
-        } catch {
-            print ("Error")
-        }
-        
-    
-    }
+  
     
     func getLikeData(dataArray: [LikeModel]) {
         print("いいねのリスト")
@@ -173,8 +161,7 @@ class ProfileViewController: UIViewController,UICollectionViewDataSource,UIColle
         collectionView.reloadData()
     }
     
-        
-    
+
     
     
     /*

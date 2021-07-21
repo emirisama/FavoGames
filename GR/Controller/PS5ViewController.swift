@@ -13,32 +13,24 @@ import PKHUD
 class PS5ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,DoneCatchDataProtocol{
 
     
-    @IBOutlet weak var rankingLabel: UILabel!
-    @IBOutlet weak var timeLabel: UILabel!
+
     @IBOutlet weak var tableView: UITableView!
     
     var index = Int()
     var dataSetsArray = [DataSets]()
     var db = Firestore.firestore()
     var idString = String()
-    
     var loadModel = LoadModel()
-    var rateAverage = Double()
     var sendDBModel = SendDBModel()
     var contentModelArray = [ContentModel]()
 
-    
     var gameTitle = String()
     var hardware = String()
     var salesDate = String()
     var largeImageUrl = String()
     var itemPrice = Int()
     var booksGenreId = String()
-    var dataSets:DataSets?
-    var contentModel:ContentModel?
-
-    
-    
+ 
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -47,9 +39,9 @@ class PS5ViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
         
         tableView.register(UINib(nibName: "ContentsCell", bundle: nil), forCellReuseIdentifier: "ContentsCell")
         
-        let urlStringPs5 = "https://app.rakuten.co.jp/services/api/BooksGame/Search/20170404?format=json&hardware=PS5&booksGenreId=006515&applicationId=1078790856161658200"
-        let urlStringPs4 = "https://app.rakuten.co.jp/services/api/BooksGame/Search/20170404?format=json&hardware=PS4&booksGenreId=006513&applicationId=1078790856161658200"
-        let urlStringSwitch = "https://app.rakuten.co.jp/services/api/BooksGame/Search/20170404?format=json&hardware=Nintendo Switch&booksGenreId=006514&applicationId=1078790856161658200"
+        let urlStringPs5 = "https://app.rakuten.co.jp/services/api/BooksGame/Search/20170404?format=json&hardware=PS5&booksGenreId=006515&sort=sales&applicationId=1078790856161658200"
+        let urlStringPs4 = "https://app.rakuten.co.jp/services/api/BooksGame/Search/20170404?format=json&hardware=PS4&booksGenreId=006513&sort=sales&applicationId=1078790856161658200"
+        let urlStringSwitch = "https://app.rakuten.co.jp/services/api/BooksGame/Search/20170404?format=json&hardware=Nintendo Switch&booksGenreId=006514&sort=sales&applicationId=1078790856161658200"
 
         
         if index == 0{
@@ -75,7 +67,7 @@ class PS5ViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
     //高さを揃える
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
-        return 350
+        return 270
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -98,13 +90,8 @@ class PS5ViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
 
         cell.contentImageView.sd_setImage(with: URL(string: dataSetsArray[indexPath.row].largeImageUrl!), completed: nil)
         cell.gameTitleLabel.text = dataSetsArray[indexPath.row].title
-        cell.rankLabel.text = String(indexPath.row + 1)
-
-        //dataSetsArray[indexPath.row].titleとFirebaseのタイトルが一致するものを探す
-        //commentCountをコメント数に入れる
-//        print("コメントの総数")
-//        print(commentCountModelArray.count)
         
+        cell.itemPriceLabel.text = String(dataSetsArray[indexPath.row].itemPrice!)
         print("dataSetsArrayの数")
         print(dataSetsArray.count)
         

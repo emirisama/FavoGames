@@ -19,7 +19,7 @@ class TrendViewController: AMPagerTabsViewController {
         
         settings.tabBackgroundColor = #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)
         settings.tabButtonColor = #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)
-        settings.tabHeight = 100
+        settings.tabHeight = 120
         isTabButtonShouldFit = true
         tabFont = UIFont.systemFont(ofSize: 17, weight: .bold)
         self.viewControllers = getTabs()

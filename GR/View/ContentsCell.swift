@@ -13,8 +13,8 @@ class ContentsCell: UITableViewCell {
     
     @IBOutlet weak var contentImageView: UIImageView!
     @IBOutlet weak var gameTitleLabel: UILabel!
-    @IBOutlet weak var rankLabel: UILabel!
-
+    @IBOutlet weak var itemPriceLabel: UILabel!
+    
     
     
     override func awakeFromNib() {

@@ -14,6 +14,8 @@ class ViewController: UIViewController {
     @IBOutlet weak var scroll: UIScrollView!
     @IBOutlet weak var pageControl: UIPageControl!
     
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -23,6 +25,7 @@ class ViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         self.scroll.delegate = self
         
+     
     }
     
     @IBAction func start(_ sender: Any) {

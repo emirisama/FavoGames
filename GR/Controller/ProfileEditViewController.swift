@@ -9,35 +9,60 @@ import UIKit
 import PKHUD
 import FirebaseAuth
 
-class ProfileEditViewController: UIViewController,SendProfileDone, UIImagePickerControllerDelegate, UINavigationControllerDelegate,GetProfileDataProtocol{
+class ProfileEditViewController: UIViewController,SendProfileDone, UIImagePickerControllerDelegate, UINavigationControllerDelegate,GetProfileDataProtocol,UITextViewDelegate,UITextFieldDelegate{
 
-
-    
 
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var nameTextField: UITextField!
-    @IBOutlet weak var idLabel: UILabel!
     @IBOutlet weak var profileTextField: UITextView!
-    
+    @IBOutlet weak var idLabel: UILabel!
     
     var loadModel = LoadModel()
     var sendDBModel = SendDBModel()
     var id = String()
     var userName = String()
     var profileModelArray = [ProfileModel]()
+    let maxLength: Int = 20
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
+        profileTextField.delegate = self
+        nameTextField.delegate = self
         imageView.layer.cornerRadius = imageView.frame.width/2
         imageView.clipsToBounds = true
         profileTextField.layer.borderColor = UIColor.gray.cgColor
         profileTextField.layer.borderWidth = 0.5
         sendDBModel.sendProfileDone = self
         setUp(id: Auth.auth().currentUser!.uid)
-    
-        // Do any additional setup after loading the view.
     }
+    //文字数制限のときは、TextViewとTexFiledのdelegateを呼ぶ。TextViewとTexFiledは別々で設定。
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        
+        let profileTextField: String = (profileTextField.text! as NSString).replacingCharacters(in: range, with: text)
+        if profileTextField.count <= 60{
+            
+            return true
+        }
+        
+        return false
+        
+    }
+    
+
+    func textField(_ textField: UITextField,shouldChangeCharactersIn range: NSRange,replacementString string: String) -> Bool{
+        // 入力を反映させたテキストを取得する
+        let nameTextField: String = (nameTextField.text! as NSString).replacingCharacters(in: range, with: string)
+        if nameTextField.count <= 20{
+            
+            return true
+        }
+        
+        return false
+        
+    }
+    
+    
     
     func setUp(id:String){
 
@@ -92,13 +117,9 @@ class ProfileEditViewController: UIViewController,SendProfileDone, UIImagePicker
         picker.dismiss(animated: true, completion: nil)
     }
     
-    
 
-    
     func checkOK() {
         HUD.hide()
-//        let profileVC = storyboard?.instantiateViewController(identifier: "profile") as! ProfileViewController
-//        self.navigationController?.pushViewController(profileVC, animated: true)
         self.dismiss(animated: true, completion: nil)
         
     }
@@ -106,10 +127,42 @@ class ProfileEditViewController: UIViewController,SendProfileDone, UIImagePicker
     
     
     @IBAction func done(_ sender: Any) {
-        
         sendDBModel.sendProfileDB(userName: nameTextField.text!, id: idLabel.text!, profileText: profileTextField.text!, imageData: (self.imageView.image?.jpegData(compressionQuality: 0.4))!)
+    }
+    
+    @IBAction func logoutTap(_ sender: Any) {
+        
+        //アラートOK
+        let alert = UIAlertController(title: "ログアウトしますか？", message: "ログアウトすると全データが削除されますがよろしいですか？", preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "ok", style: .default, handler: {
+            (action: UIAlertAction!) -> Void in
+            //ログアウト処理
+            do {
+                
+                let firebaseAuth = Auth.auth()
+                try firebaseAuth.signOut()
+                let tutorialVC = self.storyboard?.instantiateViewController(withIdentifier: "tutorial") as! ViewController
+                self.present(tutorialVC, animated: true,completion: nil)
+                print("ログアウトしました")
+            } catch {
+                print ("Error")
+            }
+        })
+        //アラートキャンセル
+        let cancel = UIAlertAction(title: "cancel", style: .cancel, handler: {
+            (action: UIAlertAction!) -> Void in
+        })
+        alert.addAction(okAction)
+        alert.addAction(cancel)
+        present(alert, animated: true, completion: nil)
         
     }
+    
+
+
+
+        
+    
     
     /*
     // MARK: - Navigation

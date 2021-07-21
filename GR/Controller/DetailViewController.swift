@@ -12,7 +12,9 @@ import PKHUD
 import FirebaseAuth
 import FirebaseFirestore
 
-class DetailViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,GetContentsDataProtocol,DoneSendLikeData,GetLikeFlagProtocol, GetLikeDataProtocol,DoneDeleteToContents{
+class DetailViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,GetContentsDataProtocol,DoneSendLikeData,GetLikeFlagProtocol, GetLikeDataProtocol,DoneDeleteToContents,ContentDetaileCellDelegate{
+
+    
  
     
 
@@ -57,7 +59,7 @@ class DetailViewController: UIViewController,UITableViewDelegate,UITableViewData
     var searchAndLoadModel = SearchAndLoadModel()
     
     var likeFlag = Bool()
-    
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -81,6 +83,8 @@ class DetailViewController: UIViewController,UITableViewDelegate,UITableViewData
             loadModel.getLikeFlagProtocol = self
             loadModel.loadLikeFlag(title: gameTitle)
             sendDBModel.doneDeleteToContents = self
+            contentDetailCell.contentDetaileCellDelegate = self
+            
             tableView.reloadData()
             
             break
@@ -93,7 +97,7 @@ class DetailViewController: UIViewController,UITableViewDelegate,UITableViewData
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if  indexPath.section == 0 {
-            return 550
+            return 500
             
         }else if indexPath.section == 1{
             
@@ -188,15 +192,20 @@ class DetailViewController: UIViewController,UITableViewDelegate,UITableViewData
     }
     
     @objc func likeButtonTap(_ sender:UIButton){
-
+        print("@objc,likeButtonTap1")
+        
         if self.likeFlag == false{
             sendDBModel.sendLikeData(userID: Auth.auth().currentUser!.uid, largeImageUrl: largeImageUrl, title: gameTitle, hardware: hardware, salesDate: salesDate, itemPrice: itemPrice, booksGenreId: booksGenreId, likeFlag: true)
+            
             print("likeをtrueに")
         }else{
+
             sendDBModel.sendLikeData(userID: Auth.auth().currentUser!.uid, largeImageUrl: largeImageUrl, title: gameTitle, hardware: hardware, salesDate: salesDate, itemPrice: itemPrice, booksGenreId: booksGenreId, likeFlag: false)
+            
             print("likeを消す")
         }
-        print("likeButtonタップしました")
+        didTapLike(likeFlag: self.likeFlag)
+        print("didTaplikeへ")
     }
     
     @objc func videoButtonTap(_ sender:UIButton){
@@ -208,7 +217,7 @@ class DetailViewController: UIViewController,UITableViewDelegate,UITableViewData
     
     @objc func itemButtonTap(_ sender:UIButton){
         let itemVC = self.storyboard?.instantiateViewController(withIdentifier: "itemVC") as! ItemViewController
-        itemVC.itemUrl = itemUrl
+        itemVC.gameTitle = gameTitle
         self.present(itemVC, animated: true)
     }
              
@@ -216,8 +225,6 @@ class DetailViewController: UIViewController,UITableViewDelegate,UITableViewData
     func getContentsData(dataArray: [ContentModel]) {
         self.contentModelArray = []
         self.contentModelArray = dataArray
-        print("DetailVCにself.contentModelArrayの値を持ってくる")
-        print(self.contentModelArray.debugDescription)
         print(contentModelArray.count)
         tableView.reloadData()
 //        sortNewComment(commentArray: self.contentModelArray)
@@ -226,17 +233,14 @@ class DetailViewController: UIViewController,UITableViewDelegate,UITableViewData
     
 
     func checkSendLikeData() {
-        print("いいねしました")
+        print("いいねを送信しました")
     }
-    
-    func like(){
-        Util.startAnimation(name: "heart", view: self.view)
-    }
-    
+
     func getLikeFlagData(likeFlag: Bool) {
         self.likeFlag = likeFlag
-        print("likeflagの中身")
+        print("DeitailVC側でlikeflag取得")
         print(self.likeFlag)
+        tableView.reloadData()
     }
     
     func getLikeData(dataArray: [LikeModel]) {
@@ -245,6 +249,12 @@ class DetailViewController: UIViewController,UITableViewDelegate,UITableViewData
     
     func checkDeleteToContentsDone() {
         print("メモ削除しました")
+    }
+    
+    func didTapLike(likeFlag: Bool) {
+        print("didtaplikeのlikeFlagの中身")
+        print(self.likeFlag)
+        self.likeFlag = likeFlag
     }
     
 }
