@@ -11,7 +11,7 @@ protocol ContentDetaileCellDelegate{
     func didTapLike(isLike: Bool)
 }
 
-class ContentDetailCell: UITableViewCell,GetLikeFlagProtocol{
+class ContentDetailCell: UITableViewCell{
 
     
 
@@ -28,7 +28,7 @@ class ContentDetailCell: UITableViewCell,GetLikeFlagProtocol{
 
     var likeFlag = Bool()
     var loadModel = LoadModel()
-//    var contentDetaileCellDelegate:ContentDetaileCellDelegate?
+    var contentDetaileCellDelegate:ContentDetaileCellDelegate?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -56,10 +56,25 @@ class ContentDetailCell: UITableViewCell,GetLikeFlagProtocol{
     
     
     @IBAction func likeButtonTap(_ sender: UIButton) {
-        loadModel.getLikeFlagProtocol = self
-        loadModel.loadLikeFlag(title: gameTitleLabel.text!)
-//        self.contentDetaileCellDelegate?.didTapLike(isLike: likeFlag)
-//        print("CellのlikeFlag")
+//        loadModel.getLikeFlagProtocol = self
+//        loadModel.loadLikeFlag(title: gameTitleLabel.text!)
+        self.contentDetaileCellDelegate?.didTapLike(isLike: likeFlag)
+        print("CellのlikeFlag")
+        print(likeFlag)
+        if likeFlag == false{
+            likeButton.setImage(UIImage(named: "heart1"),for: .normal)
+            print("ContentDetailCellでfalse画像に")
+        }else{
+            likeButton.setImage(UIImage(named: "heart2"),for: .normal)
+            print("ContentDetailCellでtrue画像に")
+        }
+        
+    }
+    
+//    func getLikeFlagData(likeFlag: Bool) {
+//
+//        self.likeFlag = likeFlag
+//        print("ContentDetailCellでlikeFlagを取得")
 //        print(self.likeFlag)
 //        if self.likeFlag == false{
 //            likeButton.setImage(UIImage(named: "heart1"),for: .normal)
@@ -68,23 +83,8 @@ class ContentDetailCell: UITableViewCell,GetLikeFlagProtocol{
 //            likeButton.setImage(UIImage(named: "heart2"),for: .normal)
 //            print("ContentDetailCellでtrue画像に")
 //        }
-//        
-    }
-    
-    func getLikeFlagData(likeFlag: Bool) {
-
-        self.likeFlag = likeFlag
-        print("ContentDetailCellでlikeFlagを取得")
-        print(self.likeFlag)
-        if self.likeFlag == false{
-            likeButton.setImage(UIImage(named: "heart1"),for: .normal)
-            print("ContentDetailCellでfalse画像に")
-        }else{
-            likeButton.setImage(UIImage(named: "heart2"),for: .normal)
-            print("ContentDetailCellでtrue画像に")
-        }
-
-    }
+//
+//    }
     
 
 

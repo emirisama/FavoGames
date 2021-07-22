@@ -14,27 +14,21 @@ import FirebaseFirestore
 
 
 
-class DetailViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,GetContentsDataProtocol,DoneSendLikeData,GetLikeFlagProtocol, GetLikeDataProtocol,DoneDeleteToContents{
-
-    
-
+class DetailViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,GetContentsDataProtocol,DoneSendLikeData,GetLikeFlagProtocol, GetLikeDataProtocol,DoneDeleteToContents,ContentDetaileCellDelegate{
 
  
     @IBOutlet weak var tableView: UITableView!
 
+    
+    
     var index = Int()
     
     var contentModel:ContentModel?
     var profileModel:ProfileModel?
     var loadModel = LoadModel()
     var sendDBModel = SendDBModel()
-    
-
-
     var profileModelArray = [ProfileModel]()
-    
     var contentModelArray = [ContentModel]()
-    
     var gameTitle = String()
     var hardware = String()
     var salesDate = String()
@@ -44,16 +38,11 @@ class DetailViewController: UIViewController,UITableViewDelegate,UITableViewData
     var documentID = String()
     var memo = String()
     var itemUrl = String()
-
     let sectionTitle = ["","Memo"]
-
     var contentDetailCell = ContentDetailCell()
-   
-
     var rateAverage = Double()
     var dataSetsArray = [DataSets]()
     var searchAndLoadModel = SearchAndLoadModel()
-    
     var likeFlag = Bool()
 
 
@@ -80,10 +69,7 @@ class DetailViewController: UIViewController,UITableViewDelegate,UITableViewData
             loadModel.getLikeFlagProtocol = self
             loadModel.loadLikeFlag(title: gameTitle)
             sendDBModel.doneDeleteToContents = self
-            
-//            contentDetailCell.contentDetaileCellDelegate = self
-
-            
+            contentDetailCell.contentDetaileCellDelegate = self
             tableView.reloadData()
             
             break
@@ -246,15 +232,20 @@ class DetailViewController: UIViewController,UITableViewDelegate,UITableViewData
     func checkDeleteToContentsDone() {
         print("メモ削除しました")
     }
-//    func didTapLike(isLike: Bool) {
-//        self.likeFlag = isLike
-//
-//    }
+    
+    func didTapLike(isLike: Bool) {
+        print("didTapLikeが呼ばれているか（DeitailVC)")
+        self.likeFlag = isLike
+
+    }
     
     func setUpView(likeFlag: Bool){
         self.likeFlag = likeFlag
     }
 
+    
+    
+    
 }
     
 
