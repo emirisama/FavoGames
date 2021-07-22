@@ -45,14 +45,21 @@ class ContentDetailCell: UITableViewCell{
 //            likeButton.setImage(UIImage(named: "heart1"),for: .normal)
 //            print("awakeFromNib()内のfalse画像")
 //        }
+        self.contentDetaileCellDelegate?.didTapLike(isLike: likeFlag)
+//        likeFlag.toggle()
+        print("0セルのLikeFlag")
+        print(likeFlag)
+        if likeFlag == true{
+            likeButton.setImage(UIImage(named: "heart2"),for: .normal)
+            print("０ContentDetailCellでtrue画像に2")
+        }else{
+            likeButton.setImage(UIImage(named: "heart1"),for: .normal)
+            print("０ContentDetailCellでtrue画像に1")
+        }
       
  
     }
 
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-    }
     
     
     @IBAction func likeButtonTap(_ sender: UIButton) {
@@ -60,7 +67,9 @@ class ContentDetailCell: UITableViewCell{
 //        loadModel.loadLikeFlag(title: gameTitleLabel.text!)
         self.contentDetaileCellDelegate?.didTapLike(isLike: likeFlag)
         print("CellのlikeFlag")
+        likeFlag.toggle()
         print(likeFlag)
+
         if likeFlag == false{
             likeButton.setImage(UIImage(named: "heart1"),for: .normal)
             print("ContentDetailCellでfalse画像に")

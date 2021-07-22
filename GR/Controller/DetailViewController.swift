@@ -70,6 +70,7 @@ class DetailViewController: UIViewController,UITableViewDelegate,UITableViewData
             loadModel.loadLikeFlag(title: gameTitle)
             sendDBModel.doneDeleteToContents = self
             contentDetailCell.contentDetaileCellDelegate = self
+ 
             tableView.reloadData()
             
             break
@@ -178,10 +179,9 @@ class DetailViewController: UIViewController,UITableViewDelegate,UITableViewData
     
     @objc func likeButtonTap(_ sender:UIButton){
         print("@objc,likeButtonTap1")
-        
+
         if self.likeFlag == false{
             sendDBModel.sendLikeData(userID: Auth.auth().currentUser!.uid, largeImageUrl: largeImageUrl, title: gameTitle, hardware: hardware, salesDate: salesDate, itemPrice: itemPrice, booksGenreId: booksGenreId, likeFlag: true)
-            
             print("likeをtrueに")
         }else{
 
@@ -222,6 +222,7 @@ class DetailViewController: UIViewController,UITableViewDelegate,UITableViewData
         self.likeFlag = likeFlag
         print("DeitailVC側でlikeflag取得")
         print(self.likeFlag)
+        didTapLike(isLike: self.likeFlag)
         tableView.reloadData()
     }
     
@@ -234,14 +235,14 @@ class DetailViewController: UIViewController,UITableViewDelegate,UITableViewData
     }
     
     func didTapLike(isLike: Bool) {
-        print("didTapLikeが呼ばれているか（DeitailVC)")
+
         self.likeFlag = isLike
+        print("didTapLikeが呼ばれているか（DeitailVC)")
+        print(self.likeFlag)
 
     }
     
-    func setUpView(likeFlag: Bool){
-        self.likeFlag = likeFlag
-    }
+
 
     
     
