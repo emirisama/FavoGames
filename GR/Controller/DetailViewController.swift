@@ -14,7 +14,7 @@ import FirebaseFirestore
 
 
 
-class DetailViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,GetContentsDataProtocol,DoneSendLikeData,GetLikeFlagProtocol, GetLikeDataProtocol,DoneDeleteToContents,ContentDetaileCellDelegate{
+class DetailViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,GetContentsDataProtocol,DoneSendLikeData,GetLikeFlagProtocol, GetLikeDataProtocol,DoneDeleteToContents{
 
     
 
@@ -81,7 +81,7 @@ class DetailViewController: UIViewController,UITableViewDelegate,UITableViewData
             loadModel.loadLikeFlag(title: gameTitle)
             sendDBModel.doneDeleteToContents = self
             
-            contentDetailCell.contentDetaileCellDelegate = self
+//            contentDetailCell.contentDetaileCellDelegate = self
 
             
             tableView.reloadData()
@@ -246,13 +246,15 @@ class DetailViewController: UIViewController,UITableViewDelegate,UITableViewData
     func checkDeleteToContentsDone() {
         print("メモ削除しました")
     }
-    func didTapLike(isLike: Bool) {
-        self.likeFlag = isLike
-        
+//    func didTapLike(isLike: Bool) {
+//        self.likeFlag = isLike
+//
+//    }
+    
+    func setUpView(likeFlag: Bool){
+        self.likeFlag = likeFlag
     }
 
-
-    
 }
     
 

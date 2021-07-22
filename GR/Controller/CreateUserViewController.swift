@@ -6,24 +6,37 @@
 //
 
 import UIKit
-import Firebase
+import FirebaseAuth
 import FirebaseFirestore
 import PKHUD
-
+import FirebaseUI
     
 class CreateUserViewController: UIViewController,UITextFieldDelegate,SendProfileDone{
   
-        @IBOutlet weak var signupButton: UIButton!
-        
-        @IBOutlet weak var nameTextField: UITextField!
-        @IBOutlet weak var idTextField: UITextField!
-         
+    @IBOutlet weak var signupButton: UIButton!
+    @IBOutlet weak var nameTextField: UITextField!
+    @IBOutlet weak var idTextField: UITextField!
+    
+    @IBOutlet weak var googleSignInButton: UIView!
+    
+    
         var sendDBModel = SendDBModel()
         var profileImage = UIImage()
  
+    var authUI: FUIAuth { get { return FUIAuth.defaultAuthUI()!}}
+    // 認証に使用するプロバイダの選択
+    let providers: [FUIAuthProvider] = [
+        FUIGoogleAuth(),
+        FUIFacebookAuth(),
+        FUIEmailAuth()
+    ]
+    
         override func viewDidLoad() {
             super.viewDidLoad()
             
+//            self.authUI.delegate = self
+//            self.authUI.providers = providers
+//            googleSignInButton.addTarget(self,action: #selector(self.authButtonTapped(sender:)),for: .touchUpInside)
             sendDBModel.sendProfileDone = self
             nameTextField.delegate = self
             idTextField.delegate = self
@@ -38,7 +51,22 @@ class CreateUserViewController: UIViewController,UITextFieldDelegate,SendProfile
         }
     
 
+    @objc func authButtonTapped(sender : AnyObject) {
+            // FirebaseUIのViewの取得
+            let authViewController = self.authUI.authViewController()
+            // FirebaseUIのViewの表示
+            self.present(authViewController, animated: true, completion: nil)
+        }
     
+    public func authUI(_ authUI: FUIAuth, didSignInWith user: User?, error: Error?){
+        // 認証に成功した場合
+        if error == nil {
+            self.performSegue(withIdentifier: "toNextView", sender: nil)
+        } else {
+        //失敗した場合
+            print("error")
+        }
+    }
 
     func textField(_ textField: UITextField,shouldChangeCharactersIn range: NSRange,replacementString string: String) -> Bool{
 

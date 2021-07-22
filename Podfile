@@ -18,7 +18,8 @@ pod 'SSSpinnerButton'
 pod 'SwiftyJSON'
 pod 'lottie-ios'
 pod 'Alamofire'
-pod 'GoogleSignIn'
+pod 'FirebaseUI'
+pod 'Firebase/Core'
 
 
 target 'GR' do

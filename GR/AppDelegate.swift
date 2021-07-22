@@ -8,30 +8,19 @@
 import UIKit
 import Firebase
 import IQKeyboardManagerSwift
-import GoogleSignIn
+import FirebaseUI
+
+
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate{
-
- 
+    
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         FirebaseApp.configure()
         IQKeyboardManager.shared.enable = true
-        
-//        GIDSignIn.sharedInstance().clientID = FirebaseApp.app()?.options.clientID
-//        GIDSignIn.sharedInstance().delegate = self
-//        @available(iOS 9.0, *)
-//        func application(_ application: UIApplication, open url: URL,
-//                         options: [UIApplication.OpenURLOptionsKey: Any])
-//          -> Bool {
-//          return GIDSignIn.sharedInstance().handle(url)
-        
-        
-        
-        
-        
 
-        
+
         //ログアウト
 //        let firebaseAuth = Auth.auth()
 //        do {
@@ -39,10 +28,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate{
 //        } catch {
 //            print ("Error")
 //        }
-  
         return true
     }
     
+    func application(_ app: UIApplication, open url: URL,
+                     options: [UIApplication.OpenURLOptionsKey : Any]) -> Bool {
+        let sourceApplication = options[UIApplication.OpenURLOptionsKey.sourceApplication] as! String?
+        // GoogleまたはFacebook認証の場合、trueを返す
+        if FUIAuth.defaultAuthUI()?.handleOpen(url, sourceApplication: sourceApplication) ?? false {
+            return true
+        }
+        return false
+    }
     
 
     // MARK: UISceneSession Lifecycle

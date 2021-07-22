@@ -156,9 +156,9 @@ class LoadModel{
                     }
                     
                 }
-                
+                self.getLikeFlagProtocol?.getLikeFlagData(likeFlag: likeFlag)
             }
-            self.getLikeFlagProtocol?.getLikeFlagData(likeFlag: likeFlag)
+            
         }
         
         
