@@ -10,8 +10,6 @@ import Firebase
 import IQKeyboardManagerSwift
 import FirebaseUI
 
-
-
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate{
     
@@ -20,15 +18,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate{
         FirebaseApp.configure()
         IQKeyboardManager.shared.enable = true
 
-        
- 
-//        //ログアウト
+
+        //ログアウト
 //        let firebaseAuth = Auth.auth()
 //        do {
 //            try firebaseAuth.signOut()
 //        } catch {
 //            print ("Error")
 //        }
+//
         return true
     }
     

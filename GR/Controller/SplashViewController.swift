@@ -24,8 +24,7 @@ class SplashViewController: UIViewController {
         }
     
     func chooseShouldLaunchViewController() {
-        let profile:ProfileModel? = userDefaultsEX.codable(forKey: "profile")
-        if Auth.auth().currentUser?.uid != nil && profile != nil{
+        if Auth.auth().currentUser?.uid != nil{
             //サインイン
             print("ログイン後、TabBarVCへ遷移")
             let tabVC = self.storyboard?.instantiateViewController(withIdentifier: "tab") as! TabBarController

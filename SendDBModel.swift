@@ -117,7 +117,7 @@ class SendDBModel {
 
     
     //プロフィールをDBへ送信する
-    func sendProfileDB(userName:String,id:String,profileText:String, imageData: Data){
+    func sendProfileDB(userName:String,imageData: Data){
         
         //プロフィール画像
         let usernoimage = UIImage(named: "userimage")
@@ -150,12 +150,12 @@ class SendDBModel {
 
                 if url != nil{
                     
-                    let profileModel = ProfileModel(userName: userName, id: id,profileText: profileText, imageURLString: url?.absoluteString, userID: Auth.auth().currentUser!.uid)
+                    let profileModel = ProfileModel(userName: userName,imageURLString: url?.absoluteString)
                     //アプリ内に自分のProfileを保存しておく
-        self.userDefaultsEX.set(value: profileModel, forKey: "profile")
+
         
                     //送信
-                    self.db.collection("Users").document(Auth.auth().currentUser!.uid).setData(["userName":userName,"id":id,"userID":Auth.auth().currentUser!.uid,"Date":Date().timeIntervalSince1970,"image":url?.absoluteString,"profileText":profileText])
+                    self.db.collection("Users").document(Auth.auth().currentUser!.uid).setData(["userName":userName,"Date":Date().timeIntervalSince1970,"image":url?.absoluteString])
                     print("プロフィール画像を保存する")
         
         //画面遷移
@@ -165,6 +165,8 @@ class SendDBModel {
             }
         }
     }
+    
+
     
 
     //ゲームタイトルに紐づくデータを送信

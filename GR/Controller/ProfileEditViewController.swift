@@ -9,13 +9,12 @@ import UIKit
 import PKHUD
 import FirebaseAuth
 
-class ProfileEditViewController: UIViewController,SendProfileDone, UIImagePickerControllerDelegate, UINavigationControllerDelegate,GetProfileDataProtocol,UITextViewDelegate,UITextFieldDelegate{
+class ProfileEditViewController: UIViewController,SendProfileDone, UIImagePickerControllerDelegate, UINavigationControllerDelegate,GetProfileDataProtocol,UITextFieldDelegate{
 
 
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var nameTextField: UITextField!
-    @IBOutlet weak var profileTextField: UITextView!
-    @IBOutlet weak var idLabel: UILabel!
+
     
     var loadModel = LoadModel()
     var sendDBModel = SendDBModel()
@@ -27,28 +26,13 @@ class ProfileEditViewController: UIViewController,SendProfileDone, UIImagePicker
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        profileTextField.delegate = self
         nameTextField.delegate = self
         imageView.layer.cornerRadius = imageView.frame.width/2
         imageView.clipsToBounds = true
-        profileTextField.layer.borderColor = UIColor.gray.cgColor
-        profileTextField.layer.borderWidth = 0.5
         sendDBModel.sendProfileDone = self
         setUp(id: Auth.auth().currentUser!.uid)
     }
-    //文字数制限のときは、TextViewとTexFiledのdelegateを呼ぶ。TextViewとTexFiledは別々で設定。
-    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
-        
-        let profileTextField: String = (profileTextField.text! as NSString).replacingCharacters(in: range, with: text)
-        if profileTextField.count <= 60{
-            
-            return true
-        }
-        
-        return false
-        
-    }
-    
+
 
     func textField(_ textField: UITextField,shouldChangeCharactersIn range: NSRange,replacementString string: String) -> Bool{
         // 入力を反映させたテキストを取得する
@@ -76,8 +60,7 @@ class ProfileEditViewController: UIViewController,SendProfileDone, UIImagePicker
         self.profileModelArray = dataArray
         imageView.sd_setImage(with: URL(string: dataArray[0].imageURLString!), completed: nil)
         nameTextField.text = dataArray[0].userName
-        profileTextField.text = dataArray[0].profileText
-        idLabel.text = dataArray[0].id
+
         
     }
     
@@ -127,13 +110,13 @@ class ProfileEditViewController: UIViewController,SendProfileDone, UIImagePicker
     
     
     @IBAction func done(_ sender: Any) {
-        sendDBModel.sendProfileDB(userName: nameTextField.text!, id: idLabel.text!, profileText: profileTextField.text!, imageData: (self.imageView.image?.jpegData(compressionQuality: 0.4))!)
+        sendDBModel.sendProfileDB(userName: nameTextField.text!,imageData: (self.imageView.image?.jpegData(compressionQuality: 0.4))!)
     }
     
     @IBAction func logoutTap(_ sender: Any) {
         
         //アラートOK
-        let alert = UIAlertController(title: "ログアウトしますか？", message: "ログアウトすると全データが削除されますがよろしいですか？", preferredStyle: .alert)
+        let alert = UIAlertController(title: "ログアウトしますか？", message: "", preferredStyle: .alert)
         let okAction = UIAlertAction(title: "ok", style: .default, handler: {
             (action: UIAlertAction!) -> Void in
             //ログアウト処理
@@ -158,10 +141,18 @@ class ProfileEditViewController: UIViewController,SendProfileDone, UIImagePicker
         
     }
     
+    @IBAction func deleteTap(_ sender: Any) {
 
-
-
+        Auth.auth().currentUser?.delete() { [weak self] error in
+            guard let self = self else { return }
+            if error != nil {
+                // 非ログイン時の画面へ
+            }
+            let tutorialVC = self.storyboard?.instantiateViewController(withIdentifier: "tutorial") as! ViewController
+            self.present(tutorialVC, animated: true,completion: nil)
+        }
         
+    }
     
     
     /*

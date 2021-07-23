@@ -25,8 +25,6 @@ class ProfileViewController: UIViewController,UICollectionViewDataSource,UIColle
     
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
-    @IBOutlet weak var idLabel: UILabel!
-    @IBOutlet weak var profileTextLabel: UILabel!
     @IBOutlet weak var collectionView: UICollectionView!
     
     
@@ -100,9 +98,6 @@ class ProfileViewController: UIViewController,UICollectionViewDataSource,UIColle
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! LikeCell
         cell.imageView.sd_setImage(with: URL(string: likeModelArray[indexPath.row].largeImageUrl!), completed: nil)
-        //自分が投稿したレビューのゲームソフトのタイトル画像(動画：コンテンツを受信しよう）
-        //        cell.contentImageView.sd_setImage(with: URL(string: contentModelArray[indexPath.row].imageURLSting!), completed: nil)
-        //        cell.reviewView.rating = contentModelArray[indexPath.row].rate!
         
         return cell
     }
@@ -131,24 +126,16 @@ class ProfileViewController: UIViewController,UICollectionViewDataSource,UIColle
 
     //プロフィールが入ったdataArray
     func getProfileData(dataArray: [ProfileModel]) {
-        print("dataArrayが渡っているか")
-        print(dataArray.debugDescription)
         self.dataArray = dataArray
         nameLabel.text = self.dataArray[0].userName
         imageView.sd_setImage(with: URL(string: self.dataArray[0].imageURLString!), completed: nil)
-        profileTextLabel.text = self.dataArray[0].profileText
-        idLabel.text = self.dataArray[0].id
         
     }
-    
-    
-    
-    
+
     
     @IBAction func tapEdit(_ sender: Any) {
         performSegue(withIdentifier: "profileEdit", sender: nil)
-        //        let profileEditVC = storyboard?.instantiateViewController(identifier: "profileEdit") as! ProfileEditViewController
-        //        self.navigationController?.pushViewController(profileEditVC, animated: true)
+
     }
     
     
@@ -160,6 +147,7 @@ class ProfileViewController: UIViewController,UICollectionViewDataSource,UIColle
         likeModelArray = dataArray
         collectionView.reloadData()
     }
+    
     
 
     

@@ -68,8 +68,8 @@ class LoadModel{
             if let snapShotDoc = snapShot?.data(){
                 print("ぷろふぃーるのsnapSHot")
                 print(snapShotDoc.count)
-                if let userID = snapShotDoc["userID"] as? String,let userName = snapShotDoc["userName"] as? String,let image = snapShotDoc["image"] as? String,let profileText = snapShotDoc["profileText"] as? String,let id = snapShotDoc["id"] as? String{
-                    let profileModel = ProfileModel(userName: userName, id: id,profileText: profileText, imageURLString: image, userID: userID)
+                if let userName = snapShotDoc["userName"] as? String,let image = snapShotDoc["image"] as? String{
+                    let profileModel = ProfileModel(userName: userName, imageURLString: image)
                     self.profileModelArray.append(profileModel)
                     print("profileModelArrayの中身")
                     print(self.profileModelArray.debugDescription)
