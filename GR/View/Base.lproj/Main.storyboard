@@ -177,9 +177,6 @@
                                 <rect key="frame" x="57" y="526" width="307" height="72"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Google"/>
-                                <connections>
-                                    <segue destination="fVx-7x-oq4" kind="show" id="1kh-Yv-a6n"/>
-                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="MJd-cP-yzd"/>
@@ -984,9 +981,6 @@
             <point key="canvasLocation" x="6669.5652173913049" y="-204.24107142857142"/>
         </scene>
     </scenes>
-    <inferredMetricsTieBreakers>
-        <segue reference="VtS-18-EqZ"/>
-    </inferredMetricsTieBreakers>
     <resources>
         <image name="ball" width="48" height="48"/>
         <image name="edit" width="32" height="32"/>

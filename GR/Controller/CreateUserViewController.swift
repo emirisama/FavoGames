@@ -55,15 +55,22 @@ class CreateUserViewController: UIViewController,UITextFieldDelegate,SendProfile
             let authViewController = self.authUI.authViewController()
             // FirebaseUIのViewの表示
             self.present(authViewController, animated: true, completion: nil)
+        print("GoogleButtonタップ")
         }
     
     public func authUI(_ authUI: FUIAuth, didSignInWith user: User?, error: Error?){
         // 認証に成功した場合
         if error == nil {
-            self.performSegue(withIdentifier: "toNextView", sender: nil)
-        } else {
-        //失敗した場合
-            print("error")
+            let usernoimage = UIImage(named: "userimage")
+            let usernoimagedata = usernoimage?.jpegData(compressionQuality: 1)
+            print("ユーザー名")
+            print(user?.displayName?.debugDescription)
+            sendDBModel.sendProfileDB(userName: (user?.displayName)!, id: "", profileText: "", imageData: usernoimagedata!)
+//            self.performSegue(withIdentifier: "toNextView", sender: nil)
+        }else{
+            //失敗した場合
+                print("error")
+            
         }
     }
 
