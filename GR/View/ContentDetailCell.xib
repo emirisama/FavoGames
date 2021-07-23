@@ -88,9 +88,6 @@
                         <rect key="frame" x="30" y="430" width="48" height="48"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <state key="normal" image="heart1"/>
-                        <connections>
-                            <action selector="likeButtonTap:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="Q4e-sM-1oj"/>
-                        </connections>
                     </button>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

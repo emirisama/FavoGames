@@ -11,14 +11,14 @@ import FirebaseFirestore
 import PKHUD
 import FirebaseUI
     
-class CreateUserViewController: UIViewController,UITextFieldDelegate,SendProfileDone{
-  
+class CreateUserViewController: UIViewController,UITextFieldDelegate,SendProfileDone,FUIAuthDelegate{
+    
+    @IBOutlet weak var authButton: UIButton!
     @IBOutlet weak var signupButton: UIButton!
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var idTextField: UITextField!
     
-    @IBOutlet weak var googleSignInButton: UIView!
-    
+
     
         var sendDBModel = SendDBModel()
         var profileImage = UIImage()
@@ -27,16 +27,15 @@ class CreateUserViewController: UIViewController,UITextFieldDelegate,SendProfile
     // 認証に使用するプロバイダの選択
     let providers: [FUIAuthProvider] = [
         FUIGoogleAuth(),
-        FUIFacebookAuth(),
-        FUIEmailAuth()
+
     ]
     
         override func viewDidLoad() {
             super.viewDidLoad()
             
-//            self.authUI.delegate = self
-//            self.authUI.providers = providers
-//            googleSignInButton.addTarget(self,action: #selector(self.authButtonTapped(sender:)),for: .touchUpInside)
+            self.authUI.delegate = self
+            self.authUI.providers = providers
+            authButton.addTarget(self, action: #selector(authButtonTapped(_:)), for: .touchUpInside)
             sendDBModel.sendProfileDone = self
             nameTextField.delegate = self
             idTextField.delegate = self
@@ -51,7 +50,7 @@ class CreateUserViewController: UIViewController,UITextFieldDelegate,SendProfile
         }
     
 
-    @objc func authButtonTapped(sender : AnyObject) {
+    @objc func authButtonTapped(_ sender:UIButton) {
             // FirebaseUIのViewの取得
             let authViewController = self.authUI.authViewController()
             // FirebaseUIのViewの表示

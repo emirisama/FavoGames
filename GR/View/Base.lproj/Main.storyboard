@@ -173,11 +173,14 @@
                                     <segue destination="hr9-Ui-kYQ" kind="show" id="r1S-tE-FZD"/>
                                 </connections>
                             </button>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cGz-1V-J7O">
-                                <rect key="frame" x="76" y="525" width="240" height="128"/>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uQl-jk-eAk">
+                                <rect key="frame" x="57" y="526" width="307" height="72"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                            </view>
+                                <state key="normal" title="Google"/>
+                                <connections>
+                                    <segue destination="fVx-7x-oq4" kind="show" id="1kh-Yv-a6n"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="MJd-cP-yzd"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -195,7 +198,7 @@
                     <navigationItem key="navigationItem" title="新規会員登録・ログイン" id="SLc-LE-QHV"/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
-                        <outlet property="googleSignInButton" destination="cGz-1V-J7O" id="k1Q-xk-gGR"/>
+                        <outlet property="authButton" destination="uQl-jk-eAk" id="X44-b2-zWd"/>
                         <outlet property="idTextField" destination="8Xc-C8-1oT" id="brR-xi-kmM"/>
                         <outlet property="nameTextField" destination="jNz-IU-W2R" id="Eny-Vn-yBE"/>
                         <outlet property="signupButton" destination="PuP-G1-iag" id="byS-l5-EDZ"/>
@@ -204,7 +207,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ian-ta-8Av" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1683" y="-410"/>
+            <point key="canvasLocation" x="1682.608695652174" y="-410.49107142857139"/>
         </scene>
         <!--Trend View Controller-->
         <scene sceneID="aA6-A7-uQ3">
@@ -467,11 +470,7 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="crE-yT-las" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-                <tapGestureRecognizer id="boO-i1-ikT">
-                    <connections>
-                        <action selector="toProfileVC:" destination="HvS-Kq-qYm" id="kim-zc-ipU"/>
-                    </connections>
-                </tapGestureRecognizer>
+                <tapGestureRecognizer id="boO-i1-ikT"/>
             </objects>
             <point key="canvasLocation" x="5831.884057971015" y="95.758928571428569"/>
         </scene>
@@ -985,6 +984,9 @@
             <point key="canvasLocation" x="6669.5652173913049" y="-204.24107142857142"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="VtS-18-EqZ"/>
+    </inferredMetricsTieBreakers>
     <resources>
         <image name="ball" width="48" height="48"/>
         <image name="edit" width="32" height="32"/>

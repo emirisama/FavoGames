@@ -14,7 +14,7 @@ import FirebaseFirestore
 
 
 
-class DetailViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,GetContentsDataProtocol,DoneSendLikeData,GetLikeFlagProtocol, GetLikeDataProtocol,DoneDeleteToContents,ContentDetaileCellDelegate{
+class DetailViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,GetContentsDataProtocol,DoneSendLikeData,GetLikeFlagProtocol, GetLikeDataProtocol,DoneDeleteToContents{
 
  
     @IBOutlet weak var tableView: UITableView!
@@ -69,8 +69,8 @@ class DetailViewController: UIViewController,UITableViewDelegate,UITableViewData
             loadModel.getLikeFlagProtocol = self
             loadModel.loadLikeFlag(title: gameTitle)
             sendDBModel.doneDeleteToContents = self
-            contentDetailCell.contentDetaileCellDelegate = self
- 
+
+            
             tableView.reloadData()
             
             break
@@ -136,6 +136,13 @@ class DetailViewController: UIViewController,UITableViewDelegate,UITableViewData
             cell.salesDate.text = salesDate
             cell.hardware.text = hardware
             cell.price.text = String(itemPrice)
+            if self.likeFlag == false{
+                cell.likeButton.setImage(UIImage(named: "heart1"),for: .normal)
+                print("ContentDetailCellでfalse画像に")
+            }else{
+                cell.likeButton.setImage(UIImage(named: "heart2"),for: .normal)
+                print("ContentDetailCellでtrue画像に")
+            }
             cell.memoButton.addTarget(self, action: #selector(memoButtonTap(_:)), for: .touchUpInside)
             cell.likeButton.addTarget(self, action: #selector(likeButtonTap(_:)), for: .touchUpInside)
             cell.videoButton.addTarget(self, action: #selector(videoButtonTap(_ :)), for: .touchUpInside)
@@ -220,9 +227,7 @@ class DetailViewController: UIViewController,UITableViewDelegate,UITableViewData
 
     func getLikeFlagData(likeFlag: Bool) {
         self.likeFlag = likeFlag
-        print("DeitailVC側でlikeflag取得")
-        print(self.likeFlag)
-        didTapLike(isLike: self.likeFlag)
+
         tableView.reloadData()
     }
     
@@ -233,19 +238,7 @@ class DetailViewController: UIViewController,UITableViewDelegate,UITableViewData
     func checkDeleteToContentsDone() {
         print("メモ削除しました")
     }
-    
-    func didTapLike(isLike: Bool) {
 
-        self.likeFlag = isLike
-        print("didTapLikeが呼ばれているか（DeitailVC)")
-        print(self.likeFlag)
-
-    }
-    
-
-
-    
-    
     
 }
     

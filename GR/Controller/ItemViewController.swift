@@ -21,7 +21,7 @@ class ItemViewController: UIViewController,WKNavigationDelegate {
         webView.navigationDelegate = self
         webView = WKWebView(frame: view.frame)
         view.addSubview(webView)
-        let url = URL(string: "https://books.rakuten.co.jp/search?sitem=\(gameTitle)&g=006&l-id=pc-search-box".addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!)
+        let url = URL(string: "https://www.google.com/search?q=\(gameTitle)".addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!)
         if url != nil{
 
             let request = URLRequest(url: url!)
