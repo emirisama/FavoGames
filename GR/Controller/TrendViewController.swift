@@ -19,21 +19,11 @@ class TrendViewController: AMPagerTabsViewController {
         
         settings.tabBackgroundColor = #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)
         settings.tabButtonColor = #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)
-        settings.tabHeight = 120
+        settings.tabHeight = 90
         isTabButtonShouldFit = true
         tabFont = UIFont.systemFont(ofSize: 17, weight: .bold)
         self.viewControllers = getTabs()
         
-//        if Auth.auth().currentUser != nil{
-//            let signinVC = self.storyboard?.instantiateViewController(withIdentifier: "signinVC") as! SignInViewController
-//            self.navigationController?.pushViewController(signinVC, animated: true)
-//        }else{
-//            
-//            //新規会員登録
-//        let createVC = self.storyboard?.instantiateViewController(withIdentifier: "createVC") as! CreateUserViewController
-//        self.navigationController?.pushViewController(createVC, animated: true)
-//        }
-   
         
     }
     
