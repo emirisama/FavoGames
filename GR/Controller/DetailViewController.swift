@@ -7,28 +7,18 @@
 
 import UIKit
 import SDWebImage
-import Cosmos
 import PKHUD
 import FirebaseAuth
 import FirebaseFirestore
 
 
+class DetailViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,GetContentsDataProtocol,SendLikeDone,GetLikeFlagProtocol,DeleteToContentsDone{
 
-class DetailViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,GetContentsDataProtocol,DoneSendLikeData,GetLikeFlagProtocol, GetLikeDataProtocol,DoneDeleteToContents{
-
- 
+    
     @IBOutlet weak var tableView: UITableView!
-
     
     
     var index = Int()
-    
-    var contentModel:ContentModel?
-    var profileModel:ProfileModel?
-    var loadModel = LoadModel()
-    var sendDBModel = SendDBModel()
-    var profileModelArray = [ProfileModel]()
-    var contentModelArray = [ContentModel]()
     var gameTitle = String()
     var hardware = String()
     var salesDate = String()
@@ -39,39 +29,35 @@ class DetailViewController: UIViewController,UITableViewDelegate,UITableViewData
     var memo = String()
     var itemUrl = String()
     let sectionTitle = ["","Memo"]
-    var contentDetailCell = ContentDetailCell()
-    var rateAverage = Double()
+    var likeFlag = Bool()
+    
+    var contentModel:ContentModel?
+    var profileModel:ProfileModel?
+    var loadModel = LoadModel()
+    var sendDBModel = SendDBModel()
+    var profileModelArray = [ProfileModel]()
+    var contentModelArray = [ContentModel]()
     var dataSetsArray = [DataSets]()
     var searchAndLoadModel = SearchAndLoadModel()
-    var likeFlag = Bool()
-
-
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
         switch index{
         
         case index:
-    
+            
             tableView.delegate = self
             tableView.dataSource = self
-            
             tableView.register(UINib(nibName: "ContentDetailCell", bundle: nil), forCellReuseIdentifier: "ContentDetailCell")
             tableView.register(UINib(nibName: "MemoViewCell", bundle: nil), forCellReuseIdentifier: "MemoViewCell")
-            
             loadModel.getContentsDataProtocol = self
             loadModel.loadContents(title: gameTitle)
-            sendDBModel.doneSendLikeData = self
-            loadModel.getLikeDataProtocol = self
-            loadModel.loadLikeData(userID: Auth.auth().currentUser!.uid)
+            sendDBModel.sendLikeDone = self
             loadModel.getLikeFlagProtocol = self
             loadModel.loadLikeFlag(title: gameTitle)
-            sendDBModel.doneDeleteToContents = self
-
-            
-            tableView.reloadData()
+            sendDBModel.deleteToContentsDone = self
             
             break
             
@@ -79,54 +65,60 @@ class DetailViewController: UIViewController,UITableViewDelegate,UITableViewData
             break
         }
     }
-        
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if  indexPath.section == 0 {
-            return 500
-            
-        }else if indexPath.section == 1{
-            
-                return 300
-   
-        }
-        return 0
-    }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         self.navigationController?.isNavigationBarHidden = false
-
+        
     }
     
-
-    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        
+        if  indexPath.section == 0 {
+            
+            return 500
+            
+        }else if indexPath.section == 1{
+            
+            return 300
+            
+        }
+        
+        return 0
+        
+    }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-
-
+        
         return sectionTitle.count
-        }
-    
+        
+    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        
         if section == 0{
+            
             return 1
+            
         }else if section == 1{
+            
             return contentModelArray.count
+            
         }
+        
         return 0
+        
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         
         return sectionTitle[section]
+        
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
         if  indexPath.section == 0 {
             
             let cell = tableView.dequeueReusableCell(withIdentifier: "ContentDetailCell", for: indexPath) as! ContentDetailCell
@@ -136,17 +128,22 @@ class DetailViewController: UIViewController,UITableViewDelegate,UITableViewData
             cell.salesDate.text = salesDate
             cell.hardware.text = hardware
             cell.price.text = String(itemPrice)
+            
             if self.likeFlag == false{
+                
                 cell.likeButton.setImage(UIImage(named: "heart1"),for: .normal)
-                print("ContentDetailCellでfalse画像に")
+                
             }else{
+                
                 cell.likeButton.setImage(UIImage(named: "heart2"),for: .normal)
-                print("ContentDetailCellでtrue画像に")
+                
             }
+            
             cell.memoButton.addTarget(self, action: #selector(memoButtonTap(_:)), for: .touchUpInside)
             cell.likeButton.addTarget(self, action: #selector(likeButtonTap(_:)), for: .touchUpInside)
             cell.videoButton.addTarget(self, action: #selector(videoButtonTap(_ :)), for: .touchUpInside)
             cell.itemButton.addTarget(self, action: #selector(itemButtonTap(_ :)), for: .touchUpInside)
+            
             return cell
             
         }else{
@@ -155,28 +152,36 @@ class DetailViewController: UIViewController,UITableViewDelegate,UITableViewData
             cell2.selectionStyle = .none
             cell2.memoLabel.text = self.contentModelArray[indexPath.row].comment
             memo = self.contentModelArray[indexPath.row].comment!
+            
             return cell2
+            
         }
+        
     }
     
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool{
+        
         return true
+        
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        
         if editingStyle == UITableViewCell.EditingStyle.delete {
+            
             contentModelArray.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath as IndexPath], with: UITableView.RowAnimation.automatic)
             sendDBModel.deleteToContents(title: gameTitle)
+            
         }
+        
     }
-
-
+    
+    
     @objc func memoButtonTap(_ sender:UIButton){
         
         let memoVC = self.storyboard?.instantiateViewController(withIdentifier: "memoVC") as! MemoViewController
-        
-        memoVC.array = dataSetsArray
+        memoVC.dataSetsArray = dataSetsArray
         memoVC.gameTitle = gameTitle
         memoVC.hardware = hardware
         memoVC.memo = memo
@@ -185,60 +190,64 @@ class DetailViewController: UIViewController,UITableViewDelegate,UITableViewData
     }
     
     @objc func likeButtonTap(_ sender:UIButton){
-        print("@objc,likeButtonTap1")
-
+        
         if self.likeFlag == false{
-            sendDBModel.sendLikeData(userID: Auth.auth().currentUser!.uid, largeImageUrl: largeImageUrl, title: gameTitle, hardware: hardware, salesDate: salesDate, itemPrice: itemPrice, booksGenreId: booksGenreId, likeFlag: true)
-            print("likeをtrueに")
-        }else{
-
-            sendDBModel.sendLikeData(userID: Auth.auth().currentUser!.uid, largeImageUrl: largeImageUrl, title: gameTitle, hardware: hardware, salesDate: salesDate, itemPrice: itemPrice, booksGenreId: booksGenreId, likeFlag: false)
             
-            print("likeを消す")
+            sendDBModel.sendLike(userID: Auth.auth().currentUser!.uid, largeImageUrl: largeImageUrl, title: gameTitle, hardware: hardware, salesDate: salesDate, itemPrice: itemPrice, booksGenreId: booksGenreId, likeFlag: true)
+            
+        }else{
+            
+            sendDBModel.sendLike(userID: Auth.auth().currentUser!.uid, largeImageUrl: largeImageUrl, title: gameTitle, hardware: hardware, salesDate: salesDate, itemPrice: itemPrice, booksGenreId: booksGenreId, likeFlag: false)
+            
         }
- 
+        
     }
     
     @objc func videoButtonTap(_ sender:UIButton){
+        
         let videoVC = self.storyboard?.instantiateViewController(withIdentifier: "videoVC") as! VideoViewController
         videoVC.gameTitle = gameTitle
         self.present(videoVC, animated: true)
-  
+        
     }
     
     @objc func itemButtonTap(_ sender:UIButton){
+        
         let itemVC = self.storyboard?.instantiateViewController(withIdentifier: "itemVC") as! ItemViewController
         itemVC.gameTitle = gameTitle
         self.present(itemVC, animated: true)
+        
     }
-             
+    
     
     func getContentsData(dataArray: [ContentModel]) {
+        
         self.contentModelArray = []
         self.contentModelArray = dataArray
         print(contentModelArray.count)
         tableView.reloadData()
+        
     }
     
-
-    func checkSendLikeData() {
+    
+    func checkSendLikeDone() {
+        
         print("いいねを送信しました")
+        
     }
-
+    
     func getLikeFlagData(likeFlag: Bool) {
+        
         self.likeFlag = likeFlag
-
         tableView.reloadData()
     }
     
-    func getLikeData(dataArray: [LikeModel]) {
-        print("いいねしました")
+    func checkDeleteToContentsDone() {
+        
+        print("メモ削除しました")
+        
     }
     
-    func checkDeleteToContentsDone() {
-        print("メモ削除しました")
-    }
-
     
 }
     

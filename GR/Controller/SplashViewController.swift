@@ -8,20 +8,20 @@
 import UIKit
 import FirebaseAuth
 
-class SplashViewController: UIViewController {
 
-    let userDefaultsEX = UserDefaultsEX()
+class SplashViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
-            super.viewDidAppear(animated)
-            self.chooseShouldLaunchViewController()
-        }
+        super.viewDidAppear(animated)
+        
+        self.chooseShouldLaunchViewController()
+        
+    }
     
     func chooseShouldLaunchViewController() {
         if Auth.auth().currentUser?.uid != nil{
@@ -31,8 +31,8 @@ class SplashViewController: UIViewController {
             tabVC.modalPresentationStyle = .fullScreen
             self.present(tabVC, animated: true, completion: nil)
         }else{
-            // 新規会員登録
-            print("新規会員登録")
+            // 新規登録
+            print("新規登録")
             let tutorialVC = self.storyboard?.instantiateViewController(withIdentifier: "tutorial") as! ViewController
             tutorialVC.modalPresentationStyle = .fullScreen
             self.present(tutorialVC, animated: true, completion: nil)
@@ -41,15 +41,5 @@ class SplashViewController: UIViewController {
         
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+    
 }

@@ -6,83 +6,78 @@
 //
 
 import UIKit
-import FirebaseAuth
+import Firebase
 import FirebaseFirestore
 import PKHUD
-import FirebaseUI
+
+
+class CreateUserViewController: UIViewController,UITextFieldDelegate,SendProfileDone{
     
-class CreateUserViewController: UIViewController,UITextFieldDelegate,SendProfileDone,FUIAuthDelegate{
     
-    @IBOutlet weak var authButton: UIButton!
+    @IBOutlet weak var nameTextField: UITextField!
     
     
     var sendDBModel = SendDBModel()
-    var profileImage = UIImage()
-    var authUI: FUIAuth { get { return FUIAuth.defaultAuthUI()!}}
-    var profileModel = [ProfileModel]()
-    // 認証に使用するプロバイダの選択
-    let providers: [FUIAuthProvider] = [
-        FUIGoogleAuth(),
+    
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
         
-    ]
-    
-        override func viewDidLoad() {
-            super.viewDidLoad()
-            
-            self.authUI.delegate = self
-            self.authUI.providers = providers
-            authButton.addTarget(self, action: #selector(authButtonTapped(_:)), for: .touchUpInside)
-            sendDBModel.sendProfileDone = self
-            authButton.layer.shadowOffset = CGSize(width: 0.0, height: 2.0)
-
-        }
-
-        //他のところをタップするとキーボードが下がる
-        override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-            self.view.endEditing(true)
-        }
-    
-
-    @objc func authButtonTapped(_ sender:UIButton) {
-            // FirebaseUIのViewの取得
-            let authViewController = self.authUI.authViewController()
-            // FirebaseUIのViewの表示
-            self.present(authViewController, animated: true, completion: nil)
-        print("GoogleButtonタップ")
-        }
-    
-    public func authUI(_ authUI: FUIAuth, didSignInWith user: User?, error: Error?){
-        // 認証に成功した場合
-        if error == nil {
-            let usernoimage = UIImage(named: "userimage")
-            let usernoimagedata = usernoimage?.jpegData(compressionQuality: 1)
-            print("ユーザー名")
-            print(user?.displayName?.debugDescription)
-            print("ユーザーがあるのかどうか")
-     print(Auth.auth().currentUser?.uid)
-            if Auth.auth().currentUser?.uid != nil{
-                print("ユーザーがある")
- 
-                checkOK()
-            }else{
-            sendDBModel.sendProfileDB(userName: (user?.displayName)!,imageData: usernoimagedata!)
-                print("新規ユーザー")
-            }
-        }else{
-            //失敗した場合
-                print("error")
-        }
+        sendDBModel.sendProfileDone = self
+        nameTextField.delegate = self
+        
     }
-
-    func checkOK() {
+    
+    //キーボードを下げる
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        
+        self.view.endEditing(true)
+        
+    }
+    
+    //文字数制限
+    func textField(_ textField: UITextField,shouldChangeCharactersIn range: NSRange,replacementString string: String) -> Bool{
+        
+        let nameTextField: String = (nameTextField.text! as NSString).replacingCharacters(in: range, with: string)
+        if nameTextField.count <= 20{
+            
+            return true
+        }
+        
+        return false
+        
+    }
+    
+    //アカウントを作成する
+    @IBAction func registerButton(_ sender: Any) {
+        
+        if nameTextField.text?.isEmpty != true{
+            
+            Auth.auth().signInAnonymously { [self] (result, error) in
+                
+                let usernoimage = UIImage(named: "userimage")
+                let usernoimagedata = usernoimage?.jpegData(compressionQuality: 1)
+                
+                if error != nil{
+                    print("エラーです")
+                }else{
+                    
+                    sendDBModel.sendProfile(userName: nameTextField.text!,imageData: usernoimagedata!)
+                    print("プロフィールデータをSendDBModelへ")
+                }
+            }
+        }
+        
+    }
+    
+    func checkProfileDone() {
         
         HUD.hide()
         //Trendの画面遷移
         let tabVC = self.storyboard?.instantiateViewController(withIdentifier: "tab") as! TabBarController
         performSegue(withIdentifier: "tab", sender: nil)
+        
     }
-    
-    
     
     
 }

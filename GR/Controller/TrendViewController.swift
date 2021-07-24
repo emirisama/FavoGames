@@ -9,10 +9,9 @@ import UIKit
 import AMPagerTabs
 import FirebaseAuth
 
+
 class TrendViewController: AMPagerTabsViewController {
     
-    
-
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,20 +23,20 @@ class TrendViewController: AMPagerTabsViewController {
         tabFont = UIFont.systemFont(ofSize: 17, weight: .bold)
         self.viewControllers = getTabs()
         
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         
         super.viewWillAppear(animated)
+        
         self.navigationController?.isNavigationBarHidden = true
-
-
+        
     }
     
     func getTabs() -> [UIViewController]{
         
         var vcArray = [UIViewController]()
+        
         for i in 0..<3{
             
             let ps5ViewController = self.storyboard?.instantiateViewController(withIdentifier: "ps5") as! PS5ViewController
@@ -45,9 +44,12 @@ class TrendViewController: AMPagerTabsViewController {
             ps5ViewController.index = i
             vcArray.append(ps5ViewController)
             
-            
         }
+        
         return vcArray
+        
     }
+    
+    
 }
 

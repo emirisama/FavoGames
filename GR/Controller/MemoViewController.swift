@@ -7,85 +7,62 @@
 
 import UIKit
 import PKHUD
-import Cosmos
 
-class MemoViewController: UIViewController,DoneSendReviewContents,GetContentsDataProtocol{
- 
- 
- 
 
- 
+class MemoViewController: UIViewController,SendContentsDone{
+    
+    
     @IBOutlet weak var commentTextField: UITextView!
     
+    
     var index = Int()
-
-   
-    var contentModel:ContentModel?
-    var userDefaultsEX = UserDefaultsEX()
-    var sendDBModel = SendDBModel()
-    var loadModel = LoadModel()
-    var array = [DataSets]()
     var gameTitle = String()
     var hardware = String()
-    var contentModelArray = [ContentModel]()
     var memo = String()
+    var contentModel:ContentModel?
+    var sendDBModel = SendDBModel()
+    var loadModel = LoadModel()
+    var dataSetsArray = [DataSets]()
+    var contentModelArray = [ContentModel]()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        sendDBModel.doneSendReviewContents = self
-        loadModel.getContentsDataProtocol = self
-        loadModel.loadContents(title: gameTitle)
+        
+        sendDBModel.sendContentsDone = self
         commentTextField.text = memo
+        
     }
-    
-
-    
     
     
     @IBAction func send(_ sender: Any) {
-        //ぐるぐるの表示
+        
+        //ローディング
         HUD.show(.progress)
         HUD.dimsBackground = true
         
-        //自分のプロフィールをアプリ内からとってくる
-        let profile:ProfileModel? = userDefaultsEX.codable(forKey: "profile")
-
-        //コンテンツとともに送信（動画：受信クラスを作成しよう）
         if commentTextField.text?.isEmpty != true {
-
-            sendDBModel.sendContents(title: gameTitle, comment: commentTextField.text)
-
-            print("ゲームタイトルに紐づくレビューをSendDBModelへ")
             
-            }else{
-
-                print("エラーです")
-                HUD.hide()
+            sendDBModel.sendContents(title: gameTitle, comment: commentTextField.text)
+            
+            print("ゲームタイトルに紐づくコメントをSendDBModelへ")
+            
+        }else{
+            
+            print("エラーです")
+            HUD.hide()
+            
         }
+        
     }
-
     
-    
-    func checkDoneReview() {
+    func checkContentsDone() {
+        
         HUD.hide()
-
+        
         self.navigationController?.popViewController(animated: true)
-        print("レビュー受信")
-    }
-
-    
-    func checkDoneCommentCounts() {
-        print("CommentCounts送信完了")
-        
+        print("コメント送信しました")
     }
     
-    func getContentsData(dataArray: [ContentModel]) {
-        contentModelArray = dataArray
-        
-    }
     
- 
-    
-
 }

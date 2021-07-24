@@ -16,5 +16,5 @@ struct LikeModel{
     let largeImageUrl:String?
     let itemPrice:Int?
     let booksGenreId:String?
-
+    
 }

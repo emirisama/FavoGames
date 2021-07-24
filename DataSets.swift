@@ -7,6 +7,7 @@
 
 import Foundation
 
+
 struct DataSets{
     
     let title:String?
@@ -16,6 +17,6 @@ struct DataSets{
     let itemPrice:Int?
     let booksGenreId:String?
     let itemUrl:String
-
+    
 }
 

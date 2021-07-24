@@ -9,9 +9,8 @@ import UIKit
 
 
 class ContentDetailCell: UITableViewCell{
-
     
-
+    
     @IBOutlet weak var gameTitleLabel: UILabel!
     @IBOutlet weak var ImageView: UIImageView!
     @IBOutlet weak var salesDate: UILabel!
@@ -22,23 +21,12 @@ class ContentDetailCell: UITableViewCell{
     @IBOutlet weak var videoButton: UIButton!
     @IBOutlet weak var itemButton: UIButton!
     
-
-
     
     override func awakeFromNib() {
         super.awakeFromNib()
-
-
-      
- 
+        
+        
     }
-
     
-
-    
-
-    
-
-
     
 }

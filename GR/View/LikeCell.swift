@@ -7,8 +7,10 @@
 
 import UIKit
 
-class LikeCell: UICollectionViewCell {
 
+class LikeCell: UICollectionViewCell {
+    
+    
     @IBOutlet weak var imageView: UIImageView!
     
     
@@ -17,7 +19,8 @@ class LikeCell: UICollectionViewCell {
         
         imageView.contentMode = UIImageView.ContentMode.scaleToFill
         
-        // Initialization code
+        
     }
-
+    
+    
 }

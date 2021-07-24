@@ -8,7 +8,7 @@
 import UIKit
 import Firebase
 import IQKeyboardManagerSwift
-import FirebaseUI
+
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate{
@@ -19,7 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate{
         IQKeyboardManager.shared.enable = true
 
 
-        //ログアウト
+//        ログアウト
 //        let firebaseAuth = Auth.auth()
 //        do {
 //            try firebaseAuth.signOut()
@@ -30,15 +30,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate{
         return true
     }
     
-    func application(_ app: UIApplication, open url: URL,
-                     options: [UIApplication.OpenURLOptionsKey : Any]) -> Bool {
-        let sourceApplication = options[UIApplication.OpenURLOptionsKey.sourceApplication] as! String?
-        // GoogleまたはFacebook認証の場合、trueを返す
-        if FUIAuth.defaultAuthUI()?.handleOpen(url, sourceApplication: sourceApplication) ?? false {
-            return true
-        }
-        return false
-    }
+
     
 
     // MARK: UISceneSession Lifecycle
