@@ -8,14 +8,9 @@
 import Foundation
 
 
-struct ProfileModel:Codable {
-        
-    var userName:String?
-    var id:String?
-    var email:String?
-    var profileText:String?
-    var imageURLString:String?
-    var userID:String?
+struct ProfileModel{
     
-
+    var userName:String?
+    var imageURLString:String?
+    
 }

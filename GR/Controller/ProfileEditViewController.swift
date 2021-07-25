@@ -7,36 +7,64 @@
 
 import UIKit
 import PKHUD
+import FirebaseAuth
 
-class ProfileEditViewController: UIViewController,SendProfileDone, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
+class ProfileEditViewController: UIViewController,SendProfileDone, UIImagePickerControllerDelegate, UINavigationControllerDelegate,GetProfileDataProtocol,UITextFieldDelegate{
+    
+    
     @IBOutlet weak var imageView: UIImageView!
-    @IBOutlet weak var nameLabel: UILabel!
-    @IBOutlet weak var idLabel: UILabel!
-    @IBOutlet weak var profileTextField: UITextView!
+    @IBOutlet weak var nameTextField: UITextField!
+    
     
     var loadModel = LoadModel()
     var sendDBModel = SendDBModel()
-    var id = String()
     var userName = String()
-    var email = String()
+    var profileModelArray = [ProfileModel]()
+    let maxLength: Int = 20
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
+        loadModel.getProfileDataProtocol = self
+        loadModel.loadProfile()
+        nameTextField.delegate = self
         imageView.layer.cornerRadius = imageView.frame.width/2
         imageView.clipsToBounds = true
         sendDBModel.sendProfileDone = self
-        // Do any additional setup after loading the view.
+        
     }
     
+    //名前の文字数制限
+    func textField(_ textField: UITextField,shouldChangeCharactersIn range: NSRange,replacementString string: String) -> Bool{
+        
+        let nameTextField: String = (nameTextField.text! as NSString).replacingCharacters(in: range, with: string)
+        
+        if nameTextField.count <= 20{
+            
+            return true
+        }
+        
+        return false
+        
+    }
+    
+    func getProfileData(dataArray: [ProfileModel]) {
+        
+        profileModelArray = dataArray
+        imageView.sd_setImage(with: URL(string: profileModelArray[0].imageURLString!), completed: nil)
+        nameTextField.text = profileModelArray[0].userName
+        
+    }
     
     @IBAction func tapImage(_ sender: UITapGestureRecognizer) {
+        
         openCamera()
-
+        
     }
     
     func openCamera(){
+        
         let sourceType:UIImagePickerController.SourceType = .photoLibrary
         //カメラが利用可能かチェック
         if UIImagePickerController.isSourceTypeAvailable(.photoLibrary){
@@ -45,7 +73,7 @@ class ProfileEditViewController: UIViewController,SendProfileDone, UIImagePicker
             cameraPicker.sourceType = sourceType
             cameraPicker.delegate = self
             cameraPicker.allowsEditing = true
-//            cameraPicker.showsCameraControls = true
+            //            cameraPicker.showsCameraControls = true
             present(cameraPicker, animated: true,completion: nil)
             
         }else{
@@ -54,6 +82,7 @@ class ProfileEditViewController: UIViewController,SendProfileDone, UIImagePicker
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        
         if let pickedImage = info[.editedImage] as? UIImage{
             imageView.image = pickedImage
             //閉じる処理
@@ -63,36 +92,57 @@ class ProfileEditViewController: UIViewController,SendProfileDone, UIImagePicker
     }
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        
         picker.dismiss(animated: true, completion: nil)
-    }
-    
-    
-
-    
-    func checkOK() {
-        HUD.hide()
-//        let profileVC = storyboard?.instantiateViewController(identifier: "profile") as! ProfileViewController
-//        self.navigationController?.pushViewController(profileVC, animated: true)
-        self.dismiss(animated: true, completion: nil)
         
     }
-    
-    
     
     @IBAction func done(_ sender: Any) {
         
-        sendDBModel.sendProfileDB(userName: nameLabel.text!, email: email, id: idLabel.text!, profileText: profileTextField.text!, imageData: (self.imageView.image?.jpegData(compressionQuality: 0.4))!)
+        sendDBModel.sendProfile(userName: nameTextField.text!,imageData: (self.imageView.image?.jpegData(compressionQuality: 0.4))!)
+    }
+    
+    @IBAction func logoutTap(_ sender: Any) {
+        
+        //アラートOK
+        let alert = UIAlertController(title: "ログアウトしますか？", message: "ログアウトすると全データが削除されますがよろしいですか？", preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "ok", style: .default, handler: { [self]
+            (action: UIAlertAction!) -> Void in
+            
+            //ログアウト処理
+            do {
+                
+                let firebaseAuth = Auth.auth()
+                try firebaseAuth.signOut()
+                
+                let tutorialVC = self.storyboard?.instantiateViewController(withIdentifier: "tutorial") as! ViewController
+                self.present(tutorialVC, animated: true,completion: nil)
+                print("ログアウトしました")
+                
+            } catch {
+                
+                print ("ログアウト失敗")
+                
+            }
+        })
+        
+        //アラートキャンセル
+        let cancel = UIAlertAction(title: "cancel", style: .cancel, handler: {
+            (action: UIAlertAction!) -> Void in
+        })
+        alert.addAction(okAction)
+        alert.addAction(cancel)
+        present(alert, animated: true, completion: nil)
         
     }
     
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    func checkProfileDone() {
+        
+        print("プロフィールを更新しました")
+        HUD.hide()
+        dismiss(animated: true, completion: nil)
+        
     }
-    */
-
+    
+    
 }

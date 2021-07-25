@@ -7,174 +7,127 @@
 
 import UIKit
 import FirebaseAuth
-import SDWebImage
-import Cosmos
-import SSSpinnerButton
-import YPImagePicker
-import Firebase
-import FirebaseStorage
-import FirebaseFirestore
-import PKHUD
 
 
-class ProfileViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,GetDataProtocol,GetProfileDataProtocol{
- 
+class ProfileViewController: UIViewController,UICollectionViewDataSource,UICollectionViewDelegate,GetProfileDataProtocol,GetLikeDataProtocol,UICollectionViewDelegateFlowLayout{
+    
     
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
-    @IBOutlet weak var idLabel: UILabel!
-    @IBOutlet weak var followLabel: UILabel!
-    @IBOutlet weak var followerLabel: UILabel!
-    @IBOutlet weak var followButton: SSSpinnerButton!
-    @IBOutlet weak var profileTextField: UITextView!
+    @IBOutlet weak var collectionView: UICollectionView!
     
-    @IBOutlet weak var tableView: UITableView!
     
     var loadModel = LoadModel()
     var sendDBModel = SendDBModel()
     var contentModel:ContentModel?
     var contentModelArray = [ContentModel]()
-    var userID = String()
-    var userName = String()
-    var email = String()
-    var dataArray = [ProfileModel]()
-    let db = Firestore.firestore()
+    var profileModelArray = [ProfileModel]()
     var profileModel = ProfileModel()
+    var likeModelArray = [LikeModel]()
+    var likeFlag = Bool()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        tableView.delegate = self
-        tableView.dataSource = self
+        loadModel.getLikeDataProtocol = self
+        loadModel.loadLikeData(userID: Auth.auth().currentUser!.uid)
+        loadModel.getProfileDataProtocol = self
+        loadModel.loadProfile()
         imageView.layer.cornerRadius = imageView.frame.width/2
         imageView.clipsToBounds = true
-        tableView.register(UINib(nibName: "ContentsCell", bundle: nil), forCellReuseIdentifier: "Cell")
-  
-        //自分のプロフィールを表示する→タブが２の場合
+        collectionView.delegate = self
+        collectionView.dataSource = self
+        collectionView.register(UINib(nibName: "LikeCell", bundle: nil), forCellWithReuseIdentifier: "cell")
+        let layout = UICollectionViewFlowLayout()
+        layout.sectionInset = UIEdgeInsets(top: 15, left: 15, bottom: 15, right: 15)
+        collectionView.collectionViewLayout = layout
         
-        if self.tabBarController!.selectedIndex == 2{
+    }
     
-            //setUP
-            setUp(id: Auth.auth().currentUser!.uid)
-            
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        
+        if Auth.auth().currentUser?.uid != nil{
+            //サインイン
         }else{
-            
-            if contentModel?.sender![2] == Auth.auth().currentUser!.uid{
-    
-            }
-            
-            //setUp（自分かどうかわからない場合）
-            setUp(id: (contentModel?.sender![2])!)
-            imageView.sd_setImage(with: URL(string: (contentModel?.sender![0])!), completed: nil)
-            imageView.clipsToBounds = true
-            nameLabel.text = contentModel?.sender![3]
-            profileTextField.text = contentModel?.sender![1]
-            idLabel.text = contentModel?.sender![4]
-            
-            
+            print("新規会員登録")
+            let createVC = self.storyboard?.instantiateViewController(withIdentifier: "createVC") as! CreateUserViewController
+            createVC.modalPresentationStyle = .fullScreen
+            self.present(createVC, animated: true, completion: nil)
         }
-        
     }
     
-    
-    
-    
-    func setUp(id:String){
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
         
-        loadModel.getDataProtocol = self
-        loadModel.getProfileDataProtocol = self
-
-        //プロフィールを受信する(idにAuth.auth().currentUserが入る
-        loadModel.loadProfile(id: id)
-  
-        //コンテンツデータの受信機能
-        loadModel.loadContents(title: id)
-        
-    }
-    
-    
-    
-    func numberOfSections(in tableView: UITableView) -> Int {
         return 1
-    }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
-        return contentModelArray.count
         
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! ContentsCell
-        //自分が投稿したレビューのゲームソフトのタイトル画像(動画：コンテンツを受信しよう）
-        //        cell.contentImageView.sd_setImage(with: URL(string: contentModelArray[indexPath.row].imageURLSting!), completed: nil)
-        //        cell.reviewView.rating = contentModelArray[indexPath.row].rate!
+        return likeModelArray.count
+        
+    }
+    
+    func collectionView(_ tableView: UICollectionView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        
+        return 10
+        
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! LikeCell
+        cell.imageView.sd_setImage(with: URL(string: likeModelArray[indexPath.row].largeImageUrl!), completed: nil)
         
         return cell
     }
     
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 400
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        let detailVC = self.storyboard?.instantiateViewController(withIdentifier: "detailVC") as! DetailViewController
+        detailVC.gameTitle = likeModelArray[indexPath.row].title!
+        detailVC.hardware = likeModelArray[indexPath.row].hardware!
+        detailVC.itemPrice = likeModelArray[indexPath.row].itemPrice!
+        detailVC.booksGenreId = likeModelArray[indexPath.row].booksGenreId!
+        detailVC.salesDate = likeModelArray[indexPath.row].salesDate!
+        detailVC.largeImageUrl = likeModelArray[indexPath.row].largeImageUrl!
+        self.navigationController?.pushViewController(detailVC, animated: true)
+        
     }
     
-    
-    func getData(dataArray: [ContentModel]) {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        contentModelArray = []
+        let horizontalSpace : CGFloat = 20
+        let cellSize : CGFloat = self.view.bounds.width / 3 - horizontalSpace
+        return CGSize(width: cellSize, height: cellSize)
         
-        contentModelArray = dataArray
-        
-        tableView.reloadData()
     }
     
-    
-    
-    
-    
-    
-    
-    //プロフィールが入ったdataArray
+    //プロフィールの値を取得
     func getProfileData(dataArray: [ProfileModel]) {
         
-        self.dataArray = dataArray
-        
-        imageView.sd_setImage(with: URL(string: dataArray[0].imageURLString!), completed: nil)
-        nameLabel.text = dataArray[0].userName
-        profileTextField.text = dataArray[0].profileText
-        idLabel.text = dataArray[0].id
-        
-        
+        self.profileModelArray = dataArray
+        nameLabel.text = self.profileModelArray[0].userName
+        imageView.sd_setImage(with: URL(string: self.profileModelArray[0].imageURLString!), completed: nil)
         
     }
     
-    
-    
-    
-    
+    //プロフィール編集画面へ遷移
     @IBAction func tapEdit(_ sender: Any) {
+        
         performSegue(withIdentifier: "profileEdit", sender: nil)
-        //        let profileEditVC = storyboard?.instantiateViewController(identifier: "profileEdit") as! ProfileEditViewController
-        //        self.navigationController?.pushViewController(profileEditVC, animated: true)
+        
     }
     
+    //いいねしたリストを取得
+    func getLikeData(dataArray: [LikeModel]) {
+        
+        likeModelArray = dataArray
+        collectionView.reloadData()
+        
+    }
     
-    
-    
-    
-    
-    
-    
-    
-    
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destination.
-     // Pass the selected object to the new view controller.
-     }
-     */
     
 }

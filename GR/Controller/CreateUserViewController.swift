@@ -10,77 +10,76 @@ import Firebase
 import FirebaseFirestore
 import PKHUD
 
-    
+
 class CreateUserViewController: UIViewController,UITextFieldDelegate,SendProfileDone{
-  
-        @IBOutlet weak var signupButton: UIButton!
-        
-        @IBOutlet weak var nameTextField: UITextField!
-        @IBOutlet weak var idTextField: UITextField!
-        
-        @IBOutlet weak var passwordTextField: UITextField!
-        
-        @IBOutlet weak var emailTextField: UITextField!
-        
-        var sendDBModel = SendDBModel()
-        var profileImage = UIImage()
- 
-        override func viewDidLoad() {
-            super.viewDidLoad()
-            
-            sendDBModel.sendProfileDone = self
-            nameTextField.delegate = self
-            idTextField.delegate = self
-            emailTextField.delegate = self
-            passwordTextField.delegate = self
-
-        }
-
-        //他のところをタップするとキーボードが下がる
-        override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-            self.view.endEditing(true)
-        }
-        
     
+    
+    @IBOutlet weak var nameTextField: UITextField!
+    
+    
+    var sendDBModel = SendDBModel()
+    
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
         
-
+        sendDBModel.sendProfileDone = self
+        nameTextField.delegate = self
+        
+        
+    }
+    
+    //キーボードを下げる
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        
+        self.view.endEditing(true)
+        
+    }
+    
+    //文字数制限
+    func textField(_ textField: UITextField,shouldChangeCharactersIn range: NSRange,replacementString string: String) -> Bool{
+        
+        let nameTextField: String = (nameTextField.text! as NSString).replacingCharacters(in: range, with: string)
+        if nameTextField.count <= 20{
+            
+            return true
+        }
+        
+        return false
+        
+    }
+    
+    //アカウントを作成する
     @IBAction func registerButton(_ sender: Any) {
-            //アカウントを作成する
-            if nameTextField.text?.isEmpty != true || idTextField.text?.isEmpty != true || emailTextField.text?.isEmpty != true || passwordTextField.text?.isEmpty != true{
+        
+        if nameTextField.text?.isEmpty != true{
+            
+            Auth.auth().signInAnonymously { [self] (result, error) in
                 
-                Auth.auth().signInAnonymously { [self] (result, error) in
+                let usernoimage = UIImage(named: "userimage")
+                let usernoimagedata = usernoimage?.jpegData(compressionQuality: 1)
+                
+                if error != nil{
+                    print("エラーです")
+                }else{
                     
-                    let usernoimage = UIImage(named: "userimage")
-                    let usernoimagedata = usernoimage!.jpegData(compressionQuality: 1)
-                    if error != nil{
-                        print("エラーです")
-                    }else{
-                        
-                        sendDBModel.sendProfileDB(userName: nameTextField.text!, email: emailTextField.text!, id: idTextField.text!, profileText: "", imageData: usernoimagedata!)
-                        print("データをSendDBModelへ")
-                    }
+                    sendDBModel.sendProfile(userName: nameTextField.text!,imageData: usernoimagedata!)
+                    print("プロフィールデータをSendDBModelへ")
                 }
             }
-            
         }
         
-
+    }
     
-    func checkOK() {
-
+    func checkProfileDone() {
+        
         HUD.hide()
         //Trendの画面遷移
         let tabVC = self.storyboard?.instantiateViewController(withIdentifier: "tab") as! TabBarController
-        self.navigationController?.pushViewController(tabVC, animated: true)
-
-    }
-    
-    
-    @IBAction func signinButton(_ sender: Any) {
-        let signinVC = self.storyboard?.instantiateViewController(withIdentifier: "signinVC") as! SignInViewController
-        self.navigationController?.pushViewController(signinVC, animated: true)
-    }
-
+        performSegue(withIdentifier: "tab", sender: nil)
         
+    }
+    
+    
 }
 

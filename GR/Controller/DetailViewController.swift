@@ -7,231 +7,253 @@
 
 import UIKit
 import SDWebImage
-import Cosmos
 import PKHUD
+import FirebaseAuth
+import FirebaseFirestore
 
-class DetailViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,GetDataProtocol,GetRateAverageCountProtocol{
 
- 
+class DetailViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,GetContentsDataProtocol,SendLikeDone,GetLikeFlagProtocol,DeleteToContentsDone{
+
+    
     @IBOutlet weak var tableView: UITableView!
-
+    
+    
     var index = Int()
+    var gameTitle = String()
+    var hardware = String()
+    var salesDate = String()
+    var largeImageUrl = String()
+    var itemPrice = Int()
+    var booksGenreId = String()
+    var documentID = String()
+    var memo = String()
+    var itemUrl = String()
+    let sectionTitle = ["","Memo"]
+    var likeFlag = Bool()
     
     var contentModel:ContentModel?
     var profileModel:ProfileModel?
     var loadModel = LoadModel()
     var sendDBModel = SendDBModel()
-    
-
-
     var profileModelArray = [ProfileModel]()
-    
     var contentModelArray = [ContentModel]()
-    
-    var gameTitle = String()
-    var hardware = String()
-    var salesDate = String()
-    var mediumImageUrl = String()
-    var itemPrice = Int()
-
-    var sectionTitle = ["","スコア・レビュー"]
-
-    var contentDetailCell = ContentDetailCell()
-   
-    var rateArray = [RateModel]()
-
-    var rateAverage = Double()
     var dataSetsArray = [DataSets]()
     var searchAndLoadModel = SearchAndLoadModel()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
         switch index{
         
         case index:
-            //皆のレビューを見れるようにさせる(ロードさせる）
-            loadModel.getDataProtocol = self
-            loadModel.loadContents(title: gameTitle)
-
-            //レビュー平均値を表示させる
-            loadModel.getRateAverageCountProtocol = self
-            loadModel.loadRateAverageCount(title: gameTitle, rateAverage: rateAverage)
-
-
-
-                tableView.delegate = self
-                tableView.dataSource = self
-                
-                tableView.register(UINib(nibName: "ContentDetailCell", bundle: nil), forCellReuseIdentifier: "ContentDetailCell")
-                tableView.register(UINib(nibName: "ReviewViewCell", bundle: nil), forCellReuseIdentifier: "ReviewViewCell")
-
-
-                break
-                
-                default:
-                break
-        }
-    }
-        
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if  indexPath.section == 0 {
-            return 400
             
-        }else if indexPath.section == 1{
-            return 300
+            tableView.delegate = self
+            tableView.dataSource = self
+            tableView.register(UINib(nibName: "ContentDetailCell", bundle: nil), forCellReuseIdentifier: "ContentDetailCell")
+            tableView.register(UINib(nibName: "MemoViewCell", bundle: nil), forCellReuseIdentifier: "MemoViewCell")
+            loadModel.getContentsDataProtocol = self
+            loadModel.loadContents(title: gameTitle)
+            sendDBModel.sendLikeDone = self
+            loadModel.getLikeFlagProtocol = self
+            loadModel.loadLikeFlag(title: gameTitle)
+            sendDBModel.deleteToContentsDone = self
+            
+            break
+            
+        default:
+            break
         }
-        return 0
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         self.navigationController?.isNavigationBarHidden = false
-
+        
     }
     
-
-    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        
+        if  indexPath.section == 0 {
+            
+            return 500
+            
+        }else if indexPath.section == 1{
+            
+            return 300
+            
+        }
+        
+        return 0
+        
+    }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-
-
+        
         return sectionTitle.count
-        }
-    
+        
+    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-
+        
         if section == 0{
+            
             return 1
+            
         }else if section == 1{
+            
             return contentModelArray.count
+            
         }
-            return 0
-
-  
+        
+        return 0
+        
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         
         return sectionTitle[section]
+        
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
         if  indexPath.section == 0 {
-
+            
             let cell = tableView.dequeueReusableCell(withIdentifier: "ContentDetailCell", for: indexPath) as! ContentDetailCell
             cell.selectionStyle = .none
-            cell.gameTitleLabel.text = self.gameTitle
-            cell.ImageView.sd_setImage(with: URL(string: mediumImageUrl), completed: nil)
-            cell.salesDate.text = self.salesDate
-            cell.hardware.text = self.hardware
-            cell.price.text = String(self.itemPrice)
-            cell.rateAverageLabel.text = String(self.rateAverage)
-            cell.reviewButton.addTarget(self, action: #selector(reviewButtonTap(_:)), for: .touchUpInside)
-
+            cell.gameTitleLabel.text = gameTitle
+            cell.ImageView.sd_setImage(with: URL(string: largeImageUrl), completed: nil)
+            cell.salesDate.text = salesDate
+            cell.hardware.text = hardware
+            cell.price.text = String(itemPrice)
+            
+            if self.likeFlag == false{
+                
+                cell.likeButton.setImage(UIImage(named: "heart1"),for: .normal)
+                
+            }else{
+                
+                cell.likeButton.setImage(UIImage(named: "heart2"),for: .normal)
+                
+            }
+            
+            cell.memoButton.addTarget(self, action: #selector(memoButtonTap(_:)), for: .touchUpInside)
+            cell.likeButton.addTarget(self, action: #selector(likeButtonTap(_:)), for: .touchUpInside)
+            cell.videoButton.addTarget(self, action: #selector(videoButtonTap(_ :)), for: .touchUpInside)
+            cell.itemButton.addTarget(self, action: #selector(itemButtonTap(_ :)), for: .touchUpInside)
+            
             return cell
-
+            
         }else{
-
-            let cell2 = tableView.dequeueReusableCell(withIdentifier: "ReviewViewCell", for: indexPath) as! ReviewViewCell
+            
+            let cell2 = tableView.dequeueReusableCell(withIdentifier: "MemoViewCell", for: indexPath) as! MemoViewCell
             cell2.selectionStyle = .none
-            cell2.userNameLabel.text = self.contentModelArray[indexPath.row].sender![3]
-            cell2.userIDLabel.text = self.contentModelArray[indexPath.row].sender![4]
-            cell2.reviewViewLabel.text = self.contentModelArray[indexPath.row].review
-            cell2.scoreCountLabel.text = String(self.contentModelArray[indexPath.row].rate!)
-            cell2.scoreView.rating = self.contentModelArray[indexPath.row].rate!
-            cell2.scoreView.settings.fillMode = .half
-            cell2.profileImage.sd_setImage(with: URL(string: self.contentModelArray[indexPath.row].sender![0]), completed: nil)
+            cell2.memoLabel.text = self.contentModelArray[indexPath.row].comment
+            memo = self.contentModelArray[indexPath.row].comment!
             
-            
-//            let ScoreLabel.text = String(cell2.scoreCountLabel.text! + cell2.scoreCountLabel.text!)
-
-//            cell2.userIDLabel.text = contentModel.sender[]
-
-//            cell2.scoreCountLabel.text = String(((contentModel?.rate)!))
-
             return cell2
+            
         }
-    }
-
-    @objc func reviewButtonTap(_ sender:UIButton){
-        
-        let reviewVC = self.storyboard?.instantiateViewController(withIdentifier: "reviewVC") as! ReviewViewController
-        
-        reviewVC.array = dataSetsArray
-        reviewVC.gameTitle = gameTitle
-        self.navigationController?.pushViewController(reviewVC, animated: true)
-        
-    }
-        
-    
-    
-
-
-//        cell..text = self.dataArray[indexPath.row].userID
-        
-//        let reviewView = cell.contentView.viewWithTag(4) as! CosmosView
-//        reviewView.rating = self.dataArray[indexPath.row].rate!
-//        
-//        let reViewTextView = cell.contentView.viewWithTag(5) as! UITextView
-//        reviewView.text = self.dataArray[indexPath.row].review
-//        
-        
-
-        
-    
-    
-
-    
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//
-//        let webVC = segue.destination as! WebViewController
-//        //↓？ゲーム画像を押すと自動検索の画面遷移
-////        webVC.contentModel = contentModelArray[sender as! Int]
-//    }
-
-    
-    @IBAction func toWebView(_ sender: Any) {
-        
-        performSegue(withIdentifier: "webVC", sender: nil)
-    }
-
-    
-    
-    @IBAction func toProfileVC(_ sender: Any) {
-        let profileVC = self.storyboard?.instantiateViewController(identifier: "profileVC") as! ProfileViewController
-        profileVC.contentModel = contentModel
-        self.navigationController?.pushViewController(profileVC, animated: true)
         
     }
     
-
-
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool{
+        
+        return true
+        
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        
+        if editingStyle == UITableViewCell.EditingStyle.delete {
+            
+            contentModelArray.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath as IndexPath], with: UITableView.RowAnimation.automatic)
+            sendDBModel.deleteToContents(title: gameTitle)
+            
+        }
+        
+    }
     
     
-    func getData(dataArray: [ContentModel]) {
-
-        contentModelArray = []
-        contentModelArray = dataArray
+    @objc func memoButtonTap(_ sender:UIButton){
+        
+        let memoVC = self.storyboard?.instantiateViewController(withIdentifier: "memoVC") as! MemoViewController
+        memoVC.dataSetsArray = dataSetsArray
+        memoVC.gameTitle = gameTitle
+        memoVC.hardware = hardware
+        memoVC.memo = memo
+        self.navigationController?.pushViewController(memoVC, animated: true)
+        
+    }
+    
+    @objc func likeButtonTap(_ sender:UIButton){
+        
+        if self.likeFlag == false{
+            
+            sendDBModel.sendLike(userID: Auth.auth().currentUser!.uid, largeImageUrl: largeImageUrl, title: gameTitle, hardware: hardware, salesDate: salesDate, itemPrice: itemPrice, booksGenreId: booksGenreId, likeFlag: true)
+            
+        }else{
+            
+            sendDBModel.sendLike(userID: Auth.auth().currentUser!.uid, largeImageUrl: largeImageUrl, title: gameTitle, hardware: hardware, salesDate: salesDate, itemPrice: itemPrice, booksGenreId: booksGenreId, likeFlag: false)
+            
+        }
+        
+    }
+    
+    @objc func videoButtonTap(_ sender:UIButton){
+        
+        let videoVC = self.storyboard?.instantiateViewController(withIdentifier: "videoVC") as! VideoViewController
+        videoVC.gameTitle = gameTitle
+        self.present(videoVC, animated: true)
+        
+    }
+    
+    @objc func itemButtonTap(_ sender:UIButton){
+        
+        let itemVC = self.storyboard?.instantiateViewController(withIdentifier: "itemVC") as! ItemViewController
+        itemVC.gameTitle = gameTitle
+        self.present(itemVC, animated: true)
+        
+    }
+    
+    
+    func getContentsData(dataArray: [ContentModel]) {
+        
+        self.contentModelArray = []
+        self.contentModelArray = dataArray
+        print(contentModelArray.count)
         tableView.reloadData()
-        print("レビュー表示")
-
+        
     }
     
-
-
-    func getRateAverageCount(rateAverage: Double) {
-
-        self.rateAverage = rateAverage
-        print("レイト平均")
-        print(self.rateAverage.debugDescription)
+    
+    func checkSendLikeDone() {
+        
+        print("いいねを送信しました")
+        
+    }
+    
+    func getLikeFlagData(likeFlag: Bool) {
+        
+        self.likeFlag = likeFlag
         tableView.reloadData()
     }
     
+    func checkDeleteToContentsDone() {
+        
+        print("メモ削除しました")
+        
+    }
     
     
 }
+    
+
+
+
+
+    
+

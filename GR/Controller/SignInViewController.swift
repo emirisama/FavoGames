@@ -8,15 +8,26 @@
 import UIKit
 import FirebaseAuth
 
-class SignInViewController: UIViewController {
+class SignInViewController: UIViewController, GetProfileDataProtocol{
+
+    
 
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
-
+    var loadModel = LoadModel()
+    var profileModelArray = [ProfileModel]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        if Auth.auth().currentUser?.uid != nil{
+            loadModel.getProfileDataProtocol = self
 
+            loadModel.loadProfile()
+        }else{
+            
+        }
+        
+        
 
         // Do any additional setup after loading the view.
     }
@@ -25,13 +36,15 @@ class SignInViewController: UIViewController {
  
         if let email = emailTextField.text,let password = passwordTextField.text{
             Auth.auth().signIn(withEmail: email, password: password) { (result, error) in
-                guard let user = result?.user,error == nil else{
+                guard let user = result?.user,error != nil else{
                     print("サインインに失敗しました")
                     
                     return
                 }
                 print("サインインに成功しました")
-                self.performSegue(withIdentifier: "tab", sender: nil)
+                let tabVC = self.storyboard?.instantiateViewController(withIdentifier: "tab") as! TabBarController
+                tabVC.modalPresentationStyle = .fullScreen
+                self.present(tabVC, animated: true, completion: nil)
             }
         }
         
@@ -41,6 +54,19 @@ class SignInViewController: UIViewController {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         
         emailTextField.resignFirstResponder()
+        
+    }
+    
+    
+    func getProfileData(dataArray: [ProfileModel]) {
+        self.profileModelArray = dataArray
+        
+        if Auth.auth().currentUser?.uid != nil{
+           
+        }else{
+            emailTextField.text = profileModelArray[0].userName
+        }
+        
         
     }
     

@@ -9,11 +9,6 @@ import Foundation
 import Firebase
 import FirebaseFirestore
 
-protocol GetDataProtocol{
-    
-    func getData(dataArray:[ContentModel])
-    
-}
 
 protocol GetProfileDataProtocol{
     
@@ -21,150 +16,162 @@ protocol GetProfileDataProtocol{
     
 }
 
-protocol GetRateAverageCountProtocol{
-    func getRateAverageCount(rateAverage: Double)
+protocol GetContentsDataProtocol{
+    
+    func getContentsData(dataArray:[ContentModel])
+    
 }
 
+protocol GetLikeDataProtocol{
+    
+    func getLikeData(dataArray: [LikeModel])
+    
+}
+
+protocol GetLikeFlagProtocol{
+    
+    func getLikeFlagData(likeFlag:Bool)
+    
+}
 
 
 class LoadModel{
     
+    //Firebase
     let db = Firestore.firestore()
     
-    //受信された値のかたまりが入る配列
+    //Memo
     var contentModelArray:[ContentModel] = []
-    var getDataProtocol:GetDataProtocol?
+    var getContentsDataProtocol:GetContentsDataProtocol?
     
     //プロフィール
     var profileModelArray:[ProfileModel] = []
     var getProfileDataProtocol:GetProfileDataProtocol?
-
-    //レビューの平均値に関する記述
-    var rateModelArray:[RateModel] = []
-    var getRateAverageCountProtocol:GetRateAverageCountProtocol?
-    var rateAverageModelArray:[RateAverageModel] = []
-
-    //コンテンツを受信するメソッド(ゲームタイトルに紐づくレビューや名前などのデータを受信する）
-    func loadContents(title:String){
-        print("コンテントモデル受信1")
-        db.collection(title).order(by: "date").addSnapshotListener { (snapShot, error) in
-            print("コンテントモデル受信2")
-            self.contentModelArray = []
-            print("コンテントモデル受信3")
-            if error != nil{
-                return
-            }
-            if let snapShotDoc = snapShot?.documents{
-                print("コンテントモデル受信4")
-                //ドキュメントの数だけcontentModelの値を入れる
-                for doc in snapShotDoc{
-                    print("コンテントモデル受信5")
-                    let data = doc.data()
-                    print("コンテントモデル受信6")
-                    //if letでもし空じゃなかったらの意味（!= nilと同じ)
-                    print("コンテントモデル受信7")
-                    if let review = data["review"] as? String,let rate = data["rate"] as? Double,let sender = data["sender"] as? [String],let date = data["date"] as? Double,let rateAverage = data["rateAverage"] as? Double{
-                        //rateAverageがnanになる
-                        if rateAverage == Double("nan"){
-                            rateAverage == 0.0
-                        }else{
-                        }
-                        let contentModel = ContentModel(review: review, sender: sender, rate: rate, rateAverage: rateAverage)
-                        self.contentModelArray.append(contentModel)
-                        
-                        self.getDataProtocol?.getData(dataArray: self.contentModelArray)
-                    }else{
-                        
-                    }
-                }
-                
-            }
-        }
-        
-    }
-
-
     
-
+    //いいね取得
+    var getLikeDataProtocol:GetLikeDataProtocol?
+    var likeModelArray:[LikeModel] = []
+    var getLikeFlagProtocol:GetLikeFlagProtocol?
     
     //プロフィールの受信
-    func loadProfile(id:String){
-        
-        db.collection("Users").document(id).addSnapshotListener { (snapShot, error) in
+    func loadProfile(){
+        db.collection("Users").document(Auth.auth().currentUser!.uid).addSnapshotListener { (snapShot, error) in
             
             self.profileModelArray = []
             
-            //!=nilはエラーがあったら、これ以上処理は進めない
             if error != nil{
                 return
             }
             
-            //スナップショットがnilでなければ{}の処理を進めてください
             if let snapShotDoc = snapShot?.data(){
                 
-                
-                if let userID = snapShotDoc["userID"] as? String,let userName = snapShotDoc["userName"] as? String,let image = snapShotDoc["image"] as? String,let profileText = snapShotDoc["profileText"] as? String,let id = snapShotDoc["id"] as? String{
-                    let profileModel = ProfileModel(userName: userName, id: id,profileText: profileText, imageURLString: image, userID: userID)
+                if let userName = snapShotDoc["userName"] as? String,let image = snapShotDoc["image"] as? String{
+                    let profileModel = ProfileModel(userName: userName, imageURLString: image)
                     self.profileModelArray.append(profileModel)
                     
                 }
             }
+            
             self.getProfileDataProtocol?.getProfileData(dataArray: self.profileModelArray)
             
         }
     }
     
-    
-    
-    //rateの平均値を出す
-    func loadRateAverageCount(title:String,rateAverage:Double){
-  
-        db.collection("Score").document(title).collection("review").addSnapshotListener { snapShot, error in
-            self.rateModelArray = []
+    //コメントの受信
+    func loadContents(title:String){
+        db.collection(title).document(Auth.auth().currentUser!.uid).collection("Contents").order(by:"date").addSnapshotListener { (snapShot, error) in
+            self.contentModelArray = []
             if error != nil{
                 return
             }
+            
             if let snapShotDoc = snapShot?.documents{
- 
+                
                 for doc in snapShotDoc{
+                    
                     let data = doc.data()
-                        if let rate = data["rate"] as? Double{
-                            let rateArray = RateModel(rate: rate)
- 
-                            self.rateModelArray.append(rateArray)
-                            
-                        }
+                    
+                    if let comment = data["comment"] as? String,let date = data["date"] as? Double,let date = data["title"] as? String{
+                        let contentModel = ContentModel(comment: comment,title: title)
+                        self.contentModelArray.append(contentModel)
+                        
+                    }
+                }
+                
+                self.getContentsDataProtocol?.getContentsData(dataArray: self.contentModelArray)
+                
+            }
+        }
+    }
+    
+    //いいねの受信
+    func loadLikeData(userID:String){
+        db.collection("Users").document(Auth.auth().currentUser!.uid).collection("like").order(by: "date").addSnapshotListener { snapShot, error in
+            
+            self.likeModelArray = []
+            
+            if error != nil{
+                return
+            }
+            
+            if let snapShotDoc = snapShot?.documents{
+                
+                for doc in snapShotDoc{
+                    
+                    let data = doc.data()
+                    
+                    if let title = data["title"] as? String, let hardware = data["hardware"] as? String,let salesDate = data["salesDate"] as? String,let largeImageUrl = data["largeImageUrl"] as? String,let itemPrice = data["itemPrice"] as? Int,let booksGenreId = data["booksGenreId"] as? String{
+                        
+                        let likeModel = LikeModel(title: title, hardware: hardware, salesDate: salesDate, largeImageUrl: largeImageUrl, itemPrice: itemPrice, booksGenreId: booksGenreId)
+                        
+                        self.likeModelArray.append(likeModel)
+                        
+                    }
                     
                 }
                 
-                var totalCount = 0.0
-                var rateAverage = 0.0
-                for (index, value) in self.rateModelArray.enumerated(){
-       
-                    totalCount = totalCount + self.rateModelArray[index].rate!
-                }
-
-                rateAverage = Double(totalCount) / Double(snapShotDoc.count)
-                var rateAverageScore = (round(10*rateAverage)/10)
-
- 
-                print("rateArrayの中身")
-                print(rateAverageScore.debugDescription)
-                print("snapShotDocの中身")
-                print(snapShotDoc.debugDescription)
-
-                self.getRateAverageCountProtocol?.getRateAverageCount(rateAverage: rateAverageScore)
+                self.getLikeDataProtocol?.getLikeData(dataArray: self.likeModelArray)
                 
             }
+        }
+    }
+    
+    //いいねの真偽の値を受信
+    func loadLikeFlag(title:String){
+        
+        db.collection("Users").document(Auth.auth().currentUser!.uid).collection("like").document(title).addSnapshotListener { snapShot, error in
             
+            var likeFlag = Bool()
             
+            if error != nil{
+                return
+            }
+            
+            if let snapShotDoc = snapShot?.data(){
+                
+                for doc in snapShotDoc{
+                    
+                    if let like = snapShotDoc["like"] as? Bool{
+                        likeFlag = like
+                        
+                    }
+                }
+                
+                self.getLikeFlagProtocol?.getLikeFlagData(likeFlag: likeFlag)
+                
+            }
         }
     }
     
     
-    
-    
+}
+
+
+
 
     
     
-}
+    
+    
+    
+    
