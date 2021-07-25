@@ -7,10 +7,6 @@
 
 import UIKit
 import FirebaseAuth
-import SDWebImage
-import FirebaseStorage
-import FirebaseFirestore
-import PKHUD
 
 
 class ProfileViewController: UIViewController,UICollectionViewDataSource,UICollectionViewDelegate,GetProfileDataProtocol,GetLikeDataProtocol,UICollectionViewDelegateFlowLayout{
@@ -26,7 +22,6 @@ class ProfileViewController: UIViewController,UICollectionViewDataSource,UIColle
     var contentModel:ContentModel?
     var contentModelArray = [ContentModel]()
     var profileModelArray = [ProfileModel]()
-    let db = Firestore.firestore()
     var profileModel = ProfileModel()
     var likeModelArray = [LikeModel]()
     var likeFlag = Bool()

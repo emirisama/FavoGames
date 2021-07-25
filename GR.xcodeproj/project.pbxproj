@@ -34,7 +34,7 @@
 		50A8D81C26452B1C008B5CEA /* SearchAndLoadModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50A8D81B26452B1C008B5CEA /* SearchAndLoadModel.swift */; };
 		50A8D81F2645310C008B5CEA /* SearchResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50A8D81E2645310C008B5CEA /* SearchResultsViewController.swift */; };
 		50A8D8222645336D008B5CEA /* DataSets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50A8D8212645336D008B5CEA /* DataSets.swift */; };
-		50CF1B9D263525DA00ECF7E4 /* PS5ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50CF1B9C263525DA00ECF7E4 /* PS5ViewController.swift */; };
+		50CF1B9D263525DA00ECF7E4 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50CF1B9C263525DA00ECF7E4 /* GameViewController.swift */; };
 		50D9222B26078EB5009A7BB0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50D9222A26078EB5009A7BB0 /* AppDelegate.swift */; };
 		50D9222D26078EB5009A7BB0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50D9222C26078EB5009A7BB0 /* SceneDelegate.swift */; };
 		50D9222F26078EB5009A7BB0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50D9222E26078EB5009A7BB0 /* ViewController.swift */; };
@@ -78,7 +78,7 @@
 		50A8D81E2645310C008B5CEA /* SearchResultsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultsViewController.swift; sourceTree = "<group>"; };
 		50A8D8212645336D008B5CEA /* DataSets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataSets.swift; sourceTree = "<group>"; };
 		50B2200626AAF83C00D7B145 /* GR.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = GR.entitlements; sourceTree = "<group>"; };
-		50CF1B9C263525DA00ECF7E4 /* PS5ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PS5ViewController.swift; sourceTree = "<group>"; };
+		50CF1B9C263525DA00ECF7E4 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		50D9222726078EB5009A7BB0 /* GR.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GR.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		50D9222A26078EB5009A7BB0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		50D9222C26078EB5009A7BB0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -139,11 +139,11 @@
 				50F33D19268783C7001A358D /* ProfileEditViewController.swift */,
 				50777F9B261C8B77005314BF /* TabBarController.swift */,
 				50763BEE261057210071941E /* TrendViewController.swift */,
-				50CF1B9C263525DA00ECF7E4 /* PS5ViewController.swift */,
+				50CF1B9C263525DA00ECF7E4 /* GameViewController.swift */,
 				505854542635081B00182CFD /* SearchViewController.swift */,
 				50A8D81E2645310C008B5CEA /* SearchResultsViewController.swift */,
-				50777FA0261CAB58005314BF /* MemoViewController.swift */,
 				508C95DA2622D6FC0077F3A6 /* DetailViewController.swift */,
+				50777FA0261CAB58005314BF /* MemoViewController.swift */,
 				5098092D26A58B7C005240D4 /* VideoViewController.swift */,
 				5098092F26A59EDF005240D4 /* ItemViewController.swift */,
 			);
@@ -154,12 +154,12 @@
 			isa = PBXGroup;
 			children = (
 				50763BF4261068D00071941E /* SendDBModel.swift */,
-				50F6F3202612207400B65E21 /* ProfileModel.swift */,
 				507375C2261F43A400D8E6D6 /* LoadModel.swift */,
+				50F6F3202612207400B65E21 /* ProfileModel.swift */,
 				507375C526217F5200D8E6D6 /* ContentModel.swift */,
+				508C81F526A484860023770B /* LikeModel.swift */,
 				50A8D81B26452B1C008B5CEA /* SearchAndLoadModel.swift */,
 				50A8D8212645336D008B5CEA /* DataSets.swift */,
-				508C81F526A484860023770B /* LikeModel.swift */,
 			);
 			name = Model;
 			path = ..;
@@ -344,7 +344,7 @@
 				50D9222F26078EB5009A7BB0 /* ViewController.swift in Sources */,
 				50F33D1A268783C7001A358D /* ProfileEditViewController.swift in Sources */,
 				505854552635081B00182CFD /* SearchViewController.swift in Sources */,
-				50CF1B9D263525DA00ECF7E4 /* PS5ViewController.swift in Sources */,
+				50CF1B9D263525DA00ECF7E4 /* GameViewController.swift in Sources */,
 				507B8DFD266266770001B8DC /* MemoViewCell.swift in Sources */,
 				5098092E26A58B7C005240D4 /* VideoViewController.swift in Sources */,
 				508C81F326A471230023770B /* LikeCell.swift in Sources */,

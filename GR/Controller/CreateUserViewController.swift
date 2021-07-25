@@ -26,6 +26,7 @@ class CreateUserViewController: UIViewController,UITextFieldDelegate,SendProfile
         sendDBModel.sendProfileDone = self
         nameTextField.delegate = self
         
+        
     }
     
     //キーボードを下げる

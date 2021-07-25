@@ -1,5 +1,5 @@
 //
-//  PS5ViewController.swift
+//  GameViewController.swift
 //  GR
 //
 //  Created by 中森えみり on 2021/04/25.
@@ -10,7 +10,7 @@ import FirebaseAuth
 import FirebaseFirestore
 import PKHUD
 
-class PS5ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,DoneCatchDataProtocol{
+class GameViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,DoneCatchDataProtocol{
     
     
     @IBOutlet weak var tableView: UITableView!
