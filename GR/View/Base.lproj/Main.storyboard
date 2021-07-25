@@ -20,24 +20,28 @@
                                 <rect key="frame" x="0.0" y="204" width="414" height="488"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RND-8P-TB9">
-                                        <rect key="frame" x="0.0" y="0.0" width="1656" height="488"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="2070" height="488"/>
                                         <subviews>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="vz2-Bw-rqs">
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tutorial1" translatesAutoresizingMaskIntoConstraints="NO" id="vz2-Bw-rqs">
                                                 <rect key="frame" x="0.0" y="0.0" width="414" height="488"/>
                                             </imageView>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="yIA-83-sqq">
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tutorial2" translatesAutoresizingMaskIntoConstraints="NO" id="yIA-83-sqq">
                                                 <rect key="frame" x="414" y="0.0" width="414" height="488"/>
                                             </imageView>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="A8C-zx-8LD">
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tutorial3" translatesAutoresizingMaskIntoConstraints="NO" id="A8C-zx-8LD">
                                                 <rect key="frame" x="828" y="0.0" width="414" height="488"/>
                                             </imageView>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="zK9-iM-RpO">
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tutorial4" translatesAutoresizingMaskIntoConstraints="NO" id="zK9-iM-RpO">
                                                 <rect key="frame" x="1242" y="0.0" width="414" height="488"/>
+                                            </imageView>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tutorial5" translatesAutoresizingMaskIntoConstraints="NO" id="4JT-Au-3ya">
+                                                <rect key="frame" x="1656" y="0.0" width="414" height="488"/>
                                             </imageView>
                                         </subviews>
                                     </stackView>
                                 </subviews>
                                 <constraints>
+                                    <constraint firstItem="4JT-Au-3ya" firstAttribute="width" secondItem="ODx-zz-juC" secondAttribute="width" id="1ir-ox-PLn"/>
                                     <constraint firstItem="RND-8P-TB9" firstAttribute="top" secondItem="ODx-zz-juC" secondAttribute="top" id="Pa8-cr-PbP"/>
                                     <constraint firstAttribute="trailing" secondItem="RND-8P-TB9" secondAttribute="trailing" constant="8" id="R6P-Zg-fhz"/>
                                     <constraint firstItem="RND-8P-TB9" firstAttribute="height" secondItem="ODx-zz-juC" secondAttribute="height" id="UeO-By-wC5"/>
@@ -51,8 +55,8 @@
                                 <viewLayoutGuide key="contentLayoutGuide" id="UfZ-Uc-EpQ"/>
                                 <viewLayoutGuide key="frameLayoutGuide" id="QPv-Ry-XID"/>
                             </scrollView>
-                            <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="4" translatesAutoresizingMaskIntoConstraints="NO" id="ALa-Xe-Y5G">
-                                <rect key="frame" x="137.5" y="736" width="139" height="27.5"/>
+                            <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="5" translatesAutoresizingMaskIntoConstraints="NO" id="ALa-Xe-Y5G">
+                                <rect key="frame" x="128" y="736" width="158" height="27.5"/>
                                 <color key="pageIndicatorTintColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="currentPageIndicatorTintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </pageControl>
@@ -102,7 +106,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
                 <exit id="CS6-cF-acy" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="991" y="96"/>
+            <point key="canvasLocation" x="989.85507246376824" y="95.758928571428569"/>
         </scene>
         <!--Trend View Controller-->
         <scene sceneID="aA6-A7-uQ3">
@@ -129,7 +133,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="syV-Ks-GXZ">
-                                <rect key="frame" x="0.0" y="143" width="414" height="569"/>
+                                <rect key="frame" x="0.0" y="143" width="414" height="637"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="569" id="QAk-eE-HRM"/>
@@ -852,6 +856,11 @@
         <image name="splash" width="120" height="120"/>
         <image name="star" width="32" height="32"/>
         <image name="tab2-1" width="24" height="24"/>
+        <image name="tutorial1" width="632" height="936"/>
+        <image name="tutorial2" width="626" height="744"/>
+        <image name="tutorial3" width="602" height="746"/>
+        <image name="tutorial4" width="621" height="928"/>
+        <image name="tutorial5" width="634" height="592"/>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
