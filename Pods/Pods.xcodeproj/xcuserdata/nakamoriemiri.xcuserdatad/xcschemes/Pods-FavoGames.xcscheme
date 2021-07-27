@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "C2C4E2E2051F8E2DB9F9936886B6AC5B"
-               BuildableName = "Pods_GR.framework"
-               BlueprintName = "Pods-GR"
+               BlueprintIdentifier = "85A9BCD6AFFA2AACA76439805AEF7100"
+               BuildableName = "Pods_FavoGames.framework"
+               BlueprintName = "Pods-FavoGames"
                ReferencedContainer = "container:Pods.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>

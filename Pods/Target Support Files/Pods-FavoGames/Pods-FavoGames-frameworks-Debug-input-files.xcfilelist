@@ -1,4 +1,4 @@
-${PODS_ROOT}/Target Support Files/Pods-GR/Pods-GR-frameworks.sh
+${PODS_ROOT}/Target Support Files/Pods-FavoGames/Pods-FavoGames-frameworks.sh
 ${BUILT_PRODUCTS_DIR}/AMPagerTabs/AMPagerTabs.framework
 ${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework
 ${BUILT_PRODUCTS_DIR}/BoringSSL-GRPC/openssl_grpc.framework

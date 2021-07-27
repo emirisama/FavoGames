@@ -11,6 +11,6 @@
 #endif
 
 
-FOUNDATION_EXPORT double Pods_GRVersionNumber;
-FOUNDATION_EXPORT const unsigned char Pods_GRVersionString[];
+FOUNDATION_EXPORT double Pods_FavoGamesVersionNumber;
+FOUNDATION_EXPORT const unsigned char Pods_FavoGamesVersionString[];
 

@@ -14,10 +14,10 @@ pod 'SwiftyJSON'
 pod 'Alamofire'
 
 
-target 'GR' do
+target 'FavoGames' do
   # Comment the next line if you don't want to use dynamic frameworks
   use_frameworks!
 
-  # Pods for GR
+  # Pods for FavoGames
 
 end

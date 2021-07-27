@@ -44,12 +44,11 @@
 		50F33D1A268783C7001A358D /* ProfileEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F33D19268783C7001A358D /* ProfileEditViewController.swift */; };
 		50F5585F2691F885004A73AE /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F5585E2691F885004A73AE /* SplashViewController.swift */; };
 		50F6F3212612207400B65E21 /* ProfileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F6F3202612207400B65E21 /* ProfileModel.swift */; };
-		F17177D3A5BD40685D9AE4F5 /* Pods_GR.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3FA3CA8F3D72086ECCD690CA /* Pods_GR.framework */; };
+		FC1DB69F43320DF3CE779F51 /* Pods_FavoGames.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C72A6CE1A1BDC90C47270B74 /* Pods_FavoGames.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		3B86963A1E8174124908661F /* Pods-GR.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GR.debug.xcconfig"; path = "Target Support Files/Pods-GR/Pods-GR.debug.xcconfig"; sourceTree = "<group>"; };
-		3FA3CA8F3D72086ECCD690CA /* Pods_GR.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GR.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		3B86963A1E8174124908661F /* Pods-FavoGames.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FavoGames.debug.xcconfig"; path = "Target Support Files/Pods-FavoGames/Pods-FavoGames.debug.xcconfig"; sourceTree = "<group>"; };
 		5046C4D6261DD7B5006939C7 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		504C276B260CB0E600179AF9 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		504C30D5265BC30300C520B0 /* ContentDetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentDetailCell.swift; sourceTree = "<group>"; };
@@ -77,9 +76,9 @@
 		50A8D81B26452B1C008B5CEA /* SearchAndLoadModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchAndLoadModel.swift; sourceTree = "<group>"; };
 		50A8D81E2645310C008B5CEA /* SearchResultsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultsViewController.swift; sourceTree = "<group>"; };
 		50A8D8212645336D008B5CEA /* DataSets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataSets.swift; sourceTree = "<group>"; };
-		50B2200626AAF83C00D7B145 /* GR.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = GR.entitlements; sourceTree = "<group>"; };
+		50B2200626AAF83C00D7B145 /* FavoGames.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = FavoGames.entitlements; sourceTree = "<group>"; };
 		50CF1B9C263525DA00ECF7E4 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
-		50D9222726078EB5009A7BB0 /* GR.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GR.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		50D9222726078EB5009A7BB0 /* FavoGames.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FavoGames.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		50D9222A26078EB5009A7BB0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		50D9222C26078EB5009A7BB0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		50D9222E26078EB5009A7BB0 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -90,7 +89,8 @@
 		50F33D19268783C7001A358D /* ProfileEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditViewController.swift; sourceTree = "<group>"; };
 		50F5585E2691F885004A73AE /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
 		50F6F3202612207400B65E21 /* ProfileModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileModel.swift; sourceTree = "<group>"; };
-		6BCD9D398C3C43D955F084EC /* Pods-GR.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GR.release.xcconfig"; path = "Target Support Files/Pods-GR/Pods-GR.release.xcconfig"; sourceTree = "<group>"; };
+		6BCD9D398C3C43D955F084EC /* Pods-FavoGames.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FavoGames.release.xcconfig"; path = "Target Support Files/Pods-FavoGames/Pods-FavoGames.release.xcconfig"; sourceTree = "<group>"; };
+		C72A6CE1A1BDC90C47270B74 /* Pods_FavoGames.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FavoGames.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,7 +98,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F17177D3A5BD40685D9AE4F5 /* Pods_GR.framework in Frameworks */,
+				FC1DB69F43320DF3CE779F51 /* Pods_FavoGames.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -168,7 +168,7 @@
 		50D9221E26078EB5009A7BB0 = {
 			isa = PBXGroup;
 			children = (
-				50D9222926078EB5009A7BB0 /* GR */,
+				50D9222926078EB5009A7BB0 /* FavoGames */,
 				50D9222826078EB5009A7BB0 /* Products */,
 				B0B46FA3BA3AC5CCEF1F290C /* Pods */,
 				7F915DD5A84C80A96C044303 /* Frameworks */,
@@ -178,15 +178,15 @@
 		50D9222826078EB5009A7BB0 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				50D9222726078EB5009A7BB0 /* GR.app */,
+				50D9222726078EB5009A7BB0 /* FavoGames.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		50D9222926078EB5009A7BB0 /* GR */ = {
+		50D9222926078EB5009A7BB0 /* FavoGames */ = {
 			isa = PBXGroup;
 			children = (
-				50B2200626AAF83C00D7B145 /* GR.entitlements */,
+				50B2200626AAF83C00D7B145 /* FavoGames.entitlements */,
 				50D9222A26078EB5009A7BB0 /* AppDelegate.swift */,
 				50D9222C26078EB5009A7BB0 /* SceneDelegate.swift */,
 				5046C4D5261DD784006939C7 /* Util */,
@@ -199,13 +199,13 @@
 				50D9223826078EB6009A7BB0 /* Info.plist */,
 				504C276B260CB0E600179AF9 /* GoogleService-Info.plist */,
 			);
-			path = GR;
+			path = FavoGames;
 			sourceTree = "<group>";
 		};
 		7F915DD5A84C80A96C044303 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				3FA3CA8F3D72086ECCD690CA /* Pods_GR.framework */,
+				C72A6CE1A1BDC90C47270B74 /* Pods_FavoGames.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -213,8 +213,8 @@
 		B0B46FA3BA3AC5CCEF1F290C /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				3B86963A1E8174124908661F /* Pods-GR.debug.xcconfig */,
-				6BCD9D398C3C43D955F084EC /* Pods-GR.release.xcconfig */,
+				3B86963A1E8174124908661F /* Pods-FavoGames.debug.xcconfig */,
+				6BCD9D398C3C43D955F084EC /* Pods-FavoGames.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -222,9 +222,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		50D9222626078EB5009A7BB0 /* GR */ = {
+		50D9222626078EB5009A7BB0 /* FavoGames */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 50D9223B26078EB6009A7BB0 /* Build configuration list for PBXNativeTarget "GR" */;
+			buildConfigurationList = 50D9223B26078EB6009A7BB0 /* Build configuration list for PBXNativeTarget "FavoGames" */;
 			buildPhases = (
 				37CD80611DF5BF249CB0C3F5 /* [CP] Check Pods Manifest.lock */,
 				50D9222326078EB5009A7BB0 /* Sources */,
@@ -236,9 +236,9 @@
 			);
 			dependencies = (
 			);
-			name = GR;
+			name = FavoGames;
 			productName = GR;
-			productReference = 50D9222726078EB5009A7BB0 /* GR.app */;
+			productReference = 50D9222726078EB5009A7BB0 /* FavoGames.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -255,7 +255,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 50D9222226078EB5009A7BB0 /* Build configuration list for PBXProject "GR" */;
+			buildConfigurationList = 50D9222226078EB5009A7BB0 /* Build configuration list for PBXProject "FavoGames" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -268,7 +268,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				50D9222626078EB5009A7BB0 /* GR */,
+				50D9222626078EB5009A7BB0 /* FavoGames */,
 			);
 		};
 /* End PBXProject section */
@@ -307,7 +307,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-GR-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-FavoGames-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -320,15 +320,15 @@
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-GR/Pods-GR-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-FavoGames/Pods-FavoGames-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-GR/Pods-GR-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-FavoGames/Pods-FavoGames-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-GR/Pods-GR-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-FavoGames/Pods-FavoGames-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -510,13 +510,13 @@
 		};
 		50D9223C26078EB6009A7BB0 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3B86963A1E8174124908661F /* Pods-GR.debug.xcconfig */;
+			baseConfigurationReference = 3B86963A1E8174124908661F /* Pods-FavoGames.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = GR/GR.entitlements;
+				CODE_SIGN_ENTITLEMENTS = GR/FavoGames.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = GR/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/FavoGames/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -530,13 +530,13 @@
 		};
 		50D9223D26078EB6009A7BB0 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6BCD9D398C3C43D955F084EC /* Pods-GR.release.xcconfig */;
+			baseConfigurationReference = 6BCD9D398C3C43D955F084EC /* Pods-FavoGames.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = GR/GR.entitlements;
+				CODE_SIGN_ENTITLEMENTS = GR/FavoGames.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = GR/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/FavoGames/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -551,7 +551,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		50D9222226078EB5009A7BB0 /* Build configuration list for PBXProject "GR" */ = {
+		50D9222226078EB5009A7BB0 /* Build configuration list for PBXProject "FavoGames" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				50D9223926078EB6009A7BB0 /* Debug */,
@@ -560,7 +560,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		50D9223B26078EB6009A7BB0 /* Build configuration list for PBXNativeTarget "GR" */ = {
+		50D9223B26078EB6009A7BB0 /* Build configuration list for PBXNativeTarget "FavoGames" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				50D9223C26078EB6009A7BB0 /* Debug */,
