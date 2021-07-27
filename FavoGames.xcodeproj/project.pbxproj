@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		504C276C260CB0E600179AF9 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 504C276B260CB0E600179AF9 /* GoogleService-Info.plist */; };
 		504C30D7265BC30300C520B0 /* ContentDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 504C30D5265BC30300C520B0 /* ContentDetailCell.swift */; };
 		504C30D8265BC30300C520B0 /* ContentDetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 504C30D6265BC30300C520B0 /* ContentDetailCell.xib */; };
 		504E35522625982D00A119D1 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 504E35512625982D00A119D1 /* ProfileViewController.swift */; };
@@ -42,12 +41,12 @@
 		50F33D1A268783C7001A358D /* ProfileEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F33D19268783C7001A358D /* ProfileEditViewController.swift */; };
 		50F5585F2691F885004A73AE /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F5585E2691F885004A73AE /* SplashViewController.swift */; };
 		50F6F3212612207400B65E21 /* ProfileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F6F3202612207400B65E21 /* ProfileModel.swift */; };
+		50F8BE1326B0373300980972 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 50F8BE1226B0373300980972 /* GoogleService-Info.plist */; };
 		FC1DB69F43320DF3CE779F51 /* Pods_FavoGames.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C72A6CE1A1BDC90C47270B74 /* Pods_FavoGames.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		3B86963A1E8174124908661F /* Pods-FavoGames.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FavoGames.debug.xcconfig"; path = "Target Support Files/Pods-FavoGames/Pods-FavoGames.debug.xcconfig"; sourceTree = "<group>"; };
-		504C276B260CB0E600179AF9 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		504C30D5265BC30300C520B0 /* ContentDetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentDetailCell.swift; sourceTree = "<group>"; };
 		504C30D6265BC30300C520B0 /* ContentDetailCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ContentDetailCell.xib; sourceTree = "<group>"; };
 		504E35512625982D00A119D1 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
@@ -84,6 +83,7 @@
 		50F33D19268783C7001A358D /* ProfileEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditViewController.swift; sourceTree = "<group>"; };
 		50F5585E2691F885004A73AE /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
 		50F6F3202612207400B65E21 /* ProfileModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileModel.swift; sourceTree = "<group>"; };
+		50F8BE1226B0373300980972 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		6BCD9D398C3C43D955F084EC /* Pods-FavoGames.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FavoGames.release.xcconfig"; path = "Target Support Files/Pods-FavoGames/Pods-FavoGames.release.xcconfig"; sourceTree = "<group>"; };
 		C72A6CE1A1BDC90C47270B74 /* Pods_FavoGames.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FavoGames.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -181,7 +181,7 @@
 				50D9223326078EB6009A7BB0 /* Assets.xcassets */,
 				50D9223526078EB6009A7BB0 /* LaunchScreen.storyboard */,
 				50D9223826078EB6009A7BB0 /* Info.plist */,
-				504C276B260CB0E600179AF9 /* GoogleService-Info.plist */,
+				50F8BE1226B0373300980972 /* GoogleService-Info.plist */,
 			);
 			path = FavoGames;
 			sourceTree = "<group>";
@@ -263,11 +263,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				507B8DFE266266770001B8DC /* MemoViewCell.xib in Resources */,
+				50F8BE1326B0373300980972 /* GoogleService-Info.plist in Resources */,
 				50D9223726078EB6009A7BB0 /* LaunchScreen.storyboard in Resources */,
 				504C30D8265BC30300C520B0 /* ContentDetailCell.xib in Resources */,
 				508C81F426A471230023770B /* LikeCell.xib in Resources */,
 				504E35572625C68700A119D1 /* ContentsCell.xib in Resources */,
-				504C276C260CB0E600179AF9 /* GoogleService-Info.plist in Resources */,
 				50D9223426078EB6009A7BB0 /* Assets.xcassets in Resources */,
 				50D9223226078EB5009A7BB0 /* Main.storyboard in Resources */,
 			);
