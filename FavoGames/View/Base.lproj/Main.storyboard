@@ -39,16 +39,14 @@
                                                         <color key="highlightedColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     </label>
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tutorial1" translatesAutoresizingMaskIntoConstraints="NO" id="Uip-oV-lqz">
-                                                        <rect key="frame" x="0.0" y="110" width="414" height="400"/>
+                                                        <rect key="frame" x="0.0" y="110" width="414" height="418"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="414" id="C1y-18-59q"/>
-                                                            <constraint firstAttribute="height" constant="400" id="SC2-0I-8cs"/>
                                                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="400" id="WoM-Z3-VWL"/>
-                                                            <constraint firstAttribute="width" constant="414" id="Z0X-fU-ALw"/>
                                                         </constraints>
                                                     </imageView>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HGA-fd-QsF">
-                                                        <rect key="frame" x="0.0" y="520" width="414" height="100"/>
+                                                        <rect key="frame" x="0.0" y="538" width="414" height="100"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="100" id="6EM-hd-R5l"/>
                                                             <constraint firstAttribute="width" constant="414" id="Wct-Iu-Da3"/>
@@ -90,16 +88,14 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tutorial2" translatesAutoresizingMaskIntoConstraints="NO" id="6h6-ck-N0n">
-                                                        <rect key="frame" x="0.0" y="110" width="414" height="400"/>
+                                                        <rect key="frame" x="0.0" y="110" width="414" height="418"/>
                                                         <constraints>
-                                                            <constraint firstAttribute="height" constant="400" id="4uC-K7-raw"/>
                                                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="414" id="b77-y7-GUc"/>
                                                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="400" id="kYY-xW-ISp"/>
-                                                            <constraint firstAttribute="width" constant="414" id="lpG-WC-4Df"/>
                                                         </constraints>
                                                     </imageView>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="お気に入りのゲームを探そう！" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j4e-tm-9v6">
-                                                        <rect key="frame" x="0.0" y="520" width="414" height="100"/>
+                                                        <rect key="frame" x="0.0" y="538" width="414" height="100"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="414" id="AdF-bp-p84"/>
                                                             <constraint firstAttribute="height" constant="100" id="yea-Lo-0fi"/>
@@ -150,7 +146,7 @@
                                                         </constraints>
                                                     </imageView>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ハートを押してお気に入り追加しよう！" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4wl-7b-X3b" userLabel="人気のゲームが一目で分かる！ ※売り上げ順に表示されます。">
-                                                        <rect key="frame" x="0.0" y="520" width="414" height="100"/>
+                                                        <rect key="frame" x="0.0" y="538" width="414" height="100"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="414" id="9I6-3y-6vt"/>
                                                             <constraint firstAttribute="height" constant="100" id="vYi-o3-OM5"/>
@@ -162,9 +158,7 @@
                                                 </subviews>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <constraints>
-                                                    <constraint firstItem="4wl-7b-X3b" firstAttribute="top" secondItem="hI5-9Q-dgK" secondAttribute="bottom" constant="10" id="2Zf-iP-P4f"/>
                                                     <constraint firstItem="ezT-z0-uHc" firstAttribute="top" secondItem="ORR-dY-pjt" secondAttribute="top" id="9bx-cV-RSe"/>
-                                                    <constraint firstItem="4wl-7b-X3b" firstAttribute="top" secondItem="hI5-9Q-dgK" secondAttribute="bottom" constant="10" id="CWG-Jv-tTM"/>
                                                     <constraint firstItem="4wl-7b-X3b" firstAttribute="centerX" secondItem="ORR-dY-pjt" secondAttribute="centerX" id="J8q-tl-tvg"/>
                                                     <constraint firstItem="hI5-9Q-dgK" firstAttribute="leading" secondItem="ORR-dY-pjt" secondAttribute="leading" id="Kdw-EY-ZfZ"/>
                                                     <constraint firstAttribute="trailing" secondItem="ezT-z0-uHc" secondAttribute="trailing" id="X5L-lw-ZDv"/>
@@ -191,16 +185,14 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tutorial4" translatesAutoresizingMaskIntoConstraints="NO" id="EgS-z3-CKZ">
-                                                        <rect key="frame" x="0.0" y="110" width="414" height="400"/>
+                                                        <rect key="frame" x="0.0" y="110" width="414" height="418"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="414" id="5U3-v4-aPo"/>
                                                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="400" id="IRD-wP-HU4"/>
-                                                            <constraint firstAttribute="width" constant="414" id="f1Z-3n-vF6"/>
-                                                            <constraint firstAttribute="height" constant="400" id="lUE-cc-ory"/>
                                                         </constraints>
                                                     </imageView>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xkm-gP-BhL" userLabel="人気のゲームが一目で分かる！ ※売り上げ順に表示されます。">
-                                                        <rect key="frame" x="0.0" y="520" width="414" height="100"/>
+                                                        <rect key="frame" x="0.0" y="538" width="414" height="100"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="414" id="NTG-5l-ABU"/>
                                                             <constraint firstAttribute="height" constant="100" id="zx0-h4-IVg"/>
@@ -243,16 +235,14 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tutorial5" translatesAutoresizingMaskIntoConstraints="NO" id="eDk-tq-0sf">
-                                                        <rect key="frame" x="0.0" y="110" width="414" height="400"/>
+                                                        <rect key="frame" x="0.0" y="110" width="414" height="418"/>
                                                         <constraints>
-                                                            <constraint firstAttribute="width" constant="414" id="RUj-bC-9dc"/>
                                                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="414" id="fYK-5w-Fmd"/>
                                                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="400" id="lHF-Wg-no1"/>
-                                                            <constraint firstAttribute="height" constant="400" id="woz-J1-Yjs"/>
                                                         </constraints>
                                                     </imageView>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="好きなゲームにメモを残そう！" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wr5-7u-lN5" userLabel="人気のゲームが一目で分かる！ ※売り上げ順に表示されます。">
-                                                        <rect key="frame" x="0.0" y="520" width="414" height="100"/>
+                                                        <rect key="frame" x="0.0" y="538" width="414" height="100"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="100" id="8kx-12-9Xj"/>
                                                             <constraint firstAttribute="width" constant="414" id="gzZ-MN-Ieu"/>
@@ -266,7 +256,6 @@
                                                 <constraints>
                                                     <constraint firstAttribute="trailing" secondItem="eDk-tq-0sf" secondAttribute="trailing" id="1SI-Up-TPm"/>
                                                     <constraint firstAttribute="bottom" secondItem="wr5-7u-lN5" secondAttribute="bottom" constant="10" id="3SP-fr-t9f"/>
-                                                    <constraint firstItem="wr5-7u-lN5" firstAttribute="top" secondItem="eDk-tq-0sf" secondAttribute="bottom" constant="10" id="4XY-ev-PXe"/>
                                                     <constraint firstItem="eDk-tq-0sf" firstAttribute="top" secondItem="Eao-zD-AjR" secondAttribute="bottom" constant="10" id="4v5-Je-LiH"/>
                                                     <constraint firstItem="Eao-zD-AjR" firstAttribute="leading" secondItem="7cI-yz-3KQ" secondAttribute="leading" id="82d-ar-C0D"/>
                                                     <constraint firstAttribute="trailing" secondItem="Eao-zD-AjR" secondAttribute="trailing" id="F0C-j4-sv1"/>
@@ -293,16 +282,14 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tutorial6" translatesAutoresizingMaskIntoConstraints="NO" id="Y9w-lK-iUd">
-                                                        <rect key="frame" x="0.0" y="110" width="414" height="400"/>
+                                                        <rect key="frame" x="0.0" y="110" width="414" height="418"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="400" id="Ro6-Mc-xlk"/>
-                                                            <constraint firstAttribute="width" constant="414" id="VEV-5F-bs3"/>
-                                                            <constraint firstAttribute="height" constant="400" id="WHo-Xc-kMe"/>
                                                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="414" id="ztv-GZ-Sff"/>
                                                         </constraints>
                                                     </imageView>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Uxl-Ln-Kwd" userLabel="人気のゲームが一目で分かる！ ※売り上げ順に表示されます。">
-                                                        <rect key="frame" x="0.0" y="520" width="414" height="100"/>
+                                                        <rect key="frame" x="0.0" y="538" width="414" height="100"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="414" id="64l-23-1ZS"/>
                                                             <constraint firstAttribute="height" constant="100" id="LVv-HU-kig"/>
@@ -431,7 +418,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="syV-Ks-GXZ">
-                                <rect key="frame" x="0.0" y="143" width="414" height="569"/>
+                                <rect key="frame" x="0.0" y="143" width="414" height="637"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="569" id="QAk-eE-HRM"/>
@@ -1163,7 +1150,7 @@
         <image name="splash" width="120" height="120"/>
         <image name="star" width="32" height="32"/>
         <image name="tutorial1" width="632" height="936"/>
-        <image name="tutorial2" width="620" height="710"/>
+        <image name="tutorial2" width="632" height="602"/>
         <image name="tutorial3" width="626" height="744"/>
         <image name="tutorial4" width="606" height="744"/>
         <image name="tutorial5" width="621" height="928"/>
