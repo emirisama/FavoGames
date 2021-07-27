@@ -17,13 +17,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ODx-zz-juC">
-                                <rect key="frame" x="0.0" y="44" width="414" height="648"/>
+                                <rect key="frame" x="0.0" y="44" width="414" height="630"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RND-8P-TB9">
-                                        <rect key="frame" x="0.0" y="0.0" width="2484" height="648"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="2484" height="630"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AVw-Er-KP4">
-                                                <rect key="frame" x="0.0" y="0.0" width="414" height="648"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="630"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1ZG-pa-IAv">
                                                         <rect key="frame" x="0.0" y="0.0" width="414" height="100"/>
@@ -34,9 +34,9 @@
                                                         </constraints>
                                                         <string key="text">Trend
 人気のゲームをすぐチェック</string>
-                                                        <fontDescription key="fontDescription" name="Arial-BoldMT" family="Arial" pointSize="25"/>
-                                                        <nil key="textColor"/>
-                                                        <nil key="highlightedColor"/>
+                                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="25"/>
+                                                        <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <color key="highlightedColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     </label>
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tutorial1" translatesAutoresizingMaskIntoConstraints="NO" id="Uip-oV-lqz">
                                                         <rect key="frame" x="0.0" y="110" width="414" height="400"/>
@@ -55,9 +55,9 @@
                                                         </constraints>
                                                         <string key="text">人気のゲームが一目で分かる！
 ※売り上げ順に表示されます。</string>
-                                                        <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="20"/>
+                                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <nil key="highlightedColor"/>
+                                                        <color key="highlightedColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     </label>
                                                 </subviews>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -65,7 +65,6 @@
                                                     <constraint firstAttribute="trailing" secondItem="1ZG-pa-IAv" secondAttribute="trailing" id="461-0n-6U9"/>
                                                     <constraint firstItem="1ZG-pa-IAv" firstAttribute="top" secondItem="AVw-Er-KP4" secondAttribute="top" id="F4j-jm-HZO"/>
                                                     <constraint firstItem="Uip-oV-lqz" firstAttribute="top" secondItem="1ZG-pa-IAv" secondAttribute="bottom" constant="10" id="GGz-zD-I5P"/>
-                                                    <constraint firstItem="HGA-fd-QsF" firstAttribute="top" secondItem="Uip-oV-lqz" secondAttribute="bottom" constant="10" id="SjX-6I-urW"/>
                                                     <constraint firstItem="Uip-oV-lqz" firstAttribute="leading" secondItem="AVw-Er-KP4" secondAttribute="leading" id="Tup-r9-jt0"/>
                                                     <constraint firstItem="HGA-fd-QsF" firstAttribute="top" secondItem="Uip-oV-lqz" secondAttribute="bottom" constant="10" id="a5r-Fm-CqW"/>
                                                     <constraint firstAttribute="bottom" secondItem="HGA-fd-QsF" secondAttribute="bottom" constant="10" id="bTQ-PE-uxv"/>
@@ -75,7 +74,7 @@
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6q0-N9-pQW">
-                                                <rect key="frame" x="414" y="0.0" width="414" height="648"/>
+                                                <rect key="frame" x="414" y="0.0" width="414" height="630"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BMe-iA-ZM6">
                                                         <rect key="frame" x="0.0" y="0.0" width="414" height="100"/>
@@ -86,7 +85,7 @@
                                                         </constraints>
                                                         <string key="text">Search
 ゲームソフト名で探そう</string>
-                                                        <fontDescription key="fontDescription" name="Arial-BoldMT" family="Arial" pointSize="25"/>
+                                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="25"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
@@ -105,7 +104,7 @@
                                                             <constraint firstAttribute="width" constant="414" id="AdF-bp-p84"/>
                                                             <constraint firstAttribute="height" constant="100" id="yea-Lo-0fi"/>
                                                         </constraints>
-                                                        <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="20"/>
+                                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
@@ -126,7 +125,7 @@
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ORR-dY-pjt">
-                                                <rect key="frame" x="828" y="0.0" width="414" height="648"/>
+                                                <rect key="frame" x="828" y="0.0" width="414" height="630"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ezT-z0-uHc">
                                                         <rect key="frame" x="0.0" y="0.0" width="414" height="100"/>
@@ -137,7 +136,7 @@
                                                         </constraints>
                                                         <string key="text">Favorite
 お気に入り追加しよう</string>
-                                                        <fontDescription key="fontDescription" name="Arial-BoldMT" family="Arial" pointSize="25"/>
+                                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="25"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
@@ -156,7 +155,7 @@
                                                             <constraint firstAttribute="width" constant="414" id="9I6-3y-6vt"/>
                                                             <constraint firstAttribute="height" constant="100" id="vYi-o3-OM5"/>
                                                         </constraints>
-                                                        <fontDescription key="fontDescription" name="AppleColorEmoji" family="Apple Color Emoji" pointSize="20"/>
+                                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
@@ -176,7 +175,7 @@
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dgg-PB-inh">
-                                                <rect key="frame" x="1242" y="0.0" width="414" height="648"/>
+                                                <rect key="frame" x="1242" y="0.0" width="414" height="630"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="231-Ff-NvY">
                                                         <rect key="frame" x="0.0" y="0.0" width="414" height="100"/>
@@ -187,7 +186,7 @@
                                                         </constraints>
                                                         <string key="text">Mypage
 私だけのゲームリスト</string>
-                                                        <fontDescription key="fontDescription" name="Arial-BoldMT" family="Arial" pointSize="25"/>
+                                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="25"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
@@ -208,7 +207,7 @@
                                                         </constraints>
                                                         <string key="text">お気に入り追加したゲームを
 いつでもチェック！</string>
-                                                        <fontDescription key="fontDescription" name="AppleColorEmoji" family="Apple Color Emoji" pointSize="20"/>
+                                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
@@ -228,7 +227,7 @@
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7cI-yz-3KQ">
-                                                <rect key="frame" x="1656" y="0.0" width="414" height="648"/>
+                                                <rect key="frame" x="1656" y="0.0" width="414" height="630"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Eao-zD-AjR">
                                                         <rect key="frame" x="0.0" y="0.0" width="414" height="100"/>
@@ -239,7 +238,7 @@
                                                         </constraints>
                                                         <string key="text">Memo
 私だけのゲーム記録</string>
-                                                        <fontDescription key="fontDescription" name="Arial-BoldMT" family="Arial" pointSize="25"/>
+                                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="25"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
@@ -258,9 +257,9 @@
                                                             <constraint firstAttribute="height" constant="100" id="8kx-12-9Xj"/>
                                                             <constraint firstAttribute="width" constant="414" id="gzZ-MN-Ieu"/>
                                                         </constraints>
-                                                        <fontDescription key="fontDescription" name="AppleColorEmoji" family="Apple Color Emoji" pointSize="20"/>
+                                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <nil key="highlightedColor"/>
+                                                        <color key="highlightedColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     </label>
                                                 </subviews>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -278,7 +277,7 @@
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="W7s-Fu-yc5">
-                                                <rect key="frame" x="2070" y="0.0" width="414" height="648"/>
+                                                <rect key="frame" x="2070" y="0.0" width="414" height="630"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jyU-ij-YFc">
                                                         <rect key="frame" x="0.0" y="0.0" width="414" height="100"/>
@@ -289,7 +288,7 @@
                                                         </constraints>
                                                         <string key="text">Watch
 ゲームの動画・詳細をチェック</string>
-                                                        <fontDescription key="fontDescription" name="Arial-BoldMT" family="Arial" pointSize="25"/>
+                                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="25"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
@@ -310,7 +309,7 @@
                                                         </constraints>
                                                         <string key="text">ワンタップで
 ゲームの動画や詳細が見れる！</string>
-                                                        <fontDescription key="fontDescription" name="AppleColorEmoji" family="Apple Color Emoji" pointSize="20"/>
+                                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
@@ -355,12 +354,12 @@
                                 <viewLayoutGuide key="frameLayoutGuide" id="QPv-Ry-XID"/>
                             </scrollView>
                             <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="6" translatesAutoresizingMaskIntoConstraints="NO" id="ALa-Xe-Y5G">
-                                <rect key="frame" x="119" y="736" width="176" height="27.5"/>
+                                <rect key="frame" x="119" y="718" width="176" height="27.5"/>
                                 <color key="pageIndicatorTintColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="currentPageIndicatorTintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </pageControl>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dcf-T1-OSx">
-                                <rect key="frame" x="117" y="780" width="180" height="50"/>
+                                <rect key="frame" x="117" y="762" width="180" height="50"/>
                                 <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="180" id="C1g-1R-pVG"/>
@@ -432,7 +431,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="syV-Ks-GXZ">
-                                <rect key="frame" x="0.0" y="143" width="414" height="637"/>
+                                <rect key="frame" x="0.0" y="143" width="414" height="569"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="569" id="QAk-eE-HRM"/>
@@ -501,43 +500,42 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="ゲームソフト名で検索" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="aAN-uj-DKf">
-                                <rect key="frame" x="50" y="204" width="248" height="35"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="iMJ-VY-F5B">
+                                <rect key="frame" x="10" y="418" width="394" height="38.5"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="250" id="Car-3n-KhU"/>
-                                    <constraint firstAttribute="height" constant="35" id="VDJ-OW-YB4"/>
-                                    <constraint firstAttribute="width" secondItem="aAN-uj-DKf" secondAttribute="height" multiplier="248:35" id="g2P-mu-r2x"/>
+                                    <constraint firstAttribute="width" secondItem="iMJ-VY-F5B" secondAttribute="height" multiplier="367:36" id="aWq-IB-eVi"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <string key="text">※日本語表記で検索してヒットしない場合、
+英語表記で検索するとヒットする可能性があります。</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <color key="textColor" systemColor="tertiarySystemGroupedBackgroundColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <searchBar contentMode="redraw" placeholder="ゲームソフト名で検索" translatesAutoresizingMaskIntoConstraints="NO" id="6sJ-04-aeH">
+                                <rect key="frame" x="0.0" y="344" width="414" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="6sJ-04-aeH" secondAttribute="height" multiplier="207:22" id="5rL-3y-P5Y"/>
+                                </constraints>
                                 <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0Wx-B3-ieY">
-                                <rect key="frame" x="318" y="204" width="32" height="32"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="32" id="wsg-ym-mWr"/>
-                                    <constraint firstAttribute="width" constant="32" id="xax-4t-jpT"/>
-                                    <constraint firstAttribute="width" secondItem="0Wx-B3-ieY" secondAttribute="height" multiplier="1:1" id="y7y-6o-EyF"/>
-                                </constraints>
-                                <state key="normal" image="tab2-1"/>
-                                <connections>
-                                    <action selector="search:" destination="ogn-S2-s4C" eventType="touchUpInside" id="VQv-Nh-Zx9"/>
-                                </connections>
-                            </button>
+                            </searchBar>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="341-JB-VNX"/>
                         <color key="backgroundColor" red="0.23118366895022094" green="0.23006683963162086" blue="0.23230049826882104" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
-                            <constraint firstItem="aAN-uj-DKf" firstAttribute="top" secondItem="341-JB-VNX" secondAttribute="top" constant="160" id="Dad-z2-nrR"/>
-                            <constraint firstItem="0Wx-B3-ieY" firstAttribute="leading" secondItem="aAN-uj-DKf" secondAttribute="trailing" constant="20" id="Hny-BR-icE"/>
-                            <constraint firstItem="aAN-uj-DKf" firstAttribute="leading" secondItem="341-JB-VNX" secondAttribute="leading" constant="50" id="JRo-Wq-hqG"/>
-                            <constraint firstItem="341-JB-VNX" firstAttribute="trailing" secondItem="0Wx-B3-ieY" secondAttribute="trailing" constant="50" id="LmS-VF-tT8"/>
-                            <constraint firstItem="0Wx-B3-ieY" firstAttribute="leading" secondItem="aAN-uj-DKf" secondAttribute="trailing" constant="20" id="jue-u1-x5V"/>
-                            <constraint firstItem="0Wx-B3-ieY" firstAttribute="top" secondItem="341-JB-VNX" secondAttribute="top" constant="160" id="wnz-2V-Zcb"/>
+                            <constraint firstItem="6sJ-04-aeH" firstAttribute="top" secondItem="341-JB-VNX" secondAttribute="top" constant="300" id="0Vy-el-qeq"/>
+                            <constraint firstItem="iMJ-VY-F5B" firstAttribute="leading" secondItem="341-JB-VNX" secondAttribute="leading" constant="10" id="3TE-Qx-Ada"/>
+                            <constraint firstItem="6sJ-04-aeH" firstAttribute="leading" secondItem="341-JB-VNX" secondAttribute="leading" id="ApV-Kc-k6C"/>
+                            <constraint firstItem="iMJ-VY-F5B" firstAttribute="top" secondItem="6sJ-04-aeH" secondAttribute="bottom" constant="30" id="O1v-3p-6TL"/>
+                            <constraint firstAttribute="trailing" secondItem="6sJ-04-aeH" secondAttribute="trailing" id="Qhk-2t-ueX"/>
+                            <constraint firstItem="iMJ-VY-F5B" firstAttribute="centerX" secondItem="X6u-ti-v9L" secondAttribute="centerX" id="WHX-t3-4co"/>
+                            <constraint firstItem="6sJ-04-aeH" firstAttribute="centerX" secondItem="X6u-ti-v9L" secondAttribute="centerX" id="YpE-OQ-bhk"/>
+                            <constraint firstItem="iMJ-VY-F5B" firstAttribute="top" secondItem="6sJ-04-aeH" secondAttribute="bottom" constant="30" id="hXK-Mj-axZ"/>
+                            <constraint firstItem="341-JB-VNX" firstAttribute="trailing" secondItem="iMJ-VY-F5B" secondAttribute="trailing" constant="10" id="sfV-Hu-cdG"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="VIh-pE-01I"/>
                     <connections>
-                        <outlet property="textField" destination="aAN-uj-DKf" id="EU1-7f-gGi"/>
+                        <outlet property="searchBar" destination="6sJ-04-aeH" id="BiT-IR-Q2g"/>
                         <segue destination="VA7-bW-eA1" kind="show" id="SZZ-bL-Rdi"/>
                     </connections>
                 </viewController>
@@ -644,10 +642,14 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <wkWebView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="F78-2X-7zx">
+                            <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="F78-2X-7zx">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="832"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="F78-2X-7zx" secondAttribute="height" multiplier="207:416" id="RIi-EP-agY"/>
+                                    <constraint firstAttribute="width" constant="414" id="deQ-a1-DjP"/>
+                                    <constraint firstAttribute="height" constant="832" id="uDk-JP-ocF"/>
+                                </constraints>
                                 <wkWebViewConfiguration key="configuration">
                                     <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
                                     <wkPreferences key="preferences"/>
@@ -673,6 +675,11 @@
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="awT-x9-JdF"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="F78-2X-7zx" firstAttribute="top" secondItem="Ea6-eP-kiH" secondAttribute="top" id="7BP-aM-5Q9"/>
+                            <constraint firstItem="F78-2X-7zx" firstAttribute="leading" secondItem="awT-x9-JdF" secondAttribute="leading" id="RoI-Bg-zwI"/>
+                            <constraint firstItem="F78-2X-7zx" firstAttribute="trailing" secondItem="awT-x9-JdF" secondAttribute="trailing" id="cIe-x3-CcC"/>
+                        </constraints>
                     </view>
                     <connections>
                         <outlet property="webView" destination="F78-2X-7zx" id="pWD-I4-48m"/>
@@ -866,7 +873,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="hOy-8M-xBr">
-                                <rect key="frame" x="0.0" y="242" width="414" height="571"/>
+                                <rect key="frame" x="0.0" y="250" width="414" height="563"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="eh3-t4-3RA">
                                     <size key="itemSize" width="128" height="128"/>
@@ -928,7 +935,7 @@
                             <constraint firstItem="tJE-1p-wyk" firstAttribute="leading" secondItem="Sgs-BC-abz" secondAttribute="trailing" constant="26" id="gF7-mb-17V"/>
                             <constraint firstItem="tJE-1p-wyk" firstAttribute="top" secondItem="jW3-Sw-fd7" secondAttribute="top" constant="85" id="mcG-3L-C48"/>
                             <constraint firstItem="Sgs-BC-abz" firstAttribute="top" secondItem="jW3-Sw-fd7" secondAttribute="top" constant="80" id="nGB-JA-MVk"/>
-                            <constraint firstItem="hOy-8M-xBr" firstAttribute="top" secondItem="SU1-B2-dGh" secondAttribute="bottom" id="taJ-yW-9AE"/>
+                            <constraint firstItem="hOy-8M-xBr" firstAttribute="top" secondItem="SU1-B2-dGh" secondAttribute="bottom" constant="8" id="taJ-yW-9AE"/>
                             <constraint firstItem="H8H-gf-yfs" firstAttribute="top" secondItem="jW3-Sw-fd7" secondAttribute="top" constant="60" id="trE-fH-y3U"/>
                             <constraint firstItem="SU1-B2-dGh" firstAttribute="centerX" secondItem="ITQ-PG-5Zp" secondAttribute="centerX" id="wJM-qa-P5z"/>
                         </constraints>
@@ -942,7 +949,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Wcm-m7-0zI" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4112" y="819"/>
+            <point key="canvasLocation" x="4111.594202898551" y="818.97321428571422"/>
         </scene>
         <!--Profile Edit View Controller-->
         <scene sceneID="qhf-U3-zPt">
@@ -1065,6 +1072,7 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                     <connections>
+                        <outlet property="toolBar" destination="Se8-9j-BCa" id="LTe-NL-nr8"/>
                         <outlet property="webView" destination="oXW-L0-75D" id="qPG-8z-HTB"/>
                     </connections>
                 </viewController>
@@ -1154,7 +1162,6 @@
         <image name="logout" width="48" height="48"/>
         <image name="splash" width="120" height="120"/>
         <image name="star" width="32" height="32"/>
-        <image name="tab2-1" width="24" height="24"/>
         <image name="tutorial1" width="632" height="936"/>
         <image name="tutorial2" width="620" height="710"/>
         <image name="tutorial3" width="626" height="744"/>
@@ -1166,6 +1173,9 @@
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="tertiarySystemGroupedBackgroundColor">
+            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

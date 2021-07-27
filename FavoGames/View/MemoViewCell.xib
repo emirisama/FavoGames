@@ -10,24 +10,32 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" restorationIdentifier="MemoViewCell" selectionStyle="default" indentationWidth="10" reuseIdentifier="MemoViewCell" rowHeight="-62" id="KGk-i7-Jjw" customClass="MemoViewCell" customModule="GR" customModuleProvider="target">
+        <tableViewCell contentMode="scaleToFill" restorationIdentifier="MemoViewCell" selectionStyle="default" indentationWidth="10" reuseIdentifier="MemoViewCell" rowHeight="-62" id="KGk-i7-Jjw" customClass="MemoViewCell" customModule="FavoGames" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="400" height="168"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
                 <rect key="frame" x="0.0" y="0.0" width="400" height="168"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" tag="5" contentMode="scaleToFill" fixedFrame="YES" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zJT-v5-Oat">
+                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" tag="5" contentMode="scaleToFill" ambiguous="YES" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zJT-v5-Oat">
                         <rect key="frame" x="13" y="11" width="367" height="140"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="400" id="pRT-8b-I50"/>
+                            <constraint firstAttribute="width" secondItem="zJT-v5-Oat" secondAttribute="height" multiplier="367:140" id="uAy-we-Cy1"/>
+                        </constraints>
                         <color key="textColor" systemColor="labelColor"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                     </textView>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                <constraints>
+                    <constraint firstItem="zJT-v5-Oat" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="2Sa-kO-S1I"/>
+                    <constraint firstAttribute="bottom" secondItem="zJT-v5-Oat" secondAttribute="bottom" constant="10" id="8ok-4d-0BX"/>
+                    <constraint firstAttribute="trailing" secondItem="zJT-v5-Oat" secondAttribute="trailing" constant="10" id="kSM-zu-Fv6"/>
+                    <constraint firstItem="zJT-v5-Oat" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="qMJ-93-kJ3"/>
+                </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

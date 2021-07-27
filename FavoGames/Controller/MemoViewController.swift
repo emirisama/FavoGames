@@ -1,6 +1,6 @@
 //
 //  MemoViewController.swift
-//  GR
+//  FavoGames
 //
 //  Created by 中森えみり on 2021/04/06.
 //
@@ -9,7 +9,7 @@ import UIKit
 import PKHUD
 
 
-class MemoViewController: UIViewController,SendContentsDone{
+class MemoViewController: UIViewController,UITextViewDelegate,SendContentsDone{
     
     
     @IBOutlet weak var commentTextField: UITextView!
@@ -31,7 +31,17 @@ class MemoViewController: UIViewController,SendContentsDone{
         
         sendDBModel.sendContentsDone = self
         commentTextField.text = memo
+        commentTextField.delegate = self
         
+    }
+    
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        // 入力を反映させたテキストを取得する
+        let commentTextField: String = (textView.text! as NSString).replacingCharacters(in: range, with: text)
+        if commentTextField.count <= 800 {
+            return true
+        }
+        return false
     }
     
     
@@ -45,11 +55,9 @@ class MemoViewController: UIViewController,SendContentsDone{
             
             sendDBModel.sendContents(title: gameTitle, comment: commentTextField.text)
             
-            print("ゲームタイトルに紐づくコメントをSendDBModelへ")
             
         }else{
             
-            print("エラーです")
             HUD.hide()
             
         }
@@ -61,7 +69,7 @@ class MemoViewController: UIViewController,SendContentsDone{
         HUD.hide()
         
         self.navigationController?.popViewController(animated: true)
-        print("コメント送信しました")
+
     }
     
     

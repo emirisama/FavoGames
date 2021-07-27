@@ -1,6 +1,6 @@
 //
 //  ViewController.swift
-//  GR
+//  FavoGames
 //
 //  Created by 中森えみり on 2021/03/21.
 //
@@ -33,7 +33,7 @@ class ViewController: UIViewController {
         let createVC = self.storyboard?.instantiateViewController(withIdentifier: "createVC") as! CreateUserViewController
         createVC.modalPresentationStyle = .fullScreen
         self.present(createVC, animated: true, completion: nil)
-        print("新規会員登録")
+
     }
     
     

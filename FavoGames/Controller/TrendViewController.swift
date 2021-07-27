@@ -1,6 +1,6 @@
 //
 //  TrendViewController.swift
-//  GR
+//  FavoGames
 //
 //  Created by 中森えみり on 2021/03/28.
 //
@@ -11,6 +11,7 @@ import AMPagerTabs
 
 class TrendViewController: AMPagerTabsViewController {
     
+    let menuArray = ["PS5","PS4","Switch"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,7 +40,7 @@ class TrendViewController: AMPagerTabsViewController {
         for i in 0..<3{
             
             let gameVC = self.storyboard?.instantiateViewController(withIdentifier: "gameVC") as! GameViewController
-            gameVC.title = "\(Constants.menuArray[i])"
+            gameVC.title = "\(menuArray[i])"
             gameVC.index = i
             vcArray.append(gameVC)
             

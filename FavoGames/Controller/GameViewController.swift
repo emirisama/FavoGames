@@ -1,6 +1,6 @@
 //
 //  GameViewController.swift
-//  GR
+//  FavoGames
 //
 //  Created by 中森えみり on 2021/04/25.
 //
@@ -9,6 +9,7 @@ import UIKit
 import FirebaseAuth
 import FirebaseFirestore
 import PKHUD
+
 
 class GameViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,DoneCatchDataProtocol{
     
@@ -63,6 +64,7 @@ class GameViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
             searchModel.search()
             
         }
+
         
     }
     

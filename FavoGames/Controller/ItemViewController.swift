@@ -1,6 +1,6 @@
 //
 //  ItemViewController.swift
-//  GR
+//  FavoGames
 //
 //  Created by 中森えみり on 2021/07/19.
 //
@@ -10,17 +10,21 @@ import WebKit
 import PKHUD
 
 class ItemViewController: UIViewController,WKNavigationDelegate {
-
+    
     @IBOutlet weak var webView: WKWebView!
-
+    
+    @IBOutlet weak var toolBar: UIToolbar!
     var gameTitle = String()
-
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         webView.navigationDelegate = self
-        webView = WKWebView(frame: view.frame)
+        webView.frame = CGRect(x: 0,
+                               y: 0,
+                               width: view.frame.size.width,
+                               height: view.frame.size.height - toolBar.frame.size.height * 2.5)
         view.addSubview(webView)
         
         let url = URL(string: "https://www.google.com/search?q=\(gameTitle)".addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!)

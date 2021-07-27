@@ -10,7 +10,6 @@ import Foundation
 
 struct Constants{
     
-    static let titleArray = ["Trend","Search","Nice","Mypage"]
     static let menuArray = ["PS5","PS4","Switch"]
 
 }

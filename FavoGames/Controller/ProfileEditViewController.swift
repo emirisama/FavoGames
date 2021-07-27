@@ -1,6 +1,6 @@
 //
 //  ProfileEditViewController.swift
-//  GR
+//  FavoGames
 //
 //  Created by 中森えみり on 2021/06/27.
 //
@@ -73,7 +73,6 @@ class ProfileEditViewController: UIViewController,SendProfileDone, UIImagePicker
             cameraPicker.sourceType = sourceType
             cameraPicker.delegate = self
             cameraPicker.allowsEditing = true
-            //            cameraPicker.showsCameraControls = true
             present(cameraPicker, animated: true,completion: nil)
             
         }else{
@@ -117,11 +116,10 @@ class ProfileEditViewController: UIViewController,SendProfileDone, UIImagePicker
                 
                 let tutorialVC = self.storyboard?.instantiateViewController(withIdentifier: "tutorial") as! ViewController
                 self.present(tutorialVC, animated: true,completion: nil)
-                print("ログアウトしました")
+
                 
             } catch {
-                
-                print ("ログアウト失敗")
+
                 
             }
         })
@@ -138,7 +136,6 @@ class ProfileEditViewController: UIViewController,SendProfileDone, UIImagePicker
     
     func checkProfileDone() {
         
-        print("プロフィールを更新しました")
         HUD.hide()
         dismiss(animated: true, completion: nil)
         

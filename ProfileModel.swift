@@ -1,6 +1,6 @@
 //
 //  ProfileModel.swift
-//  GR
+//  FavoGames
 //
 //  Created by 中森えみり on 2021/03/29.
 //

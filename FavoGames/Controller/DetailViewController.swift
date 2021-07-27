@@ -1,6 +1,6 @@
 //
 //  DetailViewController.swift
-//  GR
+//  FavoGames
 //
 //  Created by 中森えみり on 2021/04/11.
 //
@@ -12,7 +12,7 @@ import FirebaseAuth
 import FirebaseFirestore
 
 
-class DetailViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,GetContentsDataProtocol,SendLikeDone,GetLikeFlagProtocol,DeleteToContentsDone{
+class DetailViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,GetContentsDataProtocol,GetLikeFlagProtocol{
 
     
     @IBOutlet weak var tableView: UITableView!
@@ -54,10 +54,8 @@ class DetailViewController: UIViewController,UITableViewDelegate,UITableViewData
             tableView.register(UINib(nibName: "MemoViewCell", bundle: nil), forCellReuseIdentifier: "MemoViewCell")
             loadModel.getContentsDataProtocol = self
             loadModel.loadContents(title: gameTitle)
-            sendDBModel.sendLikeDone = self
             loadModel.getLikeFlagProtocol = self
             loadModel.loadLikeFlag(title: gameTitle)
-            sendDBModel.deleteToContentsDone = self
             
             break
             
@@ -160,12 +158,16 @@ class DetailViewController: UIViewController,UITableViewDelegate,UITableViewData
     }
     
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool{
-        
-        return true
+        if indexPath.section == 0{
+            return false
+        }else{
+            return true
+        }
         
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        
         
         if editingStyle == UITableViewCell.EditingStyle.delete {
             
@@ -224,28 +226,15 @@ class DetailViewController: UIViewController,UITableViewDelegate,UITableViewData
         
         self.contentModelArray = []
         self.contentModelArray = dataArray
-        print(contentModelArray.count)
         tableView.reloadData()
         
     }
     
-    
-    func checkSendLikeDone() {
-        
-        print("いいねを送信しました")
-        
-    }
     
     func getLikeFlagData(likeFlag: Bool) {
         
         self.likeFlag = likeFlag
         tableView.reloadData()
-    }
-    
-    func checkDeleteToContentsDone() {
-        
-        print("メモ削除しました")
-        
     }
     
     

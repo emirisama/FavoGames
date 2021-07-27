@@ -1,6 +1,6 @@
 //
 //  SingnupViewController.swift
-//  GR
+//  FavoGames
 //
 //  Created by 中森えみり on 2021/03/24.
 //
@@ -60,11 +60,11 @@ class CreateUserViewController: UIViewController,UITextFieldDelegate,SendProfile
                 let usernoimagedata = usernoimage?.jpegData(compressionQuality: 1)
                 
                 if error != nil{
-                    print("エラーです")
+  
                 }else{
                     
                     sendDBModel.sendProfile(userName: nameTextField.text!,imageData: usernoimagedata!)
-                    print("プロフィールデータをSendDBModelへ")
+
                 }
             }
         }

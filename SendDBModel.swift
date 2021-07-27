@@ -1,6 +1,6 @@
 //
 //  SendDBModel.swift
-//  GR
+//  FavoGames
 //
 //  Created by 中森えみり on 2021/03/28.
 //
@@ -17,22 +17,9 @@ protocol SendProfileDone{
     
 }
 
-
 protocol SendContentsDone{
     
     func checkContentsDone()
-    
-}
-
-protocol SendLikeDone{
-    
-    func checkSendLikeDone()
-    
-}
-
-protocol DeleteToContentsDone{
-    
-    func checkDeleteToContentsDone()
     
 }
 
@@ -42,8 +29,6 @@ class SendDBModel {
     var imageDatauser = Data()
     var sendProfileDone:SendProfileDone?
     var sendContentsDone:SendContentsDone?
-    var sendLikeDone:SendLikeDone?
-    var deleteToContentsDone:DeleteToContentsDone?
     
     init(){
         
@@ -84,7 +69,6 @@ class SendDBModel {
                     
                     //送信
                     self.db.collection("Users").document(Auth.auth().currentUser!.uid).setData(["userName":userName,"Date":Date().timeIntervalSince1970,"image":url?.absoluteString])
-                    print("プロフィール画像をDBへ送信")
                     
                     self.sendProfileDone?.checkProfileDone()
                 }
@@ -97,7 +81,7 @@ class SendDBModel {
         
         self.db.collection(title).document(Auth.auth().currentUser!.uid).collection("Contents").document(Auth.auth().currentUser!.uid).setData(
             ["comment":comment,"date":Date().timeIntervalSince1970,"title":title])
-        print("コメントをDBへ送信")
+
         self.sendContentsDone?.checkContentsDone()
         
     }
@@ -106,8 +90,6 @@ class SendDBModel {
     func deleteToContents(title:String){
         
         self.db.collection(title).document(Auth.auth().currentUser!.uid).collection("Contents").document(Auth.auth().currentUser!.uid).delete()
-        self.deleteToContentsDone?.checkDeleteToContentsDone()
-        print("コメント削除をDBへ送信")
         
     }
     
@@ -127,7 +109,6 @@ class SendDBModel {
             self.db.collection("Users").document(userID).collection("like").document(title).setData(
                 ["userID":userID,"title":title,"hardware":hardware,"largeImageUrl":largeImageUrl,"salesDate":salesDate,"itemPrice":itemPrice,"booksGenreId":booksGenreId,"date":Date().timeIntervalSince1970,"like":true])
             
-            self.sendLikeDone?.checkSendLikeDone()
         }
     }
     
