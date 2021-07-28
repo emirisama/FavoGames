@@ -137,20 +137,20 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tutorial3" translatesAutoresizingMaskIntoConstraints="NO" id="hI5-9Q-dgK">
-                                                        <rect key="frame" x="0.0" y="110" width="414" height="400"/>
+                                                        <rect key="frame" x="0.0" y="110" width="414" height="408"/>
                                                         <constraints>
-                                                            <constraint firstAttribute="height" constant="400" id="IRQ-Nb-ITU"/>
                                                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="414" id="TEM-oB-pdv"/>
-                                                            <constraint firstAttribute="width" constant="414" id="rLq-vc-w81"/>
                                                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="400" id="w2l-bF-Vyf"/>
                                                         </constraints>
                                                     </imageView>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ハートを押してお気に入り追加しよう！" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4wl-7b-X3b" userLabel="人気のゲームが一目で分かる！ ※売り上げ順に表示されます。">
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4wl-7b-X3b" userLabel="人気のゲームが一目で分かる！ ※売り上げ順に表示されます。">
                                                         <rect key="frame" x="0.0" y="538" width="414" height="100"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="414" id="9I6-3y-6vt"/>
                                                             <constraint firstAttribute="height" constant="100" id="vYi-o3-OM5"/>
                                                         </constraints>
+                                                        <string key="text">ハートを押して
+お気に入り追加しよう！</string>
                                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <nil key="highlightedColor"/>
@@ -159,6 +159,7 @@
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <constraints>
                                                     <constraint firstItem="ezT-z0-uHc" firstAttribute="top" secondItem="ORR-dY-pjt" secondAttribute="top" id="9bx-cV-RSe"/>
+                                                    <constraint firstItem="4wl-7b-X3b" firstAttribute="top" secondItem="hI5-9Q-dgK" secondAttribute="bottom" constant="20" id="HcE-Wy-9L4"/>
                                                     <constraint firstItem="4wl-7b-X3b" firstAttribute="centerX" secondItem="ORR-dY-pjt" secondAttribute="centerX" id="J8q-tl-tvg"/>
                                                     <constraint firstItem="hI5-9Q-dgK" firstAttribute="leading" secondItem="ORR-dY-pjt" secondAttribute="leading" id="Kdw-EY-ZfZ"/>
                                                     <constraint firstAttribute="trailing" secondItem="ezT-z0-uHc" secondAttribute="trailing" id="X5L-lw-ZDv"/>
@@ -268,7 +269,7 @@
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="W7s-Fu-yc5">
                                                 <rect key="frame" x="2070" y="0.0" width="414" height="648"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jyU-ij-YFc">
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="jyU-ij-YFc">
                                                         <rect key="frame" x="0.0" y="0.0" width="414" height="100"/>
                                                         <color key="backgroundColor" red="1" green="0.7977023405" blue="0.87430979789999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                         <constraints>
@@ -407,7 +408,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0IP-eD-zl5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4112" y="-617"/>
+            <point key="canvasLocation" x="4148" y="-617"/>
         </scene>
         <!--Game View Controller-->
         <scene sceneID="Qo4-cw-ndP">
@@ -418,7 +419,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="syV-Ks-GXZ">
-                                <rect key="frame" x="0.0" y="143" width="414" height="637"/>
+                                <rect key="frame" x="0.0" y="143" width="414" height="569"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="569" id="QAk-eE-HRM"/>
@@ -477,7 +478,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eGJ-fo-qms" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4998.5507246376819" y="-617.41071428571422"/>
+            <point key="canvasLocation" x="4999" y="-617"/>
         </scene>
         <!--Search View Controller-->
         <scene sceneID="CUk-jB-X2N">
@@ -528,7 +529,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7gC-gW-H9c" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4111.594202898551" y="95.758928571428569"/>
+            <point key="canvasLocation" x="4148" y="96"/>
         </scene>
         <!--Search Results View Controller-->
         <scene sceneID="sfO-ZE-T2h">
@@ -629,21 +630,17 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="F78-2X-7zx">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="832"/>
+                            <wkWebView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="F78-2X-7zx">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="852"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="F78-2X-7zx" secondAttribute="height" multiplier="207:416" id="RIi-EP-agY"/>
-                                    <constraint firstAttribute="width" constant="414" id="deQ-a1-DjP"/>
-                                    <constraint firstAttribute="height" constant="832" id="uDk-JP-ocF"/>
-                                </constraints>
                                 <wkWebViewConfiguration key="configuration">
                                     <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
                                     <wkPreferences key="preferences"/>
                                 </wkWebViewConfiguration>
                             </wkWebView>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ReB-ro-0Ew">
-                                <rect key="frame" x="0.0" y="832" width="414" height="44"/>
+                                <rect key="frame" x="0.0" y="847" width="414" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <items>
                                     <barButtonItem title="&lt;" id="Dp3-bU-Z5I">
@@ -662,11 +659,6 @@
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="awT-x9-JdF"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <constraints>
-                            <constraint firstItem="F78-2X-7zx" firstAttribute="top" secondItem="Ea6-eP-kiH" secondAttribute="top" id="7BP-aM-5Q9"/>
-                            <constraint firstItem="F78-2X-7zx" firstAttribute="leading" secondItem="awT-x9-JdF" secondAttribute="leading" id="RoI-Bg-zwI"/>
-                            <constraint firstItem="F78-2X-7zx" firstAttribute="trailing" secondItem="awT-x9-JdF" secondAttribute="trailing" id="cIe-x3-CcC"/>
-                        </constraints>
                     </view>
                     <connections>
                         <outlet property="webView" destination="F78-2X-7zx" id="pWD-I4-48m"/>
@@ -674,7 +666,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Cg2-8O-3Ax" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6669.5652173913049" y="466.74107142857139"/>
+            <point key="canvasLocation" x="6615.9420289855079" y="-221.65178571428569"/>
         </scene>
         <!--Memo View Controller-->
         <scene sceneID="hJz-HN-pde">
@@ -727,7 +719,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DUS-7p-7zG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5832" y="819"/>
+            <point key="canvasLocation" x="5832" y="832"/>
         </scene>
         <!--Splash View Controller-->
         <scene sceneID="erJ-DR-f3E">
@@ -849,7 +841,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0V6-se-iyN" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3120" y="819"/>
+            <point key="canvasLocation" x="3341" y="832"/>
         </scene>
         <!--Profile View Controller-->
         <scene sceneID="DW6-9N-fFz">
@@ -936,7 +928,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Wcm-m7-0zI" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4111.594202898551" y="818.97321428571422"/>
+            <point key="canvasLocation" x="4148" y="832"/>
         </scene>
         <!--Profile Edit View Controller-->
         <scene sceneID="qhf-U3-zPt">
@@ -1018,18 +1010,18 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="4999" y="819"/>
+            <point key="canvasLocation" x="4999" y="832"/>
         </scene>
-        <!--Item View Controller-->
+        <!--Google View Controller-->
         <scene sceneID="ivc-j3-5fO">
             <objects>
-                <viewController storyboardIdentifier="itemVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="vUZ-Q9-TnI" customClass="ItemViewController" customModule="FavoGames" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="googleVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="vUZ-Q9-TnI" customClass="GoogleViewController" customModule="FavoGames" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="fI6-pl-QrM">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <wkWebView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oXW-L0-75D">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="832"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="847"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <wkWebViewConfiguration key="configuration">
@@ -1038,18 +1030,18 @@
                                 </wkWebViewConfiguration>
                             </wkWebView>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Se8-9j-BCa">
-                                <rect key="frame" x="0.0" y="832" width="414" height="44"/>
+                                <rect key="frame" x="0.0" y="847" width="414" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <items>
                                     <barButtonItem title="&lt;" id="EOp-SL-77J">
                                         <connections>
-                                            <action selector="go:" destination="vUZ-Q9-TnI" id="K51-Hn-pVC"/>
+                                            <action selector="back:" destination="vUZ-Q9-TnI" id="UuT-Zy-1Fi"/>
                                         </connections>
                                     </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="Ilx-Ei-6mE"/>
                                     <barButtonItem title="&gt;" id="6JZ-Nd-edO">
                                         <connections>
-                                            <action selector="back:" destination="vUZ-Q9-TnI" id="Jaj-to-6fe"/>
+                                            <action selector="go:" destination="vUZ-Q9-TnI" id="j3v-tQ-X6y"/>
                                         </connections>
                                     </barButtonItem>
                                 </items>
@@ -1065,7 +1057,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="l9l-fP-w9z" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6669.5652173913049" y="-204.24107142857142"/>
+            <point key="canvasLocation" x="6615.9420289855079" y="491.51785714285711"/>
         </scene>
         <!--新規会員登録・ログイン-->
         <scene sceneID="Zxp-Rg-wkO">

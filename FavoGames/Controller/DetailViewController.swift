@@ -7,7 +7,6 @@
 
 import UIKit
 import SDWebImage
-import PKHUD
 import FirebaseAuth
 import FirebaseFirestore
 
@@ -140,7 +139,7 @@ class DetailViewController: UIViewController,UITableViewDelegate,UITableViewData
             cell.memoButton.addTarget(self, action: #selector(memoButtonTap(_:)), for: .touchUpInside)
             cell.likeButton.addTarget(self, action: #selector(likeButtonTap(_:)), for: .touchUpInside)
             cell.videoButton.addTarget(self, action: #selector(videoButtonTap(_ :)), for: .touchUpInside)
-            cell.itemButton.addTarget(self, action: #selector(itemButtonTap(_ :)), for: .touchUpInside)
+            cell.googleButton.addTarget(self, action: #selector(googleButtonTap(_ :)), for: .touchUpInside)
             
             return cell
             
@@ -213,11 +212,11 @@ class DetailViewController: UIViewController,UITableViewDelegate,UITableViewData
         
     }
     
-    @objc func itemButtonTap(_ sender:UIButton){
+    @objc func googleButtonTap(_ sender:UIButton){
         
-        let itemVC = self.storyboard?.instantiateViewController(withIdentifier: "itemVC") as! ItemViewController
-        itemVC.gameTitle = gameTitle
-        self.present(itemVC, animated: true)
+        let googleVC = self.storyboard?.instantiateViewController(withIdentifier: "googleVC") as! GoogleViewController
+        googleVC.gameTitle = gameTitle
+        self.present(googleVC, animated: true)
         
     }
     

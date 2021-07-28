@@ -19,7 +19,7 @@ class ContentDetailCell: UITableViewCell{
     @IBOutlet weak var likeButton: UIButton!
     @IBOutlet weak var memoButton: UIButton!
     @IBOutlet weak var videoButton: UIButton!
-    @IBOutlet weak var itemButton: UIButton!
+    @IBOutlet weak var googleButton: UIButton!
     
     
     override func awakeFromNib() {

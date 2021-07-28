@@ -7,7 +7,6 @@
 
 import UIKit
 import WebKit
-import PKHUD
 
 
 class VideoViewController: UIViewController,WKNavigationDelegate {
@@ -24,8 +23,15 @@ class VideoViewController: UIViewController,WKNavigationDelegate {
         
         webView.navigationDelegate = self
         let url = URL(string: "https://www.youtube.com/results?search_query=\(gameTitle)".addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!)
-        let request = URLRequest(url: url!)
-        webView.load(request)
+        
+        if url != nil{
+            
+            let request = URLRequest(url: url!)
+            webView.load(request)
+            
+        }else{
+            
+        }
         
     }
     
@@ -38,19 +44,6 @@ class VideoViewController: UIViewController,WKNavigationDelegate {
     @IBAction func back(_ sender: Any) {
         
         webView.goBack()
-        
-    }
-    
-    //ロードしている時に呼ばれる
-    func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
-        
-        HUD.show(.progress)
-        
-    }
-    //ロードが完了したときに呼ばれる
-    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-        
-        HUD.hide()
         
     }
     
