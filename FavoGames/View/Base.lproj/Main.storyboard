@@ -591,7 +591,6 @@
                     <navigationItem key="navigationItem" id="PAt-pF-fxj"/>
                     <connections>
                         <outlet property="tableView" destination="NRb-P2-KD1" id="W2D-VU-7pS"/>
-                        <segue destination="5ac-yS-oMF" kind="presentation" modalPresentationStyle="fullScreen" id="L0U-uX-Tys"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="crE-yT-las" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
