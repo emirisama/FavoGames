@@ -8,10 +8,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Tutorial View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController storyboardIdentifier="tutorial" modalPresentationStyle="fullScreen" useStoryboardIdentifierAsRestorationIdentifier="YES" id="BYZ-38-t0r" customClass="ViewController" customModule="FavoGames" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="tutorialVC" modalPresentationStyle="fullScreen" useStoryboardIdentifierAsRestorationIdentifier="YES" id="BYZ-38-t0r" customClass="TutorialViewController" customModule="FavoGames" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -747,7 +747,7 @@
         <!--Tab Bar Controller-->
         <scene sceneID="Rb2-aV-eJj">
             <objects>
-                <tabBarController storyboardIdentifier="tab" automaticallyAdjustsScrollViewInsets="NO" modalPresentationStyle="fullScreen" useStoryboardIdentifierAsRestorationIdentifier="YES" id="fVx-7x-oq4" customClass="TabBarController" customModule="FavoGames" customModuleProvider="target" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="tabVC" automaticallyAdjustsScrollViewInsets="NO" modalPresentationStyle="fullScreen" useStoryboardIdentifierAsRestorationIdentifier="YES" id="fVx-7x-oq4" customClass="TabBarController" customModule="FavoGames" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="DP4-mU-bsi"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="PCE-n9-ObH">
@@ -822,7 +822,7 @@
         <!--Profile View Controller-->
         <scene sceneID="DW6-9N-fFz">
             <objects>
-                <viewController storyboardIdentifier="profile" useStoryboardIdentifierAsRestorationIdentifier="YES" id="juJ-Pj-drF" customClass="ProfileViewController" customModule="FavoGames" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="juJ-Pj-drF" customClass="ProfileViewController" customModule="FavoGames" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ITQ-PG-5Zp">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -873,7 +873,7 @@
                                 <state key="normal" image="edit"/>
                                 <connections>
                                     <action selector="tapEdit:" destination="juJ-Pj-drF" eventType="touchUpInside" id="4dH-hx-rE6"/>
-                                    <segue destination="UCC-t4-Jnw" kind="presentation" identifier="profileEdit" id="lH8-xO-hev"/>
+                                    <segue destination="UCC-t4-Jnw" kind="presentation" identifier="profileEditVC" id="lH8-xO-hev"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -909,7 +909,7 @@
         <!--Profile Edit View Controller-->
         <scene sceneID="qhf-U3-zPt">
             <objects>
-                <viewController storyboardIdentifier="profileEdit" id="UCC-t4-Jnw" customClass="ProfileEditViewController" customModule="FavoGames" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="UCC-t4-Jnw" customClass="ProfileEditViewController" customModule="FavoGames" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="zMV-PD-HkE">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1103,7 +1103,7 @@
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="nameTextField" destination="Ueg-8w-SOl" id="Khy-VM-OXU"/>
-                        <segue destination="fVx-7x-oq4" kind="presentation" identifier="tab" id="1qe-T1-FBq"/>
+                        <segue destination="fVx-7x-oq4" kind="presentation" identifier="tabVC" id="1qe-T1-FBq"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IML-xj-RWx" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

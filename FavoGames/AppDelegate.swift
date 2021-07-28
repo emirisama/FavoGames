@@ -20,21 +20,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate{
         FirebaseApp.configure()
         IQKeyboardManager.shared.enable = true
 
-        let launchedBefore = UserDefaults.standard.bool(forKey: "launchedBefore")
-        if(launchedBefore == true) {
-
-            UserDefaults.standard.set(false, forKey: "launchedBefore")
-            
-        } else {
-
-            UserDefaults.standard.set(true, forKey: "launchedBefore")
-                    let firebaseAuth = Auth.auth()
-                    do {
-                        try firebaseAuth.signOut()
-                    } catch {
-     
-                    }
-        }
+                //ログアウト
+//                let firebaseAuth = Auth.auth()
+//                do {
+//                    try firebaseAuth.signOut()
+//                } catch {
+//
+//                }
 
         return true
         

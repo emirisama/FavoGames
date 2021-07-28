@@ -114,7 +114,7 @@ class ProfileEditViewController: UIViewController,SendProfileDone, UIImagePicker
                 let firebaseAuth = Auth.auth()
                 try firebaseAuth.signOut()
                 
-                let tutorialVC = self.storyboard?.instantiateViewController(withIdentifier: "tutorial") as! ViewController
+                let tutorialVC = self.storyboard?.instantiateViewController(withIdentifier: "tutorialVC") as! TutorialViewController
                 self.present(tutorialVC, animated: true,completion: nil)
 
                 

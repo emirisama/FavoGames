@@ -26,12 +26,12 @@ class SplashViewController: UIViewController {
     func chooseShouldLaunchViewController() {
         if Auth.auth().currentUser?.uid != nil{
             //サインイン
-            let tabVC = self.storyboard?.instantiateViewController(withIdentifier: "tab") as! TabBarController
+            let tabVC = self.storyboard?.instantiateViewController(withIdentifier: "tabVC") as! TabBarController
             tabVC.modalPresentationStyle = .fullScreen
             self.present(tabVC, animated: true, completion: nil)
         }else{
             // 新規登録
-            let tutorialVC = self.storyboard?.instantiateViewController(withIdentifier: "tutorial") as! ViewController
+            let tutorialVC = self.storyboard?.instantiateViewController(withIdentifier: "tutorialVC") as! TutorialViewController
             tutorialVC.modalPresentationStyle = .fullScreen
             self.present(tutorialVC, animated: true, completion: nil)
             

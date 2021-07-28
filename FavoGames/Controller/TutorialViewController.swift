@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  TutorialViewController.swift
 //  FavoGames
 //
 //  Created by 中森えみり on 2021/03/21.
@@ -8,7 +8,7 @@
 import UIKit
 
 
-class ViewController: UIViewController {
+class TutorialViewController: UIViewController {
     
     
     @IBOutlet weak var scroll: UIScrollView!
@@ -39,7 +39,7 @@ class ViewController: UIViewController {
     
 }
 
-extension ViewController:UIScrollViewDelegate {
+extension TutorialViewController:UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         
         let index = Int(round(scrollView.contentOffset.x / scrollView.frame.width))

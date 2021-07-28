@@ -117,7 +117,7 @@ class ProfileViewController: UIViewController,UICollectionViewDataSource,UIColle
     //プロフィール編集画面へ遷移
     @IBAction func tapEdit(_ sender: Any) {
         
-        performSegue(withIdentifier: "profileEdit", sender: nil)
+        performSegue(withIdentifier: "profileEditVC", sender: nil)
         
     }
     
