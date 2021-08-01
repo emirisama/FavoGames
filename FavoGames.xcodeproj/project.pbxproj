@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		5017F18826B28D870062FC78 /* CameraController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5017F18726B28D870062FC78 /* CameraController.swift */; };
 		504C30D7265BC30300C520B0 /* ContentDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 504C30D5265BC30300C520B0 /* ContentDetailCell.swift */; };
 		504C30D8265BC30300C520B0 /* ContentDetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 504C30D6265BC30300C520B0 /* ContentDetailCell.xib */; };
 		504E35522625982D00A119D1 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 504E35512625982D00A119D1 /* ProfileViewController.swift */; };
@@ -48,7 +47,6 @@
 
 /* Begin PBXFileReference section */
 		3B86963A1E8174124908661F /* Pods-FavoGames.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FavoGames.debug.xcconfig"; path = "Target Support Files/Pods-FavoGames/Pods-FavoGames.debug.xcconfig"; sourceTree = "<group>"; };
-		5017F18726B28D870062FC78 /* CameraController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraController.swift; sourceTree = "<group>"; };
 		504C30D5265BC30300C520B0 /* ContentDetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentDetailCell.swift; sourceTree = "<group>"; };
 		504C30D6265BC30300C520B0 /* ContentDetailCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ContentDetailCell.xib; sourceTree = "<group>"; };
 		504E35512625982D00A119D1 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
@@ -135,7 +133,6 @@
 				50777FA0261CAB58005314BF /* MemoViewController.swift */,
 				5098092D26A58B7C005240D4 /* VideoViewController.swift */,
 				5098092F26A59EDF005240D4 /* GoogleViewController.swift */,
-				5017F18726B28D870062FC78 /* CameraController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -325,7 +322,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5017F18826B28D870062FC78 /* CameraController.swift in Sources */,
 				50F5585F2691F885004A73AE /* SplashViewController.swift in Sources */,
 				5064B81726B5A75100994961 /* SendDBModel.swift in Sources */,
 				5098093026A59EDF005240D4 /* GoogleViewController.swift in Sources */,
