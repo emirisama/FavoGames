@@ -19,11 +19,11 @@ class SplashViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        self.chooseShouldLaunchViewController()
+        chooseShouldLaunchViewController()
         
     }
     
-    func chooseShouldLaunchViewController() {
+    func chooseShouldLaunchViewController(){
         if Auth.auth().currentUser?.uid != nil{
             //サインイン
             let tabVC = self.storyboard?.instantiateViewController(withIdentifier: "tabVC") as! TabBarController
@@ -38,6 +38,5 @@ class SplashViewController: UIViewController {
         }
         
     }
-    
     
 }

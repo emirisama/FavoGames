@@ -51,7 +51,7 @@ class ProfileViewController: UIViewController,UICollectionViewDataSource,UIColle
         if Auth.auth().currentUser?.uid != nil{
             //サインイン
         }else{
-
+            
             let createVC = self.storyboard?.instantiateViewController(withIdentifier: "createVC") as! CreateUserViewController
             createVC.modalPresentationStyle = .fullScreen
             self.present(createVC, animated: true, completion: nil)

@@ -33,6 +33,8 @@ class ProfileEditViewController: UIViewController,SendProfileDone, UIImagePicker
         imageView.clipsToBounds = true
         sendDBModel.sendProfileDone = self
         
+        
+        
     }
     
     //名前の文字数制限
@@ -61,6 +63,7 @@ class ProfileEditViewController: UIViewController,SendProfileDone, UIImagePicker
         
         openCamera()
         
+        
     }
     
     func openCamera(){
@@ -85,6 +88,7 @@ class ProfileEditViewController: UIViewController,SendProfileDone, UIImagePicker
         if let pickedImage = info[.editedImage] as? UIImage{
             imageView.image = pickedImage
             //閉じる処理
+            print("カメラ閉じる")
             picker.dismiss(animated: true, completion: nil)
             
         }
@@ -116,10 +120,10 @@ class ProfileEditViewController: UIViewController,SendProfileDone, UIImagePicker
                 
                 let tutorialVC = self.storyboard?.instantiateViewController(withIdentifier: "tutorialVC") as! TutorialViewController
                 self.present(tutorialVC, animated: true,completion: nil)
-
+                
                 
             } catch {
-
+                
                 
             }
         })
