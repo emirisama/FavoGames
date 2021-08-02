@@ -1116,7 +1116,7 @@
         <image name="heart2" width="48" height="48"/>
         <image name="logout" width="48" height="48"/>
         <image name="splash" width="120" height="120"/>
-        <image name="star" width="32" height="32"/>
+        <image name="star" width="48" height="48"/>
         <image name="tutorial1" width="632" height="936"/>
         <image name="tutorial2" width="632" height="602"/>
         <image name="tutorial3" width="626" height="744"/>

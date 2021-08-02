@@ -29,7 +29,6 @@ class TabBarController: UITabBarController {
         
         tabBar.items![2].image = UIImage(named: "tab3-1")!.withRenderingMode(UIImage.RenderingMode.alwaysOriginal)
         tabBar.items![2].selectedImage = UIImage(named: "tab3-2")!.withRenderingMode(UIImage.RenderingMode.alwaysOriginal)
-        tabBar.items![2].imageInsets = UIEdgeInsets(top: 10, left: 0, bottom: 10, right: 0)
         
         self.tabBar.tintColor = UIColor.black
         
