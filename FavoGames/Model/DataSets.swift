@@ -8,7 +8,7 @@
 import Foundation
 
 
-struct DataSets{
+struct DataSets {
     
     let title:String?
     let hardware:String?

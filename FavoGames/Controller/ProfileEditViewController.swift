@@ -10,7 +10,7 @@ import PKHUD
 import FirebaseAuth
 
 
-class ProfileEditViewController: UIViewController,SendProfileDone, UIImagePickerControllerDelegate, UINavigationControllerDelegate,GetProfileDataProtocol,UITextFieldDelegate{
+class ProfileEditViewController: CameraViewController,SendProfileDone,GetProfileDataProtocol,UITextFieldDelegate{
     
     
     @IBOutlet weak var imageView: UIImageView!
@@ -63,42 +63,18 @@ class ProfileEditViewController: UIViewController,SendProfileDone, UIImagePicker
         
         openCamera()
         
-        
     }
     
-    func openCamera(){
-        
-        let sourceType:UIImagePickerController.SourceType = .photoLibrary
-        //カメラが利用可能かチェック
-        if UIImagePickerController.isSourceTypeAvailable(.photoLibrary){
-            //インスタンスの作成
-            let cameraPicker = UIImagePickerController()
-            cameraPicker.sourceType = sourceType
-            cameraPicker.delegate = self
-            cameraPicker.allowsEditing = true
-            present(cameraPicker, animated: true,completion: nil)
-            
-        }else{
-            
-        }
-    }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         
         if let pickedImage = info[.editedImage] as? UIImage{
             imageView.image = pickedImage
-            //閉じる処理
-            print("カメラ閉じる")
             picker.dismiss(animated: true, completion: nil)
             
         }
     }
-    
-    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-        
-        picker.dismiss(animated: true, completion: nil)
-        
-    }
+
     
     @IBAction func done(_ sender: Any) {
         

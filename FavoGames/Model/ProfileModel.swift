@@ -8,9 +8,9 @@
 import Foundation
 
 
-struct ProfileModel{
+struct ProfileModel {
     
-    var userName:String?
-    var imageURLString:String?
+    var userName: String?
+    var imageURLString: String?
     
 }

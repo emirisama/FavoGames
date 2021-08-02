@@ -10,51 +10,51 @@ import Firebase
 import FirebaseFirestore
 
 
-protocol GetProfileDataProtocol{
+protocol GetProfileDataProtocol {
     
-    func getProfileData(dataArray:[ProfileModel])
-    
-}
-
-protocol GetContentsDataProtocol{
-    
-    func getContentsData(dataArray:[ContentModel])
+    func getProfileData(dataArray: [ProfileModel])
     
 }
 
-protocol GetLikeDataProtocol{
+protocol GetCommentsDataProtocol {
+    
+    func getCommentsData(dataArray: [CommentsModel])
+    
+}
+
+protocol GetLikeDataProtocol {
     
     func getLikeData(dataArray: [LikeModel])
     
 }
 
-protocol GetLikeFlagProtocol{
+protocol GetLikeFlagProtocol {
     
-    func getLikeFlagData(likeFlag:Bool)
+    func getLikeFlagData(likeFlag: Bool)
     
 }
 
 
-class LoadModel{
+class LoadModel {
     
     //Firebase
     let db = Firestore.firestore()
     
     //Memo
-    var contentModelArray:[ContentModel] = []
-    var getContentsDataProtocol:GetContentsDataProtocol?
+    var commentsModelArray: [CommentsModel] = []
+    var getCommentsDataProtocol: GetCommentsDataProtocol?
     
     //プロフィール
-    var profileModelArray:[ProfileModel] = []
-    var getProfileDataProtocol:GetProfileDataProtocol?
+    var profileModelArray: [ProfileModel] = []
+    var getProfileDataProtocol: GetProfileDataProtocol?
     
     //いいね取得
-    var getLikeDataProtocol:GetLikeDataProtocol?
-    var likeModelArray:[LikeModel] = []
-    var getLikeFlagProtocol:GetLikeFlagProtocol?
+    var getLikeDataProtocol: GetLikeDataProtocol?
+    var likeModelArray: [LikeModel] = []
+    var getLikeFlagProtocol: GetLikeFlagProtocol?
     
     //プロフィールの受信
-    func loadProfile(){
+    func loadProfile() {
         db.collection("Users").document(Auth.auth().currentUser!.uid).addSnapshotListener { (snapShot, error) in
             
             self.profileModelArray = []
@@ -78,35 +78,37 @@ class LoadModel{
     }
     
     //コメントの受信
-    func loadContents(title:String){
-        db.collection(title).document(Auth.auth().currentUser!.uid).collection("Contents").order(by:"date").addSnapshotListener { (snapShot, error) in
-            self.contentModelArray = []
-            if error != nil{
+    func loadComments(title: String) {
+        db.collection(title).document(Auth.auth().currentUser!.uid).collection("Comments").order(by:"date").addSnapshotListener { (snapShot, error) in
+            
+            self.commentsModelArray = []
+            
+            if error != nil {
                 return
             }
             
-            if let snapShotDoc = snapShot?.documents{
+            if let snapShotDoc = snapShot?.documents {
                 
-                for doc in snapShotDoc{
+                for doc in snapShotDoc {
                     
                     let data = doc.data()
                     
                     if let comment = data["comment"] as? String,let date = data["date"] as? Double,let date = data["title"] as? String{
-                        let contentModel = ContentModel(comment: comment,title: title)
-                        self.contentModelArray.append(contentModel)
+                        let commentsModel = CommentsModel(comment: comment,title: title)
+                        self.commentsModelArray.append(commentsModel)
                         
                     }
                 }
                 
-                self.getContentsDataProtocol?.getContentsData(dataArray: self.contentModelArray)
+                self.getCommentsDataProtocol?.getCommentsData(dataArray: self.commentsModelArray)
                 
             }
         }
     }
     
     //いいねの受信
-    func loadLikeData(userID:String){
-        db.collection("Users").document(Auth.auth().currentUser!.uid).collection("like").order(by: "date").addSnapshotListener { snapShot, error in
+    func loadLikeData(userID: String) {
+        db.collection("Users").document(Auth.auth().currentUser!.uid).collection("like").order(by:  "date").addSnapshotListener { snapShot, error in
             
             self.likeModelArray = []
             
@@ -114,9 +116,9 @@ class LoadModel{
                 return
             }
             
-            if let snapShotDoc = snapShot?.documents{
+            if let snapShotDoc = snapShot?.documents {
                 
-                for doc in snapShotDoc{
+                for doc in snapShotDoc {
                     
                     let data = doc.data()
                     
@@ -137,7 +139,7 @@ class LoadModel{
     }
     
     //いいねの真偽の値を受信
-    func loadLikeFlag(title:String){
+    func loadLikeFlag(title: String) {
         
         db.collection("Users").document(Auth.auth().currentUser!.uid).collection("like").document(title).addSnapshotListener { snapShot, error in
             
@@ -147,11 +149,11 @@ class LoadModel{
                 return
             }
             
-            if let snapShotDoc = snapShot?.data(){
+            if let snapShotDoc = snapShot?.data() {
                 
-                for doc in snapShotDoc{
+                for doc in snapShotDoc {
                     
-                    if let like = snapShotDoc["like"] as? Bool{
+                    if let like = snapShotDoc["like"] as? Bool {
                         likeFlag = like
                         
                     }

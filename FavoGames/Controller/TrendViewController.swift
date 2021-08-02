@@ -33,7 +33,7 @@ class TrendViewController: AMPagerTabsViewController {
         
     }
     
-    func getTabs() -> [UIViewController]{
+    func getTabs() -> [UIViewController] {
         
         var vcArray = [UIViewController]()
         

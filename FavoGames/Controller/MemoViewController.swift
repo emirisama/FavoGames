@@ -9,7 +9,7 @@ import UIKit
 import PKHUD
 
 
-class MemoViewController: UIViewController,UITextViewDelegate,SendContentsDone{
+class MemoViewController: UIViewController,UITextViewDelegate,SendCommentsDone {
     
     
     @IBOutlet weak var commentTextField: UITextView!
@@ -19,17 +19,17 @@ class MemoViewController: UIViewController,UITextViewDelegate,SendContentsDone{
     var gameTitle = String()
     var hardware = String()
     var memo = String()
-    var contentModel:ContentModel?
+    var cmmentsModel: CommentsModel?
     var sendDBModel = SendDBModel()
     var loadModel = LoadModel()
     var dataSetsArray = [DataSets]()
-    var contentModelArray = [ContentModel]()
+    var commentsModelArray = [CommentsModel]()
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        sendDBModel.sendContentsDone = self
+        sendDBModel.sendCommentsDone = self
         commentTextField.text = memo
         commentTextField.delegate = self
         
@@ -53,7 +53,7 @@ class MemoViewController: UIViewController,UITextViewDelegate,SendContentsDone{
         
         if commentTextField.text?.isEmpty != true {
             
-            sendDBModel.sendContents(title: gameTitle, comment: commentTextField.text)
+            sendDBModel.sendComments(title: gameTitle, comment: commentTextField.text)
             
             
         }else{
@@ -64,7 +64,7 @@ class MemoViewController: UIViewController,UITextViewDelegate,SendContentsDone{
         
     }
     
-    func checkContentsDone() {
+    func checkCommentsDone() {
         
         HUD.hide()
         

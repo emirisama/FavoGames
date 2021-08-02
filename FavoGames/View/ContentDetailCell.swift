@@ -8,7 +8,7 @@
 import UIKit
 
 
-class ContentDetailCell: UITableViewCell{
+class ContentDetailCell: UITableViewCell {
     
     
     @IBOutlet weak var gameTitleLabel: UILabel!

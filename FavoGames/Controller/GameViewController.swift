@@ -21,7 +21,7 @@ class GameViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
     var loadModel = LoadModel()
     var sendDBModel = SendDBModel()
     var dataSetsArray = [DataSets]()
-    var contentModelArray = [ContentModel]()
+    var commentsModelArray = [CommentsModel]()
     
     var index = Int()
     var idString = String()

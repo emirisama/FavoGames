@@ -19,8 +19,8 @@ class ProfileViewController: UIViewController,UICollectionViewDataSource,UIColle
     
     var loadModel = LoadModel()
     var sendDBModel = SendDBModel()
-    var contentModel:ContentModel?
-    var contentModelArray = [ContentModel]()
+    var commentsModel: CommentsModel?
+    var commentsModelArray = [CommentsModel]()
     var profileModelArray = [ProfileModel]()
     var profileModel = ProfileModel()
     var likeModelArray = [LikeModel]()

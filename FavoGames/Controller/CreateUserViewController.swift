@@ -37,10 +37,10 @@ class CreateUserViewController: UIViewController,UITextFieldDelegate,SendProfile
     }
     
     //文字数制限
-    func textField(_ textField: UITextField,shouldChangeCharactersIn range: NSRange,replacementString string: String) -> Bool{
+    func textField(_ textField: UITextField,shouldChangeCharactersIn range: NSRange,replacementString string: String) -> Bool {
         
         let nameTextField: String = (nameTextField.text! as NSString).replacingCharacters(in: range, with: string)
-        if nameTextField.count <= 20{
+        if nameTextField.count <= 20 {
             
             return true
         }
@@ -52,7 +52,7 @@ class CreateUserViewController: UIViewController,UITextFieldDelegate,SendProfile
     //アカウントを作成する
     @IBAction func registerButton(_ sender: Any) {
         
-        if nameTextField.text?.isEmpty != true{
+        if nameTextField.text?.isEmpty != true {
             
             Auth.auth().signInAnonymously { [self] (result, error) in
                 

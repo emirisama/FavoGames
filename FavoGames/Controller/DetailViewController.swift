@@ -11,7 +11,7 @@ import FirebaseAuth
 import FirebaseFirestore
 
 
-class DetailViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,GetContentsDataProtocol,GetLikeFlagProtocol{
+class DetailViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,GetCommentsDataProtocol,GetLikeFlagProtocol{
 
     
     @IBOutlet weak var tableView: UITableView!
@@ -30,12 +30,12 @@ class DetailViewController: UIViewController,UITableViewDelegate,UITableViewData
     let sectionTitle = ["","Memo"]
     var likeFlag = Bool()
     
-    var contentModel:ContentModel?
-    var profileModel:ProfileModel?
+    var commentsModel: CommentsModel?
+    var profileModel: ProfileModel?
     var loadModel = LoadModel()
     var sendDBModel = SendDBModel()
     var profileModelArray = [ProfileModel]()
-    var contentModelArray = [ContentModel]()
+    var commentsModelArray = [CommentsModel]()
     var dataSetsArray = [DataSets]()
     var searchAndLoadModel = SearchAndLoadModel()
     
@@ -51,8 +51,8 @@ class DetailViewController: UIViewController,UITableViewDelegate,UITableViewData
             tableView.dataSource = self
             tableView.register(UINib(nibName: "ContentDetailCell", bundle: nil), forCellReuseIdentifier: "ContentDetailCell")
             tableView.register(UINib(nibName: "MemoViewCell", bundle: nil), forCellReuseIdentifier: "MemoViewCell")
-            loadModel.getContentsDataProtocol = self
-            loadModel.loadContents(title: gameTitle)
+            loadModel.getCommentsDataProtocol = self
+            loadModel.loadComments(title: gameTitle)
             loadModel.getLikeFlagProtocol = self
             loadModel.loadLikeFlag(title: gameTitle)
             
@@ -100,7 +100,7 @@ class DetailViewController: UIViewController,UITableViewDelegate,UITableViewData
             
         }else if section == 1{
             
-            return contentModelArray.count
+            return commentsModelArray.count
             
         }
         
@@ -147,8 +147,8 @@ class DetailViewController: UIViewController,UITableViewDelegate,UITableViewData
             
             let cell2 = tableView.dequeueReusableCell(withIdentifier: "MemoViewCell", for: indexPath) as! MemoViewCell
             cell2.selectionStyle = .none
-            cell2.memoLabel.text = self.contentModelArray[indexPath.row].comment
-            memo = self.contentModelArray[indexPath.row].comment!
+            cell2.memoLabel.text = self.commentsModelArray[indexPath.row].comment
+            memo = self.commentsModelArray[indexPath.row].comment!
             
             return cell2
             
@@ -170,16 +170,16 @@ class DetailViewController: UIViewController,UITableViewDelegate,UITableViewData
         
         if editingStyle == UITableViewCell.EditingStyle.delete {
             
-            contentModelArray.remove(at: indexPath.row)
+            commentsModelArray.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath as IndexPath], with: UITableView.RowAnimation.automatic)
-            sendDBModel.deleteToContents(title: gameTitle)
+            sendDBModel.deleteToComments(title: gameTitle)
             
         }
         
     }
     
     
-    @objc func memoButtonTap(_ sender:UIButton){
+    @objc func memoButtonTap(_ sender: UIButton) {
         
         let memoVC = self.storyboard?.instantiateViewController(withIdentifier: "memoVC") as! MemoViewController
         memoVC.dataSetsArray = dataSetsArray
@@ -190,7 +190,7 @@ class DetailViewController: UIViewController,UITableViewDelegate,UITableViewData
         
     }
     
-    @objc func likeButtonTap(_ sender:UIButton){
+    @objc func likeButtonTap(_ sender: UIButton) {
         
         if self.likeFlag == false{
             
@@ -204,7 +204,7 @@ class DetailViewController: UIViewController,UITableViewDelegate,UITableViewData
         
     }
     
-    @objc func videoButtonTap(_ sender:UIButton){
+    @objc func videoButtonTap(_ sender: UIButton) {
         
         let videoVC = self.storyboard?.instantiateViewController(withIdentifier: "videoVC") as! VideoViewController
         videoVC.gameTitle = gameTitle
@@ -212,7 +212,7 @@ class DetailViewController: UIViewController,UITableViewDelegate,UITableViewData
         
     }
     
-    @objc func googleButtonTap(_ sender:UIButton){
+    @objc func googleButtonTap(_ sender: UIButton) {
         
         let googleVC = self.storyboard?.instantiateViewController(withIdentifier: "googleVC") as! GoogleViewController
         googleVC.gameTitle = gameTitle
@@ -221,10 +221,10 @@ class DetailViewController: UIViewController,UITableViewDelegate,UITableViewData
     }
     
     
-    func getContentsData(dataArray: [ContentModel]) {
+    func getCommentsData(dataArray: [CommentsModel]) {
         
-        self.contentModelArray = []
-        self.contentModelArray = dataArray
+        self.commentsModelArray = []
+        self.commentsModelArray = dataArray
         tableView.reloadData()
         
     }

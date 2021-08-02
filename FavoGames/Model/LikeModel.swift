@@ -8,7 +8,7 @@
 import Foundation
 
 
-struct LikeModel{
+struct LikeModel {
     
     let title:String?
     let hardware:String?

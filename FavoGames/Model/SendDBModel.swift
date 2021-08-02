@@ -11,15 +11,15 @@ import FirebaseAuth
 import FirebaseStorage
 import PKHUD
 
-protocol SendProfileDone{
+protocol SendProfileDone {
     
     func checkProfileDone()
     
 }
 
-protocol SendContentsDone{
+protocol SendCommentsDone {
     
-    func checkContentsDone()
+    func checkCommentsDone()
     
 }
 
@@ -28,92 +28,95 @@ class SendDBModel {
     let db = Firestore.firestore()
     var imageDatauser = Data()
     var sendProfileDone:SendProfileDone?
-    var sendContentsDone:SendContentsDone?
+    var sendCommentsDone:SendCommentsDone?
     
-    init(){
+    init() {
         
     }
     
     //プロフィールをDBへ送信する
-    func sendProfile(userName:String,imageData: Data){
+    func sendProfile(userName: String,imageData: Data) {
         
         //プロフィール画像
         let usernoimage = UIImage(named: "userimage")
         let usernoimagedata = usernoimage!.pngData()
         
         let imageRef = Storage.storage().reference().child("ProfielImage").child("\(UUID().uuidString + String(Date().timeIntervalSince1970)).jpg")
+        
         //ローディング
         HUD.show(.progress)
         HUD.dimsBackground = true
         
         
         //（プロフィール画像が空の場合、デフォルト画像を入れる）
-        if imageData.isEmpty == true{
+        if imageData.isEmpty == true {
+            
             imageDatauser = usernoimagedata!
             
-        }else{
+        } else {
+            
             imageDatauser = imageData
+            
         }
         
         imageRef.putData(imageDatauser, metadata: nil) { (metaData, error ) in
             
-            if error != nil{
+            if error != nil {
                 return
             }
             
             imageRef.downloadURL { (url, error) in
                 
-                if url != nil{
-                    
-                    let profileModel = ProfileModel(userName: userName,imageURLString: url?.absoluteString)
-                    
+                if url != nil {
+         
                     //送信
-                    self.db.collection("Users").document(Auth.auth().currentUser!.uid).setData(["userName":userName,"Date":Date().timeIntervalSince1970,"image":url?.absoluteString])
+                    self.db.collection("Users").document(Auth.auth().currentUser!.uid).setData(["userName": userName,"Date": Date().timeIntervalSince1970,"image": url?.absoluteString])
                     
                     self.sendProfileDone?.checkProfileDone()
+                    
                 }
             }
         }
     }
     
     //ゲームソフトに紐づくメモ（コメントをDBへ送信）
-    func sendContents(title:String,comment:String){
+    func sendComments(title: String,comment: String) {
         
-        self.db.collection(title).document(Auth.auth().currentUser!.uid).collection("Contents").document(Auth.auth().currentUser!.uid).setData(
-            ["comment":comment,"date":Date().timeIntervalSince1970,"title":title])
+        self.db.collection(title).document(Auth.auth().currentUser!.uid).collection("Comments").document(Auth.auth().currentUser!.uid).setData(
+            ["comment": comment,"date": Date().timeIntervalSince1970,"title": title])
 
-        self.sendContentsDone?.checkContentsDone()
+        self.sendCommentsDone?.checkCommentsDone()
         
     }
     
     //Memo(コメント削除)
-    func deleteToContents(title:String){
+    func deleteToComments(title: String) {
         
-        self.db.collection(title).document(Auth.auth().currentUser!.uid).collection("Contents").document(Auth.auth().currentUser!.uid).delete()
+        self.db.collection(title).document(Auth.auth().currentUser!.uid).collection("Comments").document(Auth.auth().currentUser!.uid).delete()
         
     }
     
     //ゲームソフトをいいねする（likeを送信)
-    func sendLike(userID:String,largeImageUrl:String,title:String,hardware:String,salesDate:String,itemPrice:Int,booksGenreId:String,likeFlag:Bool){
+    func sendLike(userID: String,largeImageUrl:  String,title: String,hardware: String,salesDate: String,itemPrice: Int,booksGenreId: String,likeFlag: Bool){
         
-        if likeFlag == false{
+        if likeFlag == false {
             
             self.db.collection("Users").document(userID).collection("like").document(title).setData(
-                ["userID":userID,"title":title,"hardware":hardware,"largeImageUrl":largeImageUrl,"salesDate":salesDate,"itemPrice":itemPrice,"booksGenreId":booksGenreId,"date":Date().timeIntervalSince1970,"like":false])
+                ["userID": userID,"title": title,"hardware": hardware,"largeImageUrl": largeImageUrl,"salesDate": salesDate,"itemPrice": itemPrice,"booksGenreId": booksGenreId,"date": Date().timeIntervalSince1970,"like": false])
             
             //消す
-            deleteToLike(title:title)
+            deleteToLike(title: title)
             
-        }else if likeFlag == true{
+        } else if likeFlag == true {
             
             self.db.collection("Users").document(userID).collection("like").document(title).setData(
-                ["userID":userID,"title":title,"hardware":hardware,"largeImageUrl":largeImageUrl,"salesDate":salesDate,"itemPrice":itemPrice,"booksGenreId":booksGenreId,"date":Date().timeIntervalSince1970,"like":true])
+                ["userID": userID,"title": title,"hardware": hardware,"largeImageUrl": largeImageUrl,"salesDate": salesDate,"itemPrice": itemPrice,"booksGenreId": booksGenreId,"date": Date().timeIntervalSince1970,"like": true])
             
         }
     }
     
     //いいねを消す(like削除を送信)
-    func deleteToLike(title:String){
+    func deleteToLike(title: String) {
         
         self.db.collection("Users").document(Auth.auth().currentUser!.uid).collection("like").document(title).delete()
         
