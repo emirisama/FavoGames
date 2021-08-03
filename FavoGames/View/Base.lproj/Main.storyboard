@@ -80,7 +80,7 @@
                                                             <constraint firstAttribute="height" constant="100" id="9Us-iw-yoI"/>
                                                         </constraints>
                                                         <string key="text">Search
-ゲームソフト名で探そう</string>
+ゲームタイトルで探そう</string>
                                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="25"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
@@ -1116,13 +1116,13 @@
         <image name="heart2" width="48" height="48"/>
         <image name="logout" width="48" height="48"/>
         <image name="splash" width="120" height="120"/>
-        <image name="star" width="48" height="48"/>
-        <image name="tutorial1" width="632" height="936"/>
-        <image name="tutorial2" width="632" height="602"/>
-        <image name="tutorial3" width="626" height="744"/>
+        <image name="star" width="32" height="32"/>
+        <image name="tutorial1" width="626" height="932"/>
+        <image name="tutorial2" width="508" height="592"/>
+        <image name="tutorial3" width="622" height="732"/>
         <image name="tutorial4" width="606" height="744"/>
-        <image name="tutorial5" width="621" height="928"/>
-        <image name="tutorial6" width="634" height="592"/>
+        <image name="tutorial5" width="627" height="910"/>
+        <image name="tutorial6" width="628" height="744"/>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
