@@ -32,6 +32,8 @@
 		5098092E26A58B7C005240D4 /* VideoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5098092D26A58B7C005240D4 /* VideoViewController.swift */; };
 		5098093026A59EDF005240D4 /* GoogleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5098092F26A59EDF005240D4 /* GoogleViewController.swift */; };
 		50A8D81F2645310C008B5CEA /* SearchResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50A8D81E2645310C008B5CEA /* SearchResultsViewController.swift */; };
+		50BB2F6926BD6292004E7796 /* MypageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50BB2F6826BD6292004E7796 /* MypageViewController.swift */; };
+		50BB2F6B26BD62EC004E7796 /* SigninGuidanceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50BB2F6A26BD62EC004E7796 /* SigninGuidanceViewController.swift */; };
 		50BE516F26B6A981004F6495 /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50BE516E26B6A981004F6495 /* CameraViewController.swift */; };
 		50CF1B9D263525DA00ECF7E4 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50CF1B9C263525DA00ECF7E4 /* GameViewController.swift */; };
 		50D9222B26078EB5009A7BB0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50D9222A26078EB5009A7BB0 /* AppDelegate.swift */; };
@@ -73,6 +75,8 @@
 		5098092D26A58B7C005240D4 /* VideoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoViewController.swift; sourceTree = "<group>"; };
 		5098092F26A59EDF005240D4 /* GoogleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleViewController.swift; sourceTree = "<group>"; };
 		50A8D81E2645310C008B5CEA /* SearchResultsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultsViewController.swift; sourceTree = "<group>"; };
+		50BB2F6826BD6292004E7796 /* MypageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MypageViewController.swift; sourceTree = "<group>"; };
+		50BB2F6A26BD62EC004E7796 /* SigninGuidanceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SigninGuidanceViewController.swift; sourceTree = "<group>"; };
 		50BE516E26B6A981004F6495 /* CameraViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
 		50CF1B9C263525DA00ECF7E4 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		50D9222726078EB5009A7BB0 /* FavoGames.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FavoGames.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -136,6 +140,8 @@
 				5098092D26A58B7C005240D4 /* VideoViewController.swift */,
 				5098092F26A59EDF005240D4 /* GoogleViewController.swift */,
 				50BE516E26B6A981004F6495 /* CameraViewController.swift */,
+				50BB2F6A26BD62EC004E7796 /* SigninGuidanceViewController.swift */,
+				50BB2F6826BD6292004E7796 /* MypageViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -342,8 +348,10 @@
 				5064B81526B5A75100994961 /* ProfileModel.swift in Sources */,
 				508B0B47260B615700FBA8C5 /* CreateUserViewController.swift in Sources */,
 				504E35522625982D00A119D1 /* ProfileViewController.swift in Sources */,
+				50BB2F6926BD6292004E7796 /* MypageViewController.swift in Sources */,
 				5064B81426B5A75100994961 /* DataSets.swift in Sources */,
 				504E35562625C68700A119D1 /* ContentsCell.swift in Sources */,
+				50BB2F6B26BD62EC004E7796 /* SigninGuidanceViewController.swift in Sources */,
 				5064B81026B5A75100994961 /* SearchAndLoadModel.swift in Sources */,
 				504C30D7265BC30300C520B0 /* ContentDetailCell.swift in Sources */,
 				50763BEF261057210071941E /* TrendViewController.swift in Sources */,

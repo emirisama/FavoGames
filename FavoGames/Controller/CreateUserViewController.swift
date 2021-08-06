@@ -71,12 +71,23 @@ class CreateUserViewController: UIViewController,UITextFieldDelegate,SendProfile
         
     }
     
+    @IBAction func withoutSigningButton(_ sender: Any) {
+        
+        TransitionToTabVC()
+        
+    }
+    
     func checkProfileDone() {
         
         HUD.hide()
-        //Trendの画面遷移
+        TransitionToTabVC()
+        
+    }
+    
+    func TransitionToTabVC() {
+        
         let tabVC = self.storyboard?.instantiateViewController(withIdentifier: "tabVC") as! TabBarController
-        performSegue(withIdentifier: "tabVC", sender: nil)
+        self.present(tabVC, animated: true, completion: nil)
         
     }
     

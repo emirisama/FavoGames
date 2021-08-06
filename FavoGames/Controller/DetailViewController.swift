@@ -43,9 +43,7 @@ class DetailViewController: UIViewController,UITableViewDelegate,UITableViewData
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        switch index{
-        
-        case index:
+        if Auth.auth().currentUser?.uid != nil {
             
             tableView.delegate = self
             tableView.dataSource = self
@@ -56,10 +54,11 @@ class DetailViewController: UIViewController,UITableViewDelegate,UITableViewData
             loadModel.getLikeFlagProtocol = self
             loadModel.loadLikeFlag(title: gameTitle)
             
-            break
+        } else {
             
-        default:
-            break
+            let createVC = self.storyboard?.instantiateViewController(withIdentifier: "createVC") as! CreateUserViewController
+            self.present(createVC, animated: true, completion: nil)
+            
         }
     }
     
