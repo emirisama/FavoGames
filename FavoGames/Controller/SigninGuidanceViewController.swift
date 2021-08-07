@@ -17,12 +17,11 @@ class SigninGuidanceViewController: UIViewController {
     
 
     @IBAction func signUpButton(_ sender: Any) {
-        
+   
             let createVC = self.storyboard?.instantiateViewController(withIdentifier: "createVC") as! CreateUserViewController
             self.present(createVC, animated: true, completion: nil)
         
     }
-    
         
 
 

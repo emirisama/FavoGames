@@ -1027,6 +1027,7 @@
                                 </state>
                                 <connections>
                                     <action selector="registerButton:" destination="Nzw-g7-Gxg" eventType="touchUpInside" id="sCh-bD-D9C"/>
+                                    <action selector="signUpButton:" destination="xfr-OZ-dex" eventType="touchUpInside" id="MIa-zK-Cke"/>
                                 </connections>
                             </button>
                         </subviews>
