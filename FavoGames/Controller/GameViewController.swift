@@ -32,6 +32,9 @@ class GameViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
     var itemPrice = Int()
     var booksGenreId = String()
     
+    let semaphore = DispatchSemaphore(value: 1)
+    var refleshControl:UIRefreshControl?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -64,10 +67,21 @@ class GameViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
             searchModel.search()
             
         }
-
         
+        tableView.delaysContentTouches = false
+        refleshControl = UIRefreshControl()
+        refleshControl?.addTarget(self, action: #selector(reflesh), for: UIControl.Event.valueChanged)
+        tableView.refreshControl = refleshControl
+
     }
     
+    @objc func reflesh() {
+        
+        semaphore.wait()
+        semaphore.signal()
+        refleshControl?.endRefreshing()
+        
+    }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
