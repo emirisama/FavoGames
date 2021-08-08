@@ -2,6 +2,8 @@
 
 # 概要
 - 人気のゲームソフトをチェックでき、お気に入りリストに追加できるアプリ
+# デモ動画
+- https://user-images.githubusercontent.com/69104912/128629129-ce90c993-1d8f-468a-b579-599a7f86101e.mp4
 # 要件
 - 人気のゲームソフトをランキング形式でチェックできる
 - 好きなゲームソフトをお気に入りリストに追加できる
@@ -19,7 +21,7 @@
 # 開発環境
 - Swift5.4
 - Xcode12.5
-- FirebaseFirestore
+- Firebase
 # CocoaPods
 - Firebase/Analytics
 - Firebase/Firestore
@@ -32,11 +34,6 @@
 - PKHUD
 - SwiftyJSON
 - Alamofire
-
-
-# プレビュー
-- 
-
 # API通信
 - 楽天ブックスゲーム検索API：https://webservice.rakuten.co.jp/api/booksgamesearch/
 - 楽天ブックスジャンル検索API：https://webservice.rakuten.co.jp/api/booksgenresearch/
