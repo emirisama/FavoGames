@@ -1,4 +1,5 @@
 # FavoGames
+- https://apps.apple.com/jp/app/favogames/id1579308448
 
 # 概要
 - 人気のゲームソフトをチェックでき、お気に入りリストに追加できるアプリ
