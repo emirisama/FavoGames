@@ -7,8 +7,7 @@
 
 import UIKit
 import SDWebImage
-import FirebaseAuth
-import FirebaseFirestore
+import Firebase
 
 
 class DetailViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,GetCommentsDataProtocol,GetLikeFlagProtocol{

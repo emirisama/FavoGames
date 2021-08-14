@@ -31,7 +31,7 @@
 		508C95DB2622D6FC0077F3A6 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 508C95DA2622D6FC0077F3A6 /* DetailViewController.swift */; };
 		5098092E26A58B7C005240D4 /* VideoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5098092D26A58B7C005240D4 /* VideoViewController.swift */; };
 		5098093026A59EDF005240D4 /* GoogleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5098092F26A59EDF005240D4 /* GoogleViewController.swift */; };
-		50A6A9DB26C7A54500BF5538 /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50A6A9DA26C7A54500BF5538 /* AuthManager.swift */; };
+		50A6A9DD26C7BCE500BF5538 /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50A6A9DC26C7BCE500BF5538 /* AuthManager.swift */; };
 		50A8D81F2645310C008B5CEA /* SearchResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50A8D81E2645310C008B5CEA /* SearchResultsViewController.swift */; };
 		50BB2F6926BD6292004E7796 /* MypageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50BB2F6826BD6292004E7796 /* MypageViewController.swift */; };
 		50BB2F6B26BD62EC004E7796 /* SigninGuidanceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50BB2F6A26BD62EC004E7796 /* SigninGuidanceViewController.swift */; };
@@ -75,7 +75,7 @@
 		508C95DA2622D6FC0077F3A6 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		5098092D26A58B7C005240D4 /* VideoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoViewController.swift; sourceTree = "<group>"; };
 		5098092F26A59EDF005240D4 /* GoogleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleViewController.swift; sourceTree = "<group>"; };
-		50A6A9DA26C7A54500BF5538 /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
+		50A6A9DC26C7BCE500BF5538 /* AuthManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AuthManager.swift; path = FavoGames/Model/AuthManager.swift; sourceTree = "<group>"; };
 		50A8D81E2645310C008B5CEA /* SearchResultsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultsViewController.swift; sourceTree = "<group>"; };
 		50BB2F6826BD6292004E7796 /* MypageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MypageViewController.swift; sourceTree = "<group>"; };
 		50BB2F6A26BD62EC004E7796 /* SigninGuidanceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SigninGuidanceViewController.swift; sourceTree = "<group>"; };
@@ -151,6 +151,7 @@
 		50763BF3261068B50071941E /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				50A6A9DC26C7BCE500BF5538 /* AuthManager.swift */,
 				5064B80B26B5A75100994961 /* CommentsModel.swift */,
 				5064B80C26B5A75100994961 /* DataSets.swift */,
 				5064B80926B5A75000994961 /* LikeModel.swift */,
@@ -158,7 +159,6 @@
 				5064B80D26B5A75100994961 /* ProfileModel.swift */,
 				5064B80826B5A75000994961 /* SearchAndLoadModel.swift */,
 				5064B80F26B5A75100994961 /* SendDBModel.swift */,
-				50A6A9DA26C7A54500BF5538 /* AuthManager.swift */,
 			);
 			name = Model;
 			path = ..;
@@ -345,7 +345,6 @@
 				50CF1B9D263525DA00ECF7E4 /* GameViewController.swift in Sources */,
 				507B8DFD266266770001B8DC /* MemoViewCell.swift in Sources */,
 				5064B81626B5A75100994961 /* LoadModel.swift in Sources */,
-				50A6A9DB26C7A54500BF5538 /* AuthManager.swift in Sources */,
 				5098092E26A58B7C005240D4 /* VideoViewController.swift in Sources */,
 				508C81F326A471230023770B /* LikeCell.swift in Sources */,
 				50777FA1261CAB58005314BF /* MemoViewController.swift in Sources */,
@@ -359,6 +358,7 @@
 				5064B81026B5A75100994961 /* SearchAndLoadModel.swift in Sources */,
 				504C30D7265BC30300C520B0 /* ContentDetailCell.swift in Sources */,
 				50763BEF261057210071941E /* TrendViewController.swift in Sources */,
+				50A6A9DD26C7BCE500BF5538 /* AuthManager.swift in Sources */,
 				50A8D81F2645310C008B5CEA /* SearchResultsViewController.swift in Sources */,
 				50777F9C261C8B77005314BF /* TabBarController.swift in Sources */,
 				50D9222B26078EB5009A7BB0 /* AppDelegate.swift in Sources */,

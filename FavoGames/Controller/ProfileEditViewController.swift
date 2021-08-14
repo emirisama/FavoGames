@@ -7,7 +7,7 @@
 
 import UIKit
 import PKHUD
-import FirebaseAuth
+import Firebase
 
 
 class ProfileEditViewController: CameraViewController,SendProfileDone,GetProfileDataProtocol,UITextFieldDelegate{
