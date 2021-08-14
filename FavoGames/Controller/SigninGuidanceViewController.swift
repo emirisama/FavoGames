@@ -22,8 +22,6 @@ class SigninGuidanceViewController: UIViewController {
             self.present(createVC, animated: true, completion: nil)
         
     }
-        
-
 
 
 }

@@ -11,9 +11,8 @@ import FirebaseFirestore
 import PKHUD
 
 
-class CreateUserViewController: UIViewController,UITextFieldDelegate,SendProfileDone{
-    
-    
+class CreateUserViewController: UIViewController,UITextFieldDelegate, SendProfileDataProtocol{
+  
     @IBOutlet weak var nameTextField: UITextField!
     
     
@@ -23,9 +22,15 @@ class CreateUserViewController: UIViewController,UITextFieldDelegate,SendProfile
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        sendDBModel.sendProfileDone = self
         nameTextField.delegate = self
         
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        
+        super.viewWillAppear(animated)
+        
+        AuthManager.shared.sendProfileDataProtocol = self
         
     }
     
@@ -54,40 +59,30 @@ class CreateUserViewController: UIViewController,UITextFieldDelegate,SendProfile
         
         if nameTextField.text?.isEmpty != true {
             
-            Auth.auth().signInAnonymously { [self] (result, error) in
-                
-                let usernoimage = UIImage(named: "userimage")
-                let usernoimagedata = usernoimage?.jpegData(compressionQuality: 1)
-                
-                if error != nil{
-                    
-                }else{
-                    
-                    sendDBModel.sendProfile(userName: nameTextField.text!,imageData: usernoimagedata!)
-                    
-                }
-            }
+            AuthManager.shared.signIn(userName: nameTextField.text!)
+            
         }
         
     }
     
     @IBAction func withoutSigningButton(_ sender: Any) {
         
-        TransitionToTabVC()
+        transitionToTabVC()
         
     }
     
-    func checkProfileDone() {
-        
-        HUD.hide()
-        TransitionToTabVC()
-        
-    }
     
-    func TransitionToTabVC() {
+    func transitionToTabVC() {
         
         let tabVC = self.storyboard?.instantiateViewController(withIdentifier: "tabVC") as! TabBarController
         self.present(tabVC, animated: true, completion: nil)
+        
+    }
+    
+    func catchProfileData() {
+        
+        HUD.hide()
+        transitionToTabVC()
         
     }
     

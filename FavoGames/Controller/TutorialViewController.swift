@@ -31,7 +31,6 @@ class TutorialViewController: UIViewController {
     @IBAction func start(_ sender: Any) {
         
         let createVC = self.storyboard?.instantiateViewController(withIdentifier: "createVC") as! CreateUserViewController
-        createVC.modalPresentationStyle = .fullScreen
         self.present(createVC, animated: true, completion: nil)
 
     }

@@ -6,9 +6,7 @@
 //
 
 import Foundation
-import FirebaseFirestore
-import FirebaseAuth
-import FirebaseStorage
+import Firebase
 import PKHUD
 
 protocol SendProfileDone {
@@ -38,28 +36,13 @@ class SendDBModel {
     func sendProfile(userName: String,imageData: Data) {
         
         //プロフィール画像
-        let usernoimage = UIImage(named: "userimage")
-        let usernoimagedata = usernoimage!.pngData()
-        
         let imageRef = Storage.storage().reference().child("ProfielImage").child("\(UUID().uuidString + String(Date().timeIntervalSince1970)).jpg")
         
         //ローディング
         HUD.show(.progress)
         HUD.dimsBackground = true
         
-        
-        //（プロフィール画像が空の場合、デフォルト画像を入れる）
-        if imageData.isEmpty == true {
-            
-            imageDatauser = usernoimagedata!
-            
-        } else {
-            
-            imageDatauser = imageData
-            
-        }
-        
-        imageRef.putData(imageDatauser, metadata: nil) { (metaData, error ) in
+        imageRef.putData(imageData, metadata: nil) { (metaData, error ) in
             
             if error != nil {
                 return

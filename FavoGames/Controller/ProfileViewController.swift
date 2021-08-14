@@ -49,7 +49,7 @@ class ProfileViewController: UIViewController,UICollectionViewDataSource,UIColle
         super.viewWillAppear(true)
         
         if Auth.auth().currentUser?.uid != nil{
-            //サインイン
+            
         }else{
             
             let createVC = self.storyboard?.instantiateViewController(withIdentifier: "createVC") as! CreateUserViewController
