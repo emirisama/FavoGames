@@ -80,7 +80,7 @@ class SendDBModel {
     }
     
     //ゲームソフトをいいねする（likeを送信)
-    func sendLike(userID: String,largeImageUrl:  String,title: String,hardware: String,salesDate: String,itemPrice: Int,booksGenreId: String,likeFlag: Bool){
+    func sendLike(userID: String,largeImageUrl: String,title: String,hardware: String,salesDate: String,itemPrice: Int,booksGenreId: String,likeFlag: Bool){
         
         if likeFlag == false {
             
