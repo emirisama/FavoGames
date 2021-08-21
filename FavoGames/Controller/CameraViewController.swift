@@ -7,13 +7,26 @@
 
 import UIKit
 
-class CameraViewController: UIViewController,UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class CameraViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
     }
+
+}
+
+extension CameraViewController: UIImagePickerControllerDelegate {
+
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        
+        picker.dismiss(animated: true, completion: nil)
+        
+    }
+    
+}
+
+extension CameraViewController: UINavigationControllerDelegate {
     
     func openCamera(){
         
@@ -31,14 +44,5 @@ class CameraViewController: UIViewController,UIImagePickerControllerDelegate, UI
         }
     }
     
-    
-    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-        
-        picker.dismiss(animated: true, completion: nil)
-        
-    }
-    
 }
-
-
 

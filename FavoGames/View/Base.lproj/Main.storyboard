@@ -931,7 +931,7 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
-                                    <action selector="registerButton:" destination="Nzw-g7-Gxg" eventType="touchUpInside" id="FlX-Mi-zUO"/>
+                                    <action selector="signupButtonDidTapped:" destination="Nzw-g7-Gxg" eventType="touchUpInside" id="zRj-hJ-Xsd"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ib2-YW-mjP">
@@ -946,9 +946,8 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
-                                    <action selector="registerButton:" destination="Nzw-g7-Gxg" eventType="touchUpInside" id="QDg-Pa-DWM"/>
                                     <action selector="withoutSigningButton:" destination="ckg-AI-vv9" eventType="touchUpInside" id="HFw-H6-Nhb"/>
-                                    <action selector="withoutSigningButton:" destination="Nzw-g7-Gxg" eventType="touchUpInside" id="oDf-xm-301"/>
+                                    <action selector="withoutSigningButtonDidTapped:" destination="Nzw-g7-Gxg" eventType="touchUpInside" id="3Rz-oJ-BSe"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -1026,7 +1025,6 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
-                                    <action selector="registerButton:" destination="Nzw-g7-Gxg" eventType="touchUpInside" id="sCh-bD-D9C"/>
                                     <action selector="signUpButton:" destination="xfr-OZ-dex" eventType="touchUpInside" id="MIa-zK-Cke"/>
                                 </connections>
                             </button>

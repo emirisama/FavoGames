@@ -8,7 +8,7 @@
 import UIKit
 
 
-class SearchResultsViewController: UIViewController,UITableViewDelegate,UITableViewDataSource{
+class SearchResultsViewController: UIViewController {
     
     
     @IBOutlet weak var tableView: UITableView!
@@ -30,6 +30,10 @@ class SearchResultsViewController: UIViewController,UITableViewDelegate,UITableV
         self.navigationController?.isNavigationBarHidden = false
         
     }
+    
+}
+
+extension SearchResultsViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
@@ -59,6 +63,10 @@ class SearchResultsViewController: UIViewController,UITableViewDelegate,UITableV
         
     }
     
+}
+
+extension SearchResultsViewController: UITableViewDelegate {
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         let DetailVC = storyboard?.instantiateViewController(identifier: "detailVC") as! DetailViewController
@@ -72,6 +80,5 @@ class SearchResultsViewController: UIViewController,UITableViewDelegate,UITableV
         self.navigationController?.pushViewController(DetailVC, animated: true)
         
     }
-    
     
 }

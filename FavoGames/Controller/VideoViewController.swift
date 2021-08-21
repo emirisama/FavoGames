@@ -9,7 +9,7 @@ import UIKit
 import WebKit
 
 
-class VideoViewController: UIViewController,WKNavigationDelegate {
+class VideoViewController: UIViewController {
     
     
     @IBOutlet weak var webView: WKWebView!
@@ -46,6 +46,12 @@ class VideoViewController: UIViewController,WKNavigationDelegate {
         webView.goBack()
         
     }
+    
+    
+}
+
+extension VideoViewController: WKNavigationDelegate {
+    
     
     
 }

@@ -10,13 +10,11 @@ import Firebase
 import PKHUD
 
 
-class CreateUserViewController: UIViewController,UITextFieldDelegate, SendProfileDataProtocol{
-  
+class CreateUserViewController: UIViewController {
+    
     @IBOutlet weak var nameTextField: UITextField!
     
-    
     var sendDBModel = SendDBModel()
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,8 +37,36 @@ class CreateUserViewController: UIViewController,UITextFieldDelegate, SendProfil
         self.view.endEditing(true)
         
     }
+
+    //アカウントを作成する
+    @IBAction func signupButtonDidTapped(_ sender: Any) {
+        
+        if nameTextField.text?.isEmpty != true {
+            
+            AuthManager.shared.signIn(userName: nameTextField.text!)
+            
+        }
+        
+    }
     
-    //文字数制限
+    
+    @IBAction func withoutSigningButtonDidTapped(_ sender: Any) {
+        
+        transitionToTabVC()
+        
+    }
+    
+    func transitionToTabVC() {
+        
+        let tabVC = self.storyboard?.instantiateViewController(withIdentifier: "tabVC") as! TabBarController
+        self.present(tabVC, animated: true, completion: nil)
+        
+    }
+    
+}
+
+extension CreateUserViewController: UITextFieldDelegate {
+    
     func textField(_ textField: UITextField,shouldChangeCharactersIn range: NSRange,replacementString string: String) -> Bool {
         
         let nameTextField: String = (nameTextField.text! as NSString).replacingCharacters(in: range, with: string)
@@ -53,30 +79,9 @@ class CreateUserViewController: UIViewController,UITextFieldDelegate, SendProfil
         
     }
     
-    //アカウントを作成する
-    @IBAction func registerButton(_ sender: Any) {
-        
-        if nameTextField.text?.isEmpty != true {
-            
-            AuthManager.shared.signIn(userName: nameTextField.text!)
-            
-        }
-        
-    }
-    
-    @IBAction func withoutSigningButton(_ sender: Any) {
-        
-        transitionToTabVC()
-        
-    }
-    
-    
-    func transitionToTabVC() {
-        
-        let tabVC = self.storyboard?.instantiateViewController(withIdentifier: "tabVC") as! TabBarController
-        self.present(tabVC, animated: true, completion: nil)
-        
-    }
+}
+
+extension CreateUserViewController: SendProfileDataProtocol {
     
     func catchProfileData() {
         
@@ -85,6 +90,9 @@ class CreateUserViewController: UIViewController,UITextFieldDelegate, SendProfil
         
     }
     
-    
 }
+    
+
+
+
 

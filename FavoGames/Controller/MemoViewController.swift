@@ -9,7 +9,7 @@ import UIKit
 import PKHUD
 
 
-class MemoViewController: UIViewController,UITextViewDelegate,SendCommentsDone {
+class MemoViewController: UIViewController {
     
     
     @IBOutlet weak var commentTextField: UITextView!
@@ -25,7 +25,6 @@ class MemoViewController: UIViewController,UITextViewDelegate,SendCommentsDone {
     var dataSetsArray = [DataSets]()
     var commentsModelArray = [CommentsModel]()
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -34,16 +33,7 @@ class MemoViewController: UIViewController,UITextViewDelegate,SendCommentsDone {
         commentTextField.delegate = self
         
     }
-    
-    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
-        // 入力を反映させたテキストを取得する
-        let commentTextField: String = (textView.text! as NSString).replacingCharacters(in: range, with: text)
-        if commentTextField.count <= 800 {
-            return true
-        }
-        return false
-    }
-    
+
     
     @IBAction func send(_ sender: Any) {
         
@@ -63,6 +53,23 @@ class MemoViewController: UIViewController,UITextViewDelegate,SendCommentsDone {
         }
         
     }
+
+}
+
+extension MemoViewController: UITextViewDelegate {
+    
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        // 入力を反映させたテキストを取得する
+        let commentTextField: String = (textView.text! as NSString).replacingCharacters(in: range, with: text)
+        if commentTextField.count <= 800 {
+            return true
+        }
+        return false
+    }
+    
+}
+
+extension MemoViewController: SendCommentsDone {
     
     func checkCommentsDone() {
         
@@ -71,6 +78,5 @@ class MemoViewController: UIViewController,UITextViewDelegate,SendCommentsDone {
         self.navigationController?.popViewController(animated: true)
 
     }
-    
     
 }

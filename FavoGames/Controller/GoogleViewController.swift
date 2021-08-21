@@ -9,7 +9,7 @@ import UIKit
 import WebKit
 
 
-class GoogleViewController: UIViewController,WKNavigationDelegate {
+class GoogleViewController: UIViewController {
     
     @IBOutlet weak var webView: WKWebView!
     
@@ -49,6 +49,12 @@ class GoogleViewController: UIViewController,WKNavigationDelegate {
         webView.goBack()
         
     }
+    
+    
+}
+
+extension GoogleViewController: WKNavigationDelegate {
+    
     
     
 }

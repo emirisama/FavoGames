@@ -9,8 +9,7 @@ import UIKit
 import Firebase
 
 
-class ProfileViewController: UIViewController,UICollectionViewDataSource,UICollectionViewDelegate,GetProfileDataProtocol,GetLikeDataProtocol,UICollectionViewDelegateFlowLayout{
-    
+class ProfileViewController: UIViewController {
     
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
@@ -57,16 +56,53 @@ class ProfileViewController: UIViewController,UICollectionViewDataSource,UIColle
             self.present(createVC, animated: true, completion: nil)
         }
     }
+
     
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
+    //プロフィール編集画面へ遷移
+    @IBAction func tapEdit(_ sender: Any) {
         
-        return 1
+        performSegue(withIdentifier: "profileEditVC", sender: nil)
         
     }
+
+}
+
+extension ProfileViewController: GetProfileDataProtocol {
+    
+    //プロフィールの値を取得
+    func getProfileData(dataArray: [ProfileModel]) {
+        
+        self.profileModelArray = dataArray
+        nameLabel.text = self.profileModelArray[0].userName
+        imageView.sd_setImage(with: URL(string: self.profileModelArray[0].imageURLString!), completed: nil)
+        
+    }
+
+}
+
+extension ProfileViewController: GetLikeDataProtocol {
+    
+    //いいねしたリストを取得
+    func getLikeData(dataArray: [LikeModel]) {
+        
+        likeModelArray = dataArray
+        collectionView.reloadData()
+        
+    }
+    
+}
+
+extension ProfileViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
         return likeModelArray.count
+        
+    }
+    
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        
+        return 1
         
     }
     
@@ -84,6 +120,10 @@ class ProfileViewController: UIViewController,UICollectionViewDataSource,UIColle
         return cell
     }
     
+}
+
+extension ProfileViewController: UICollectionViewDelegate {
+    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
         let detailVC = self.storyboard?.instantiateViewController(withIdentifier: "detailVC") as! DetailViewController
@@ -97,6 +137,10 @@ class ProfileViewController: UIViewController,UICollectionViewDataSource,UIColle
         
     }
     
+}
+
+extension ProfileViewController: UICollectionViewDelegateFlowLayout {
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
         let horizontalSpace : CGFloat = 20
@@ -104,30 +148,5 @@ class ProfileViewController: UIViewController,UICollectionViewDataSource,UIColle
         return CGSize(width: cellSize, height: cellSize)
         
     }
-    
-    //プロフィールの値を取得
-    func getProfileData(dataArray: [ProfileModel]) {
-        
-        self.profileModelArray = dataArray
-        nameLabel.text = self.profileModelArray[0].userName
-        imageView.sd_setImage(with: URL(string: self.profileModelArray[0].imageURLString!), completed: nil)
-        
-    }
-    
-    //プロフィール編集画面へ遷移
-    @IBAction func tapEdit(_ sender: Any) {
-        
-        performSegue(withIdentifier: "profileEditVC", sender: nil)
-        
-    }
-    
-    //いいねしたリストを取得
-    func getLikeData(dataArray: [LikeModel]) {
-        
-        likeModelArray = dataArray
-        collectionView.reloadData()
-        
-    }
-    
     
 }

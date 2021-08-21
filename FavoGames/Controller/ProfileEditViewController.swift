@@ -10,7 +10,7 @@ import PKHUD
 import Firebase
 
 
-class ProfileEditViewController: CameraViewController,SendProfileDone,GetProfileDataProtocol,UITextFieldDelegate{
+class ProfileEditViewController: CameraViewController {
     
     
     @IBOutlet weak var imageView: UIImageView!
@@ -32,33 +32,9 @@ class ProfileEditViewController: CameraViewController,SendProfileDone,GetProfile
         imageView.layer.cornerRadius = imageView.frame.width/2
         imageView.clipsToBounds = true
         sendDBModel.sendProfileDone = self
-        
-        
-        
+
     }
-    
-    //名前の文字数制限
-    func textField(_ textField: UITextField,shouldChangeCharactersIn range: NSRange,replacementString string: String) -> Bool{
-        
-        let nameTextField: String = (nameTextField.text! as NSString).replacingCharacters(in: range, with: string)
-        
-        if nameTextField.count <= 20{
-            
-            return true
-        }
-        
-        return false
-        
-    }
-    
-    func getProfileData(dataArray: [ProfileModel]) {
-        
-        profileModelArray = dataArray
-        imageView.sd_setImage(with: URL(string: profileModelArray[0].imageURLString!), completed: nil)
-        nameTextField.text = profileModelArray[0].userName
-        
-    }
-    
+
     @IBAction func tapImage(_ sender: UITapGestureRecognizer) {
         
         openCamera()
@@ -113,6 +89,10 @@ class ProfileEditViewController: CameraViewController,SendProfileDone,GetProfile
         present(alert, animated: true, completion: nil)
         
     }
+
+}
+
+extension ProfileEditViewController: SendProfileDone {
     
     func checkProfileDone() {
         
@@ -121,5 +101,34 @@ class ProfileEditViewController: CameraViewController,SendProfileDone,GetProfile
         
     }
     
+}
+
+extension ProfileEditViewController: GetProfileDataProtocol {
+    
+    func getProfileData(dataArray: [ProfileModel]) {
+        
+        profileModelArray = dataArray
+        imageView.sd_setImage(with: URL(string: profileModelArray[0].imageURLString!), completed: nil)
+        nameTextField.text = profileModelArray[0].userName
+        
+    }
+    
+}
+
+extension ProfileEditViewController: UITextFieldDelegate {
+    
+    //名前の文字数制限
+    func textField(_ textField: UITextField,shouldChangeCharactersIn range: NSRange,replacementString string: String) -> Bool{
+        
+        let nameTextField: String = (nameTextField.text! as NSString).replacingCharacters(in: range, with: string)
+        
+        if nameTextField.count <= 20{
+            
+            return true
+        }
+        
+        return false
+        
+    }
     
 }

@@ -10,7 +10,7 @@ import Firebase
 import PKHUD
 
 
-class GameViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,DoneCatchDataProtocol{
+class GameViewController: UIViewController{
     
     
     @IBOutlet weak var tableView: UITableView!
@@ -47,6 +47,7 @@ class GameViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
         
         let urlStringSwitch = "https://app.rakuten.co.jp/services/api/BooksGame/Search/20170404?format=json&hardware=Nintendo Switch&booksGenreId=006514&sort=sales&applicationId=1078790856161658200"
         
+        
         if index == 0{
             
             let searchModel = SearchAndLoadModel(urlString: urlStringPs5)
@@ -82,6 +83,22 @@ class GameViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
         
     }
     
+}
+
+extension GameViewController: DoneCatchDataProtocol {
+    
+    func doneCatchData(array: [DataSets]) {
+        
+        self.dataSetsArray = []
+        self.dataSetsArray = array
+        tableView.reloadData()
+        
+    }
+    
+}
+
+extension GameViewController: UITableViewDataSource {
+    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
         return 270
@@ -111,6 +128,10 @@ class GameViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
         
     }
     
+}
+
+extension GameViewController: UITableViewDelegate {
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         let detailVC = storyboard?.instantiateViewController(identifier: "detailVC") as! DetailViewController
@@ -125,15 +146,8 @@ class GameViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
         
     }
     
-    func doneCatchData(array: [DataSets]) {
-        
-        self.dataSetsArray = []
-        self.dataSetsArray = array
-        tableView.reloadData()
-        
-    }
-    
-    
 }
+
+
     
 

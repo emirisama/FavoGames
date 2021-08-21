@@ -10,11 +10,9 @@ import SDWebImage
 import Firebase
 
 
-class DetailViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,GetCommentsDataProtocol,GetLikeFlagProtocol{
-
+class DetailViewController: UIViewController{
     
     @IBOutlet weak var tableView: UITableView!
-    
     
     var index = Int()
     var gameTitle = String()
@@ -67,6 +65,11 @@ class DetailViewController: UIViewController,UITableViewDelegate,UITableViewData
         self.navigationController?.isNavigationBarHidden = false
         
     }
+
+    
+}
+
+extension DetailViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
@@ -151,8 +154,51 @@ class DetailViewController: UIViewController,UITableViewDelegate,UITableViewData
             return cell2
             
         }
+
+    }
+    
+    @objc func likeButtonTap(_ sender: UIButton) {
+        
+        if self.likeFlag == false{
+            
+            sendDBModel.sendLike(userID: Auth.auth().currentUser!.uid, largeImageUrl: largeImageUrl, title: gameTitle, hardware: hardware, salesDate: salesDate, itemPrice: itemPrice, booksGenreId: booksGenreId, likeFlag: true)
+            
+        }else{
+            
+            sendDBModel.sendLike(userID: Auth.auth().currentUser!.uid, largeImageUrl: largeImageUrl, title: gameTitle, hardware: hardware, salesDate: salesDate, itemPrice: itemPrice, booksGenreId: booksGenreId, likeFlag: false)
+            
+        }
         
     }
+    
+    @objc func memoButtonTap(_ sender: UIButton) {
+        
+        let memoVC = self.storyboard?.instantiateViewController(withIdentifier: "memoVC") as! MemoViewController
+        memoVC.dataSetsArray = dataSetsArray
+        memoVC.gameTitle = gameTitle
+        memoVC.hardware = hardware
+        memoVC.memo = memo
+        self.navigationController?.pushViewController(memoVC, animated: true)
+        
+    }
+    
+    @objc func videoButtonTap(_ sender: UIButton) {
+        
+        let videoVC = self.storyboard?.instantiateViewController(withIdentifier: "videoVC") as! VideoViewController
+        videoVC.gameTitle = gameTitle
+        self.present(videoVC, animated: true)
+        
+    }
+    
+    @objc func googleButtonTap(_ sender: UIButton) {
+        
+        let googleVC = self.storyboard?.instantiateViewController(withIdentifier: "googleVC") as! GoogleViewController
+        googleVC.gameTitle = gameTitle
+        self.present(googleVC, animated: true)
+        
+    }
+    
+
     
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool{
         if indexPath.section == 0{
@@ -177,47 +223,24 @@ class DetailViewController: UIViewController,UITableViewDelegate,UITableViewData
     }
     
     
-    @objc func memoButtonTap(_ sender: UIButton) {
+}
+
+extension DetailViewController: UITableViewDelegate {
+    
+    
+}
+
+extension DetailViewController: GetLikeFlagProtocol {
+    
+    func getLikeFlagData(likeFlag: Bool) {
         
-        let memoVC = self.storyboard?.instantiateViewController(withIdentifier: "memoVC") as! MemoViewController
-        memoVC.dataSetsArray = dataSetsArray
-        memoVC.gameTitle = gameTitle
-        memoVC.hardware = hardware
-        memoVC.memo = memo
-        self.navigationController?.pushViewController(memoVC, animated: true)
-        
+        self.likeFlag = likeFlag
+        tableView.reloadData()
     }
     
-    @objc func likeButtonTap(_ sender: UIButton) {
-        
-        if self.likeFlag == false{
-            
-            sendDBModel.sendLike(userID: Auth.auth().currentUser!.uid, largeImageUrl: largeImageUrl, title: gameTitle, hardware: hardware, salesDate: salesDate, itemPrice: itemPrice, booksGenreId: booksGenreId, likeFlag: true)
-            
-        }else{
-            
-            sendDBModel.sendLike(userID: Auth.auth().currentUser!.uid, largeImageUrl: largeImageUrl, title: gameTitle, hardware: hardware, salesDate: salesDate, itemPrice: itemPrice, booksGenreId: booksGenreId, likeFlag: false)
-            
-        }
-        
-    }
-    
-    @objc func videoButtonTap(_ sender: UIButton) {
-        
-        let videoVC = self.storyboard?.instantiateViewController(withIdentifier: "videoVC") as! VideoViewController
-        videoVC.gameTitle = gameTitle
-        self.present(videoVC, animated: true)
-        
-    }
-    
-    @objc func googleButtonTap(_ sender: UIButton) {
-        
-        let googleVC = self.storyboard?.instantiateViewController(withIdentifier: "googleVC") as! GoogleViewController
-        googleVC.gameTitle = gameTitle
-        self.present(googleVC, animated: true)
-        
-    }
-    
+}
+
+extension DetailViewController: GetCommentsDataProtocol{
     
     func getCommentsData(dataArray: [CommentsModel]) {
         
@@ -227,17 +250,7 @@ class DetailViewController: UIViewController,UITableViewDelegate,UITableViewData
         
     }
     
-    
-    func getLikeFlagData(likeFlag: Bool) {
-        
-        self.likeFlag = likeFlag
-        tableView.reloadData()
-    }
-    
-    
 }
-    
-
 
 
 

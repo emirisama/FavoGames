@@ -9,13 +9,11 @@ import UIKit
 import PKHUD
 
 
-class SearchViewController: UIViewController,UISearchBarDelegate,DoneCatchDataProtocol {
+class SearchViewController: UIViewController {
     
     
     @IBOutlet weak var searchBar: UISearchBar!
 
-    
-    
     var dataSetsArray = [DataSets]()
     
     
@@ -31,6 +29,25 @@ class SearchViewController: UIViewController,UISearchBarDelegate,DoneCatchDataPr
         
     }
     
+ 
+ 
+}
+
+extension SearchViewController: DoneCatchDataProtocol {
+    
+    func doneCatchData(array: [DataSets]) {
+        
+        //dataSetsの値を渡して画面遷移
+        let searchVC = self.storyboard?.instantiateViewController(identifier: "searchVC") as! SearchResultsViewController
+        searchVC.dataSetsArray = array
+        self.navigationController?.pushViewController(searchVC, animated: true)
+        
+    }
+    
+}
+
+extension SearchViewController: UISearchBarDelegate {
+    
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         
         searchBar.resignFirstResponder()
@@ -45,16 +62,5 @@ class SearchViewController: UIViewController,UISearchBarDelegate,DoneCatchDataPr
         searchModel.doneCatchDataProtocol = self
         searchModel.search()
     }
-    
-    
-    func doneCatchData(array: [DataSets]) {
-        
-        //dataSetsの値を渡して画面遷移
-        let searchVC = self.storyboard?.instantiateViewController(identifier: "searchVC") as! SearchResultsViewController
-        searchVC.dataSetsArray = array
-        self.navigationController?.pushViewController(searchVC, animated: true)
-        
-    }
-    
     
 }
