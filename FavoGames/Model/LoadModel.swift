@@ -107,7 +107,7 @@ class LoadModel {
     
     //いいねの受信
     func loadLikeData(userID: String) {
-        db.collection("Users").document(Auth.auth().currentUser!.uid).collection("like").order(by:  "date").addSnapshotListener { snapShot, error in
+        db.collection("Users").document(Auth.auth().currentUser!.uid).collection("like").order(by: "date").addSnapshotListener { snapShot, error in
             
             self.likeModelArray = []
             

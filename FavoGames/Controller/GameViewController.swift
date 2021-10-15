@@ -21,9 +21,7 @@ class GameViewController: UIViewController{
     var sendDBModel = SendDBModel()
     var dataSetsArray = [DataSets]()
     var commentsModelArray = [CommentsModel]()
-    
     var index = Int()
-    var idString = String()
     var gameTitle = String()
     var hardware = String()
     var salesDate = String()
@@ -34,9 +32,10 @@ class GameViewController: UIViewController{
     let semaphore = DispatchSemaphore(value: 1)
     var refleshControl:UIRefreshControl?
     
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(UINib(nibName: "ContentsCell", bundle: nil), forCellReuseIdentifier: "ContentsCell")
@@ -72,7 +71,7 @@ class GameViewController: UIViewController{
         refleshControl = UIRefreshControl()
         refleshControl?.addTarget(self, action: #selector(reflesh), for: UIControl.Event.valueChanged)
         tableView.refreshControl = refleshControl
-
+        
     }
     
     @objc func reflesh() {
